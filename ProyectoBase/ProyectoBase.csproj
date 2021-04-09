@@ -201,21 +201,65 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\moment.js" />
-    <Content Include="Styles\css\bootstrap-toggle.min.css" />
-    <Content Include="Styles\css\jquery-ui.css" />
-    <Content Include="Styles\image\favicon.jpg" />
-    <Content Include="Styles\js\bootstrap-combobox.js" />
     <Content Include="Styles\css\bootstrap-theme.css" />
     <Content Include="Styles\css\bootstrap-theme.min.css" />
+    <Content Include="Styles\css\bootstrap-toggle.min.css" />
     <Content Include="Styles\css\bootstrap.css" />
     <Content Include="Styles\css\bootstrap.min.css" />
+    <Content Include="Styles\css\custom.css" />
     <Content Include="Styles\css\datatable.min.css" />
     <Content Include="Styles\css\estilo-template.css" />
-    <Content Include="Styles\css\custom.css" />
+    <Content Include="Styles\css\jquery-ui.css" />
     <Content Include="Styles\css\jquery.ui.css" />
+    <Content Include="Styles\img\about-bg.jpg" />
+    <Content Include="Styles\img\about.jpg" />
+    <Content Include="Styles\img\apple-touch-icon.png" />
+    <Content Include="Styles\img\chefs\chefs-1.jpg" />
+    <Content Include="Styles\img\chefs\chefs-2.jpg" />
+    <Content Include="Styles\img\chefs\chefs-3.jpg" />
+    <Content Include="Styles\img\event-birthday.jpg" />
+    <Content Include="Styles\img\event-custom.jpg" />
+    <Content Include="Styles\img\event-private.jpg" />
+    <Content Include="Styles\img\events-bg.jpg" />
+    <Content Include="Styles\img\favicon.png" />
+    <Content Include="Styles\img\Fotografias.PNG" />
+    <Content Include="Styles\img\gallery\gallery-1.jpg" />
+    <Content Include="Styles\img\gallery\gallery-2.jpg" />
+    <Content Include="Styles\img\gallery\gallery-3.jpg" />
+    <Content Include="Styles\img\gallery\gallery-4.jpg" />
+    <Content Include="Styles\img\gallery\gallery-5.jpg" />
+    <Content Include="Styles\img\gallery\gallery-6.jpg" />
+    <Content Include="Styles\img\gallery\gallery-7.jpg" />
+    <Content Include="Styles\img\gallery\gallery-8.jpg" />
+    <Content Include="Styles\img\hero-bg.jpg" />
+    <Content Include="Styles\img\logo_tempora.png" />
+    <Content Include="Styles\img\logo_tempora.svg" />
+    <Content Include="Styles\img\menu\bread-barrel.jpg" />
+    <Content Include="Styles\img\menu\caesar.jpg" />
+    <Content Include="Styles\img\menu\cake.jpg" />
+    <Content Include="Styles\img\menu\greek-salad.jpg" />
+    <Content Include="Styles\img\menu\lobster-bisque.jpg" />
+    <Content Include="Styles\img\menu\lobster-roll.jpg" />
+    <Content Include="Styles\img\menu\mozzarella.jpg" />
+    <Content Include="Styles\img\menu\spinach-salad.jpg" />
+    <Content Include="Styles\img\menu\tuscan-grilled.jpg" />
+    <Content Include="Styles\img\respaldo\about-bg.jpg" />
+    <Content Include="Styles\img\respaldo\about.jpg" />
+    <Content Include="Styles\img\respaldo\events-bg.jpg" />
+    <Content Include="Styles\img\respaldo\hero-bg.jpg" />
+    <Content Include="Styles\img\specials-1.png" />
+    <Content Include="Styles\img\specials-2.png" />
+    <Content Include="Styles\img\specials-3.png" />
+    <Content Include="Styles\img\specials-4.png" />
+    <Content Include="Styles\img\specials-5.png" />
+    <Content Include="Styles\img\testimonials\testimonials-1.jpg" />
+    <Content Include="Styles\img\testimonials\testimonials-2.jpg" />
+    <Content Include="Styles\img\testimonials\testimonials-3.jpg" />
+    <Content Include="Styles\img\testimonials\testimonials-4.jpg" />
+    <Content Include="Styles\img\testimonials\testimonials-5.jpg" />
     <Content Include="Styles\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Styles\image\home-icon.png" />
-    <Content Include="Styles\image\searchresultui.png" />
+    <Content Include="Styles\css\Style.css" />
+    <Content Include="Styles\js\bootstrap-combobox.js" />
     <Content Include="Styles\js\bootstrap-toggle.min.js" />
     <Content Include="Styles\js\bootstrap.js" />
     <Content Include="Styles\js\bootstrap.min.js" />
@@ -227,7 +271,7 @@
     <Content Include="Styles\js\jquery.ui.js" />
     <Content Include="Styles\js\moment.js" />
     <Content Include="Styles\js\npm.js" />
-    <Content Include="Styles\css\Style.css" />
+    <Content Include="Styles\js\WebCam.js" />
     <Content Include="Views\Casos\Creacion.aspx" />
     <Content Include="Views\Casos\Resumen.aspx" />
     <Content Include="Views\Home\Error404.aspx" />
@@ -248,6 +292,10 @@
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Styles\css\bootstrap-theme.css.map" />
+    <Content Include="Styles\css\bootstrap-theme.min.css.map" />
+    <Content Include="Styles\css\bootstrap.css.map" />
+    <Content Include="Styles\css\bootstrap.min.css.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -260,10 +308,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Styles\css\bootstrap-theme.css.map" />
-    <Content Include="Styles\css\bootstrap-theme.min.css.map" />
-    <Content Include="Styles\css\bootstrap.css.map" />
-    <Content Include="Styles\css\bootstrap.min.css.map" />
     <Content Include="Styles\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Styles\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Styles\fonts\glyphicons-halflings-regular.woff" />

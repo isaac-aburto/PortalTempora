@@ -166,18 +166,40 @@ h1, h2, h3, h4, h5, h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: rgba(12, 11, 9, 0.6);
+  background: rgba(255, 255, 255, 0.952);
   border-bottom: 1px solid rgba(12, 11, 9, 0.6);
   transition: all 0.5s;
   z-index: 997;
   padding: 15px 0;
   top: 40px;
 }
+#header > a{
+  top: 0;
+  background: rgba(0, 0, 0, 0.85);
+  border-bottom: 1px solid #37332a;
+  display: block;
+  position: relative;
+  color: rgb(0, 0, 0);
+  transition: 0.3s;
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+}
 
 #header.header-scrolled {
   top: 0;
   background: rgba(0, 0, 0, 0.85);
   border-bottom: 1px solid #37332a;
+}
+#header.header-scrolled > a{
+  top: 0;
+  background: rgba(0, 0, 0, 0.85);
+  border-bottom: 1px solid #37332a;
+  display: block;
+  position: relative;
+  color: white;
+  transition: 0.3s;
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
 }
 
 #header .logo {
@@ -220,14 +242,14 @@ h1, h2, h3, h4, h5, h6 {
   padding-left: 28px;
 }
 
-.nav-menu a {
+/* .nav-menu a {
   display: block;
   position: relative;
   color: white;
   transition: 0.3s;
   font-size: 14px;
   font-family: "Open Sans", sans-serif;
-}
+} */
 
 .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
   color: #afc700;
@@ -235,7 +257,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-menu .book-a-table a {
   border: 2px solid #BAD305;
-  color: #fff;
+  color: #BAD305;
   border-radius: 50px;
   padding: 8px 25px;
   text-transform: uppercase;
@@ -487,7 +509,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #hero:before {
   content: "";
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(234, 255, 140, 0);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -593,7 +615,7 @@ h1, h2, h3, h4, h5, h6 {
   animation-timing-function: steps;
   opacity: 1;
   border-radius: 50%;
-  border: 5px solid rgba(205, 164, 94, 0.7);
+  border: 5px solid rgba(255, 255, 255, 0.7);
   top: -15%;
   left: -15%;
   background: rgba(198, 16, 0, 0);
@@ -1088,7 +1110,7 @@ section {
 
 .events::before {
   content: '';
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0);
   position: absolute;
   top: 0;
   right: 0;
@@ -1243,9 +1265,9 @@ section {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
-  background: #0c0b09;
+  background: #ffffff;
   border-color: #625b4b;
-  color: white;
+  color: rgb(34, 34, 34);
 }
 
 .book-a-table .php-email-form input::-webkit-input-placeholder, .book-a-table .php-email-form textarea::-webkit-input-placeholder {
