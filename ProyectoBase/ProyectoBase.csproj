@@ -182,9 +182,74 @@
     <Compile Include="Controllers\CasosController.cs" />
     <Compile Include="Controllers\ConversorBase64.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SolicitudesController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\Util.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Archivos.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArchivoxSolicitud.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ciudad.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cliente.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstadoSolicitud.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Fotos.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloTempora.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloTempora.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloTempora.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloTempora.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloTempora.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Perfil.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RangoFoliculos.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Region.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SLA.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Solicitud.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tecnica.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZonaAReparar.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZonaxSolicitud.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -193,9 +258,26 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Global.asax" />
+    <Content Include="Models\ModeloTempora.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloTempora.edmx</DependentUpon>
+      <LastGenOutput>ModeloTempora.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModeloTempora.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloTempora.edmx</DependentUpon>
+      <LastGenOutput>ModeloTempora.cs</LastGenOutput>
+    </Content>
     <Content Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <Content Include="Scripts\Additional-Validations.js" />
+    <EntityDeploy Include="Models\ModeloTempora.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModeloTempora.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModeloTempora.edmx.diagram">
+      <DependentUpon>ModeloTempora.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\bootstrap-toggle.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -206,11 +288,16 @@
     <Content Include="Styles\css\bootstrap-toggle.min.css" />
     <Content Include="Styles\css\bootstrap.css" />
     <Content Include="Styles\css\bootstrap.min.css" />
+    <Content Include="Styles\css\component.css" />
     <Content Include="Styles\css\custom.css" />
     <Content Include="Styles\css\datatable.min.css" />
+    <Content Include="Styles\css\demo.css" />
     <Content Include="Styles\css\estilo-template.css" />
+    <Content Include="Styles\fonts\codropsicons\codropsicons.svg" />
+    <Content Include="Styles\fonts\codropsicons\license.txt" />
     <Content Include="Styles\css\jquery-ui.css" />
     <Content Include="Styles\css\jquery.ui.css" />
+    <Content Include="Styles\css\normalize.css" />
     <Content Include="Styles\img\about-bg.jpg" />
     <Content Include="Styles\img\about.jpg" />
     <Content Include="Styles\img\apple-touch-icon.png" />
@@ -257,27 +344,113 @@
     <Content Include="Styles\img\testimonials\testimonials-3.jpg" />
     <Content Include="Styles\img\testimonials\testimonials-4.jpg" />
     <Content Include="Styles\img\testimonials\testimonials-5.jpg" />
-    <Content Include="Styles\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Styles\css\Style.css" />
     <Content Include="Styles\js\bootstrap-combobox.js" />
     <Content Include="Styles\js\bootstrap-toggle.min.js" />
+    <Content Include="Styles\js\bootstrap.bundle.js" />
+    <Content Include="Styles\js\bootstrap.bundle.min.js" />
+    <Content Include="Styles\js\bootstrap.esm.js" />
+    <Content Include="Styles\js\bootstrap.esm.min.js" />
     <Content Include="Styles\js\bootstrap.js" />
     <Content Include="Styles\js\bootstrap.min.js" />
     <Content Include="Styles\js\cascade.regioncomuna.js" />
+    <Content Include="Styles\js\custom-file-input.js" />
     <Content Include="Styles\js\datatable.min.js" />
     <Content Include="Styles\js\jquery-3.2.1.js" />
+    <Content Include="Styles\js\jquery-v1.min.js" />
+    <Content Include="Styles\js\jquery.custom-file-input.js" />
     <Content Include="Styles\js\jquery.numeric.js" />
     <Content Include="Styles\js\jquery.Rut.js" />
     <Content Include="Styles\js\jquery.ui.js" />
+    <Content Include="Styles\js\main.js" />
     <Content Include="Styles\js\moment.js" />
     <Content Include="Styles\js\npm.js" />
     <Content Include="Styles\js\WebCam.js" />
+    <Content Include="Styles\respaldo\css\bootstrap-theme.css" />
+    <Content Include="Styles\respaldo\css\bootstrap-theme.min.css" />
+    <Content Include="Styles\respaldo\css\bootstrap-toggle.min.css" />
+    <Content Include="Styles\respaldo\css\bootstrap.css" />
+    <Content Include="Styles\respaldo\css\bootstrap.min.css" />
+    <Content Include="Styles\respaldo\css\custom.css" />
+    <Content Include="Styles\respaldo\css\datatable.min.css" />
+    <Content Include="Styles\respaldo\css\estilo-template.css" />
+    <Content Include="Styles\respaldo\css\jquery-ui.css" />
+    <Content Include="Styles\respaldo\css\jquery.ui.css" />
+    <Content Include="Styles\respaldo\css\Style.css" />
+    <Content Include="Styles\respaldo\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Styles\respaldo\image\home-icon.png" />
+    <Content Include="Styles\respaldo\image\logo.png" />
+    <Content Include="Styles\respaldo\image\searchresultui.png" />
+    <Content Include="Styles\respaldo\js\bootstrap-combobox.js" />
+    <Content Include="Styles\respaldo\js\bootstrap-toggle.min.js" />
+    <Content Include="Styles\respaldo\js\bootstrap.js" />
+    <Content Include="Styles\respaldo\js\bootstrap.min.js" />
+    <Content Include="Styles\respaldo\js\cascade.regioncomuna.js" />
+    <Content Include="Styles\respaldo\js\datatable.min.js" />
+    <Content Include="Styles\respaldo\js\jquery-3.2.1.js" />
+    <Content Include="Styles\respaldo\js\jquery.numeric.js" />
+    <Content Include="Styles\respaldo\js\jquery.Rut.js" />
+    <Content Include="Styles\respaldo\js\jquery.ui.js" />
+    <Content Include="Styles\respaldo\js\moment.js" />
+    <Content Include="Styles\respaldo\js\npm.js" />
+    <Content Include="Styles\vendor\animate.css\animate.compat.css" />
+    <Content Include="Styles\vendor\animate.css\animate.css" />
+    <Content Include="Styles\vendor\animate.css\animate.min.css" />
+    <Content Include="Styles\vendor\aos\aos.css" />
+    <Content Include="Styles\vendor\aos\aos.js" />
+    <Content Include="Styles\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Styles\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Styles\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Styles\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Styles\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Styles\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Styles\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Styles\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Styles\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Styles\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\css\bootstrap-grid.css" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\css\bootstrap-grid.min.css" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\css\bootstrap-reboot.css" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\css\bootstrap-reboot.min.css" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\css\bootstrap.css" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\css\bootstrap.min.css" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\js\bootstrap.bundle.js" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\js\bootstrap.bundle.min.js" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\js\bootstrap.js" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\js\bootstrap.min.js" />
+    <Content Include="Styles\vendor\boxicons\css\animations.css" />
+    <Content Include="Styles\vendor\boxicons\css\boxicons.css" />
+    <Content Include="Styles\vendor\boxicons\css\boxicons.min.css" />
+    <Content Include="Styles\vendor\boxicons\css\transformations.css" />
+    <Content Include="Styles\vendor\boxicons\fonts\boxicons.svg" />
+    <Content Include="Styles\vendor\icofont\icofont.min.css" />
+    <Content Include="Styles\vendor\isotope-layout\isotope.pkgd.js" />
+    <Content Include="Styles\vendor\isotope-layout\isotope.pkgd.min.js" />
+    <Content Include="Styles\vendor\jquery.easing\jquery.easing.min.js" />
+    <Content Include="Styles\vendor\jquery\jquery.min.js" />
+    <Content Include="Styles\vendor\owl.carousel\assets\ajax-loader.gif" />
+    <Content Include="Styles\vendor\owl.carousel\assets\owl.carousel.css" />
+    <Content Include="Styles\vendor\owl.carousel\assets\owl.carousel.min.css" />
+    <Content Include="Styles\vendor\owl.carousel\assets\owl.theme.default.css" />
+    <Content Include="Styles\vendor\owl.carousel\assets\owl.theme.default.min.css" />
+    <Content Include="Styles\vendor\owl.carousel\assets\owl.theme.green.css" />
+    <Content Include="Styles\vendor\owl.carousel\assets\owl.theme.green.min.css" />
+    <Content Include="Styles\vendor\owl.carousel\assets\owl.video.play.png" />
+    <Content Include="Styles\vendor\owl.carousel\owl.carousel.js" />
+    <Content Include="Styles\vendor\owl.carousel\owl.carousel.min.js" />
+    <Content Include="Styles\vendor\php-email-form\validate.js" />
+    <Content Include="Styles\vendor\venobox\venobox.css" />
+    <Content Include="Styles\vendor\venobox\venobox.js" />
+    <Content Include="Styles\vendor\venobox\venobox.min.css" />
+    <Content Include="Styles\vendor\venobox\venobox.min.js" />
     <Content Include="Views\Casos\Creacion.aspx" />
     <Content Include="Views\Casos\Resumen.aspx" />
     <Content Include="Views\Home\Error404.aspx" />
     <Content Include="Views\Home\Home.aspx" />
+    <Content Include="Views\Solicitudes\Enviado.aspx" />
     <Content Include="Views\Home\Index.aspx" />
-    <Content Include="Views\Home\index2.aspx" />
+    <Content Include="Views\Solicitudes\GestionSolicitudes.aspx" />
+    <Content Include="Views\Solicitudes\Index.aspx" />
     <Content Include="Views\Home\Login.aspx" />
     <Content Include="Views\Home\Test.aspx" />
     <Content Include="Web.config">
@@ -296,22 +469,63 @@
     <Content Include="Styles\css\bootstrap-theme.min.css.map" />
     <Content Include="Styles\css\bootstrap.css.map" />
     <Content Include="Styles\css\bootstrap.min.css.map" />
+    <Content Include="Views\DisenoBootstrap3 - Copia.Master" />
+    <Content Include="Styles\respaldo\css\bootstrap-theme.css.map" />
+    <Content Include="Styles\respaldo\css\bootstrap-theme.min.css.map" />
+    <Content Include="Styles\respaldo\css\bootstrap.css.map" />
+    <Content Include="Styles\respaldo\css\bootstrap.min.css.map" />
+    <Content Include="Styles\respaldo\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Styles\respaldo\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Styles\respaldo\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Styles\respaldo\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Styles\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Styles\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Styles\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Styles\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Styles\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Styles\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Styles\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Styles\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Styles\vendor\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Styles\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\css\bootstrap-grid.css.map" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\css\bootstrap-grid.min.css.map" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\css\bootstrap-reboot.css.map" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\css\bootstrap.css.map" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\css\bootstrap.min.css.map" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\js\bootstrap.bundle.js.map" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\js\bootstrap.js.map" />
+    <Content Include="Styles\vendor\bootstrap\respaldo\js\bootstrap.min.js.map" />
+    <Content Include="Styles\vendor\boxicons\fonts\boxicons.eot" />
+    <Content Include="Styles\vendor\boxicons\fonts\boxicons.ttf" />
+    <Content Include="Styles\vendor\boxicons\fonts\boxicons.woff" />
+    <Content Include="Styles\vendor\boxicons\fonts\boxicons.woff2" />
+    <Content Include="Styles\vendor\icofont\fonts\icofont.woff" />
+    <Content Include="Styles\vendor\icofont\fonts\icofont.woff2" />
+    <Content Include="Styles\vendor\jquery\jquery.min.map" />
+    <Content Include="Styles\vendor\owl.carousel\LICENSE" />
+    <Content Include="Styles\vendor\owl.carousel\README.md" />
+    <Content Include="Styles\fonts\.DS_Store" />
+    <Content Include="Styles\fonts\codropsicons\codropsicons.eot" />
+    <Content Include="Styles\fonts\codropsicons\codropsicons.ttf" />
+    <Content Include="Styles\fonts\codropsicons\codropsicons.woff" />
+    <Content Include="Styles\js\bootstrap.bundle.js.map" />
+    <Content Include="Styles\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Styles\js\bootstrap.esm.js.map" />
+    <Content Include="Styles\js\bootstrap.esm.min.js.map" />
+    <Content Include="Styles\js\bootstrap.js.map" />
+    <Content Include="Styles\js\bootstrap.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="WebServices\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Styles\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Styles\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="Styles\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Styles\fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\ExportarCarpeta.pubxml" />

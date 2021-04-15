@@ -574,13 +574,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .play-btn {
-  width: 94px;
-  height: 94px;
-  background: radial-gradient(#BAD305 50%, rgba(205, 164, 94, 0.4) 52%);
-  border-radius: 50%;
-  display: block;
-  position: relative;
-  overflow: hidden;
+    width: 94px;
+    height: 94px;
+    background: radial-gradient(#BAD305 50%, rgb(249 249 249 / 40%) 52%);
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    overflow: hidden;
 }
 
 #hero .play-btn::after {
@@ -1302,13 +1302,30 @@ section {
   padding: 10px 12px;
 }
 
-.book-a-table .php-email-form button[type="submit"] {
-  background: #BAD305;
-  border: 0;
-  padding: 10px 35px;
-  color: #fff;
-  transition: 0.4s;
-  border-radius: 50px;
+    .book-a-table .php-email-form button[type="submit"] {
+        background: #BAD305;
+        border: 0;
+        padding: 10px 35px;
+        color: #fff;
+        transition: 0.4s;
+        border-radius: 50px;
+    }
+
+    .book-a-table .php-email-form button[type="button"] {
+        background: #BAD305;
+        border: 0;
+        padding: 10px 35px;
+        color: #fff;
+        transition: 0.4s;
+        border-radius: 50px;
+    }
+.button {
+    background: #BAD305;
+    border: 0;
+    padding: 10px 35px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 50px;
 }
 
 .book-a-table .php-email-form button[type="submit"]:hover {

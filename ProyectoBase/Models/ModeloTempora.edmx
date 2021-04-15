@@ -1,0 +1,1049 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PortalModeloTemporal.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Archivos">
+          <Key>
+            <PropertyRef Name="idArchivos" />
+          </Key>
+          <Property Name="idArchivos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreArchivo" Type="varchar" MaxLength="100" />
+          <Property Name="baseArchivo" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ArchivoxSolicitud">
+          <Key>
+            <PropertyRef Name="idArchivoxSolicitud" />
+          </Key>
+          <Property Name="idArchivoxSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_idArchivo" Type="int" />
+          <Property Name="FK_idSolicitud" Type="int" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="idCiudad" />
+          </Key>
+          <Property Name="idCiudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCiudad" Type="varchar" MaxLength="100" />
+          <Property Name="FK_idRegion" Type="int" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="70" />
+          <Property Name="apellido" Type="varchar" MaxLength="70" />
+          <Property Name="fecha_nacimiento" Type="date" />
+          <Property Name="rut" Type="varchar" MaxLength="11" />
+          <Property Name="correo" Type="varchar" MaxLength="70" />
+          <Property Name="password" Type="varchar" MaxLength="100" />
+          <Property Name="telefono" Type="varchar" MaxLength="50" />
+          <Property Name="celular" Type="varchar" MaxLength="50" />
+          <Property Name="facebook" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="EstadoSolicitud">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreEstado" Type="varchar" MaxLength="100" />
+          <Property Name="cod_Estado" Type="varchar" MaxLength="20" />
+          <Property Name="etapaPipeDrive" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Fotos">
+          <Key>
+            <PropertyRef Name="idFotos" />
+          </Key>
+          <Property Name="idFotos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreArchivo" Type="varchar" MaxLength="200" />
+          <Property Name="baseArchivo" Type="varchar(max)" />
+          <Property Name="FK_idSolicitud" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="idPerfil" />
+          </Key>
+          <Property Name="idPerfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombrePerfil" Type="varchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
+          <Property Name="cod_Perfil" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RangoFoliculos">
+          <Key>
+            <PropertyRef Name="idRango" />
+          </Key>
+          <Property Name="idRango" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rango" Type="varchar" MaxLength="50" />
+          <Property Name="ValorRango" Type="int" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="idRegion" />
+          </Key>
+          <Property Name="idRegion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nomRegion" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="SLA">
+          <Key>
+            <PropertyRef Name="idSLA" />
+          </Key>
+          <Property Name="idSLA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreSLA" Type="varchar" MaxLength="100" />
+          <Property Name="HrsSLA" Type="int" />
+        </EntityType>
+        <EntityType Name="Solicitud">
+          <Key>
+            <PropertyRef Name="idSolicitud" />
+          </Key>
+          <Property Name="idSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
+          <Property Name="FechaSolicitud" Type="datetime" />
+          <Property Name="RespDerm" Type="varchar" MaxLength="1000" />
+          <Property Name="RespPelo" Type="varchar" MaxLength="1000" />
+          <Property Name="ObserMed" Type="varchar" MaxLength="1000" />
+          <Property Name="ValorTotal" Type="int" />
+          <Property Name="FK_idCliente" Type="int" />
+          <Property Name="Fk_idEstado" Type="int" />
+          <Property Name="FK_idCiudad" Type="int" />
+          <Property Name="FK_SLA" Type="int" />
+          <Property Name="FK_Tecnica" Type="int" />
+          <Property Name="FK_Rango" Type="int" />
+          <Property Name="FK_idUsuario" Type="int" />
+          <Property Name="RespZona" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tecnica">
+          <Key>
+            <PropertyRef Name="idTecnica" />
+          </Key>
+          <Property Name="idTecnica" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreTecnica" Type="varchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="800" />
+          <Property Name="ValorTecnica" Type="int" />
+          <Property Name="cod_Tecnica" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" />
+          <Property Name="Apellido" Type="varchar" MaxLength="100" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="Telefono" Type="varchar" MaxLength="100" />
+          <Property Name="Celular" Type="varchar" MaxLength="100" />
+          <Property Name="FK_idPerfil" Type="int" />
+        </EntityType>
+        <EntityType Name="ZonaAReparar">
+          <Key>
+            <PropertyRef Name="idZona" />
+          </Key>
+          <Property Name="idZona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreZona" Type="varchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
+          <Property Name="ValorZona" Type="int" />
+          <Property Name="cod_Zona" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ZonaxSolicitud">
+          <Key>
+            <PropertyRef Name="idZonaxSolicitud" />
+          </Key>
+          <Property Name="idZonaxSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_idZona" Type="int" />
+          <Property Name="FK_idSolicitud" Type="int" />
+        </EntityType>
+        <Association Name="FK_ArchivoxSolicitud_Archivo">
+          <End Role="Archivos" Type="Self.Archivos" Multiplicity="0..1" />
+          <End Role="ArchivoxSolicitud" Type="Self.ArchivoxSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Archivos">
+              <PropertyRef Name="idArchivos" />
+            </Principal>
+            <Dependent Role="ArchivoxSolicitud">
+              <PropertyRef Name="FK_idArchivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArchivoxSolicitud_Solicitud">
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="0..1" />
+          <End Role="ArchivoxSolicitud" Type="Self.ArchivoxSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="ArchivoxSolicitud">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ciudad_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="idRegion" />
+            </Principal>
+            <Dependent Role="Ciudad">
+              <PropertyRef Name="FK_idRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fotos_Solicitud">
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="1" />
+          <End Role="Fotos" Type="Self.Fotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="Fotos">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Ciudad">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="idCiudad" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="FK_idCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Cliente1">
+          <End Role="EstadoSolicitud" Type="Self.EstadoSolicitud" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoSolicitud">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="Fk_idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Cliente2">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="FK_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Rango">
+          <End Role="RangoFoliculos" Type="Self.RangoFoliculos" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RangoFoliculos">
+              <PropertyRef Name="idRango" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="FK_Rango" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_SLA">
+          <End Role="SLA" Type="Self.SLA" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLA">
+              <PropertyRef Name="idSLA" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="FK_SLA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Tecnica">
+          <End Role="Tecnica" Type="Self.Tecnica" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tecnica">
+              <PropertyRef Name="idTecnica" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="FK_Tecnica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="FK_idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Perfil">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="idPerfil" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="FK_idPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZonaxSolicitud_Solicitud">
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="0..1" />
+          <End Role="ZonaxSolicitud" Type="Self.ZonaxSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="ZonaxSolicitud">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZonaxSolicitud_ZonaAReparar">
+          <End Role="ZonaAReparar" Type="Self.ZonaAReparar" Multiplicity="0..1" />
+          <End Role="ZonaxSolicitud" Type="Self.ZonaxSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZonaAReparar">
+              <PropertyRef Name="idZona" />
+            </Principal>
+            <Dependent Role="ZonaxSolicitud">
+              <PropertyRef Name="FK_idZona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PortalModeloTemporalStoreContainer">
+          <EntitySet Name="Archivos" EntityType="Self.Archivos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArchivoxSolicitud" EntityType="Self.ArchivoxSolicitud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadoSolicitud" EntityType="Self.EstadoSolicitud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fotos" EntityType="Self.Fotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RangoFoliculos" EntityType="Self.RangoFoliculos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SLA" EntityType="Self.SLA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solicitud" EntityType="Self.Solicitud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tecnica" EntityType="Self.Tecnica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZonaAReparar" EntityType="Self.ZonaAReparar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZonaxSolicitud" EntityType="Self.ZonaxSolicitud" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ArchivoxSolicitud_Archivo" Association="Self.FK_ArchivoxSolicitud_Archivo">
+            <End Role="Archivos" EntitySet="Archivos" />
+            <End Role="ArchivoxSolicitud" EntitySet="ArchivoxSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArchivoxSolicitud_Solicitud" Association="Self.FK_ArchivoxSolicitud_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="ArchivoxSolicitud" EntitySet="ArchivoxSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ciudad_Region" Association="Self.FK_Ciudad_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Ciudad" EntitySet="Ciudad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fotos_Solicitud" Association="Self.FK_Fotos_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="Fotos" EntitySet="Fotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Ciudad" Association="Self.FK_Solicitud_Ciudad">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Cliente1" Association="Self.FK_Solicitud_Cliente1">
+            <End Role="EstadoSolicitud" EntitySet="EstadoSolicitud" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Cliente2" Association="Self.FK_Solicitud_Cliente2">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Rango" Association="Self.FK_Solicitud_Rango">
+            <End Role="RangoFoliculos" EntitySet="RangoFoliculos" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_SLA" Association="Self.FK_Solicitud_SLA">
+            <End Role="SLA" EntitySet="SLA" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Tecnica" Association="Self.FK_Solicitud_Tecnica">
+            <End Role="Tecnica" EntitySet="Tecnica" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Usuario" Association="Self.FK_Solicitud_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Perfil" Association="Self.FK_Usuario_Perfil">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZonaxSolicitud_Solicitud" Association="Self.FK_ZonaxSolicitud_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="ZonaxSolicitud" EntitySet="ZonaxSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZonaxSolicitud_ZonaAReparar" Association="Self.FK_ZonaxSolicitud_ZonaAReparar">
+            <End Role="ZonaAReparar" EntitySet="ZonaAReparar" />
+            <End Role="ZonaxSolicitud" EntitySet="ZonaxSolicitud" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PortalModeloTemporal" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Archivos">
+          <Key>
+            <PropertyRef Name="idArchivos" />
+          </Key>
+          <Property Name="idArchivos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreArchivo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="baseArchivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ArchivoxSolicitud" Relationship="Self.FK_ArchivoxSolicitud_Archivo" FromRole="Archivos" ToRole="ArchivoxSolicitud" />
+        </EntityType>
+        <EntityType Name="ArchivoxSolicitud">
+          <Key>
+            <PropertyRef Name="idArchivoxSolicitud" />
+          </Key>
+          <Property Name="idArchivoxSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_idArchivo" Type="Int32" />
+          <Property Name="FK_idSolicitud" Type="Int32" />
+          <NavigationProperty Name="Archivos" Relationship="Self.FK_ArchivoxSolicitud_Archivo" FromRole="ArchivoxSolicitud" ToRole="Archivos" />
+          <NavigationProperty Name="Solicitud" Relationship="Self.FK_ArchivoxSolicitud_Solicitud" FromRole="ArchivoxSolicitud" ToRole="Solicitud" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="idCiudad" />
+          </Key>
+          <Property Name="idCiudad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCiudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FK_idRegion" Type="Int32" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Ciudad_Region" FromRole="Ciudad" ToRole="Region" />
+          <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Ciudad" FromRole="Ciudad" ToRole="Solicitud" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="apellido" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="rut" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="correo" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="facebook" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Cliente2" FromRole="Cliente" ToRole="Solicitud" />
+        </EntityType>
+        <EntityType Name="EstadoSolicitud">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreEstado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cod_Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="etapaPipeDrive" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Cliente1" FromRole="EstadoSolicitud" ToRole="Solicitud" />
+        </EntityType>
+        <EntityType Name="Fotos">
+          <Key>
+            <PropertyRef Name="idFotos" />
+          </Key>
+          <Property Name="idFotos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreArchivo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="baseArchivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_idSolicitud" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Solicitud" Relationship="Self.FK_Fotos_Solicitud" FromRole="Fotos" ToRole="Solicitud" />
+        </EntityType>
+        <EntityType Name="Perfil">
+          <Key>
+            <PropertyRef Name="idPerfil" />
+          </Key>
+          <Property Name="idPerfil" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombrePerfil" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="cod_Perfil" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_Perfil" FromRole="Perfil" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="RangoFoliculos">
+          <Key>
+            <PropertyRef Name="idRango" />
+          </Key>
+          <Property Name="idRango" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rango" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ValorRango" Type="Int32" />
+          <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Rango" FromRole="RangoFoliculos" ToRole="Solicitud" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="idRegion" />
+          </Key>
+          <Property Name="idRegion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nomRegion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ciudad" Relationship="Self.FK_Ciudad_Region" FromRole="Region" ToRole="Ciudad" />
+        </EntityType>
+        <EntityType Name="SLA">
+          <Key>
+            <PropertyRef Name="idSLA" />
+          </Key>
+          <Property Name="idSLA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreSLA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="HrsSLA" Type="Int32" />
+          <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_SLA" FromRole="SLA" ToRole="Solicitud" />
+        </EntityType>
+        <EntityType Name="Solicitud">
+          <Key>
+            <PropertyRef Name="idSolicitud" />
+          </Key>
+          <Property Name="idSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="FechaSolicitud" Type="DateTime" Precision="3" />
+          <Property Name="RespDerm" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="RespPelo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ObserMed" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ValorTotal" Type="Int32" />
+          <Property Name="FK_idCliente" Type="Int32" />
+          <Property Name="Fk_idEstado" Type="Int32" />
+          <Property Name="FK_idCiudad" Type="Int32" />
+          <Property Name="FK_SLA" Type="Int32" />
+          <Property Name="FK_Tecnica" Type="Int32" />
+          <Property Name="FK_Rango" Type="Int32" />
+          <Property Name="FK_idUsuario" Type="Int32" />
+          <NavigationProperty Name="ArchivoxSolicitud" Relationship="Self.FK_ArchivoxSolicitud_Solicitud" FromRole="Solicitud" ToRole="ArchivoxSolicitud" />
+          <NavigationProperty Name="Ciudad" Relationship="Self.FK_Solicitud_Ciudad" FromRole="Solicitud" ToRole="Ciudad" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Solicitud_Cliente2" FromRole="Solicitud" ToRole="Cliente" />
+          <NavigationProperty Name="EstadoSolicitud" Relationship="Self.FK_Solicitud_Cliente1" FromRole="Solicitud" ToRole="EstadoSolicitud" />
+          <NavigationProperty Name="Fotos" Relationship="Self.FK_Fotos_Solicitud" FromRole="Solicitud" ToRole="Fotos" />
+          <NavigationProperty Name="RangoFoliculos" Relationship="Self.FK_Solicitud_Rango" FromRole="Solicitud" ToRole="RangoFoliculos" />
+          <NavigationProperty Name="SLA" Relationship="Self.FK_Solicitud_SLA" FromRole="Solicitud" ToRole="SLA" />
+          <NavigationProperty Name="Tecnica" Relationship="Self.FK_Solicitud_Tecnica" FromRole="Solicitud" ToRole="Tecnica" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Solicitud_Usuario" FromRole="Solicitud" ToRole="Usuario" />
+          <NavigationProperty Name="ZonaxSolicitud" Relationship="Self.FK_ZonaxSolicitud_Solicitud" FromRole="Solicitud" ToRole="ZonaxSolicitud" />
+          <Property Name="RespZona" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tecnica">
+          <Key>
+            <PropertyRef Name="idTecnica" />
+          </Key>
+          <Property Name="idTecnica" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreTecnica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="ValorTecnica" Type="Int32" />
+          <Property Name="cod_Tecnica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Tecnica" FromRole="Tecnica" ToRole="Solicitud" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FK_idPerfil" Type="Int32" />
+          <NavigationProperty Name="Perfil" Relationship="Self.FK_Usuario_Perfil" FromRole="Usuario" ToRole="Perfil" />
+          <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Usuario" FromRole="Usuario" ToRole="Solicitud" />
+        </EntityType>
+        <EntityType Name="ZonaAReparar">
+          <Key>
+            <PropertyRef Name="idZona" />
+          </Key>
+          <Property Name="idZona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreZona" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ValorZona" Type="Int32" />
+          <Property Name="cod_Zona" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ZonaxSolicitud" Relationship="Self.FK_ZonaxSolicitud_ZonaAReparar" FromRole="ZonaAReparar" ToRole="ZonaxSolicitud" />
+        </EntityType>
+        <EntityType Name="ZonaxSolicitud">
+          <Key>
+            <PropertyRef Name="idZonaxSolicitud" />
+          </Key>
+          <Property Name="idZonaxSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_idZona" Type="Int32" />
+          <Property Name="FK_idSolicitud" Type="Int32" />
+          <NavigationProperty Name="Solicitud" Relationship="Self.FK_ZonaxSolicitud_Solicitud" FromRole="ZonaxSolicitud" ToRole="Solicitud" />
+          <NavigationProperty Name="ZonaAReparar" Relationship="Self.FK_ZonaxSolicitud_ZonaAReparar" FromRole="ZonaxSolicitud" ToRole="ZonaAReparar" />
+        </EntityType>
+        <Association Name="FK_ArchivoxSolicitud_Archivo">
+          <End Role="Archivos" Type="Self.Archivos" Multiplicity="0..1" />
+          <End Role="ArchivoxSolicitud" Type="Self.ArchivoxSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Archivos">
+              <PropertyRef Name="idArchivos" />
+            </Principal>
+            <Dependent Role="ArchivoxSolicitud">
+              <PropertyRef Name="FK_idArchivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArchivoxSolicitud_Solicitud">
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="0..1" />
+          <End Role="ArchivoxSolicitud" Type="Self.ArchivoxSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="ArchivoxSolicitud">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ciudad_Region">
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="idRegion" />
+            </Principal>
+            <Dependent Role="Ciudad">
+              <PropertyRef Name="FK_idRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Ciudad">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="idCiudad" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="FK_idCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Cliente2">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="FK_idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Cliente1">
+          <End Role="EstadoSolicitud" Type="Self.EstadoSolicitud" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoSolicitud">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="Fk_idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fotos_Solicitud">
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="1" />
+          <End Role="Fotos" Type="Self.Fotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="Fotos">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Perfil">
+          <End Role="Perfil" Type="Self.Perfil" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Perfil">
+              <PropertyRef Name="idPerfil" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="FK_idPerfil" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Rango">
+          <End Role="RangoFoliculos" Type="Self.RangoFoliculos" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RangoFoliculos">
+              <PropertyRef Name="idRango" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="FK_Rango" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_SLA">
+          <End Role="SLA" Type="Self.SLA" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SLA">
+              <PropertyRef Name="idSLA" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="FK_SLA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Tecnica">
+          <End Role="Tecnica" Type="Self.Tecnica" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tecnica">
+              <PropertyRef Name="idTecnica" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="FK_Tecnica" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="FK_idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZonaxSolicitud_Solicitud">
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="0..1" />
+          <End Role="ZonaxSolicitud" Type="Self.ZonaxSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="ZonaxSolicitud">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZonaxSolicitud_ZonaAReparar">
+          <End Role="ZonaAReparar" Type="Self.ZonaAReparar" Multiplicity="0..1" />
+          <End Role="ZonaxSolicitud" Type="Self.ZonaxSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZonaAReparar">
+              <PropertyRef Name="idZona" />
+            </Principal>
+            <Dependent Role="ZonaxSolicitud">
+              <PropertyRef Name="FK_idZona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModeloTempora" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Archivos" EntityType="Self.Archivos" />
+          <EntitySet Name="ArchivoxSolicitud" EntityType="Self.ArchivoxSolicitud" />
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="EstadoSolicitud" EntityType="Self.EstadoSolicitud" />
+          <EntitySet Name="Fotos" EntityType="Self.Fotos" />
+          <EntitySet Name="Perfil" EntityType="Self.Perfil" />
+          <EntitySet Name="RangoFoliculos" EntityType="Self.RangoFoliculos" />
+          <EntitySet Name="Region" EntityType="Self.Region" />
+          <EntitySet Name="SLA" EntityType="Self.SLA" />
+          <EntitySet Name="Solicitud" EntityType="Self.Solicitud" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tecnica" EntityType="Self.Tecnica" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="ZonaAReparar" EntityType="Self.ZonaAReparar" />
+          <EntitySet Name="ZonaxSolicitud" EntityType="Self.ZonaxSolicitud" />
+          <AssociationSet Name="FK_ArchivoxSolicitud_Archivo" Association="Self.FK_ArchivoxSolicitud_Archivo">
+            <End Role="Archivos" EntitySet="Archivos" />
+            <End Role="ArchivoxSolicitud" EntitySet="ArchivoxSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArchivoxSolicitud_Solicitud" Association="Self.FK_ArchivoxSolicitud_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="ArchivoxSolicitud" EntitySet="ArchivoxSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ciudad_Region" Association="Self.FK_Ciudad_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Ciudad" EntitySet="Ciudad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Ciudad" Association="Self.FK_Solicitud_Ciudad">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Cliente2" Association="Self.FK_Solicitud_Cliente2">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Cliente1" Association="Self.FK_Solicitud_Cliente1">
+            <End Role="EstadoSolicitud" EntitySet="EstadoSolicitud" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fotos_Solicitud" Association="Self.FK_Fotos_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="Fotos" EntitySet="Fotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Perfil" Association="Self.FK_Usuario_Perfil">
+            <End Role="Perfil" EntitySet="Perfil" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Rango" Association="Self.FK_Solicitud_Rango">
+            <End Role="RangoFoliculos" EntitySet="RangoFoliculos" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_SLA" Association="Self.FK_Solicitud_SLA">
+            <End Role="SLA" EntitySet="SLA" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Tecnica" Association="Self.FK_Solicitud_Tecnica">
+            <End Role="Tecnica" EntitySet="Tecnica" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Usuario" Association="Self.FK_Solicitud_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZonaxSolicitud_Solicitud" Association="Self.FK_ZonaxSolicitud_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="ZonaxSolicitud" EntitySet="ZonaxSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZonaxSolicitud_ZonaAReparar" Association="Self.FK_ZonaxSolicitud_ZonaAReparar">
+            <End Role="ZonaAReparar" EntitySet="ZonaAReparar" />
+            <End Role="ZonaxSolicitud" EntitySet="ZonaxSolicitud" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PortalModeloTemporalStoreContainer" CdmEntityContainer="ModeloTempora">
+          <EntitySetMapping Name="Archivos">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.Archivos">
+              <MappingFragment StoreEntitySet="Archivos">
+                <ScalarProperty Name="idArchivos" ColumnName="idArchivos" />
+                <ScalarProperty Name="nombreArchivo" ColumnName="nombreArchivo" />
+                <ScalarProperty Name="baseArchivo" ColumnName="baseArchivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArchivoxSolicitud">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.ArchivoxSolicitud">
+              <MappingFragment StoreEntitySet="ArchivoxSolicitud">
+                <ScalarProperty Name="idArchivoxSolicitud" ColumnName="idArchivoxSolicitud" />
+                <ScalarProperty Name="FK_idArchivo" ColumnName="FK_idArchivo" />
+                <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ciudad">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.Ciudad">
+              <MappingFragment StoreEntitySet="Ciudad">
+                <ScalarProperty Name="idCiudad" ColumnName="idCiudad" />
+                <ScalarProperty Name="nombreCiudad" ColumnName="nombreCiudad" />
+                <ScalarProperty Name="FK_idRegion" ColumnName="FK_idRegion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="apellido" ColumnName="apellido" />
+                <ScalarProperty Name="fecha_nacimiento" ColumnName="fecha_nacimiento" />
+                <ScalarProperty Name="rut" ColumnName="rut" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="facebook" ColumnName="facebook" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadoSolicitud">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.EstadoSolicitud">
+              <MappingFragment StoreEntitySet="EstadoSolicitud">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="nombreEstado" ColumnName="nombreEstado" />
+                <ScalarProperty Name="cod_Estado" ColumnName="cod_Estado" />
+                <ScalarProperty Name="etapaPipeDrive" ColumnName="etapaPipeDrive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fotos">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.Fotos">
+              <MappingFragment StoreEntitySet="Fotos">
+                <ScalarProperty Name="idFotos" ColumnName="idFotos" />
+                <ScalarProperty Name="nombreArchivo" ColumnName="nombreArchivo" />
+                <ScalarProperty Name="baseArchivo" ColumnName="baseArchivo" />
+                <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Perfil">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.Perfil">
+              <MappingFragment StoreEntitySet="Perfil">
+                <ScalarProperty Name="idPerfil" ColumnName="idPerfil" />
+                <ScalarProperty Name="nombrePerfil" ColumnName="nombrePerfil" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="cod_Perfil" ColumnName="cod_Perfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RangoFoliculos">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.RangoFoliculos">
+              <MappingFragment StoreEntitySet="RangoFoliculos">
+                <ScalarProperty Name="idRango" ColumnName="idRango" />
+                <ScalarProperty Name="Rango" ColumnName="Rango" />
+                <ScalarProperty Name="ValorRango" ColumnName="ValorRango" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Region">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="idRegion" ColumnName="idRegion" />
+                <ScalarProperty Name="nomRegion" ColumnName="nomRegion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SLA">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.SLA">
+              <MappingFragment StoreEntitySet="SLA">
+                <ScalarProperty Name="idSLA" ColumnName="idSLA" />
+                <ScalarProperty Name="nombreSLA" ColumnName="nombreSLA" />
+                <ScalarProperty Name="HrsSLA" ColumnName="HrsSLA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitud">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.Solicitud">
+              <MappingFragment StoreEntitySet="Solicitud">
+                <ScalarProperty Name="RespZona" ColumnName="RespZona" />
+                <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="FechaSolicitud" ColumnName="FechaSolicitud" />
+                <ScalarProperty Name="RespDerm" ColumnName="RespDerm" />
+                <ScalarProperty Name="RespPelo" ColumnName="RespPelo" />
+                <ScalarProperty Name="ObserMed" ColumnName="ObserMed" />
+                <ScalarProperty Name="ValorTotal" ColumnName="ValorTotal" />
+                <ScalarProperty Name="FK_idCliente" ColumnName="FK_idCliente" />
+                <ScalarProperty Name="Fk_idEstado" ColumnName="Fk_idEstado" />
+                <ScalarProperty Name="FK_idCiudad" ColumnName="FK_idCiudad" />
+                <ScalarProperty Name="FK_SLA" ColumnName="FK_SLA" />
+                <ScalarProperty Name="FK_Tecnica" ColumnName="FK_Tecnica" />
+                <ScalarProperty Name="FK_Rango" ColumnName="FK_Rango" />
+                <ScalarProperty Name="FK_idUsuario" ColumnName="FK_idUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tecnica">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.Tecnica">
+              <MappingFragment StoreEntitySet="Tecnica">
+                <ScalarProperty Name="idTecnica" ColumnName="idTecnica" />
+                <ScalarProperty Name="nombreTecnica" ColumnName="nombreTecnica" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ValorTecnica" ColumnName="ValorTecnica" />
+                <ScalarProperty Name="cod_Tecnica" ColumnName="cod_Tecnica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="FK_idPerfil" ColumnName="FK_idPerfil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZonaAReparar">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.ZonaAReparar">
+              <MappingFragment StoreEntitySet="ZonaAReparar">
+                <ScalarProperty Name="idZona" ColumnName="idZona" />
+                <ScalarProperty Name="nombreZona" ColumnName="nombreZona" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ValorZona" ColumnName="ValorZona" />
+                <ScalarProperty Name="cod_Zona" ColumnName="cod_Zona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZonaxSolicitud">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.ZonaxSolicitud">
+              <MappingFragment StoreEntitySet="ZonaxSolicitud">
+                <ScalarProperty Name="idZonaxSolicitud" ColumnName="idZonaxSolicitud" />
+                <ScalarProperty Name="FK_idZona" ColumnName="FK_idZona" />
+                <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
