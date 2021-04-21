@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Net;
+using System.Net.Mail;
 
 namespace WebSolicitudes.Controllers
 {
@@ -57,5 +59,34 @@ namespace WebSolicitudes.Controllers
             {
             }
         }
+
+
+        public static void EnviarMail(string texto, string txtCorreo, string titulo)
+        {
+            using (MailMessage mail = new MailMessage())
+
+            {
+                mail.From = new MailAddress("isaac.aburto@backspace.cl");
+                mail.To.Add("isaac.aburto@backspace.cl");
+                mail.Subject = titulo;
+                mail.Body = texto;
+                mail.IsBodyHtml = true;
+                //mail.Attachments.Add(new Attachment("C:\\file.zip"));
+
+                using (SmtpClient client = new SmtpClient())
+                {
+                    client.EnableSsl = true;
+                    client.UseDefaultCredentials = false;
+                    client.Credentials = new NetworkCredential("isaac.aburto@backspace.cl", "Isaac74644453120509");
+                    client.Host = "smtp.gmail.com";
+                    client.Port = 587;
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.Send(mail);
+                }
+
+            }
+
+        }
+
     }
 }

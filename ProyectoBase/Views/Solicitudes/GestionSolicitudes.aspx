@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap.min.css">
-  
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap.min.js"></script>
 
@@ -14,7 +14,16 @@
         $(document).ready(function () {
             
             $("#btnGestionar").click(function () {
-                
+                var div = document.getElementById('container');
+                var icon = document.getElementById('icon');
+                var open = false;
+                if (open) {
+                    icon.className = 'fa fa-arrow-down';
+                } else {
+                    icon.className = 'fa fa-arrow-down open';
+                }
+                open = !open;
+
             });
         });
     </script>
@@ -22,6 +31,18 @@
         .textarea {
             overflow: auto !important;
         }
+        .fa-arrow-down{
+          transform: rotate(0deg);
+          transition: transform 0.3s linear;
+          font-size: 27px;
+        }
+
+        .fa-arrow-down.open{
+          transform: rotate(180deg);
+          transition: transform 0.3s linear;
+          font-size: 27px;
+}
+
     </style>
 </asp:Content>
 
@@ -29,6 +50,8 @@
     <main id="main">
 
     <!-- ======= About Section ======= -->
+
+
         <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Solicitudes/GestionSolicitudes") %>">
         <section id="about" class="about">
             <div class="card border-secondary <%--border-0--%> shadow rounded-lg mt-5" style="margin-top: -55px">
@@ -36,7 +59,19 @@
                     <input hidden name="idSolicitud" value="<%= ViewData["idSolicitud"]%>"/>
                     <div class="row">
                         <div class="card-body">
-                            <h1 style="color: #C6D41D; font-family: 'Open Sans', sans-serif;">Gestión Solicitud - #1</h1>
+                        <div class="card border-left-warning shadow ">
+                        <div class="card-body">
+                            <div>
+
+                                <script>
+                                    (function (document) {
+
+                                    })(document);
+                                </script>
+                                <h1 style="color: #C6D41D; font-family: 'Open Sans', sans-serif;">Solicitud N°<%= ViewData["idSolicitud"]%> </h1>
+                                <h1 style="color: #C6D41D; font-family: 'Open Sans', sans-serif;"><%= ViewData["NombreCompleto"]  %></h1>
+                            </div>
+                            <hr />
                             <br />
                             <div class="row">
                                 <div class="col">
@@ -123,11 +158,19 @@
                             </div>
 
                             <%-- Gestion --%>
+
+                            <h1><a id="btnGestionar" style="color:#C6D41D; font-family: 'Open Sans', sans-serif !important" data-toggle="collapse" data-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Gestionar<i style="color: #C6D41D;" id="icon" class="fa fa-arrow-down"></i>
+                            </a></h1>
+<%--                            <h6 class="collapse" id="collapseExample">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                            </h6>
                             <div class=" text-center">
                                 <a id="btnGestionar" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="background-color: #C6D41D; border-color: #C6D41D;">Gestionar</a>
-                            </div>
+                            </div>--%>
                             <div class="collapse" id="collapseExample">
-                                <br />
+                                <hr />
+
                                 <div class="row">
                                 <div class="col">
                                     <label for="txtEstado"></label>
@@ -176,9 +219,10 @@
                                     <button class="btn btn-primary" id="btnEnviar" type="submit" style="background-color: #C6D41D; border-color: #C6D41D;">Enviar</button>
                                 </div>
                             </div>
-                        </div> 
-                    </div> 
-                        
+                        </div>
+                        </div>
+                    </div>
+                    </div>    
                 </div> 
             </div> 
         </section>

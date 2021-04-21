@@ -29,9 +29,15 @@
 
     <!-- Template Main CSS File -->
     <link href="<%: Url.Content("~/Styles/css/style.css") %>" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="<%: Url.Content("~/Styles/css/normalize.css") %>" >
+     <link rel="stylesheet" type="text/css" href="<%: Url.Content("~/Styles/css/normalize.css") %>" >
 	<link rel="stylesheet" type="text/css" href="<%: Url.Content("~/Styles/ccs/demo.css") %>" >
 	<link rel="stylesheet" type="text/css" href="<%: Url.Content("~/Styles/css/component.css") %>" >
+    <link rel="stylesheet" href="<%: Url.Content("~/assets/css/normalize.css") %>" type="text/css">
+	<link rel="stylesheet" href="<%: Url.Content("~/assets/css/style.css") %>" type="text/css">
+	<link rel="stylesheet" href="<%: Url.Content("~/assets/css/examples.css") %>" type="text/css">
+	<link rel="shortcut icon" href="<%: Url.Content("~/assets/img/favicon.ico") %>" type="image/x-icon">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic|Josefin+Slab:400,700italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         .fade {
             transition: opacity .15s linear !important;
@@ -60,6 +66,9 @@
         .custom-file-input:active::before {
           background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
         }
+        a {
+  color: #BAD305 !important;
+}
     </style>
 
 
@@ -97,7 +106,7 @@
 <body>
 
  <!-- ======= Top Bar ======= -->
-  <div id="topbar" class="d-flex align-items-center fixed-top">
+  <div id="topbar" class="d-flex align-items-center fixed-top" style="background-color: black;">
     <div class="container d-flex">
       <div class="contact-info mr-auto">
         <i class="icofont-phone" style="color: #BAD305;"></i> (2) 2846 5820
@@ -116,20 +125,15 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
       <a class="navbar-brand" href="<%: Url.Content("~/Home") %>"><img src="<%: Url.Content("~/Styles/img/logo_tempora.png") %>"/></a>
-      <%--<h1 class="logo mr-auto"><a href="index.html">TEMPORA<img src="<%: Url.Content("~/Styles/image/logo_tempora.png")%>"/></a></h1>--%>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!--<a href="index.html" class="logo mr-auto"><img src="Styles/img/logo.png" alt="" class="img-fluid"></a>-->
+
 
       <nav class="nav-menu d-none d-lg-block" style="padding-left: 14pc;">
         <ul>
           <li class="active"><a href="index.html">Home</a></li>
           <li><a href="#about">Sobre Nosotros</a></li>
-<%--          <li><a href="#menu">Menu</a></li>
-          <li><a href="#specials">Specials</a></li>--%>
+
           <li><a href="#events">Evaluación Médica</a></li>
-<%--          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#chefs">Chefs</a></li>
-          <li><a href="#contact">Contacto</a></li>--%>
+
              <%if (Convert.ToBoolean(Session["Conectado"]) == false)
                  { %>
             <li class="book-a-table text-center"><a href="" data-toggle="modal" data-target="#ModalLogin">Ingresar</a></li>
@@ -138,10 +142,10 @@
             <%} %>
           
         </ul>
-      </nav><!-- .nav-menu -->
-
+      </nav>
     </div>
-  </header><!-- End Header -->
+
+  </header>
 
 
 
@@ -149,12 +153,12 @@
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------------
 CONTENEDOR PARA IMPLEMENTAR
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-    <section>
+<%--    <section>--%>
         <div class="box-contenedor mx-auto">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-    </section>
+<%--    </section>--%>
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------------
 FIN CONTENEDOR PARA IMPLEMENTAR
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------->
@@ -249,9 +253,14 @@ FIN CONTENEDOR PARA IMPLEMENTAR
     
   <!-- Template Main JS File -->
 
-     <script src="<%: Url.Content("~/Styles/js/main.js") %>"></script>
-      <script src="<%: Url.Content("~/Styles/vendor/bootstrap/js/bootstrap.bundle.min.js") %>"></script>
- <script "<%: Url.Content("~/Styles/js/custom-file-input.js") %>></script>
+<script src="<%: Url.Content("~/Styles/js/main.js") %>"></script>
+<script src="<%: Url.Content("~/Styles/vendor/bootstrap/js/bootstrap.bundle.min.js") %>"></script>
+<script "<%: Url.Content("~/Styles/js/custom-file-input.js") %>></script>
+
+<%-- DataTable --%>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap.min.js"></script>
+
 <%--    <script src="<%: Url.Content("~/Styles/js/bootstrap.js") %>"></script>
     <script src="<%: Url.Content("~/Styles/js/bootstrap-combobox.js") %>"></script>
     <script src="<%: Url.Content("~/Styles/js/bootstrap-toggle.js") %>"></script>--%>
@@ -262,7 +271,7 @@ FIN CONTENEDOR PARA IMPLEMENTAR
         <div class="modal-dialog" >
             <div class="modal-content" style="width: 75%; height: 27pc;   margin-left: 5pc;  opacity: 0.8;">
                 <div class="modal-header" style="    background-color: black;">
-                <h5 class="modal-title text-center font-weight-light" id="exampleModalLabel" style="font-family: 'Open Sans', sans-serif;">Iniciar Sesión</h5>
+                <h5 class="modal-title text-center font-weight-light" id="exampleModalLabel" style="color: white ;font-family: 'Open Sans', sans-serif;">Iniciar Sesión</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -272,19 +281,19 @@ FIN CONTENEDOR PARA IMPLEMENTAR
                         <div class="card-body">
                             <form class="form-signin" method="post" action="<%: Url.Content("~/Usuarios/Login") %>">
                                 <div class="form-group">
-                                    <label class="small mb-1" for="inputEmail">Email</label>
+                                    <label class="small mb-1" for="inputEmail" style="color: white ;">Email</label>
                                     <input class="form-control py-4" id="inputEmail" name="inputEmail" type="email" placeholder="Ingresar correo" required/>
                                 </div>
                                 <div class="form-group">
-                                    <label class="small mb-1" for="inputPassword">Contraseña</label>
+                                    <label class="small mb-1" for="inputPassword" style="color: white ;">Contraseña</label>
                                     <input class="form-control py-4" id="inputPassword" name="inputPassword" type="password" placeholder="Ingresar contraseña" required/>
                                 </div>
-                            <div class="form-group">
+<%--                            <div class="form-group">
                                     <div class="custom-control custom-checkbox">
                                         <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
                                         <label class="custom-control-label" for="rememberPasswordCheck">Recordar Contraseña</label>
                                     </div>
-                            </div>
+                            </div>--%>
                                     <p style="color: red"><%= ViewData["Error"] %></p>
                                     <input id="Exp" type="hidden" name="Exp" value="<%= ViewData["Exp"] %>" / >
                                 <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
@@ -299,6 +308,13 @@ FIN CONTENEDOR PARA IMPLEMENTAR
                     </div>
             </div>
         </div>
+                        <script>
+                            $(document).ready(function () {
+                                $("#ModalLogin").draggable({
+                                    handle: ".modal-header"
+                                });
+                            });
+                        </script>
 
 </body>
 

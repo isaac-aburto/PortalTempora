@@ -15,7 +15,7 @@ body {
 }
 
 a {
-  color: #BAD305;
+  color: #BAD305 !important;
 }
 
 a:hover {

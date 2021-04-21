@@ -27,6 +27,32 @@ namespace WebSolicitudes.Controllers
                         if (usuario == null)
                             throw new Exception("El usuario no existe");
 
+                        // Filtros
+
+
+                        List<Tecnica> listaTecnicas = conexionDB.Tecnica.ToList();
+                        string opcionesTecnicas = string.Empty;
+                        opcionesTecnicas += "<option value='0'>-- Selecciona opción --</option>";
+                        foreach (Tecnica item in listaTecnicas)
+                        {
+                            opcionesTecnicas += "<option  value='" + item.idTecnica + "'>" + item.nombreTecnica + "</option>";
+                        }
+                        ViewData["opcionesTecnicas"] = opcionesTecnicas;
+
+
+                        List<EstadoSolicitud> listaEstados = conexionDB.EstadoSolicitud.ToList();
+                        string opcionesEstados = string.Empty;
+                        opcionesEstados += "<option value='0'>-- Selecciona opción --</option>";
+                        foreach (EstadoSolicitud item in listaEstados)
+                        {
+                            opcionesEstados += "<option  value='" + item.idEstado + "'>" + item.nombreEstado + "</option>";
+
+                        }
+                        ViewData["opcionesEstados"] = opcionesEstados;
+
+
+
+
                         //Lista Solicitudes
                         List<Solicitud> listaSolicitud = conexionDB.Solicitud.ToList();
                         string filaSolicitud = string.Empty;
@@ -199,6 +225,10 @@ namespace WebSolicitudes.Controllers
         {
           
             ViewData["Correo"] = Session["Correo"];
+            return View();
+        }
+        public ActionResult Pagina1(string idcliente)
+        {  
             return View();
         }
     }
