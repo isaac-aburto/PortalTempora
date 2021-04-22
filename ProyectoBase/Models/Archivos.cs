@@ -17,7 +17,7 @@ namespace WebSolicitudes.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Archivos()
         {
-            this.ArchivoxSolicitud = new HashSet<ArchivoxSolicitud>();
+            this.ArchivoxEstado = new HashSet<ArchivoxEstado>();
         }
     
         public int idArchivos { get; set; }
@@ -25,6 +25,6 @@ namespace WebSolicitudes.Models
         public string baseArchivo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ArchivoxSolicitud> ArchivoxSolicitud { get; set; }
+        public virtual ICollection<ArchivoxEstado> ArchivoxEstado { get; set; }
     }
 }

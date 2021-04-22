@@ -18,6 +18,7 @@ namespace WebSolicitudes.Models
         public EstadoSolicitud()
         {
             this.Solicitud = new HashSet<Solicitud>();
+            this.ArchivoxEstado = new HashSet<ArchivoxEstado>();
         }
     
         public int idEstado { get; set; }
@@ -27,5 +28,7 @@ namespace WebSolicitudes.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Solicitud> Solicitud { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ArchivoxEstado> ArchivoxEstado { get; set; }
     }
 }

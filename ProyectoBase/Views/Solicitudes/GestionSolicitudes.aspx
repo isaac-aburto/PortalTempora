@@ -94,14 +94,16 @@
                                     <br />
                                 </div>
                                 <div class="col">
-                                    <label for="txtCorreo"></label>
-                                    <label style="color: black">Correo </label>
+                                    <label for="txtFechaNacimiento"></label>
+                                        
+                                    <label style="color: black">Fecha de Nacimiento </label>
                                     <div id="selDiv">
-                                        <input disabled id="txtCorreo" name="txtCorreo" type='text' class='form-control' value='<%= ViewData["Correo"] %>'>
+                                        <input disabled id="txtFechaNacimiento" name="txtFechaNacimiento" type='text' class='form-control' value='<%= ViewData["FechaNacimiento"] %>'>
                                     </div>
                                     <div class="invalid-feedback">Seleccione una opción</div>
                                     <br />
                                 </div>
+
                             </div>
                             <div class="row">
                                 <div class="col-4">
@@ -118,6 +120,15 @@
                                     <label style="color: black">Celular </label>
                                     <div id="selDiv">
                                         <input disabled  name="txtCelular" type='text' class='form-control' value='<%= ViewData["Celular"] %>'>
+                                    </div>
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                                    <div class="col-4">
+                                    <label for="txtCorreo"></label>
+                                    <label style="color: black">Correo </label>
+                                    <div id="selDiv">
+                                        <input disabled id="txtCorreo" name="txtCorreo" type='text' class='form-control' value='<%= ViewData["Correo"] %>'>
                                     </div>
                                     <div class="invalid-feedback">Seleccione una opción</div>
                                     <br />
@@ -153,6 +164,69 @@
                                         <textarea  disabled name="txtPelo"  class='form-control' style="overflow: hidden"><%= ViewData["RespuestaPelo"] %></textarea>
                                     </div>
                                     <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                            </div>      
+                            <%-- Fotografías --%>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="txtFotos"></label>
+                                    <label style="color:black"> Fotografías</label>
+                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+         
+                                        </ol>
+                                        <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100" src="https://unidadmedicaserrano.com/wp-content/uploads/2018/11/resultados_injerto-capilar-3_despu%C3%A9s.jpg" alt="First slide">
+                                          <div class="carousel-caption d-none d-md-block">
+                                            <h5>Desde arriba</h5>
+                                            <p>imagen1.jpg</p>
+                                          </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="https://unidadmedicaserrano.com/wp-content/uploads/2018/11/resultados_injerto-capilar-3_despu%C3%A9s.jpg" alt="Second slide">
+                                             <div class="carousel-caption d-none d-md-block">
+                                                <h5>Perfil izquierdo</h5>
+                                                <p>imagen2.jpg</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="https://unidadmedicaserrano.com/wp-content/uploads/2018/11/resultados_injerto-capilar-3_despu%C3%A9s.jpg" alt="Third slide">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>Perfil Derecho</h5>
+                                                <p>imagen3.jpg</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="https://unidadmedicaserrano.com/wp-content/uploads/2018/11/resultados_injerto-capilar-3_despu%C3%A9s.jpg" alt="Third slide">
+                                             <div class="carousel-caption d-none d-md-block">
+                                                <h5>De atrás</h5>
+                                                <p>imagen4.jpg</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="https://unidadmedicaserrano.com/wp-content/uploads/2018/11/resultados_injerto-capilar-3_despu%C3%A9s.jpg" alt="Third slide">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>De frente</h5>
+                                                <p>imagen5.jpg</p>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
                                     <br />
                                 </div>
                             </div>
@@ -205,6 +279,26 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-6">
+                                    <label for="txtFoliculo1"></label>
+                                    <label style="color:black"> Rango Folículos </label>
+                                        <select name="txtFoliculo1" id="txtFoliculo1" class="form-control" >
+                                            <%= ViewData["opcionesRangos1"] %>
+                                        </select>  
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                                <div class="col-6">
+                                    <label for="txtFoliculo2"></label>
+                                    <label style="color:white"> a </label>
+                                        <select name="txtFoliculo2" id="txtFoliculo2" class="form-control" >
+                                            <%= ViewData["opcionesRangos2"] %>
+                                        </select>  
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-12">
                                     <label for="txtObservacion"></label>
                                     <label style="color:black"> Observación </label>
@@ -216,7 +310,24 @@
                                 </div>
                             </div>
                                 <div class=" text-center">
-                                    <button class="btn btn-primary" id="btnEnviar" type="submit" style="background-color: #C6D41D; border-color: #C6D41D;">Enviar</button>
+                                    <div class="row">
+                                        <div class="col">
+                                            <button class="btn btn-primary" id="btnGuardar" type="submit" style="background-color: #55a247; border-color: #55a247;">Guardar</button>
+
+                                        </div>
+                                        <div class="col">
+                                            <button class="btn btn-primary" id="btnEnviar" type="submit" style="background-color: #C6D41D; border-color: #C6D41D;">Enviar</button>
+                                            <input id="enviar" name="enviar" hidden value="0"/>
+                                            <script>
+                                                $(document).ready(function () {
+                                                    $("#btnEnviar").click(function () {
+                                                        $("#enviar").val(1);
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

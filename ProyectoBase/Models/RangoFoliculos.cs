@@ -18,6 +18,7 @@ namespace WebSolicitudes.Models
         public RangoFoliculos()
         {
             this.Solicitud = new HashSet<Solicitud>();
+            this.RangoxSolicitud = new HashSet<RangoxSolicitud>();
         }
     
         public int idRango { get; set; }
@@ -26,5 +27,7 @@ namespace WebSolicitudes.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Solicitud> Solicitud { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RangoxSolicitud> RangoxSolicitud { get; set; }
     }
 }

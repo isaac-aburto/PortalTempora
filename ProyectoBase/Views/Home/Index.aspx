@@ -175,8 +175,7 @@
           </div>
           <div class="header-overlay">
               <div class="header-content">
-                      <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
-
+            <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
           <h1>Bienvenido a <span style="color: #BAD305">Tempora</span></h1>
           <h4 style="color: #BAD305">Portal de solicitudes</h4>
 <%--          <div class="btns">
@@ -184,11 +183,9 @@
             <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Evaluación</a>
           </div>--%>
         </div>
-        <div class="col-lg-4 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="200">
+<%--        <div class="col-lg-4 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="200">
           <a href="https://www.youtube.com/watch?v=gpcZw_XAys4" class="venobox play-btn" data-vbtype="video" data-autoplay="true"></a>
-        </div>
-
-  
+        </div>--%>
               </div>
           </div>
       </div>
@@ -328,7 +325,7 @@
                         <div class="validate"></div>
                     </div>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento"/>
+                        <input id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" />
                         <script>
                             $('#txtFechaNacimiento').datepicker({
                                 uiLibrary: 'bootstrap4',

@@ -39,6 +39,7 @@ namespace WebSolicitudes.Controllers
                 string Correo = collection["txtEmail"];
                 string Telefono = collection["txtTelefono"];
                 string Celular = collection["txtCelular"];
+                string FechaDeNacimiento = collection["txtFechaNacimiento"];
 
                 string idcliente;
                 //Solicitud
@@ -153,6 +154,7 @@ namespace WebSolicitudes.Controllers
                     cliente.telefono = Telefono;
                     cliente.celular = Celular;
                     cliente.correo = Correo;
+                    cliente.fecha_nacimiento = DateTime.Parse(FechaDeNacimiento);
                     conexionDB.Cliente.Add(cliente);
                     conexionDB.SaveChanges();
 

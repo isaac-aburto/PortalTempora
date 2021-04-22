@@ -22,8 +22,10 @@ namespace WebSolicitudes.Models
     
         public int idRegion { get; set; }
         public string nomRegion { get; set; }
+        public Nullable<int> FK_idPais { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ciudad> Ciudad { get; set; }
+        public virtual País País { get; set; }
     }
 }

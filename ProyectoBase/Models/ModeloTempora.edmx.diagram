@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="e71c819f976146b297a272d379c9be84" Name="Diagram1">
         <EntityTypeShape EntityType="PortalModeloTemporal.Archivos" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortalModeloTemporal.ArchivoxSolicitud" Width="1.5" PointX="7.5" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.Ciudad" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.Cliente" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.EstadoSolicitud" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
@@ -21,8 +20,6 @@
         <EntityTypeShape EntityType="PortalModeloTemporal.Usuario" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.ZonaAReparar" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.ZonaxSolicitud" Width="1.5" PointX="7.5" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="PortalModeloTemporal.FK_ArchivoxSolicitud_Archivo" ManuallyRouted="false" />
-        <AssociationConnector Association="PortalModeloTemporal.FK_ArchivoxSolicitud_Solicitud" ManuallyRouted="false" />
         <AssociationConnector Association="PortalModeloTemporal.FK_Ciudad_Region" ManuallyRouted="false" />
         <AssociationConnector Association="PortalModeloTemporal.FK_Solicitud_Ciudad" ManuallyRouted="false" />
         <AssociationConnector Association="PortalModeloTemporal.FK_Solicitud_Cliente2" ManuallyRouted="false" />
@@ -35,6 +32,14 @@
         <AssociationConnector Association="PortalModeloTemporal.FK_Solicitud_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="PortalModeloTemporal.FK_ZonaxSolicitud_Solicitud" ManuallyRouted="false" />
         <AssociationConnector Association="PortalModeloTemporal.FK_ZonaxSolicitud_ZonaAReparar" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.ArchivoxEstado" Width="1.5" PointX="7.5" PointY="12.5" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.País" Width="1.5" PointX="0.75" PointY="7.25" />
+        <AssociationConnector Association="PortalModeloTemporal.FK_ArchivoxEstado_Archivos" />
+        <AssociationConnector Association="PortalModeloTemporal.FK_ArchivoxSolicitud_EstadoSolicitud1" />
+        <AssociationConnector Association="PortalModeloTemporal.FK_Region_País" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.RangoxSolicitud" Width="1.5" PointX="7.5" PointY="9.75" />
+        <AssociationConnector Association="PortalModeloTemporal.FK_RangoxSolicitud_RangoFoliculos" />
+        <AssociationConnector Association="PortalModeloTemporal.FK_RangoxSolicitud_Solicitud" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

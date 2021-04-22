@@ -26,7 +26,6 @@ namespace WebSolicitudes.Models
         }
     
         public virtual DbSet<Archivos> Archivos { get; set; }
-        public virtual DbSet<ArchivoxSolicitud> ArchivoxSolicitud { get; set; }
         public virtual DbSet<Ciudad> Ciudad { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<EstadoSolicitud> EstadoSolicitud { get; set; }
@@ -41,5 +40,8 @@ namespace WebSolicitudes.Models
         public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<ZonaAReparar> ZonaAReparar { get; set; }
         public virtual DbSet<ZonaxSolicitud> ZonaxSolicitud { get; set; }
+        public virtual DbSet<ArchivoxEstado> ArchivoxEstado { get; set; }
+        public virtual DbSet<País> País { get; set; }
+        public virtual DbSet<RangoxSolicitud> RangoxSolicitud { get; set; }
     }
 }

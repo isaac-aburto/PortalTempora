@@ -124,6 +124,7 @@ namespace WebSolicitudes.Controllers
                         ViewData["Correo"] = solicitud.Cliente.correo;
                         ViewData["Telefono"] = solicitud.Cliente.telefono;
                         ViewData["Celular"] = solicitud.Cliente.celular;
+                        ViewData["FechaNacimiento"] = solicitud.Cliente.fecha_nacimiento;
                         ViewData["RespuestaZona"] = solicitud.RespZona;
                         ViewData["RespuestaDerma"] = solicitud.RespDerm;
                         ViewData["RespuestaPelo"] = solicitud.RespPelo;
@@ -166,6 +167,60 @@ namespace WebSolicitudes.Controllers
                         }
                         ViewData["opcionesEstados"] = opcionesEstados;
 
+                        List<RangoFoliculos> listaRangos = conexionDB.RangoFoliculos.ToList();
+                        string opcionesRangos = string.Empty;
+
+                        foreach (RangoFoliculos item in listaRangos)
+                        {
+                            if (solicitud.RangoxSolicitud.Count() != 0)
+                            {
+                                int rango1 = int.Parse(solicitud.RangoxSolicitud.FirstOrDefault().FK_idRango.ToString());
+                                if (item.idRango == rango1)
+                                {
+                                    opcionesRangos += "<option selected value='" + item.idRango + "'>" + item.Rango + "</option>";
+                                }
+                                else
+                                {
+                                    opcionesRangos += "<option  value='" + item.idRango + "'>" + item.Rango + "</option>";
+                                }
+
+                            }
+                            else {
+                                opcionesRangos += "<option  value='" + item.idRango + "'>" + item.Rango + "</option>";
+                            }
+                                
+
+                        }
+                        ViewData["opcionesRangos1"] = opcionesRangos;
+
+                        List<RangoFoliculos> listaRangos2 = conexionDB.RangoFoliculos.ToList();
+                        string opcionesRangos2 = string.Empty;
+
+                        foreach (RangoFoliculos item in listaRangos)
+                        {
+                            if (solicitud.RangoxSolicitud.Count() != 0)
+                            {
+                                int rango2 = int.Parse(solicitud.RangoxSolicitud.LastOrDefault().FK_idRango.ToString());
+                                if (item.idRango == rango2)
+                                {
+                                    opcionesRangos2 += "<option selected value='" + item.idRango + "'>" + item.Rango + "</option>";
+                                }
+                                else
+                                {
+                                    opcionesRangos2 += "<option  value='" + item.idRango + "'>" + item.Rango + "</option>";
+                                }
+
+                            }
+                            else
+                            {
+                                opcionesRangos2 += "<option  value='" + item.idRango + "'>" + item.Rango + "</option>";
+                            }
+
+                        }
+                        ViewData["opcionesRangos2"] = opcionesRangos2;
+
+
+
                         ViewData["idSolicitud"] = id;
                         return View();
 
@@ -190,6 +245,9 @@ namespace WebSolicitudes.Controllers
             string Tecnica = collection["txtTecnica"];
             string Zona = collection["txtZona"];
             string Obsrevación = collection["txtObservacion"];
+            int Rango1 = int.Parse(collection["txtFoliculo1"]);
+            int Rango2 = int.Parse(collection["txtFoliculo2"]);
+            string enviar = collection["enviar"];
             try
             {
                 string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
@@ -202,12 +260,43 @@ namespace WebSolicitudes.Controllers
                         //Validación de Usuario
                         if (usuario == null)
                             throw new Exception("El usuario no existe");
-                        Solicitud solicitud = conexionDB.Solicitud.Find(idSolicitud);
 
+                        //Buscar Rangos
+                        
+
+
+                        Solicitud solicitud = conexionDB.Solicitud.Find(idSolicitud);
                         solicitud.Fk_idEstado = int.Parse(Estado);
                         solicitud.FK_Tecnica = int.Parse(Tecnica);
+                        if (solicitud.RangoxSolicitud.Count() == 0)
+                        {
+                            RangoxSolicitud rango1 = new RangoxSolicitud();
+                            rango1.FK_idRango = Rango1;
+                            rango1.FK_idSolicitud = idSolicitud;
+                            conexionDB.RangoxSolicitud.Add(rango1);
+
+                            RangoxSolicitud rango2 = new RangoxSolicitud();
+                            rango2.FK_idRango = Rango2;
+                            rango2.FK_idSolicitud = idSolicitud;
+                            conexionDB.RangoxSolicitud.Add(rango2);
+                        }
+                        else {
+                            solicitud.RangoxSolicitud.FirstOrDefault().FK_idRango = Rango1;
+                            solicitud.RangoxSolicitud.LastOrDefault().FK_idRango = Rango2;
+                        }
                         solicitud.ObserMed = Obsrevación;
                         conexionDB.SaveChanges();
+
+                        //Guardar Rangos
+                        if (enviar == "1") {
+                            //Enviar Correo
+                            string titulo = "He aquí tu evaluación - Portal Tempora";
+                            string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                            string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudPaso1.html")).Replace("[Nombre]", nombre);
+                            Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+
+                        }
+
                         return RedirectToAction("GestionSolicitudes/" + idSolicitud.ToString()/*, "Tickets"*/);
 
                     }

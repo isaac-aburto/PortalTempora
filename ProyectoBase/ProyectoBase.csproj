@@ -191,7 +191,7 @@
     <Compile Include="Models\Archivos.cs">
       <DependentUpon>ModeloTempora.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ArchivoxSolicitud.cs">
+    <Compile Include="Models\ArchivoxEstado.cs">
       <DependentUpon>ModeloTempora.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ciudad.cs">
@@ -221,10 +221,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloTempora.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\País.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Perfil.cs">
       <DependentUpon>ModeloTempora.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RangoFoliculos.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RangoxSolicitud.cs">
       <DependentUpon>ModeloTempora.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Region.cs">
@@ -454,6 +460,7 @@
     <Content Include="Styles\img\specials-3.png" />
     <Content Include="Styles\img\specials-4.png" />
     <Content Include="Styles\img\specials-5.png" />
+    <Content Include="assets\tempora.mp4" />
     <Content Include="Styles\img\tempora.mp4" />
     <Content Include="Styles\img\testimonials\testimonials-1.jpg" />
     <Content Include="Styles\img\testimonials\testimonials-2.jpg" />
@@ -519,6 +526,7 @@
     <Content Include="Styles\js\tracking.js" />
     <Content Include="Styles\js\velocity.min.js" />
     <Content Include="Styles\js\WebCam.js" />
+    <Content Include="Styles\MensajeSolicitudPaso1.html" />
     <Content Include="Styles\MensajeSolicitudUsuario.html" />
     <Content Include="Styles\respaldo\css\bootstrap-theme.css" />
     <Content Include="Styles\respaldo\css\bootstrap-theme.min.css" />

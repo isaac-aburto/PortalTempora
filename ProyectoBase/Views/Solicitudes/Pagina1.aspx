@@ -83,40 +83,40 @@
         }
     </style>
     <style type="text/css">
-						.digit {
-							opacity: 0;
-							-webkit-transform: translateX(-40px);
-								 -moz-transform: translateX(-40px);
-									-ms-transform: translateX(-40px);
-									 -o-transform: translateX(-40px);
-											transform: translateX(-40px);
-							-webkit-transition: all 0.6s ease-out;
-								 -moz-transition: all 0.6s ease-out;
-									-ms-transition: all 0.6s ease-out;
-									 -o-transition: all 0.6s ease-out;
-											transition: all 0.6s ease-out;
-						}
-						.digit.visible {
-							opacity: 1;
-							-webkit-transform: none;
-								 -moz-transform: none;
-									-ms-transform: none;
-									 -o-transform: none;
-											transform: none;
-						}
-						.digit:nth-child(2) {
-							margin-top: 50px;
-						}
-						.digit:nth-child(3) {
-							margin-top: 100px;
-						}
-						.digit:nth-child(4) {
-							margin-top: 150px;
-						}
-						.digit:nth-child(5) {
-							margin-top: 200px;
-						}
-					</style>
+		.digit {
+			opacity: 0;
+			-webkit-transform: translateX(-40px);
+					-moz-transform: translateX(-40px);
+					-ms-transform: translateX(-40px);
+						-o-transform: translateX(-40px);
+							transform: translateX(-40px);
+			-webkit-transition: all 0.6s ease-out;
+					-moz-transition: all 0.6s ease-out;
+					-ms-transition: all 0.6s ease-out;
+						-o-transition: all 0.6s ease-out;
+							transition: all 0.6s ease-out;
+		}
+		.digit.visible {
+			opacity: 1;
+			-webkit-transform: none;
+					-moz-transform: none;
+					-ms-transform: none;
+						-o-transform: none;
+							transform: none;
+		}
+		.digit:nth-child(2) {
+			margin-top: 50px;
+		}
+		.digit:nth-child(3) {
+			margin-top: 100px;
+		}
+		.digit:nth-child(4) {
+			margin-top: 150px;
+		}
+		.digit:nth-child(5) {
+			margin-top: 200px;
+		}
+	</style>
     <style>
         .rectangulo {
             width: 60px; 
@@ -167,11 +167,11 @@
     <div class="contenedor">
 
         <div class="headera">
-            <div class="overlay"></div>
+          <div class="fullscreen-video-wrap">
             <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-            <source src="../../assets/video/tempora.mp4" type="video/mp4">
+                <source src="../../assets/video/tempora.mp4" type="video/mp4">
             </video>
-
+          </div>
             <div class="container h-100">
                 <div class="d-flex h-100 text-center align-items-center">
                     <div class="w-100 text-white">
@@ -236,61 +236,10 @@
         </div>
     </div>
 
-    
-        <form class="move">
-	<fieldset id="tweenparams">
-		<legend>Tween Parameters</legend>
-		<div>
-			<label for="scaleX">scaleX</label>
-			<div class="slider liveupdate"></div>
-			<input type="text" id="scaleX" size="3" value="1.0" min="0.1" max="3" step="0.1">
-		</div>
-		<div>
-			<label for="scaleY">scaleY</label>
-			<div class="slider liveupdate"></div>
-			<input type="text" id="scaleY" size="3" value="1.0" min="0.1" max="3" step="0.1">
-		</div>
-	</fieldset>
-</form>
-<div class="spacer s1"></div>
-<div id="trigger2" class="spacer s1"></div>
-<div class="spacer s0"></div>
-<div id="target1" class="box1 orange">
-	<p>Squeeze me tight.</p>
-	<a href="#" class="viewsource">view source</a>
-</div>
-<div class="spacer s2"></div>
-<script>
-    // init controller
-    var controller5 = new ScrollMagic.Controller();
-
-    // build tween
-    var tween = TweenMax.to("#target1", 0.5, { css: { scaleX: 1, scaleY: 1 }, ease: Linear.easeNone });
-
-    // build scene
-    var scene = new ScrollMagic.Scene({ triggerElement: "#trigger2", duration: 300 })
-        .setTween(tween)
-        .addIndicators() // add indicators (requires plugin)
-        .addTo(controller5);
-
-    $("#tweenparams input").on("change", function () {
-        var params = {
-            css: {
-                scaleX: 3.0,
-                scaleY: 3.0
-            }
-        };
-        // reset progress to start so changes do not occur from current position but from start
-        tween.progress(0)
-        // set set new tween parameters
-        tween.updateTo(params, true);
-        // re-add tween to reset position and to update
-        scene.setTween(tween);
-    });
-</script>
+   
 
     <%-- Fondo Estático --%>
-    <div class="scrollContent">
+    <%--<div class="scrollContent">
 	<section class="demo">
 		<style type="text/css">
 			.parallaxParent {
@@ -320,7 +269,7 @@
         </script>
 	</section>
 	<div class="spacer s_viewport"></div>
-</div>
+</div>--%>
 
     
     <%-- Contenedor principal --%>

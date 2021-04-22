@@ -11,6 +11,11 @@
 <main id="main">
     <br />
     <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
     <section id="book-a-table" class="book-a-table">
       <div class="container" data-aos="fade-up">
             <div class="section-title">
@@ -21,5 +26,8 @@
             <p>Si lo desea puede crear una contraseña para su usuario <%= ViewData["Correo"] %> y usar este portal para ver en tiempo real estado de su solicitud. </p>
         </div>
     </section>
+    <br />
+    <br />
+    <br />
 </main><!-- End #main -->
 </asp:Content>

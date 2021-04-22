@@ -13,13 +13,13 @@
           <Property Name="nombreArchivo" Type="varchar" MaxLength="100" />
           <Property Name="baseArchivo" Type="varchar(max)" />
         </EntityType>
-        <EntityType Name="ArchivoxSolicitud">
+        <EntityType Name="ArchivoxEstado">
           <Key>
-            <PropertyRef Name="idArchivoxSolicitud" />
+            <PropertyRef Name="idArchivoxEstado" />
           </Key>
-          <Property Name="idArchivoxSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idArchivoxEstado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FK_idArchivo" Type="int" />
-          <Property Name="FK_idSolicitud" Type="int" />
+          <Property Name="FK_idEstado" Type="int" />
         </EntityType>
         <EntityType Name="Ciudad">
           <Key>
@@ -36,7 +36,7 @@
           <Property Name="idCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="70" />
           <Property Name="apellido" Type="varchar" MaxLength="70" />
-          <Property Name="fecha_nacimiento" Type="date" />
+          <Property Name="fecha_nacimiento" Type="datetime" />
           <Property Name="rut" Type="varchar" MaxLength="11" />
           <Property Name="correo" Type="varchar" MaxLength="70" />
           <Property Name="password" Type="varchar" MaxLength="100" />
@@ -62,6 +62,14 @@
           <Property Name="baseArchivo" Type="varchar(max)" />
           <Property Name="FK_idSolicitud" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="País">
+          <Key>
+            <PropertyRef Name="idPais" />
+          </Key>
+          <Property Name="idPais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombrePais" Type="nchar" MaxLength="100" />
+          <Property Name="tipoMoneda" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Perfil">
           <Key>
             <PropertyRef Name="idPerfil" />
@@ -79,12 +87,21 @@
           <Property Name="Rango" Type="varchar" MaxLength="50" />
           <Property Name="ValorRango" Type="int" />
         </EntityType>
+        <EntityType Name="RangoxSolicitud">
+          <Key>
+            <PropertyRef Name="idRangoxSolicitud" />
+          </Key>
+          <Property Name="idRangoxSolicitud" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_idRango" Type="int" />
+          <Property Name="FK_idSolicitud" Type="int" />
+        </EntityType>
         <EntityType Name="Region">
           <Key>
             <PropertyRef Name="idRegion" />
           </Key>
           <Property Name="idRegion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nomRegion" Type="varchar" MaxLength="200" />
+          <Property Name="FK_idPais" Type="int" />
         </EntityType>
         <EntityType Name="SLA">
           <Key>
@@ -165,27 +182,27 @@
           <Property Name="FK_idZona" Type="int" />
           <Property Name="FK_idSolicitud" Type="int" />
         </EntityType>
-        <Association Name="FK_ArchivoxSolicitud_Archivo">
+        <Association Name="FK_ArchivoxEstado_Archivos">
           <End Role="Archivos" Type="Self.Archivos" Multiplicity="0..1" />
-          <End Role="ArchivoxSolicitud" Type="Self.ArchivoxSolicitud" Multiplicity="*" />
+          <End Role="ArchivoxEstado" Type="Self.ArchivoxEstado" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Archivos">
               <PropertyRef Name="idArchivos" />
             </Principal>
-            <Dependent Role="ArchivoxSolicitud">
+            <Dependent Role="ArchivoxEstado">
               <PropertyRef Name="FK_idArchivo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ArchivoxSolicitud_Solicitud">
-          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="0..1" />
-          <End Role="ArchivoxSolicitud" Type="Self.ArchivoxSolicitud" Multiplicity="*" />
+        <Association Name="FK_ArchivoxSolicitud_EstadoSolicitud">
+          <End Role="EstadoSolicitud" Type="Self.EstadoSolicitud" Multiplicity="0..1" />
+          <End Role="ArchivoxEstado" Type="Self.ArchivoxEstado" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Solicitud">
-              <PropertyRef Name="idSolicitud" />
+            <Principal Role="EstadoSolicitud">
+              <PropertyRef Name="idEstado" />
             </Principal>
-            <Dependent Role="ArchivoxSolicitud">
-              <PropertyRef Name="FK_idSolicitud" />
+            <Dependent Role="ArchivoxEstado">
+              <PropertyRef Name="FK_idEstado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -210,6 +227,42 @@
             </Principal>
             <Dependent Role="Fotos">
               <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RangoxSolicitud_RangoFoliculos">
+          <End Role="RangoFoliculos" Type="Self.RangoFoliculos" Multiplicity="0..1" />
+          <End Role="RangoxSolicitud" Type="Self.RangoxSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RangoFoliculos">
+              <PropertyRef Name="idRango" />
+            </Principal>
+            <Dependent Role="RangoxSolicitud">
+              <PropertyRef Name="FK_idRango" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RangoxSolicitud_Solicitud">
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="0..1" />
+          <End Role="RangoxSolicitud" Type="Self.RangoxSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="RangoxSolicitud">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Region_País">
+          <End Role="País" Type="Self.País" Multiplicity="0..1" />
+          <End Role="Region" Type="Self.Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="País">
+              <PropertyRef Name="idPais" />
+            </Principal>
+            <Dependent Role="Region">
+              <PropertyRef Name="FK_idPais" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -246,18 +299,6 @@
             </Principal>
             <Dependent Role="Solicitud">
               <PropertyRef Name="FK_idCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Solicitud_Rango">
-          <End Role="RangoFoliculos" Type="Self.RangoFoliculos" Multiplicity="0..1" />
-          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RangoFoliculos">
-              <PropertyRef Name="idRango" />
-            </Principal>
-            <Dependent Role="Solicitud">
-              <PropertyRef Name="FK_Rango" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -335,13 +376,15 @@
         </Association>
         <EntityContainer Name="PortalModeloTemporalStoreContainer">
           <EntitySet Name="Archivos" EntityType="Self.Archivos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ArchivoxSolicitud" EntityType="Self.ArchivoxSolicitud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArchivoxEstado" EntityType="Self.ArchivoxEstado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoSolicitud" EntityType="Self.EstadoSolicitud" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fotos" EntityType="Self.Fotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="País" EntityType="Self.País" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RangoFoliculos" EntityType="Self.RangoFoliculos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RangoxSolicitud" EntityType="Self.RangoxSolicitud" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SLA" EntityType="Self.SLA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Solicitud" EntityType="Self.Solicitud" Schema="dbo" store:Type="Tables" />
@@ -350,13 +393,13 @@
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZonaAReparar" EntityType="Self.ZonaAReparar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZonaxSolicitud" EntityType="Self.ZonaxSolicitud" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ArchivoxSolicitud_Archivo" Association="Self.FK_ArchivoxSolicitud_Archivo">
+          <AssociationSet Name="FK_ArchivoxEstado_Archivos" Association="Self.FK_ArchivoxEstado_Archivos">
             <End Role="Archivos" EntitySet="Archivos" />
-            <End Role="ArchivoxSolicitud" EntitySet="ArchivoxSolicitud" />
+            <End Role="ArchivoxEstado" EntitySet="ArchivoxEstado" />
           </AssociationSet>
-          <AssociationSet Name="FK_ArchivoxSolicitud_Solicitud" Association="Self.FK_ArchivoxSolicitud_Solicitud">
-            <End Role="Solicitud" EntitySet="Solicitud" />
-            <End Role="ArchivoxSolicitud" EntitySet="ArchivoxSolicitud" />
+          <AssociationSet Name="FK_ArchivoxSolicitud_EstadoSolicitud" Association="Self.FK_ArchivoxSolicitud_EstadoSolicitud">
+            <End Role="EstadoSolicitud" EntitySet="EstadoSolicitud" />
+            <End Role="ArchivoxEstado" EntitySet="ArchivoxEstado" />
           </AssociationSet>
           <AssociationSet Name="FK_Ciudad_Region" Association="Self.FK_Ciudad_Region">
             <End Role="Region" EntitySet="Region" />
@@ -365,6 +408,18 @@
           <AssociationSet Name="FK_Fotos_Solicitud" Association="Self.FK_Fotos_Solicitud">
             <End Role="Solicitud" EntitySet="Solicitud" />
             <End Role="Fotos" EntitySet="Fotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RangoxSolicitud_RangoFoliculos" Association="Self.FK_RangoxSolicitud_RangoFoliculos">
+            <End Role="RangoFoliculos" EntitySet="RangoFoliculos" />
+            <End Role="RangoxSolicitud" EntitySet="RangoxSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RangoxSolicitud_Solicitud" Association="Self.FK_RangoxSolicitud_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="RangoxSolicitud" EntitySet="RangoxSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Region_País" Association="Self.FK_Region_País">
+            <End Role="País" EntitySet="País" />
+            <End Role="Region" EntitySet="Region" />
           </AssociationSet>
           <AssociationSet Name="FK_Solicitud_Ciudad" Association="Self.FK_Solicitud_Ciudad">
             <End Role="Ciudad" EntitySet="Ciudad" />
@@ -376,10 +431,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Solicitud_Cliente2" Association="Self.FK_Solicitud_Cliente2">
             <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Solicitud" EntitySet="Solicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Solicitud_Rango" Association="Self.FK_Solicitud_Rango">
-            <End Role="RangoFoliculos" EntitySet="RangoFoliculos" />
             <End Role="Solicitud" EntitySet="Solicitud" />
           </AssociationSet>
           <AssociationSet Name="FK_Solicitud_SLA" Association="Self.FK_Solicitud_SLA">
@@ -418,17 +469,7 @@
           <Property Name="idArchivos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombreArchivo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="baseArchivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ArchivoxSolicitud" Relationship="Self.FK_ArchivoxSolicitud_Archivo" FromRole="Archivos" ToRole="ArchivoxSolicitud" />
-        </EntityType>
-        <EntityType Name="ArchivoxSolicitud">
-          <Key>
-            <PropertyRef Name="idArchivoxSolicitud" />
-          </Key>
-          <Property Name="idArchivoxSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FK_idArchivo" Type="Int32" />
-          <Property Name="FK_idSolicitud" Type="Int32" />
-          <NavigationProperty Name="Archivos" Relationship="Self.FK_ArchivoxSolicitud_Archivo" FromRole="ArchivoxSolicitud" ToRole="Archivos" />
-          <NavigationProperty Name="Solicitud" Relationship="Self.FK_ArchivoxSolicitud_Solicitud" FromRole="ArchivoxSolicitud" ToRole="Solicitud" />
+          <NavigationProperty Name="ArchivoxEstado" Relationship="PortalModeloTemporal.FK_ArchivoxEstado_Archivos" FromRole="Archivos" ToRole="ArchivoxEstado" />
         </EntityType>
         <EntityType Name="Ciudad">
           <Key>
@@ -447,7 +488,7 @@
           <Property Name="idCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
           <Property Name="apellido" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
-          <Property Name="fecha_nacimiento" Type="DateTime" Precision="0" />
+          <Property Name="fecha_nacimiento" Type="DateTime" Precision="3" />
           <Property Name="rut" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="correo" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -465,6 +506,7 @@
           <Property Name="cod_Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="etapaPipeDrive" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Cliente1" FromRole="EstadoSolicitud" ToRole="Solicitud" />
+          <NavigationProperty Name="ArchivoxEstado" Relationship="PortalModeloTemporal.FK_ArchivoxSolicitud_EstadoSolicitud1" FromRole="EstadoSolicitud" ToRole="ArchivoxEstado" />
         </EntityType>
         <EntityType Name="Fotos">
           <Key>
@@ -494,6 +536,7 @@
           <Property Name="Rango" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ValorRango" Type="Int32" />
           <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Rango" FromRole="RangoFoliculos" ToRole="Solicitud" />
+          <NavigationProperty Name="RangoxSolicitud" Relationship="PortalModeloTemporal.FK_RangoxSolicitud_RangoFoliculos" FromRole="RangoFoliculos" ToRole="RangoxSolicitud" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -502,6 +545,8 @@
           <Property Name="idRegion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nomRegion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Ciudad" Relationship="Self.FK_Ciudad_Region" FromRole="Region" ToRole="Ciudad" />
+          <Property Name="FK_idPais" Type="Int32" />
+          <NavigationProperty Name="País" Relationship="PortalModeloTemporal.FK_Region_País" FromRole="Region" ToRole="País" />
         </EntityType>
         <EntityType Name="SLA">
           <Key>
@@ -530,7 +575,6 @@
           <Property Name="FK_Tecnica" Type="Int32" />
           <Property Name="FK_Rango" Type="Int32" />
           <Property Name="FK_idUsuario" Type="Int32" />
-          <NavigationProperty Name="ArchivoxSolicitud" Relationship="Self.FK_ArchivoxSolicitud_Solicitud" FromRole="Solicitud" ToRole="ArchivoxSolicitud" />
           <NavigationProperty Name="Ciudad" Relationship="Self.FK_Solicitud_Ciudad" FromRole="Solicitud" ToRole="Ciudad" />
           <NavigationProperty Name="Cliente" Relationship="Self.FK_Solicitud_Cliente2" FromRole="Solicitud" ToRole="Cliente" />
           <NavigationProperty Name="EstadoSolicitud" Relationship="Self.FK_Solicitud_Cliente1" FromRole="Solicitud" ToRole="EstadoSolicitud" />
@@ -541,6 +585,7 @@
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Solicitud_Usuario" FromRole="Solicitud" ToRole="Usuario" />
           <NavigationProperty Name="ZonaxSolicitud" Relationship="Self.FK_ZonaxSolicitud_Solicitud" FromRole="Solicitud" ToRole="ZonaxSolicitud" />
           <Property Name="RespZona" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RangoxSolicitud" Relationship="PortalModeloTemporal.FK_RangoxSolicitud_Solicitud" FromRole="Solicitud" ToRole="RangoxSolicitud" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -599,30 +644,6 @@
           <NavigationProperty Name="Solicitud" Relationship="Self.FK_ZonaxSolicitud_Solicitud" FromRole="ZonaxSolicitud" ToRole="Solicitud" />
           <NavigationProperty Name="ZonaAReparar" Relationship="Self.FK_ZonaxSolicitud_ZonaAReparar" FromRole="ZonaxSolicitud" ToRole="ZonaAReparar" />
         </EntityType>
-        <Association Name="FK_ArchivoxSolicitud_Archivo">
-          <End Role="Archivos" Type="Self.Archivos" Multiplicity="0..1" />
-          <End Role="ArchivoxSolicitud" Type="Self.ArchivoxSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Archivos">
-              <PropertyRef Name="idArchivos" />
-            </Principal>
-            <Dependent Role="ArchivoxSolicitud">
-              <PropertyRef Name="FK_idArchivo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ArchivoxSolicitud_Solicitud">
-          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="0..1" />
-          <End Role="ArchivoxSolicitud" Type="Self.ArchivoxSolicitud" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Solicitud">
-              <PropertyRef Name="idSolicitud" />
-            </Principal>
-            <Dependent Role="ArchivoxSolicitud">
-              <PropertyRef Name="FK_idSolicitud" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Ciudad_Region">
           <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
           <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="*" />
@@ -769,7 +790,6 @@
         </Association>
         <EntityContainer Name="ModeloTempora" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Archivos" EntityType="Self.Archivos" />
-          <EntitySet Name="ArchivoxSolicitud" EntityType="Self.ArchivoxSolicitud" />
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" />
           <EntitySet Name="EstadoSolicitud" EntityType="Self.EstadoSolicitud" />
@@ -784,14 +804,6 @@
           <EntitySet Name="Usuario" EntityType="Self.Usuario" />
           <EntitySet Name="ZonaAReparar" EntityType="Self.ZonaAReparar" />
           <EntitySet Name="ZonaxSolicitud" EntityType="Self.ZonaxSolicitud" />
-          <AssociationSet Name="FK_ArchivoxSolicitud_Archivo" Association="Self.FK_ArchivoxSolicitud_Archivo">
-            <End Role="Archivos" EntitySet="Archivos" />
-            <End Role="ArchivoxSolicitud" EntitySet="ArchivoxSolicitud" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ArchivoxSolicitud_Solicitud" Association="Self.FK_ArchivoxSolicitud_Solicitud">
-            <End Role="Solicitud" EntitySet="Solicitud" />
-            <End Role="ArchivoxSolicitud" EntitySet="ArchivoxSolicitud" />
-          </AssociationSet>
           <AssociationSet Name="FK_Ciudad_Region" Association="Self.FK_Ciudad_Region">
             <End Role="Region" EntitySet="Region" />
             <End Role="Ciudad" EntitySet="Ciudad" />
@@ -840,7 +852,119 @@
             <End Role="ZonaAReparar" EntitySet="ZonaAReparar" />
             <End Role="ZonaxSolicitud" EntitySet="ZonaxSolicitud" />
           </AssociationSet>
+          <EntitySet Name="ArchivoxEstado" EntityType="PortalModeloTemporal.ArchivoxEstado" />
+          <EntitySet Name="País" EntityType="PortalModeloTemporal.País" />
+          <AssociationSet Name="FK_ArchivoxEstado_Archivos" Association="PortalModeloTemporal.FK_ArchivoxEstado_Archivos">
+            <End Role="Archivos" EntitySet="Archivos" />
+            <End Role="ArchivoxEstado" EntitySet="ArchivoxEstado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ArchivoxSolicitud_EstadoSolicitud1" Association="PortalModeloTemporal.FK_ArchivoxSolicitud_EstadoSolicitud1">
+            <End Role="EstadoSolicitud" EntitySet="EstadoSolicitud" />
+            <End Role="ArchivoxEstado" EntitySet="ArchivoxEstado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Region_País" Association="PortalModeloTemporal.FK_Region_País">
+            <End Role="País" EntitySet="País" />
+            <End Role="Region" EntitySet="Region" />
+          </AssociationSet>
+          <EntitySet Name="RangoxSolicitud" EntityType="PortalModeloTemporal.RangoxSolicitud" />
+          <AssociationSet Name="FK_RangoxSolicitud_RangoFoliculos" Association="PortalModeloTemporal.FK_RangoxSolicitud_RangoFoliculos">
+            <End Role="RangoFoliculos" EntitySet="RangoFoliculos" />
+            <End Role="RangoxSolicitud" EntitySet="RangoxSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RangoxSolicitud_Solicitud" Association="PortalModeloTemporal.FK_RangoxSolicitud_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="RangoxSolicitud" EntitySet="RangoxSolicitud" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ArchivoxEstado">
+          <Key>
+            <PropertyRef Name="idArchivoxEstado" />
+          </Key>
+          <Property Name="idArchivoxEstado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_idArchivo" Type="Int32" />
+          <Property Name="FK_idEstado" Type="Int32" />
+          <NavigationProperty Name="Archivos" Relationship="PortalModeloTemporal.FK_ArchivoxEstado_Archivos" FromRole="ArchivoxEstado" ToRole="Archivos" />
+          <NavigationProperty Name="EstadoSolicitud" Relationship="PortalModeloTemporal.FK_ArchivoxSolicitud_EstadoSolicitud1" FromRole="ArchivoxEstado" ToRole="EstadoSolicitud" />
+        </EntityType>
+        <EntityType Name="País">
+          <Key>
+            <PropertyRef Name="idPais" />
+          </Key>
+          <Property Name="idPais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombrePais" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="tipoMoneda" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Region" Relationship="PortalModeloTemporal.FK_Region_País" FromRole="País" ToRole="Region" />
+        </EntityType>
+        <Association Name="FK_ArchivoxEstado_Archivos">
+          <End Type="PortalModeloTemporal.Archivos" Role="Archivos" Multiplicity="0..1" />
+          <End Type="PortalModeloTemporal.ArchivoxEstado" Role="ArchivoxEstado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Archivos">
+              <PropertyRef Name="idArchivos" />
+            </Principal>
+            <Dependent Role="ArchivoxEstado">
+              <PropertyRef Name="FK_idArchivo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ArchivoxSolicitud_EstadoSolicitud1">
+          <End Type="PortalModeloTemporal.EstadoSolicitud" Role="EstadoSolicitud" Multiplicity="0..1" />
+          <End Type="PortalModeloTemporal.ArchivoxEstado" Role="ArchivoxEstado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadoSolicitud">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="ArchivoxEstado">
+              <PropertyRef Name="FK_idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Region_País">
+          <End Type="PortalModeloTemporal.País" Role="País" Multiplicity="0..1" />
+          <End Type="PortalModeloTemporal.Region" Role="Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="País">
+              <PropertyRef Name="idPais" />
+            </Principal>
+            <Dependent Role="Region">
+              <PropertyRef Name="FK_idPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RangoxSolicitud">
+          <Key>
+            <PropertyRef Name="idRangoxSolicitud" />
+          </Key>
+          <Property Name="idRangoxSolicitud" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_idRango" Type="Int32" />
+          <Property Name="FK_idSolicitud" Type="Int32" />
+          <NavigationProperty Name="RangoFoliculos" Relationship="PortalModeloTemporal.FK_RangoxSolicitud_RangoFoliculos" FromRole="RangoxSolicitud" ToRole="RangoFoliculos" />
+          <NavigationProperty Name="Solicitud" Relationship="PortalModeloTemporal.FK_RangoxSolicitud_Solicitud" FromRole="RangoxSolicitud" ToRole="Solicitud" />
+        </EntityType>
+        <Association Name="FK_RangoxSolicitud_RangoFoliculos">
+          <End Type="PortalModeloTemporal.RangoFoliculos" Role="RangoFoliculos" Multiplicity="0..1" />
+          <End Type="PortalModeloTemporal.RangoxSolicitud" Role="RangoxSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RangoFoliculos">
+              <PropertyRef Name="idRango" />
+            </Principal>
+            <Dependent Role="RangoxSolicitud">
+              <PropertyRef Name="FK_idRango" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RangoxSolicitud_Solicitud">
+          <End Type="PortalModeloTemporal.Solicitud" Role="Solicitud" Multiplicity="0..1" />
+          <End Type="PortalModeloTemporal.RangoxSolicitud" Role="RangoxSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="RangoxSolicitud">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -853,15 +977,6 @@
                 <ScalarProperty Name="idArchivos" ColumnName="idArchivos" />
                 <ScalarProperty Name="nombreArchivo" ColumnName="nombreArchivo" />
                 <ScalarProperty Name="baseArchivo" ColumnName="baseArchivo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ArchivoxSolicitud">
-            <EntityTypeMapping TypeName="PortalModeloTemporal.ArchivoxSolicitud">
-              <MappingFragment StoreEntitySet="ArchivoxSolicitud">
-                <ScalarProperty Name="idArchivoxSolicitud" ColumnName="idArchivoxSolicitud" />
-                <ScalarProperty Name="FK_idArchivo" ColumnName="FK_idArchivo" />
-                <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -932,6 +1047,7 @@
           <EntitySetMapping Name="Region">
             <EntityTypeMapping TypeName="PortalModeloTemporal.Region">
               <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="FK_idPais" ColumnName="FK_idPais" />
                 <ScalarProperty Name="idRegion" ColumnName="idRegion" />
                 <ScalarProperty Name="nomRegion" ColumnName="nomRegion" />
               </MappingFragment>
@@ -1020,6 +1136,33 @@
                 <ScalarProperty Name="idZonaxSolicitud" ColumnName="idZonaxSolicitud" />
                 <ScalarProperty Name="FK_idZona" ColumnName="FK_idZona" />
                 <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArchivoxEstado">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.ArchivoxEstado">
+              <MappingFragment StoreEntitySet="ArchivoxEstado">
+                <ScalarProperty Name="FK_idEstado" ColumnName="FK_idEstado" />
+                <ScalarProperty Name="FK_idArchivo" ColumnName="FK_idArchivo" />
+                <ScalarProperty Name="idArchivoxEstado" ColumnName="idArchivoxEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="País">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.País">
+              <MappingFragment StoreEntitySet="País">
+                <ScalarProperty Name="tipoMoneda" ColumnName="tipoMoneda" />
+                <ScalarProperty Name="nombrePais" ColumnName="nombrePais" />
+                <ScalarProperty Name="idPais" ColumnName="idPais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RangoxSolicitud">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.RangoxSolicitud">
+              <MappingFragment StoreEntitySet="RangoxSolicitud">
+                <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
+                <ScalarProperty Name="FK_idRango" ColumnName="FK_idRango" />
+                <ScalarProperty Name="idRangoxSolicitud" ColumnName="idRangoxSolicitud" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -17,9 +17,9 @@ namespace WebSolicitudes.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Solicitud()
         {
-            this.ArchivoxSolicitud = new HashSet<ArchivoxSolicitud>();
             this.Fotos = new HashSet<Fotos>();
             this.ZonaxSolicitud = new HashSet<ZonaxSolicitud>();
+            this.RangoxSolicitud = new HashSet<RangoxSolicitud>();
         }
     
         public int idSolicitud { get; set; }
@@ -38,8 +38,6 @@ namespace WebSolicitudes.Models
         public Nullable<int> FK_idUsuario { get; set; }
         public string RespZona { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ArchivoxSolicitud> ArchivoxSolicitud { get; set; }
         public virtual Ciudad Ciudad { get; set; }
         public virtual Cliente Cliente { get; set; }
         public virtual EstadoSolicitud EstadoSolicitud { get; set; }
@@ -51,5 +49,7 @@ namespace WebSolicitudes.Models
         public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ZonaxSolicitud> ZonaxSolicitud { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RangoxSolicitud> RangoxSolicitud { get; set; }
     }
 }
