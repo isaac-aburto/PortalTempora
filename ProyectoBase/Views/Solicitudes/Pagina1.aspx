@@ -163,6 +163,7 @@
         <br />
         <br />
     </div>
+
     <%-- Video --%>
     <div class="contenedor">
 
@@ -203,15 +204,30 @@
                                             }
                                         </script>
 				                    </section>
-<%--				                    <section class="demo">
+				                    <section class="demo">
 					                    <div class="spacer s2"></div>
 					                    <div id="trigger2" class="spacer s0"></div>
 					                    <div id="pin2">
-                                        <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
+                                        <div class="container " data-aos="zoom-in" data-aos-delay="100">
                                             <div class="row">
-                                            <div class="col-lg-8">
-                                                <h1 style="color: black">Su tratamiento<span style="color: #BAD305"> Ideal</span></h1>
-                                                <h2 style="color: #BAD305">[Info]</h2>
+                                            <div class="col-md-8 col-md-offset-2">
+                                                <div class="row">
+                                                    <img width="50" height="50" src="https://smilefreshcafe.github.io/img/call.png"/>
+                                                </div>
+                                                 <div class="row align-self-end">
+                                                    <br />
+                                                  </div>
+                                                <div class="row align-self-end">
+
+                                                    <img width="50" height="50" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/240px-Facebook_Logo_%282019%29.png"/>
+                                                </div>
+                                                <div class="row">
+                                                    <br />
+                                                </div>
+                                                <div class="row align-self-end">
+
+                                                    <img width="50" height="50" src="https://logodownload.org/wp-content/uploads/2015/04/whatsapp-logo-1.png"/>
+                                                </div>
                                             </div>
                                             </div>
                                         </div>
@@ -220,13 +236,13 @@
 					                    <script>
                                             $(function () { // wait for document ready
                                                 // build scene
-                                                var scene = new ScrollMagic.Scene({ triggerElement: "#pin2", duration: 500})
+                                                var scene = new ScrollMagic.Scene({ triggerElement: "#pin2"})
                                                     .setPin("#pin2")
                                                     .addIndicators({ name: "2 (duration: 0)" }) // add indicators (requires plugin)
                                                     .addTo(controller);
                                             });
                                         </script>
-			                        </section>	--%>	
+			                        </section>	
 		                        </div>
 	                        </div>
                         </div>
@@ -236,7 +252,6 @@
         </div>
     </div>
 
-   
 
     <%-- Fondo Estático --%>
     <%--<div class="scrollContent">

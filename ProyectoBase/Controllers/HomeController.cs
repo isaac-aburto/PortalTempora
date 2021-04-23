@@ -29,10 +29,11 @@ namespace WebSolicitudes.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(/*IEnumerable<HttpPostedFileBase> files*/ FormCollection collection) {
+        public ActionResult Index(/*IEnumerable<HttpPostedFileBase> files,*/ FormCollection collection) {
             try
             {
                 //Usuario
+                string foto = collection["fotografia"];
                 string Nombre = collection["txtNombre"];
                 string Apellido = collection["txtApellido"];
                 string Rut = collection["txtRut"];
@@ -168,6 +169,67 @@ namespace WebSolicitudes.Controllers
                     solicitud.FechaSolicitud = DateTime.Now;
                     conexionDB.Solicitud.Add(solicitud);
                     conexionDB.SaveChanges();
+
+
+
+                    ////Agrego cada Archivo.
+                    //foreach (var file in files)
+                    //{
+                    //    if (file != null && file.ContentLength > 0)
+                    //    {
+                    //        var filename = Path.GetFileName(file.FileName);
+                    //        //var path = Path.GetTempPath();
+                    //        var path = Path.Combine(Server.MapPath("~/App_Data/uploadsTickets"), filename);
+                    //        file.SaveAs(path);
+
+                    //        Fotos fotos = new Fotos();
+
+                    //        //Ver si existe otro archivo con el mismo nombre.
+                    //        List<Fotos> listafotos = conexionDB.Fotos.ToList();
+                    //        String opciones = string.Empty;
+                    //        int n = 0;
+                    //        string segundoNombre = "";
+                    //        bool igual = false;
+                    //        foreach (Fotos item in listafotos)
+                    //        {
+                    //            if (item.nombreArchivo == filename)
+                    //            {
+                    //                n++;
+                    //                igual = true;
+                    //                if (igual == true)
+                    //                {
+                    //                    string nombrefile = filename.Split('.').FirstOrDefault();
+                    //                    string exten = filename.Split('.').LastOrDefault();
+                    //                    if (n != 1)
+                    //                    {
+                    //                        string nombrefileparnt = nombrefile.Split('(').FirstOrDefault();
+                    //                        segundoNombre = nombrefileparnt + "(" + n.ToString() + ")." + exten;
+                    //                    }
+                    //                    else
+                    //                    {
+                    //                        segundoNombre = nombrefile + "(" + n.ToString() + ")." + exten;
+                    //                    }
+                    //                }
+                    //            }
+                    //        }
+
+                    //        if (igual == false)
+                    //        {
+                    //            segundoNombre = filename;
+                    //        }
+                    //        fotos.nombreFalso =
+                    //        fotos.nombreArchivo = filename;
+                    //        fotos.baseArchivo = Util.ConvertirArchivoABase64(path);
+                    //        var ultimoId = solicitud.idSolicitud;
+                    //        fotos.FK_idSolicitud = ultimoId;
+                    //        conexionDB.Fotos.Add(fotos);
+                    //        conexionDB.SaveChanges();
+                    //        //respuesta.AdjuntoEvidencias = archivo.id_archivo;
+                    //    }
+                    //}
+
+
+
 
                     //Enviar Correo
                     string titulo  = "Nueva Solicitud - Portal Tempora";

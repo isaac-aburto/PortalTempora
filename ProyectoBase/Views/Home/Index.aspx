@@ -2,8 +2,10 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 
-        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
 
     <script type="text/javascript">
         $(function () {
@@ -22,7 +24,32 @@
                     var x = "300";
                     var y = "100";
                     document.getElementById('idcaptured').innerHTML =
-                        '<img width="320" height="185" src="' + data_uri + '"/>';
+                    '<img id="fotografia" name="fotografia" width="320" height="185" src="' + data_uri + '"/>';
+                    
+
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#btnModalGuardar1").click(function () {
+                console.log("hice click");
+                console.log($('#fotografia').attr('src'));
+                var file = document.getElementById("fotografia").src;
+
+                var formdata = new FormData();
+                formdata.append("fotografia", file);
+
+                $.ajax({
+                    url: '<%: Url.Content("~/Home/Imagen1/") %>',
+                    type: "POST",
+                    data: formdata,
+                    processData: false,
+                    contentType: false
+                    success: function (url) {
+                        editor.insertImage(welEditable, url);
+                    }
                 });
             });
         });
@@ -294,7 +321,7 @@
               <div id="baraDeCarga" class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div>
-        <form action="<%: Url.Content("~/Home/Index") %>" method="post">
+        <form action="<%: Url.Content("~/Home/Index") %>" enctype="multipart/form-data" id="formSolicitud" method="post">
 <%--        <form action="<%: Url.Content("~/Home/Index") %>" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">--%>
          <%--  Paso 1 --%>
             <div id="divPaso1">
@@ -382,12 +409,14 @@
                 <%-- Segunda Pregunta --%>
                 <h6>2.- ¿Se ha estado tratando con algún dermatologo por alguna enfermedad capilar?</h6>
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="chkDermaSi" name="chkDermaSi" class="custom-control-input">
-                  <label class="custom-control-label" for="chkDermaSi">Sí</label>
+                                        <label>Si</label>
+                    <input type="radio" id="chkDermaSi" name="chkDermaSi" class="custom-control-input">
+                  <label class="custom-control-label" for="chkDermaSi"></label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
+                                      <label>No</label>
                   <input type="radio" id="chkDermaNo" name="chkDermaSi" class="custom-control-input">
-                  <label class="custom-control-label" for="chkDermaNo">No</label>
+                  <label class="custom-control-label" for="chkDermaNo"></label>
                 </div>
                 <%-- Chk Si --%>
                 <div id="divSegundaPregunta" style="margin-left: 24px">
@@ -428,15 +457,17 @@
                 <%-- Tercera Pregunta --%>
                 <h6>3.- ¿Ha tenido pelones en la cabeza o barba?</h6>
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="chkPeloSi" name="chkPeloSi" class="custom-control-input">
+                  <label>Si</label>
+                    <input type="radio" id="chkPeloSi" name="chkPeloSi" class="custom-control-input">
                   <label class="custom-control-label" for="chkPeloSi">
-                      Sí
+                      
                   </label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="chkPeloNo" name="chkPeloNo" class="custom-control-input">
+                  <label>No</label>
+                    <input type="radio" id="chkPeloNo" name="chkPeloSi" class="custom-control-input">
                   <label class="custom-control-label" for="chkPeloNo">
-                      No
+                      
                   </label>
                 </div>
             </div>
@@ -456,6 +487,7 @@
                         <div class="row">
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalArriba" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Desde Arriba</button>
+                                <input id="foto" name="foto" value="" hidden/>
                             </div>
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalIzquierdo" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Izquierdo</button>
@@ -495,7 +527,7 @@
                   </div>
               </div>
         </div>
-        </form>
+        
       </div>
     </section>
        
@@ -751,7 +783,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Fotografía 1</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -774,7 +806,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #C6D41D; border-color: #C6D41D;">Guardar Cambios</button>
+                    <button id="btnModalGuardar1" type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #C6D41D; border-color: #C6D41D;">Guardar Cambios</button>
                 </div>
             </div>
         </div>
@@ -855,6 +887,6 @@
             </div>
         </div>
     </div>
-
+    </form>
   </main><!-- End #main -->
 </asp:Content>

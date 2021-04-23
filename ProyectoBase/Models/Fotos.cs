@@ -18,6 +18,7 @@ namespace WebSolicitudes.Models
         public string nombreArchivo { get; set; }
         public string baseArchivo { get; set; }
         public int FK_idSolicitud { get; set; }
+        public string nombreFalso { get; set; }
     
         public virtual Solicitud Solicitud { get; set; }
     }

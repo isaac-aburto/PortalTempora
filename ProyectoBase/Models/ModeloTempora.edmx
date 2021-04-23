@@ -61,6 +61,7 @@
           <Property Name="nombreArchivo" Type="varchar" MaxLength="200" />
           <Property Name="baseArchivo" Type="varchar(max)" />
           <Property Name="FK_idSolicitud" Type="int" Nullable="false" />
+          <Property Name="nombreFalso" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="País">
           <Key>
@@ -517,6 +518,7 @@
           <Property Name="baseArchivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FK_idSolicitud" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Solicitud" Relationship="Self.FK_Fotos_Solicitud" FromRole="Fotos" ToRole="Solicitud" />
+          <Property Name="nombreFalso" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Perfil">
           <Key>
@@ -1018,6 +1020,7 @@
           <EntitySetMapping Name="Fotos">
             <EntityTypeMapping TypeName="PortalModeloTemporal.Fotos">
               <MappingFragment StoreEntitySet="Fotos">
+                <ScalarProperty Name="nombreFalso" ColumnName="nombreFalso" />
                 <ScalarProperty Name="idFotos" ColumnName="idFotos" />
                 <ScalarProperty Name="nombreArchivo" ColumnName="nombreArchivo" />
                 <ScalarProperty Name="baseArchivo" ColumnName="baseArchivo" />

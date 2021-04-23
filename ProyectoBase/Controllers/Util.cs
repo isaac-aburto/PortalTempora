@@ -60,7 +60,21 @@ namespace WebSolicitudes.Controllers
             }
         }
 
-
+        public static string ConvertirArchivoABase64(string file)
+        {
+            try
+            {
+                byte[] array = System.IO.File.ReadAllBytes(file);
+                string res = Convert.ToBase64String(array);
+                Console.WriteLine(res);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
         public static void EnviarMail(string texto, string txtCorreo, string titulo)
         {
             using (MailMessage mail = new MailMessage())
