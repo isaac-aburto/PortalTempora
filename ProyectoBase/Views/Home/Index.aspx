@@ -321,44 +321,57 @@
               <div id="baraDeCarga" class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div>
-        <form action="<%: Url.Content("~/Home/Index") %>" enctype="multipart/form-data" id="formSolicitud" method="post">
+        <form action="<%: Url.Content("~/Home/Index") %>" enctype="multipart/form-data" id="formSolicitud" method="post" class="needs-validation" novalidate>
 <%--        <form action="<%: Url.Content("~/Home/Index") %>" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">--%>
          <%--  Paso 1 --%>
             <div id="divPaso1">
                 <h3>Primer Paso: Información Personal</h3>
                 <div class="form-row">
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" data-rule="minlen:1" data-msg="Please enter at least 4 chars">
-                        <div class="validate"></div>
+                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" data-rule="minlen:1" data-msg="Please enter at least 4 chars" required>
+                        <div class="invalid-feedback">
+                            Por favor ingrese su nombre
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="text" id="txtApellido" name="txtApellido" class="form-control" placeholder="Apellido" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                        <div class="validate"></div>
+                        <input type="text" id="txtApellido" name="txtApellido" class="form-control" placeholder="Apellido" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                        <div class="invalid-feedback">
+                           Por favor ingrese su apellido
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="Rut">
-                        <div class="validate"></div>
+                        <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="Rut" required>
+                        <div class="invalid-feedback">
+                            Por favor ingrese su rut
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email">
-                        <div class="validate"></div>
+                        <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email" required>
+                        <div class="invalid-feedback">
+                            Por favor ingrese su correo
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" placeholder="Teléfono" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                        <div class="validate"></div>
+                        <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" placeholder="Teléfono" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                        <div class="invalid-feedback">
+                            Por favor ingrese su telefono
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="text" class="form-control" name="txtCelular" id="txtCelular" placeholder="Celular" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                        <div class="validate"></div>
+                        <input type="text" class="form-control" name="txtCelular" id="txtCelular" placeholder="Celular" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                        <div class="invalid-feedback">
+                            Por favor ingrese su celular
+                        </div>
                     </div>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" />
+                        <input id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" required/>
                         <script>
                             $('#txtFechaNacimiento').datepicker({
                                 uiLibrary: 'bootstrap4',
                                 format: 'dd/mm/yyyy'
                             });
                         </script>
+
                     </div>
                 </div>
             </div>
@@ -373,6 +386,7 @@
                         <label class="form-check-label" for="chkZonaCima">
                             Cima
                         </label>
+
                     </div>
                     <div class="form-check custom-radio custom-control-inline">
                         <input class="form-check-input" type="checkbox" id="chkZonaRegion" name="chkZonaRegion">
@@ -408,6 +422,9 @@
                 <br />
                 <%-- Segunda Pregunta --%>
                 <h6>2.- ¿Se ha estado tratando con algún dermatologo por alguna enfermedad capilar?</h6>
+                <div class="invalid-feedback">
+                    You must agree before submitting.
+                </div>
                 <div class="custom-control custom-radio custom-control-inline">
                                         <label>Si</label>
                     <input type="radio" id="chkDermaSi" name="chkDermaSi" class="custom-control-input">
@@ -415,8 +432,9 @@
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
                                       <label>No</label>
-                  <input type="radio" id="chkDermaNo" name="chkDermaSi" class="custom-control-input">
+                  <input type="radio" id="chkDermaNo" name="chkDermaSi" class="custom-control-input" required>
                   <label class="custom-control-label" for="chkDermaNo"></label>
+
                 </div>
                 <%-- Chk Si --%>
                 <div id="divSegundaPregunta" style="margin-left: 24px">
@@ -458,7 +476,7 @@
                 <h6>3.- ¿Ha tenido pelones en la cabeza o barba?</h6>
                 <div class="custom-control custom-radio custom-control-inline">
                   <label>Si</label>
-                    <input type="radio" id="chkPeloSi" name="chkPeloSi" class="custom-control-input">
+                    <input type="radio" id="chkPeloSi" name="chkPeloSi" class="custom-control-input" required>
                   <label class="custom-control-label" for="chkPeloSi">
                       
                   </label>
@@ -467,7 +485,6 @@
                   <label>No</label>
                     <input type="radio" id="chkPeloNo" name="chkPeloSi" class="custom-control-input">
                   <label class="custom-control-label" for="chkPeloNo">
-                      
                   </label>
                 </div>
             </div>
@@ -526,10 +543,33 @@
                       <button id="btnEnviar" type="submit" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Enviar</button>
                   </div>
               </div>
-        </div>
-        
+            </div>
+        </form>
+          <script>
+              // Example starter JavaScript for disabling form submissions if there are invalid fields
+              (function () {
+                  'use strict';
+                  window.addEventListener('load', function () {
+                      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                      var forms = document.getElementsByClassName('needs-validation');
+                      // Loop over them and prevent submission
+                      var validation = Array.prototype.filter.call(forms, function (form) {
+                          form.addEventListener('submit', function (event) {
+                              if (form.checkValidity() === false) {
+                                  event.preventDefault();
+                                  event.stopPropagation();
+                              } else {
+
+                              }
+                              form.classList.add('was-validated');
+                          }, false);
+                      });
+                  }, false);
+              })();
+          </script>
       </div>
     </section>
+
        
         <!-- End Book A Table Section -->
 
@@ -887,6 +927,6 @@
             </div>
         </div>
     </div>
-    </form>
+    
   </main><!-- End #main -->
 </asp:Content>

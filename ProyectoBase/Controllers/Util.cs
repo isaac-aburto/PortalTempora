@@ -5,6 +5,7 @@ using System.Text;
 using System.Web;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Cryptography;
 
 namespace WebSolicitudes.Controllers
 {
@@ -100,6 +101,31 @@ namespace WebSolicitudes.Controllers
 
             }
 
+        }
+
+        //Encriptación de Contraseñas
+        public static string GetSHA1(String texto)
+        {
+            SHA1 sha1 = SHA1CryptoServiceProvider.Create();
+            Byte[] textOriginal = ASCIIEncoding.Default.GetBytes(texto);
+            Byte[] hash = sha1.ComputeHash(textOriginal);
+            StringBuilder cadena = new StringBuilder();
+            foreach (byte i in hash)
+            {
+                cadena.AppendFormat("{0:x2}", i);
+            }
+            return cadena.ToString();
+        }
+
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+        public static string Base64Decode(string base64EncodedData)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
     }

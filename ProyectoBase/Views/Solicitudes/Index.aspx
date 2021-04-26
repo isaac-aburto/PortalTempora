@@ -5,7 +5,7 @@
 
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap.min.css">
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="js/jquery.min.js" type="text/javascript"></script>
 <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
     <style>
@@ -105,12 +105,12 @@
                                     <input type="text" class="form-control" id="txtSolicitud" name="txtSolicitud" />
                                 </fieldset>                         
                                 <fieldset class="form-group col-md-3">
-                                    <label for="txtEstadoCasoTicket2">Rut Paciente</label>
-                                    <input type="text" class="form-control" id="txtRut" name="txtRut" />
-                                </fieldset>
-                                    <fieldset class="form-group col-md-3">
-                                    <label for="txtFechaDesde">Fecha de Solicitud</label>
+                                    <label for="txtFechaDesde">Creación Desde</label>
                                     <input type="date" class="form-control" id="txtFechaDesde" name="txtFechaDesde" />
+                                </fieldset>
+                                <fieldset class="form-group col-md-3">
+                                    <label for="txtFechaHasta">Creación Hasta</label>
+                                    <input type="date" class="form-control" id="txtFechaHasta" name="txtFechaHasta" />
                                 </fieldset>
                                 <fieldset class="form-group col-md-2">
                                     <label for="txtEstado">Estado</label>
@@ -187,7 +187,7 @@
                         table.draw();
                     });
 
-                    $('#txtRut, #txtFechaDesde, #txtEstado, #txtTecnica').change(function () {
+                    $('#txtRut, #txtFechaDesde, #txtFechaHasta,  #txtEstado, #txtTecnica').change(function () {
                         table.draw();
                     });
 
@@ -200,21 +200,30 @@
                                 IdSolicitud.includes($("#txtSolicitud").val()) == true;
 
                             //Rut
-                            var Rut = data[2];
-                            var IsRut = !$("#txtRut").val() ||
-                                Rut.includes($("#txtRut").val()) == true;
+                            //var Rut = data[2];
+                            //var IsRut = !$("#txtRut").val() ||
+                            //    Rut.includes($("#txtRut").val()) == true;
+
+                            var min = moment($('#txtFechaDesde').val(), "YYYY-MM-DD");
+                            var max = moment($('#txtFechaHasta').val(), "YYYY-MM-DD");
+                            var fecha = moment(data[3], "DD/MM/YYYY");
+                            var estaEnRangoFechas = ((isNaN(min) && isNaN(max)) || // Si no hay campos
+                                (min.isSameOrBefore(fecha) && isNaN(max)) || // Solo si hay desde
+                                (isNaN(min) && fecha.isSameOrBefore(max)) || // Solo si hay hasta
+                                (min.isSameOrBefore(fecha) && fecha.isSameOrBefore(max))); // Si hay ambos campos
+
 
                             //Estado
                             var EstadoTabla = data[4];
                             var EstadoActual = $("#txtEstado").children(":selected").text();
-                            var EstadoSeleccionada = EstadoActual == "--- Selecciona opción --" || EstadoActual == EstadoTabla;
+                            var EstadoSeleccionada = EstadoActual == "-- Selecciona opción --" || EstadoActual == EstadoTabla;
 
                             //Técnica
                             var TecnicoTabla = data[5];
                             var TecnicoActual = $("#txtTecnica").children(":selected").text();
                             var TecnicoSeleccionada = TecnicoActual == "-- Selecciona opción --" || TecnicoActual == TecnicoTabla;
 
-                            if (TecnicoSeleccionada && IsIdSolicitud && EstadoSeleccionada && IsRut) {
+                            if (TecnicoSeleccionada && IsIdSolicitud && EstadoSeleccionada && estaEnRangoFechas) {
                                 return true;
                             }
                             return false;

@@ -14,7 +14,7 @@ using System.Web.Script.Serialization;
 using System.Xml;
 using WebSolicitudes.Models;
 using System.Globalization;
-
+using FiftyOne.Foundation.Bases;
 
 namespace WebSolicitudes.Controllers
 {
@@ -261,7 +261,7 @@ namespace WebSolicitudes.Controllers
 
         public ActionResult Login()
         {
-            return RedirectToAction("Index", "Home"); 
+            return View(); 
         }
 
         //
@@ -269,10 +269,173 @@ namespace WebSolicitudes.Controllers
         [HttpPost]
         public ActionResult Login(FormCollection collection)
         {
-            return RedirectToAction("Index", "Home"); 
-        }
-        
+            string usr = collection["inputEmail"];
+            string pass = collection["inputPassword"];
+            pass = Util.GetSHA1(pass);
+            try
+            {
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Usuario usuario = conexionDB.Usuario.Where(w => w.Correo == usr && w.Password == pass).FirstOrDefault();
+                    if (usuario != null)
+                    {
+                        Session.Timeout = 60;
+                        Session["Conectado"] = true;
+                        Session["IdUsuario"] = usuario.idUsuario;
+                        Session["IdPerfil"] = usuario.FK_idPerfil;
+                        Session["Usuario"] = usuario;
+                        Session["Nombre"] = usuario.Nombre + " " + usuario.Apellido;
+                        Session["Correo"] = usuario.Correo;
+                        Session["Celular"] = usuario.Telefono;
+                        Session["Telefono"] = usuario.Celular;
+                        //Session["Permisos"] = new HomeController().NivelDePermisos(usuario.id_Usuarios);
 
+                        return RedirectToAction("Index", "Solicitudes");
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Util.escribirLog("Login", "Post", ex.Message);
+                Util.escribirLog("Login", "Post", ex.InnerException.Message);
+                return RedirectToAction("Index", "Home");
+
+
+            }
+            return View();
+        }
+
+        public ActionResult OlvidePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult OlvidePassword(FormCollection collection)
+        {
+            try
+            {
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    string correo = collection["correo"].ToString();
+                    //string CAMBIAR = "isaac.aburto@backspace.cl";
+                    string fecha = DateTime.Now.ToString();
+                    var objDLL = new Base32();
+
+                    string id = (conexionDB.Usuario.Where(w => w.Correo == correo).Select(s => s.idUsuario).FirstOrDefault()).ToString();
+                    if (id != "0")
+                    {
+                        string urlServidor = Url.Action("SolicitudCambioPass", "Usuarios", null, Request.Url.Scheme);
+                        string nombre = conexionDB.Usuario.Where(d => d.Correo == correo).Select(s => s.Nombre).FirstOrDefault().ToString();
+                        //string fecha_idurl = /*fecha + ";" + */id;
+                        string fecha_idurl = Util.Base64Encode(fecha + ";" + id);
+                        string hola = Util.Base64Decode(fecha_idurl);
+                        string titulo = "Cambio de Contraseña";
+                        string texto = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/CorreoCambioPass.html")).Replace("[Nombre]", nombre).Replace("[CodigoUrl]", fecha_idurl);
+                        texto = texto.Replace("[URLServidor]", urlServidor);
+                        Util.EnviarMail(texto, correo, titulo);
+                        ViewData["Bueno"] = "Su correo se envió con éxito";
+                    }
+                    else
+                    {
+                        ViewData["Error"] = "El correo no existe";
+                        return View();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewData["Error"] = "Error interno, por favor comuníquese con un administrador";
+                Util.escribirLog("Usuario", "Activar", ex.Message);
+                return View();
+            }
+            return View();
+        }
+
+        public ActionResult Pass(string id)
+        {
+            try
+            {
+                string error = string.Empty;
+                //string[] fecha_idurl = id.Split(';');
+                //string fecha = fecha_idurl[0];
+                string[] fecha_idurl = Util.Base64Decode(id).Split(';');
+                string fecha = fecha_idurl[0];
+                string idurl = fecha_idurl[1];
+                //string ID = idurl.Split(';').ToString();
+                //DateTime fecha_pasado = Convert.ToDateTime(fecha).AddHours(12);
+                //DateTime fecha_abierto = DateTime.Now;
+                //if (DateTime.Compare(fecha_pasado, fecha_abierto) > 0)
+                //{
+                //Guardo el ID en la vista
+                ViewData["id"] = idurl;
+                return View();
+                //}
+                //else
+                //{
+                //    error = "El tiempo expiró";
+                //    return RedirectToAction("Pass", "Usuarios");
+                //}
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("Usuario", "Pass", ex.Message);
+                return RedirectToAction("Pass", "Usuarios");
+            }
+        }
+
+        [HttpPost]
+        public ActionResult GuardarContraseña(FormCollection collection)
+        {
+            int id = Int32.Parse(collection["ocultar"]);
+            string error = string.Empty;
+            string pass1 = collection["pss1"];
+            string pass2 = collection["pss2"];
+            try
+            {
+                if (pass1 == pass2)
+                {
+                    pass1 = Util.GetSHA1(pass1);
+                    using (ModeloTempora conexionDB = new ModeloTempora())
+                    {
+                        Usuario usuario = conexionDB.Usuario.Find(id);
+                        if (usuario != null)
+                        {
+                            usuario.Password = pass1;
+                            conexionDB.SaveChanges();
+                            // Iniciar Sesión
+                            Session.Timeout = 60;
+                            Session["Conectado"] = true;
+                            Session["IdUsuario"] = usuario.idUsuario;
+                            Session["IdPerfil"] = usuario.FK_idPerfil;
+                            Session["Usuario"] = usuario;
+                            Session["Nombre"] = usuario.Nombre + " " + usuario.Apellido;
+                            Session["Correo"] = usuario.Correo;
+                            Session["Celular"] = usuario.Telefono;
+                            Session["Telefono"] = usuario.Celular;
+                            return RedirectToAction("Index", "Solicitudes");
+                        }
+                        else
+                        {
+                            ViewData["Error"] = "Error interno";
+                            return RedirectToAction("Pass", "Home");
+                        }
+                    }
+                }
+                else
+                {
+                    ViewData["Error"] = "Error - contraseñas distintas";
+                    return RedirectToAction("Pass", "Home");
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("Usuario", "Pass", ex.Message);
+                return RedirectToAction("Pass", "Usuarios");
+            }
+        }
         //
         // GET: /Home/CerrarSesion
 

@@ -17,24 +17,37 @@ namespace WebSolicitudes.Controllers
         {
             string usr = collection["inputEmail"];
             string pass = collection["inputPassword"];
-            using (ModeloTempora conexionDB = new ModeloTempora())
+            pass = Util.GetSHA1(pass);
+            try
             {
-                Usuario usuario = conexionDB.Usuario.Where(w => w.Correo == usr && w.Password == pass).FirstOrDefault();
-                if (usuario != null)
+                using (ModeloTempora conexionDB = new ModeloTempora())
                 {
-                    Session.Timeout = 60;
-                    Session["Conectado"] = true;
-                    Session["IdUsuario"] = usuario.idUsuario;
-                    Session["IdPerfil"] = usuario.FK_idPerfil;
-                    Session["Usuario"] = usuario;
-                    Session["Nombre"] = usuario.Nombre + " " + usuario.Apellido;
-                    Session["Correo"] = usuario.Correo;
-                    Session["Celular"] = usuario.Telefono;
-                    Session["Telefono"] = usuario.Celular;
-                    //Session["Permisos"] = new HomeController().NivelDePermisos(usuario.id_Usuarios);
+                    Usuario usuario = conexionDB.Usuario.Where(w => w.Correo == usr && w.Password == pass).FirstOrDefault();
+                    if (usuario != null)
+                    {
+                        Session.Timeout = 60;
+                        Session["Conectado"] = true;
+                        Session["IdUsuario"] = usuario.idUsuario;
+                        Session["IdPerfil"] = usuario.FK_idPerfil;
+                        Session["Usuario"] = usuario;
+                        Session["Nombre"] = usuario.Nombre + " " + usuario.Apellido;
+                        Session["Correo"] = usuario.Correo;
+                        Session["Celular"] = usuario.Telefono;
+                        Session["Telefono"] = usuario.Celular;
+                        //Session["Permisos"] = new HomeController().NivelDePermisos(usuario.id_Usuarios);
 
-                    return RedirectToAction("Index", "Solicitudes");
+                        return RedirectToAction("Index", "Solicitudes");
+                    }
+
                 }
+            }
+            catch (Exception ex)
+            {
+
+                Util.escribirLog("Login", "Post", ex.Message);
+                Util.escribirLog("Login", "Post", ex.InnerException.Message);
+                return RedirectToAction("Index", "Home");
+
 
             }
             return View();
