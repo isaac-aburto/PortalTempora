@@ -20,7 +20,7 @@
                     <div class="container">
                         <div class="row justify-content-center">
                             <div class="col-lg-5">
-                                <div class="card border-secondary shadow-lg rounded-lg mt-5">
+                                <div class="card shadow-lg rounded-lg mt-5">
                                     <div class="card-header" style="background-color: #f7f7f7;"><h3 class="text-center font-weight-light my-4" ><img src="<%: Url.Content("~/Styles/img/logo_tempora.png") %>"/></h3></div>
                                     <div class="card-body">
                                         <div class="text-center">

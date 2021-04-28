@@ -143,6 +143,22 @@ namespace WebSolicitudes.Controllers
                     RespuestaPelones = "No";
                 }
 
+                //Fotos
+                string base64FotoArriba = collection["fotoArriba"];
+                base64FotoArriba = base64FotoArriba.Replace("data:image/jpeg;base64,", "");
+
+                string base64FotoIzquierdo = collection["fotoIzquierdo"];
+                base64FotoIzquierdo = base64FotoIzquierdo.Replace("data:image/jpeg;base64,", "");
+
+                string base64FotoDerecho = collection["fotoDerecho"];
+                base64FotoDerecho = base64FotoDerecho.Replace("data:image/jpeg;base64,", "");
+
+                string base64FotoAtras = collection["fotoAtras"];
+                base64FotoAtras = base64FotoAtras.Replace("data:image/jpeg;base64,", "");
+
+                string base64FotoFrente = collection["fotoFrente"];
+                base64FotoFrente = base64FotoFrente.Replace("data:image/jpeg;base64,", "");
+
 
                 using (ModeloTempora conexionDB = new ModeloTempora())
                 {
@@ -170,65 +186,103 @@ namespace WebSolicitudes.Controllers
                     conexionDB.Solicitud.Add(solicitud);
                     conexionDB.SaveChanges();
 
+                    //Agrego cada Foto.
+
+                    var filename = "fotoArriba.jpg";
+                    var filename2 = "fotoIzquierdo.jpg";
+                    var filename3 = "fotoDerecho.jpg";
+                    var filename4 = "fotoAtras.jpg";
+                    var filename5 = "fotoFrente.jpg";
 
 
-                    ////Agrego cada Archivo.
-                    //foreach (var file in files)
+                    //var filename = Path.GetFileName(file.FileName);
+                    //var path = Path.GetTempPath();
+
+                    Fotos fotos = new Fotos();
+
+                    var path = Path.Combine(Server.MapPath("~/App_Data/"), filename);
+                    System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoArriba));
+                    //Ver si existe otro archivo con el mismo nombre.
+                    //List<Fotos> listafotos = conexionDB.Fotos.ToList();
+                    //String opciones = string.Empty;
+                    //int n = 0;
+                    //string segundoNombre = "";
+                    //bool igual = false;
+
+                    if (true) {
+                        //foreach (Fotos item in listafotos)
+                        //{
+                        //    if (item.nombreArchivo == filename)
+                        //    {
+                        //        n++;
+                        //        igual = true;
+                        //        if (igual == true)
+                        //        {
+                        //            string nombrefile = filename.Split('.').FirstOrDefault();
+                        //            string exten = filename.Split('.').LastOrDefault();
+                        //            if (n != 1)
+                        //            {
+                        //                string nombrefileparnt = nombrefile.Split('(').FirstOrDefault();
+                        //                segundoNombre = nombrefileparnt + "(" + n.ToString() + ")." + exten;
+                        //            }
+                        //            else
+                        //            {
+                        //                segundoNombre = nombrefile + "(" + n.ToString() + ")." + exten;
+                        //            }
+                        //        }
+                        //    }
+                        //}
+                    
+
+                    //if (igual == false)
                     //{
-                    //    if (file != null && file.ContentLength > 0)
-                    //    {
-                    //        var filename = Path.GetFileName(file.FileName);
-                    //        //var path = Path.GetTempPath();
-                    //        var path = Path.Combine(Server.MapPath("~/App_Data/uploadsTickets"), filename);
-                    //        file.SaveAs(path);
-
-                    //        Fotos fotos = new Fotos();
-
-                    //        //Ver si existe otro archivo con el mismo nombre.
-                    //        List<Fotos> listafotos = conexionDB.Fotos.ToList();
-                    //        String opciones = string.Empty;
-                    //        int n = 0;
-                    //        string segundoNombre = "";
-                    //        bool igual = false;
-                    //        foreach (Fotos item in listafotos)
-                    //        {
-                    //            if (item.nombreArchivo == filename)
-                    //            {
-                    //                n++;
-                    //                igual = true;
-                    //                if (igual == true)
-                    //                {
-                    //                    string nombrefile = filename.Split('.').FirstOrDefault();
-                    //                    string exten = filename.Split('.').LastOrDefault();
-                    //                    if (n != 1)
-                    //                    {
-                    //                        string nombrefileparnt = nombrefile.Split('(').FirstOrDefault();
-                    //                        segundoNombre = nombrefileparnt + "(" + n.ToString() + ")." + exten;
-                    //                    }
-                    //                    else
-                    //                    {
-                    //                        segundoNombre = nombrefile + "(" + n.ToString() + ")." + exten;
-                    //                    }
-                    //                }
-                    //            }
-                    //        }
-
-                    //        if (igual == false)
-                    //        {
-                    //            segundoNombre = filename;
-                    //        }
-                    //        fotos.nombreFalso =
-                    //        fotos.nombreArchivo = filename;
-                    //        fotos.baseArchivo = Util.ConvertirArchivoABase64(path);
-                    //        var ultimoId = solicitud.idSolicitud;
-                    //        fotos.FK_idSolicitud = ultimoId;
-                    //        conexionDB.Fotos.Add(fotos);
-                    //        conexionDB.SaveChanges();
-                    //        //respuesta.AdjuntoEvidencias = archivo.id_archivo;
-                    //    }
+                    //    segundoNombre = filename;
                     //}
+                    }
 
+                    //fotos.nombreFalso =
+                    fotos.nombreArchivo = filename;
+                    fotos.baseArchivo = Util.ConvertirArchivoABase64(path);
+                    var ultimoId = solicitud.idSolicitud;
+                    fotos.FK_idSolicitud = ultimoId;
+                    conexionDB.Fotos.Add(fotos);
+                    conexionDB.SaveChanges();
 
+                    Fotos fotos2 = new Fotos();
+                    var path2 = Path.Combine(Server.MapPath("~/App_Data/"), filename2);
+                    System.IO.File.WriteAllBytes(path2, Util.ConvertirBase64ABytes(base64FotoIzquierdo));
+                    fotos2.nombreArchivo = filename2;
+                    fotos2.baseArchivo = Util.ConvertirArchivoABase64(path2);
+                    fotos2.FK_idSolicitud = ultimoId;
+                    conexionDB.Fotos.Add(fotos2);
+                    conexionDB.SaveChanges();
+
+                    Fotos fotos3 = new Fotos();
+                    var path3 = Path.Combine(Server.MapPath("~/App_Data/"), filename3);
+                    System.IO.File.WriteAllBytes(path3, Util.ConvertirBase64ABytes(base64FotoDerecho));
+                    fotos3.nombreArchivo = filename3;
+                    fotos3.baseArchivo = Util.ConvertirArchivoABase64(path3);
+                    fotos3.FK_idSolicitud = ultimoId;
+                    conexionDB.Fotos.Add(fotos3);
+                    conexionDB.SaveChanges();
+
+                    Fotos fotos4 = new Fotos();
+                    var path4 = Path.Combine(Server.MapPath("~/App_Data/"), filename4);
+                    System.IO.File.WriteAllBytes(path4, Util.ConvertirBase64ABytes(base64FotoAtras));
+                    fotos4.nombreArchivo = filename4;
+                    fotos4.baseArchivo = Util.ConvertirArchivoABase64(path4);
+                    fotos4.FK_idSolicitud = ultimoId;
+                    conexionDB.Fotos.Add(fotos4);
+                    conexionDB.SaveChanges();
+
+                    Fotos fotos5 = new Fotos();
+                    var path5 = Path.Combine(Server.MapPath("~/App_Data/"), filename5);
+                    System.IO.File.WriteAllBytes(path5, Util.ConvertirBase64ABytes(base64FotoFrente));
+                    fotos5.nombreArchivo = filename5;
+                    fotos5.baseArchivo = Util.ConvertirArchivoABase64(path5);
+                    fotos5.FK_idSolicitud = ultimoId;
+                    conexionDB.Fotos.Add(fotos5);
+                    conexionDB.SaveChanges();
 
 
                     //Enviar Correo

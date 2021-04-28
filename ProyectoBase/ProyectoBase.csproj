@@ -624,8 +624,10 @@
     <Content Include="Views\Casos\Resumen.aspx" />
     <Content Include="Views\Home\Error404.aspx" />
     <Content Include="Views\Home\Home.aspx" />
+    <Content Include="Views\Home\Index - Copia.aspx" />
     <Content Include="Views\Home\Pass.aspx" />
     <Content Include="Views\Home\OlvidePassword.aspx" />
+    <Content Include="Views\Solicitudes\PruebGsap.aspx" />
     <Content Include="Views\Solicitudes\Pagina1.aspx" />
     <Content Include="Views\Solicitudes\Enviado.aspx" />
     <Content Include="Views\Home\Index.aspx" />

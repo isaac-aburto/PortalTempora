@@ -183,35 +183,35 @@
                                         </ol>
                                         <div class="carousel-inner">
                                         <div class="carousel-item active">
-                                            <img class="d-block w-100" src="https://unidadmedicaserrano.com/wp-content/uploads/2018/11/resultados_injerto-capilar-3_despu%C3%A9s.jpg" alt="First slide">
+                                            <img class="d-block w-100" src="<%= ViewData["Foto1"]%>" alt="First slide">
                                           <div class="carousel-caption d-none d-md-block">
                                             <h5>Desde arriba</h5>
                                             <p>imagen1.jpg</p>
                                           </div>
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="https://unidadmedicaserrano.com/wp-content/uploads/2018/11/resultados_injerto-capilar-3_despu%C3%A9s.jpg" alt="Second slide">
+                                            <img class="d-block w-100" src="<%= ViewData["Foto2"]%>" alt="Second slide">
                                              <div class="carousel-caption d-none d-md-block">
                                                 <h5>Perfil izquierdo</h5>
                                                 <p>imagen2.jpg</p>
                                             </div>
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="https://unidadmedicaserrano.com/wp-content/uploads/2018/11/resultados_injerto-capilar-3_despu%C3%A9s.jpg" alt="Third slide">
+                                            <img class="d-block w-100" src="<%= ViewData["Foto3"]%>" alt="Third slide">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <h5>Perfil Derecho</h5>
                                                 <p>imagen3.jpg</p>
                                             </div>
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="https://unidadmedicaserrano.com/wp-content/uploads/2018/11/resultados_injerto-capilar-3_despu%C3%A9s.jpg" alt="Third slide">
+                                            <img class="d-block w-100" src="<%= ViewData["Foto4"]%>" alt="Third slide">
                                              <div class="carousel-caption d-none d-md-block">
                                                 <h5>De atrás</h5>
                                                 <p>imagen4.jpg</p>
                                             </div>
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="https://unidadmedicaserrano.com/wp-content/uploads/2018/11/resultados_injerto-capilar-3_despu%C3%A9s.jpg" alt="Third slide">
+                                            <img class="d-block w-100" src="<%= ViewData["Foto5"]%>" alt="Third slide">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <h5>De frente</h5>
                                                 <p>imagen5.jpg</p>
@@ -230,7 +230,8 @@
                                     <br />
                                 </div>
                             </div>
-
+                            
+                            
                             <%-- Gestion --%>
 
                             <h1><a id="btnGestionar" style="color:#C6D41D; font-family: 'Open Sans', sans-serif !important" data-toggle="collapse" data-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">

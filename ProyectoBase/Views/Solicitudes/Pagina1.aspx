@@ -14,6 +14,7 @@
 	
 	<script type="text/javascript" src="<%: Url.Content("~/Styles/js/gsap3/gsap.min.js")%>"></script>
 	<script type="text/javascript" src="<%: Url.Content("~/Styles/scrollmagic/uncompressed/ScrollMagic.js")%>"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js"></script>
 	<script type="text/javascript" src="<%: Url.Content("~/Styles/scrollmagic/uncompressed/plugins/animation.gsap.js")%>"></script>
 	<script type="text/javascript" src="<%: Url.Content("~/Styles/scrollmagic/uncompressed/plugins/debug.addIndicators.js")%>"></script>
 
@@ -252,6 +253,15 @@
         </div>
     </div>
 
+
+
+    <div id="hola" class="content">
+        <h1>Hoooola</h1>
+
+    </div>
+    <script>
+        gsap.to('#hola', { opacity: 0, duration: 1, y: -50, ease: 'elastic(1. 0.3)', scrollTrigger: '#hola', x:500})
+    </script>
 
     <%-- Fondo Estático --%>
     <%--<div class="scrollContent">

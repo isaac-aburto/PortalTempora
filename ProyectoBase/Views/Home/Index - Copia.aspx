@@ -6,7 +6,7 @@
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
-    <%-- Script cámara --%>
+
     <script type="text/javascript">
         $(function () {
             Webcam.set({
@@ -18,66 +18,19 @@
             });
             Webcam.attach('#idwebcam');
             //Imagen capturada
-            $("#btnCapturar1").click(function () {
+            $("#btnCapturar").click(function () {
                 Webcam.snap(function (data_uri) {
                     // display results in page
                     var x = "300";
                     var y = "100";
                     document.getElementById('idcaptured').innerHTML =
-                        '<img id="fotografia1" name="fotografia1" width="320" height="185" src="' + data_uri + '"/>';
+                        '<img id="fotografia" name="fotografia" width="320" height="185" src="' + data_uri + '"/>';
+                    console.log("hola");
                     console.log(data_uri)
-                    document.getElementById('fotoArriba').value = data_uri;
+                    document.getElementById('foto').value = data_uri;
+                    console.log("chao");
                 });
             });
-            Webcam.attach('#idwebcam2');
-            $("#btnCapturar2").click(function () {
-                Webcam.snap(function (data_uri2) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured2').innerHTML =
-                        '<img id="fotografia2" name="fotografia2" width="320" height="185" src="' + data_uri2 + '"/>';
-                    console.log(data_uri2)
-                    document.getElementById('fotoIzquierdo').value = data_uri2;
-                });
-            });
-            Webcam.attach('#idwebcam3');
-            $("#btnCapturar3").click(function () {
-                Webcam.snap(function (data_uri3) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured3').innerHTML =
-                        '<img id="fotografia3" name="fotografia3" width="320" height="185" src="' + data_uri3 + '"/>';
-                    console.log(data_uri3)
-                    document.getElementById('fotoDerecho').value = data_uri3;
-                });
-            });
-            Webcam.attach('#idwebcam4');
-            $("#btnCapturar4").click(function () {
-                Webcam.snap(function (data_uri4) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured4').innerHTML =
-                        '<img id="fotografia4" name="fotografia4" width="320" height="185" src="' + data_uri4 + '"/>';
-                    console.log(data_uri4)
-                    document.getElementById('fotoAtras').value = data_uri4;
-                });
-            });
-            Webcam.attach('#idwebcam5');
-            $("#btnCapturar5").click(function () {
-                Webcam.snap(function (data_uri5) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured5').innerHTML =
-                        '<img id="fotografia5" name="fotografia5" width="320" height="185" src="' + data_uri5 + '"/>';
-                    console.log(data_uri5)
-                    document.getElementById('fotoFrente').value = data_uri5;
-                });
-            });
-
         });
     </script>
     <script>
@@ -98,22 +51,7 @@
             $("#Camara1").click(function () {
                 $("#divCamara1").show();
             });
-            $("#divCamara2").hide();
-            $("#Camara2").click(function () {
-                $("#divCamara2").show();
-            });
-            $("#divCamara3").hide();
-            $("#Camara3").click(function () {
-                $("#divCamara3").show();
-            });
-            $("#divCamara4").hide();
-            $("#Camara4").click(function () {
-                $("#divCamara4").show();
-            });
-            $("#divCamara5").hide();
-            $("#Camara5").click(function () {
-                $("#divCamara5").show();
-            });
+
         });
     </script>
     <%-- Pasos --%>
@@ -557,15 +495,13 @@
                         <div class="row">
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalArriba" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Desde Arriba</button>
-                                <input type="text"  id="fotoArriba" name="fotoArriba" value="" />
+                                <input type="text"  id="foto" name="foto" value="" />
                             </div>
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalIzquierdo" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Izquierdo</button>
-                                <input type="text"  id="fotoIzquierdo" name="fotoIzquierdo" value="" />
                             </div>
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalDerecho" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Derecho</button>
-                                <input type="text"  id="fotoDerecho" name="fotoDerecho" value="" />
                             </div>
                         </div>
                         <br />
@@ -573,11 +509,9 @@
                         <div class="row">
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalAtras" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Atrás</button>
-                                <input type="text"  id="fotoAtras" name="fotoAtras" value="" />
                             </div>
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalFrente" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Frente</button>
-                                <input type="text"  id="fotoFrente" name="fotoFrente" value="" />
                             </div>
                         </div>
                     </div>
@@ -627,8 +561,232 @@
       </div>
     </section>
 
- 
-<!-- End Chefs Section -->
+       
+        <!-- End Book A Table Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+<%--    <section id="testimonials" class="testimonials section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Testimonials</h2>
+          <p>What they're saying about us</p>
+        </div>--%>
+
+        <%--<div class="owl-carousel testimonials-carousel" data-aos="zoom-in" data-aos-delay="100">
+
+          <div class="testimonial-item">
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+            <img src="Styles/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+            <h3>Saul Goodman</h3>
+            <h4>Ceo &amp; Founder</h4>
+          </div>
+
+          <div class="testimonial-item">
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+            <img src="Styles/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+            <h3>Sara Wilsson</h3>
+            <h4>Designer</h4>
+          </div>
+
+          <div class="testimonial-item">
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+            <img src="Styles/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+            <h3>Jena Karlis</h3>
+            <h4>Store Owner</h4>
+          </div>
+
+          <div class="testimonial-item">
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+            <img src="Styles/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+            <h3>Matt Brandon</h3>
+            <h4>Freelancer</h4>
+          </div>
+
+          <div class="testimonial-item">
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+            <img src="Styles/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+            <h3>John Larson</h3>
+            <h4>Entrepreneur</h4>
+          </div>
+
+        </div>--%>
+
+<%--      </div>
+    </section>--%><!-- End Testimonials Section -->
+
+    <!-- ======= Gallery Section ======= -->
+  <%--  <section id="gallery" class="gallery">
+
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Gallery</h2>
+          <p>Some photos from Our Restaurant</p>
+        </div>
+      </div>
+
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row no-gutters">
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="Styles/img/gallery/gallery-1.jpg" class="venobox" data-gall="gallery-item">
+                <img src="Styles/img/gallery/gallery-1.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="Styles/img/gallery/gallery-2.jpg" class="venobox" data-gall="gallery-item">
+                <img src="Styles/img/gallery/gallery-2.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="Styles/img/gallery/gallery-3.jpg" class="venobox" data-gall="gallery-item">
+                <img src="Styles/img/gallery/gallery-3.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="Styles/img/gallery/gallery-4.jpg" class="venobox" data-gall="gallery-item">
+                <img src="Styles/img/gallery/gallery-4.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="Styles/img/gallery/gallery-5.jpg" class="venobox" data-gall="gallery-item">
+                <img src="Styles/img/gallery/gallery-5.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="Styles/img/gallery/gallery-6.jpg" class="venobox" data-gall="gallery-item">
+                <img src="Styles/img/gallery/gallery-6.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="Styles/img/gallery/gallery-7.jpg" class="venobox" data-gall="gallery-item">
+                <img src="Styles/img/gallery/gallery-7.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="Styles/img/gallery/gallery-8.jpg" class="venobox" data-gall="gallery-item">
+                <img src="Styles/img/gallery/gallery-8.jpg" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>--%><!-- End Gallery Section -->
+
+    <!-- ======= Chefs Section ======= -->
+    <%--<section id="chefs" class="chefs">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Chefs</h2>
+          <p>Our Proffesional Chefs</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6">
+            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+              <img src="Styles/img/chefs/chefs-1.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Walter White</h4>
+                  <span>Master Chef</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="member" data-aos="zoom-in" data-aos-delay="200">
+              <img src="Styles/img/chefs/chefs-2.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Sarah Jhonson</h4>
+                  <span>Patissier</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <div class="member" data-aos="zoom-in" data-aos-delay="300">
+              <img src="Styles/img/chefs/chefs-3.jpg" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>William Anderson</h4>
+                  <span>Cook</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="icofont-twitter"></i></a>
+                  <a href=""><i class="icofont-facebook"></i></a>
+                  <a href=""><i class="icofont-instagram"></i></a>
+                  <a href=""><i class="icofont-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>--%><!-- End Chefs Section -->
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -667,7 +825,7 @@
                         <div id="idcaptured"></div>
                         <br />
                         <div class="text-center">
-                         <input type="button" id="btnCapturar1" value="Capturar" style="background: #BAD305;border-radius: 50px;border: 0;color: #fff; margin-right: 78px;"/>
+                         <input type="button" id="btnCapturar" value="Capturar" style="background: #BAD305;border-radius: 50px;border: 0;color: #fff; margin-right: 78px;"/>
                         </div>
                         <br />
                     </div>
@@ -694,20 +852,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <div style="margin-left: 5pc;" id="divCamara2">
-                        <div id="idwebcam2"></div>
-                        <div id="idcaptured2"></div>
-                        <br />
-                        <div class="text-center">
-                         <input type="button" id="btnCapturar2" value="Capturar" style="background: #BAD305;border-radius: 50px;border: 0;color: #fff; margin-right: 78px;"/>
-                        </div>
-                        <br />
-                    </div>
-                    <div class="row align-items-center">
-                    <div class="col-sm text-center">
-                        <button type="button" value="Activar Cámara" id="Camara2" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Activar Cámara</button>
-                    </div>
-                    </div>
+                s
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -726,20 +871,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <div style="margin-left: 5pc;" id="divCamara3">
-                        <div id="idwebcam3"></div>
-                        <div id="idcaptured3"></div>
-                        <br />
-                        <div class="text-center">
-                         <input type="button" id="btnCapturar3" value="Capturar" style="background: #BAD305;border-radius: 50px;border: 0;color: #fff; margin-right: 78px;"/>
-                        </div>
-                        <br />
-                    </div>
-                    <div class="row align-items-center">
-                    <div class="col-sm text-center">
-                        <button type="button" value="Activar Cámara" id="Camara3" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Activar Cámara</button>
-                    </div>
-                    </div>
+                d
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -758,20 +890,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <div style="margin-left: 5pc;" id="divCamara4">
-                        <div id="idwebcam4"></div>
-                        <div id="idcaptured4"></div>
-                        <br />
-                        <div class="text-center">
-                         <input type="button" id="btnCapturar4" value="Capturar" style="background: #BAD305;border-radius: 50px;border: 0;color: #fff; margin-right: 78px;"/>
-                        </div>
-                        <br />
-                    </div>
-                    <div class="row align-items-center">
-                    <div class="col-sm text-center">
-                        <button type="button" value="Activar Cámara" id="Camara4" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Activar Cámara</button>
-                    </div>
-                    </div>
+                f
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -790,20 +909,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <div style="margin-left: 5pc;" id="divCamara5">
-                        <div id="idwebcam5"></div>
-                        <div id="idcaptured5"></div>
-                        <br />
-                        <div class="text-center">
-                         <input type="button" id="btnCapturar5" value="Capturar" style="background: #BAD305;border-radius: 50px;border: 0;color: #fff; margin-right: 78px;"/>
-                        </div>
-                        <br />
-                    </div>
-                    <div class="row align-items-center">
-                    <div class="col-sm text-center">
-                        <button type="button" value="Activar Cámara" id="Camara5" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Activar Cámara</button>
-                    </div>
-                    </div>
+                g
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

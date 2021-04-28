@@ -220,6 +220,39 @@ namespace WebSolicitudes.Controllers
                         ViewData["opcionesRangos2"] = opcionesRangos2;
 
 
+                        //Fotos
+
+
+                        List<Fotos> listaFotos = conexionDB.Fotos.ToList();
+                        int cont = 0;
+                        foreach (Fotos item in listaFotos)
+                        {
+                            if (item.FK_idSolicitud == id)
+                            {
+                                if (item.FK_idSolicitud == id && cont == 0)
+                                {
+                                    ViewData["Foto1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                }
+                                if (item.FK_idSolicitud == id && cont == 1)
+                                {
+                                    ViewData["Foto2"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                }
+                                if (item.FK_idSolicitud == id && cont == 2)
+                                {
+                                    ViewData["Foto3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                }
+                                if (item.FK_idSolicitud == id && cont == 3)
+                                {
+                                    ViewData["Foto4"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                }
+                                if (item.FK_idSolicitud == id && cont == 4)
+                                {
+                                    ViewData["Foto5"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                }
+                                cont++;
+                            }
+                        }
+
 
                         ViewData["idSolicitud"] = id;
                         return View();
@@ -248,6 +281,7 @@ namespace WebSolicitudes.Controllers
             int Rango1 = int.Parse(collection["txtFoliculo1"]);
             int Rango2 = int.Parse(collection["txtFoliculo2"]);
             string enviar = collection["enviar"];
+
             try
             {
                 string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
@@ -261,10 +295,7 @@ namespace WebSolicitudes.Controllers
                         if (usuario == null)
                             throw new Exception("El usuario no existe");
 
-                        //Buscar Rangos
-                        
-
-
+                        //Buscar Rangos                      
                         Solicitud solicitud = conexionDB.Solicitud.Find(idSolicitud);
                         solicitud.Fk_idEstado = int.Parse(Estado);
                         solicitud.FK_Tecnica = int.Parse(Tecnica);
@@ -318,6 +349,10 @@ namespace WebSolicitudes.Controllers
         }
         public ActionResult Pagina1(string idcliente)
         {  
+            return View();
+        }
+        public ActionResult PruebGsap()
+        {
             return View();
         }
     }

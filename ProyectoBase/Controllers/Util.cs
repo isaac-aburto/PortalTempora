@@ -103,6 +103,20 @@ namespace WebSolicitudes.Controllers
 
         }
 
+        public static byte[] ConvertirBase64ABytes(string archivo)
+        {
+            try
+            {
+                byte[] res = Convert.FromBase64String(archivo);
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
         //Encriptación de Contraseñas
         public static string GetSHA1(String texto)
         {
