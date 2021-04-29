@@ -15,59 +15,89 @@
 
 
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-    }
+html,
+body {
+  height:100%;
+}
 
-    section {
-        height: 100vh;
-        text-align: center;
-    }
+body {
+  width:100%;
+}
 
-    .box {
-        background: red;
-        width: 200px;
-        height: 200px;
-    }
+.headera {
+  color: white;
+  font-size: 50px;
+}
+
+.section {
+  height: 50%;
+  background: #293744;
+  color: #899eb5;
+}
+
+.scene {
+  height: 100%;
+  width: 100%;
+  background: #EAEAEA;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.viewer {
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 200px;
+  width: 100%;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/doodle-sprite.png);
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+}
+
 </style>
 
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-
-      <!-- ======= Hero Section ======= -->
+<!-- ======= Hero Section ======= -->
 <main id="main" style="background-color: white;">
-    <section>
-        <h1>Scroll down</h1>
-    </section>
-    <section>
-        <div class="box" data-aos="fade-up">
-            <h1 id="hola">hola</h1>
-        </div>
-    </section>
-    <section></section>
 
-    <script>
-        gsap.to('.box', {
-            opacity: 10,
-            duration: 1,
-            x: 500,
-            scrollTrigger: {
-                trigger: ".box",
-                start: "top 80%",
-                end: "top 30%",
-                scrub: true,
-                toggleActions: "restart none none none",
-                markers: true,
-            }       
-        })
-        gsap.grom('#hola', {
-            opacity: 0,
-            duration: 1,
-        })
-    </script>
+    <header class="headera section">
+  <div class="center">&darr;</div>
+</header>
+<section class="scene section" id="sticky">
+  <div class="viewer"></div>
+</section>
+
+<section class="section">
+  <div class="center">End</div>
+</section>
+
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    var frame_count = 9,
+        offset_value = 100;
+
+    gsap.to(".viewer", {
+        backgroundPosition: (-offset_value * frame_count * 2) + "px 50%",
+        ease: "steps(" + frame_count + ")", // use a stepped ease for the sprite sheet
+        scrollTrigger: {
+            trigger: ".scene",
+            start: "top top",
+            end: "+=" + (frame_count * offset_value),
+            pin: true,
+            scrub: true
+        }
+    });
+</script>
 
 	<script type="text/javascript" src="<%: Url.Content("~/Styles/js/tracking.js")%>"></script>	
 </main><!-- End #main -->

@@ -1,12 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/DisenoBootstrap3.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
+   
     
 
 	<link rel="stylesheet" href="<%: Url.Content("~/assets/css/examples.css")%>" type="text/css">
         <link rel="stylesheet" href="<%: Url.Content("~/assets/css/normalize.css")%>" type="text/css">
 	<link rel="shortcut icon" href="<%: Url.Content("~/assets/img/favicon.ico")%>" type="image/x-icon">
-
     <script type="text/javascript" src="<%: Url.Content("~/assets/js/lib/jquery.min.js") %>"></script>
 	<script type="text/javascript" src="<%: Url.Content("~/Styles/js/highlight.pack.js") %>"></script>
 	<script type="text/javascript" src="<%: Url.Content("~/Styles/js/modernizr.custom.min.js") %>"></script>

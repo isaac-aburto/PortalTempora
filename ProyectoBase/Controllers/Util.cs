@@ -6,6 +6,7 @@ using System.Web;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
+using System.Diagnostics;
 
 namespace WebSolicitudes.Controllers
 {
@@ -142,5 +143,55 @@ namespace WebSolicitudes.Controllers
             return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
+        public static void EnviarWhatsapp() {
+            var psi = new ProcessStartInfo();
+            psi.FileName = @"C:\Python\python.exe";
+
+            var script = @"C:\Python\whatsapp.py";
+
+            psi.Arguments = $"\"{script}";
+
+            psi.UseShellExecute = false;
+            psi.CreateNoWindow = true;
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
+
+            var errors = "";
+            var results = "";
+
+            using (var process = Process.Start(psi)) {
+                errors = process.StandardError.ReadToEnd();
+                results = process.StandardOutput.ReadToEnd();
+            }
+
+            Console.WriteLine("Errors:");
+            Console.WriteLine(errors);
+            Console.WriteLine();
+            Console.WriteLine("Resultados");
+            Console.WriteLine(results);
+        }
+
+        public static void run_cmd()
+        {
+
+            string fileName = @"C:\sample_script.py";
+
+            Process p = new Process();
+            p.StartInfo = new ProcessStartInfo(@"C:\Python27\python.exe", fileName)
+            {
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            p.Start();
+
+            string output = p.StandardOutput.ReadToEnd();
+            p.WaitForExit();
+
+            Console.WriteLine(output);
+
+            Console.ReadLine();
+
+        }
     }
 }

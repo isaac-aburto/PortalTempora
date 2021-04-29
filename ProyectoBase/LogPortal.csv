@@ -9,3 +9,4 @@ Fecha;Hora;Proceso;Método;Mensaje
 Nombre del parámetro: s"
 "26-04-2021";"16:20";"Usuario";"Pass";"El valor no puede ser nulo.
 Nombre del parámetro: s"
+"29-04-2021";"1:31";"Index";"Solicitudes (GET)";"Acceso denegado"

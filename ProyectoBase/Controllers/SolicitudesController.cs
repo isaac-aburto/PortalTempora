@@ -289,6 +289,8 @@ namespace WebSolicitudes.Controllers
                 {
                     if (int.TryParse(valorUsuario, out int idUsuario))
                     {
+                        
+                        Util.EnviarWhatsapp();
 
                         Usuario usuario = conexionDB.Usuario.Find(idUsuario);
                         //Validación de Usuario
@@ -326,6 +328,9 @@ namespace WebSolicitudes.Controllers
                             string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudPaso1.html")).Replace("[Nombre]", nombre);
                             Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
 
+                            
+                        
+                        
                         }
 
                         return RedirectToAction("GestionSolicitudes/" + idSolicitud.ToString()/*, "Tickets"*/);

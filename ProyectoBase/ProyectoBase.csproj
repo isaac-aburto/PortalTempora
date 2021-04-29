@@ -180,6 +180,9 @@
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="WhatsAppApi, Version=1.0.2.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Whatsapp.NET.1.2.2\lib\WhatsAppApi.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CasosController.cs" />
@@ -439,6 +442,7 @@
     <Content Include="Styles\img\gallery\gallery-7.jpg" />
     <Content Include="Styles\img\gallery\gallery-8.jpg" />
     <Content Include="Styles\img\hero-bg.jpg" />
+    <Content Include="Styles\img\imagen1.png" />
     <Content Include="Styles\img\img_mountains01.jpg" />
     <Content Include="Styles\img\img_mountains02.jpg" />
     <Content Include="Styles\img\img_mountains03.jpg" />
