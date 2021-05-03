@@ -302,7 +302,7 @@
     <br />
     <div id="content-wrapper">
 		<div id="example-wrapper">
-			<div class="scrollContent">
+			<div id="a" class="scrollContent">
 				<section class="demo">
 					<div class="spacer s2"></div>
 					<div class="spacer s0" id="trigger"></div>
@@ -335,7 +335,8 @@
                                 roundProps: "curImg",				// only integers so it can be used as an array index
                                 /*repeat: 3,*/									// repeat 3 times
                                 immediateRender: true,			// load first image automatically
-                                ease: Linear.easeNone,			// show every image the same ammount of time
+                                ease: Linear.easeNone,
+                                setPin: "#a",// show every image the same ammount of time
                                 onUpdate: function () {
                                     $("#myimg").attr("src", images[obj.curImg]); // set the image source
                                 }
@@ -346,10 +347,12 @@
                         var controller = new ScrollMagic.Controller();
 
                         // build scene
-                        var scene = new ScrollMagic.Scene({ triggerElement: "#trigger", duration: 500 })
+                        var scene = new ScrollMagic.Scene({ triggerElement: "#trigger", duration: 500, setPin: "#a" })
                             .setTween(tween)
                             .addIndicators() // add indicators (requires plugin)
-                            .addTo(controller);
+                            .addTo(controller)
+                            .setPin(scrollContent);
+                        
 
                         // handle form change
                         $("form.move input[name=duration]:radio").change(function () {

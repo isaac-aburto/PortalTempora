@@ -557,15 +557,15 @@
                         <div class="row">
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalArriba" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Desde Arriba</button>
-                                <input type="text"  id="fotoArriba" name="fotoArriba" value="" />
+                                <input type="text"  id="fotoArriba" name="fotoArriba" value="" hidden/>
                             </div>
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalIzquierdo" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Izquierdo</button>
-                                <input type="text"  id="fotoIzquierdo" name="fotoIzquierdo" value="" />
+                                <input type="text"  id="fotoIzquierdo" name="fotoIzquierdo" value="" hidden/>
                             </div>
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalDerecho" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Derecho</button>
-                                <input type="text"  id="fotoDerecho" name="fotoDerecho" value="" />
+                                <input type="text"  id="fotoDerecho" name="fotoDerecho" value="" hidden/>
                             </div>
                         </div>
                         <br />
@@ -573,11 +573,11 @@
                         <div class="row">
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalAtras" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Atrás</button>
-                                <input type="text"  id="fotoAtras" name="fotoAtras" value="" />
+                                <input type="text"  id="fotoAtras" name="fotoAtras" value="" hidden/>
                             </div>
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalFrente" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Frente</button>
-                                <input type="text"  id="fotoFrente" name="fotoFrente" value="" />
+                                <input type="text"  id="fotoFrente" name="fotoFrente" value="" hidden/>
                             </div>
                         </div>
                     </div>

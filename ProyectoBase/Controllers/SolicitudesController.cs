@@ -289,7 +289,9 @@ namespace WebSolicitudes.Controllers
                 {
                     if (int.TryParse(valorUsuario, out int idUsuario))
                     {
-                        
+
+
+
                         Util.EnviarWhatsapp();
 
                         Usuario usuario = conexionDB.Usuario.Find(idUsuario);

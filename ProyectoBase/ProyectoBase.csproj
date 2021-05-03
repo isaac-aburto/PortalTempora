@@ -378,6 +378,7 @@
     <Content Include="assets\js\lib\modernizr.custom.min.js" />
     <Content Include="assets\js\lib\velocity.min.js" />
     <Content Include="assets\js\tracking.js" />
+    <Content Include="assets\tempora9sec.mp4" />
     <Content Include="assets\video\tempora.mp4" />
     <Content Include="Global.asax" />
     <Content Include="Models\ModeloTempora.Context.tt">
@@ -423,10 +424,12 @@
     <Content Include="Styles\css\normalize.css" />
     <Content Include="Styles\img\about-bg.jpg" />
     <Content Include="Styles\img\about.jpg" />
+    <Content Include="Styles\img\antes.jpg" />
     <Content Include="Styles\img\apple-touch-icon.png" />
     <Content Include="Styles\img\chefs\chefs-1.jpg" />
     <Content Include="Styles\img\chefs\chefs-2.jpg" />
     <Content Include="Styles\img\chefs\chefs-3.jpg" />
+    <Content Include="Styles\img\despues.jpg" />
     <Content Include="Styles\img\event-birthday.jpg" />
     <Content Include="Styles\img\event-custom.jpg" />
     <Content Include="Styles\img\event-private.jpg" />
