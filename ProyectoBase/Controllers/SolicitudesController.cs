@@ -324,10 +324,13 @@ namespace WebSolicitudes.Controllers
 
                         //Guardar Rangos
                         if (enviar == "1") {
+                            //Armar link
+                            string link = solicitud.Cliente.idCliente+";"+DateTime.Now.ToString("dd/MM/yyyy");
+                            link = Util.Base64Encode(link);
                             //Enviar Correo
                             string titulo = "He aquí tu evaluación - Portal Tempora";
                             string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
-                            string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudPaso1.html")).Replace("[Nombre]", nombre);
+                            string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudPaso1.html")).Replace("[Nombre]", nombre).Replace("[Link]",link);
                             Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
 
                             
@@ -348,9 +351,31 @@ namespace WebSolicitudes.Controllers
 
             return View();
         }
+
+        public ActionResult Solicitud(string link)
+        {
+            try 
+            {
+                string[] linkDecod = Util.Base64Decode(link).Split(';');
+                int linkId = int.Parse(linkDecod[0]);
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Usuario usuario = conexionDB.Usuario.Find(linkId);
+                    if (usuario == null)
+                        throw new Exception("El usuario no existe");
+                    ViewData["Nombre"] = usuario.Nombre + usuario.Apellido;
+
+                }
+                }
+            catch (Exception ex) {
+                Util.escribirLog("Solicitud", "Solicitudes (GET)", ex.Message);
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
         public ActionResult Enviado(string idcliente)
         {
-          
             ViewData["Correo"] = Session["Correo"];
             return View();
         }
@@ -358,10 +383,7 @@ namespace WebSolicitudes.Controllers
         {  
             return View();
         }
-        public ActionResult PruebGsap()
-        {
-            return View();
-        }
+
     }
 
 }
