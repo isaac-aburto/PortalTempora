@@ -274,6 +274,7 @@ namespace WebSolicitudes.Controllers
 
             int idSolicitud = int.Parse(collection["idSolicitud"].ToString());
 
+            string FechaNacimiento = collection["Nacimiento"];
             string Estado = collection["txtEstado"];
             string Tecnica = collection["txtTecnica"];
             string Zona = collection["txtZona"];
@@ -281,6 +282,7 @@ namespace WebSolicitudes.Controllers
             int Rango1 = int.Parse(collection["txtFoliculo1"]);
             int Rango2 = int.Parse(collection["txtFoliculo2"]);
             string enviar = collection["enviar"];
+
 
             try
             {
@@ -290,9 +292,7 @@ namespace WebSolicitudes.Controllers
                     if (int.TryParse(valorUsuario, out int idUsuario))
                     {
 
-
-
-                        Util.EnviarWhatsapp();
+                        //Util.EnviarWhatsapp();
 
                         Usuario usuario = conexionDB.Usuario.Find(idUsuario);
                         //Validación de Usuario
@@ -352,21 +352,36 @@ namespace WebSolicitudes.Controllers
             return View();
         }
 
-        public ActionResult Solicitud(string link)
+        public ActionResult Solicitud(string id)
         {
             try 
             {
-                string[] linkDecod = Util.Base64Decode(link).Split(';');
+                string[] linkDecod = Util.Base64Decode(id).Split(';');
                 int linkId = int.Parse(linkDecod[0]);
                 using (ModeloTempora conexionDB = new ModeloTempora())
                 {
-                    Usuario usuario = conexionDB.Usuario.Find(linkId);
-                    if (usuario == null)
+                    Cliente cliente = conexionDB.Cliente.Find(linkId);
+                    if (cliente == null)
                         throw new Exception("El usuario no existe");
-                    ViewData["Nombre"] = usuario.Nombre + usuario.Apellido;
+
+                    Solicitud solicitud = conexionDB.Solicitud.Where(w => w.FK_idCliente == cliente.idCliente).FirstOrDefault();
+                    //Insertar video
+                    int edad = Util.CalcularEdad(cliente.fecha_nacimiento.ToString());
+                    string tecnica = solicitud.Tecnica.nombreTecnica;
+                    int rango1 = int.Parse(conexionDB.RangoxSolicitud.Where(w=> w.FK_idSolicitud == solicitud.idSolicitud).Select(s=> s.FK_idRango).FirstOrDefault().ToString());
+                    int Rango1 = int.Parse(conexionDB.RangoFoliculos.Where(w => w.idRango == rango1).Select(s => s.Rango).FirstOrDefault().ToString());
+                    int idrango2 = int.Parse(conexionDB.RangoxSolicitud.Where(w => w.FK_idSolicitud == solicitud.idSolicitud).Select(s => s.idRangoxSolicitud).FirstOrDefault().ToString()) + 1;
+                    int rango2 = int.Parse(conexionDB.RangoxSolicitud.Where(w => w.idRangoxSolicitud == idrango2).Select(s => s.FK_idRango).FirstOrDefault().ToString());
+                    int Rango2 = int.Parse(conexionDB.RangoFoliculos.Where(w => w.idRango == rango2).Select(s => s.Rango).FirstOrDefault().ToString());
+
+                    //Obtener video
+                    string src = Util.CalcularVideo(tecnica, Rango1, Rango2, edad);
+
+                    ViewData["src"] = src;
+                    ViewData["Nombre"] = cliente.nombre +" "+ cliente.apellido;
 
                 }
-                }
+            }
             catch (Exception ex) {
                 Util.escribirLog("Solicitud", "Solicitudes (GET)", ex.Message);
                 return RedirectToAction("Index", "Home");

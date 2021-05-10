@@ -22,18 +22,24 @@
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     
-    <%-- Scroll suave --%>
-<%--    https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js
+    <%-- autoplay video --%>
+    <script src="/bower_components/play-on-scroll/scripts/play-on-scroll.js"></script>
+
+    
     <script>
-        const locoScroll = new LocomotiveScroll({
-            el: document.querySelector(".scrollContainer"),
-            smooth: true
-        }); 
+        var size = [window.width, window.height];  //public variable
+
+        $(window).resize(function () {
+            window.resizeTo(size[0], size[1]);
+        });
     </script>
-    https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.min.js--%>
+ 
     <%-- Video CSS/Script --%>
     <style>
-
+        html {
+            resize: none;
+            background-color: #DCFABD
+        }
         .contenedor{
             position: relative;
             display: inline-block;
@@ -67,6 +73,16 @@
           -moz-transform: translateX(-50%) translateY(-50%);
           -webkit-transform: translateX(-50%) translateY(-50%);
           transform: translateX(-50%) translateY(-50%);
+        }
+        video::after {
+              content:"";
+              position:absolute;
+              top:0;
+              left:0;
+              width:100%;
+              height:100%;
+              background:rgba(0,0,0,0.6);
+              z-index:-1;      
         }
 
         headera .container {
@@ -184,7 +200,7 @@
     .rectangulo {
         width: 60px; 
         height: 20px; 
-        background: #808080;
+        background: #808080ad;
     }
     .dot {
           height: 25px;
@@ -194,16 +210,23 @@
           display: inline-block;
     }
     .containera {
+      
       height: 100vh;
       position: relative;
     }
     .scaleDowna {
-      width: 112vw;
+      width: 50%;
       height: 140vh;
+      min-width: 112vw;
+      max-width: 112vw;
+      max-height: 112vw;
+      min-height: 140vh;
       position: absolute;
       top: 50%;
       left: 50%;
+      resize: none;
       background-image:url(../../Styles/img/notebook.png);
+      background-repeat: no-repeat;
 /*    border-radius: 25px;
       border-color: #C4D600;
       border-style:solid;
@@ -226,6 +249,36 @@
         margin-left: -62px;
         height: 43pc;
         width: 1284px;
+    }
+    .mensaje1 {
+        background-image: url(../../Styles/img/mensaje1.png);
+    background-position: 1pc 8pc;
+    background-repeat: no-repeat;
+    background-size: 403px 226px;
+    opacity: 0.7654;
+    transform: translate3d(0px, 46.9178px, 0px);
+    }
+        .mensaje2 {
+        background-image: url(../../Styles/img/mensaje2.png);
+    background-position: 1pc 8pc;
+    background-repeat: no-repeat;
+    background-size: 403px 226px;
+    opacity: 0.7654;
+    transform: translate3d(0px, 46.9178px, 0px);
+    }
+    .mensaje11 {
+        background-color: green;
+        border-radius: 5px;
+        width: 50px;
+        height: 100px;
+    }
+    .circulo {
+         width: 100px;
+         height: 100px;
+         -moz-border-radius: 50%;
+         -webkit-border-radius: 50%;
+         border-radius: 50%;
+         background: #5cb85c;
     }
 </style>
 
@@ -274,8 +327,9 @@
 }
 
 .pSection {
+border-radius: 28px;
   position: relative;
-  padding-top: 200px;
+  padding-top: 289px;
   padding-bottom: 300px;
 }
 
@@ -289,13 +343,15 @@
 
 .pContent {
   width: 99%;
+  border-radius: 1pc;
   background-color: rgba(78,152,21,0.8);
   color: white;
   padding: 40px 60px;
 }
 
 .pImage {
-  width: 70%;
+  width: 67%;
+  height: 40pc;
   position: absolute;
   top: 0;
   right: 0;
@@ -327,18 +383,16 @@
     </section>--%>
 
     <div class="headera">
-        <h1 style="color: white;">¡<span style="color: #BAD305"><%= ViewData["Nombre"] %></span> tenemos el plan perfecto para usted!.</h1>
+        <h1 style="color: white; z-index: 100">¡<span style="color: #BAD305; z-index: 100;"><%= ViewData["Nombre"] %></span> tenemos el plan perfecto para usted!</h1>
         <h1></h1>
         <div class="fullscreen-video-wrap">
-            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" style="filter: brightness(0.7);">
                 <source src="../../assets/video/tempora.mp4" type="video/mp4">
             </video>
         </div>
     </div>
-    <br />
-    <br />
-    <br />
-    <div class="box">
+    <section>
+<%--    <div class="box">
     </div>
     <script>
             gsap.to(".box", {
@@ -355,19 +409,137 @@
             x: 500,
 
         });
-    </script>
+    </script>--%>
+    <div class="d-flex justify-content-center">
+        <h2 style="font-size: 42px;" class="textoPropuesta" >Nuestra propuesta...</h2>
+    </div>
     <br />
+    <br />
+    <section class="pSection">
+        <div class="container">
+        <div class="pContent">
+            <h1 class="text1" >Su plan es el siguiente:</h1>
+            <br />
+            <br />
+          <h2 class="text1">Según nuestro análisis capilar, usted padece de <span style="color: #BAD305">Alopecia Androgenética</span>, con una perdida de cabello aproximada a 2000 fóliculos</h2>
+          <br />
+          <div class="precios">
+              <div class="row">
+                  <div class="col">
+                      <div class="card" style="width: 18rem; border-color: transparent; background: transparent;">
+                        <div class="card-body" style="background-color: #a5c700; border-radius: 56px 5px; border-color: white">
+                            <h5 class="card-title">2000 Fóliculos</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">$3.100.000</h6>
+                            <p style="color: white" class="card-text">Pesos Chilenos</p>
+                        </div>
+                      </div>
+                  </div>
+                <div class="col">
+                    <div class="rectangulo" style="margin-top: 4pc; margin-left: 7pc; margin-bottom: 5pc;"></div>
+                </div>
+                  <div class="col">
+                      <div class="card" style="width: 18rem; border-color: transparent; background: transparent;">
+                        <div class="card-body" style="background-color: #a5c700; border-radius: 56px 5px; border-color: white">
+                            <h5 class="card-title">2500 Fóliculos</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">$3.600.000</h6>
+                            <p style="color: white" class="card-text">Pesos Chilenos</p>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+           </div>
+        </div>
+        </div>
+  
+        <img class="pImage" src="../../Styles/img/fondo-plantas.jpg" alt="Filler image">
+        <script>
+            gsap.from(".textoPropuesta", {
+                x: 200,
+                duration: 3,
+                opacity: 0,
+                scrollTrigger: {
+                    trigger: ".textoPropuesta",
+                    scrub: true,
+                }
+            })
 
-    <br />
-    <br />
-    <br />
+            gsap.to(".pContent", {
+                yPercent: -100,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".pSection",
+                    // start: "top bottom", // the default values
+                    // end: "bottom top",
+                    scrub: true
+                },
+            });
+
+            gsap.to(".pImage", {
+                yPercent: 50,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".pSection",
+                    // start: "top bottom", // the default values
+                    // end: "bottom top",
+                    scrub: true
+                },
+            });
+        </script>
+    </section>
+    <div class="d-flex justify-content-center">
+        <h2 style="font-size: 42px; margin-top: -13pc;" class="textoPropuesta" >Un caso como el tuyo</h2>
+    </div>
+     <script>
+         gsap.from(".textoPropuesta", {
+             y: 200,
+             duration: 2,
+             opacity: 0,
+             scrollTrigger: {
+                 trigger: ".textoPropuesta",
+                 scrub: true,
+             }
+         })
+     </script>
     <br />
     <br />
     <div class="containera" >
       <div class="scaleDowna" data-aos="fade-up">
           <div class="pantalla">
-              <video src="../../assets/tempora.mp4" controls="controls" style="height: 719.0px;margin-top: 47px;margin-left: 4.1px;"/>  
+              <video id="video"  src="<%= ViewData["src"] %>" controls="controls" style="height: 719.0px;margin-top: 47px;margin-left: 4.1px;"/>  
           </div>
+        <script>
+            let playAfterThisHeight = 2200
+            let playAfterThisHeight2 = 3600
+            $(document).scroll(function () {
+                if ($(document).scrollTop() > playAfterThisHeight && $(document).scrollTop() < playAfterThisHeight2) {
+                    $('#video').prop('volume', 0.50);
+                    $('#video').trigger('play');
+
+                } else {
+                    if ($(document).scrollTop() > 3700) {
+                        $('#video').prop('volume', 0.40);
+                    }
+                    if ($(document).scrollTop() > 3800) {
+                        $('#video').prop('volume', 0.30);
+                    }
+                    if ($(document).scrollTop() > 3900) {
+                        $('#video').prop('volume', 0.20);
+                    }
+                    if ($(document).scrollTop() > 4000) {
+                        $('#video').prop('volume', 0.10);
+                    }
+                    if ($(document).scrollTop() > 4100) {
+                        $('#video').prop('volume', 0.05);
+                    }
+                    if ($(document).scrollTop() > 4200) {
+                        $('#video').trigger('pause');
+                    }
+
+
+                                  
+                }
+            })
+        </script>
      <br />
 <%--          <h1 class="text1" >Su plan es el siguiente:</h1>
             <br />
@@ -401,11 +573,11 @@
            </div>--%>
           
       </div>
-       
     </div>
-        <br />
-        <br />
     <br />
+    <br />
+    <br />
+     </section>
     <script>
         gsap.set(".scaleDowna", { xPercent: -50, yPercent: -50 });
         gsap.to(".scaleDowna", {
@@ -418,22 +590,19 @@
             }
         }),
         gsap.from(".precios", {
-            x: 500,
-            y: 200,
-            duration: 3,
+
+            duration: 6,
             opacity: 0,
             scrollTrigger: {
-                trigger: ".scaleDowna",
+                trigger: ".textoPropuesta",
                 scrub: true,
             }
         })
         gsap.from(".text1", {
-            x: 500,
-            y: 200,
-            duration: 3,
+            duration: 6,
             opacity: 0,
             scrollTrigger: {
-                trigger: ".scaleDowna",
+                trigger: ".textoPropuesta",
                 scrub: true,
             }
         })
@@ -445,12 +614,10 @@
         <div class="container">
     <div class="box4">
     </div>
-
     <script>
         gsap.to(".box4", {
             scrollTrigger: { trigger: ".box4", scrub: true }, // start the animation when ".box" enters the viewport (once)
             x: 500,
-
         });
     </script>
         <br />
@@ -464,103 +631,40 @@
 
         });
     </script>
-    <br />
+
  
     </div>
     </section>
-    <br />
-    <br />
-
-    <h1 class="textoPropuesta" style="margin-left: 14pc">Nuestra propuesta...</h1>
-
-    <section class="pSection">
-        <div class="container">
-        <div class="pContent">
-            <h1 class="text1" >Su plan es el siguiente:</h1>
-            <br />
-            <br />
-          <h2 class="text1">Según nuestro análisis capilar, usted padece de <span style="color: #BAD305">Alopecia Androgenética</span>, con una perdida de cabello aproximada a 2000 fóliculos</h2>
-          <br />
-          <div class="precios">
-              <div class="row">
-                  <div class="col">
-                      <div class="card" style="width: 18rem; border-color: transparent; background: transparent;">
-                        <div class="card-body" style="background-color: #C4D600; border-radius: 56px 5px; border-color: white">
-                            <h5 class="card-title">2000 Fóliculos</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3.100.000</h6>
-                            <p style="color: white" class="card-text">Pesos Chilenos</p>
-                        </div>
-                      </div>
-                  </div>
-                <div class="col">
-                    <div class="rectangulo" style="margin-top: 4pc; margin-left: 7pc; margin-bottom: 5pc;"></div>
-                </div>
-                  <div class="col">
-                      <div class="card" style="width: 18rem; border-color: transparent; background: transparent;">
-                        <div class="card-body" style="background-color: #C4D600; border-radius: 56px 5px; border-color: white">
-                            <h5 class="card-title">2500 Fóliculos</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">3.600.000</h6>
-                            <p style="color: white" class="card-text">Pesos Chilenos</p>
-                        </div>
-                      </div>
-                  </div>
-              </div>
-           </div>
-        </div>
-        </div>
-  
-        <img class="pImage" src="../../Styles/img/fondo-plantas.jpg" alt="Filler image">
-        <script>
-            gsap.from(".textoPropuesta", {
-                x: 200,
-                duration: 5,
-                opacity: 0,
-                scrollTrigger: {
-                    trigger: ".textoPropuesta",
-                    scrub: true,
-                }
-            })
-
-            gsap.to(".pContent", {
-                yPercent: -100,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: ".pSection",
-                    // start: "top bottom", // the default values
-                    // end: "bottom top",
-                    scrub: true
-                },
-            });
-
-            gsap.to(".pImage", {
-                yPercent: 50,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: ".pSection",
-                    // start: "top bottom", // the default values
-                    // end: "bottom top",
-                    scrub: true
-                },
-            });
-        </script>
-    </section>
-
-
-    <br />
-    <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <section style=" margin-top: -16pc;">
         <div class="d-flex justify-content-center">
-            <h1 data-aos="zoom-in" data-aos-delay="100">En <span style="color: #BAD305">Tempora</span> transformaremos su vida</h1>
+            <h2 style="font-size: 42px;"data-aos="zoom-in" data-aos-delay="100">En <span style="color: #BAD305">Tempora</span> transformaremos tu vida</h2>
+        
         </div>
          <div class="d-flex justify-content-around">
-             <div class="texto2">
-                 <h2 data-aos-delay="100" style="width: 24pc; margin-left: 60px; margin-top: 10pc;">El 100% de nuestros pacientes están satisfechos con los resultados...</h2>
+             <div class="texto2 mensaje1" >
+                 <h2 data-aos-delay="100" style="width: 24pc; margin-left: 60px; margin-top: 10pc; color:white">El 100% de nuestros pacientes están satisfechos con los resultados...</h2>
 
              </div>
              <script>
                  gsap.from(".texto2", {
                      scrollTrigger: { trigger: ".texto2", scrub: true }, // start the animation when ".box" enters the viewport (once)
                      y: 200,
+                     duration: 1,
                      opacity: 0
+  
 
                  });
              </script>
@@ -568,13 +672,15 @@
               <div class="card-body">
                 <section class="comparisonSection">
               <div class="comparisonImage beforeImage">
-                <img src="../../Styles/img/antes.jpg" alt="before">
+                <img src="../../Styles/img/antes.jpg" alt="before" style="border-radius: 3%;">
               </div>
               <div class="comparisonImage afterImage">
-                <img src="../../Styles/img/despues.jpg" alt="after">
+                <img src="../../Styles/img/despues.jpg" alt="after" style="border-radius: 3%;">
+                  
               </div>
+                
             </section>
-                  <h6 data-aos="zoom-in" data-aos-delay="100" style="color: darkslategrey;">Técnica FUE - 2500 Folículos</h6>
+                 <h6 data-aos="zoom-in" data-aos-delay="100" style="color: darkslategrey;">Técnica FUE - 2500 Folículos</h6> 
               </div>
             </div>
         </div>
@@ -584,18 +690,19 @@
               <div class="card-body">
                 <section class="comparisonSection">
               <div class="comparisonImage beforeImage">
-                <img src="../../Styles/img/antes2.jpg" alt="before">
+                <img src="../../Styles/img/antes2.jpg" alt="before" style="border-radius: 3%;">
               </div>
               <div class="comparisonImage afterImage">
-                <img src="../../Styles/img/despues2.jpg" alt="after">
+                <img src="../../Styles/img/despues2.jpg" alt="after" style="border-radius: 3%;">
+                  
               </div>
             </section>
                   <h6 data-aos="zoom-in" data-aos-delay="100" style="color: darkslategrey;">Técnica FUE - 2500 Folículos</h6>
                   
               </div>
             </div>
-            <div class="texto3">
-                <h2 style="width: 19pc; margin-left: 41px; margin-top: 10pc;">Obtendrás resultados visibles a partir del segundo mes...</h2>
+            <div class="texto3 mensaje2" style="width: 26pc;">
+                <h2 style="width: 19pc; margin-left: 76px; margin-top: 10pc; color: white">Obtendrás resultados visibles a partir del segundo mes...</h2>
             </div>
             <script>
                 gsap.from(".texto3", {
@@ -608,14 +715,14 @@
         </div>
         
         <div class="d-flex justify-content-around">
-            <div class="texto4">
-                <h2 style="width: 232px; margin-top: 10pc;">Lorem Ipsum is simply dummy text of the printing and typesetting</h2>
+            <div class="texto4 mensaje1" style="    width: 33pc;">
+                <h2 style="width: 19pc; margin-left: 4pc;margin-top: 10pc; color:white">Lorem Ipsum is simply dummy text of the printing and typesetting</h2>
             </div>
                 <script>
                     gsap.from(".texto4", {
                         scrollTrigger: { trigger: ".texto4", scrub: true }, // start the animation when ".box" enters the viewport (once)
                         y: 200,
-                        opacity: 100
+                        opacity: 0
 
                     });
                 </script>
@@ -623,11 +730,12 @@
               <div class="card-body">
                 <section class="comparisonSection">
                   <div class="comparisonImage beforeImage">
-                    <img src="../../Styles/img/antes3.jpg" alt="before">
+                    <img src="../../Styles/img/antes3.jpg" alt="before" style="border-radius: 3%;">
                   </div>
                 
                   <div class="comparisonImage afterImage">
-                    <img src="../../Styles/img/despues3.jpg" alt="after">
+                    <img src="../../Styles/img/despues3.jpg" alt="after" style="border-radius: 3%;">
+                      
                   </div>
                 </section>
                   <h6 data-aos="zoom-in" data-aos-delay="100" style="color: darkslategrey;">Técnica FUE - 1500 Folículos</h6>
@@ -656,8 +764,10 @@
                 // ...and the image the opposite way (at the same time)
                 .fromTo(section.querySelector(".afterImage img"), { xPercent: -100, x: 0 }, { xPercent: 0 }, 0);
         });
-    </script>
-        <br />
+        </script> 
+            </section>
+            </div>
+       
         <br />
         <br />
     <br />
@@ -701,7 +811,7 @@
                 </div>
             </div>
             <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-                <h3 style="color: greenyellow">Agendemos su visita...</h3>
+                <h3 style="color: greenyellow">Agendemos su visita</h3>
                 <p class="font-italic" style="color: white;">
                     Por favor seleccione el día y hora que más le acomode para que pueda asistir a nuestra clínica
                 </p>
@@ -713,8 +823,11 @@
                             format: 'dd/mm/yyyy'
                         });
                     </script>
-
+                    <br />
+                    <br />
+                    
                 </div>
+                <button type="button" data-toggle="modal" data-target="#ModalArriba" style="background: #8aaf32; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Agendar</button>
             </div>
         </div>
         </div>

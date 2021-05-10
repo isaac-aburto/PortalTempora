@@ -193,5 +193,97 @@ namespace WebSolicitudes.Controllers
             Console.ReadLine();
 
         }
+
+        public static int CalcularEdad(string FechaNacimiento) {
+
+            var parsedDate = DateTime.Parse(FechaNacimiento);
+            int edad = (DateTime.Today.AddTicks(-parsedDate.Ticks).Year - 1);
+
+
+            return edad;
+        }
+
+        public static string CalcularVideo(string tecnica, int rango1, int rango2, int edad) {
+            string video = string.Empty;
+
+
+            if (tecnica == "FUE" && (edad >= 18 && edad <= 30) && (rango1 >= 1000 && rango2 <= 1500)) {
+                return video = "../../Styles/caso/2079.mp4";
+            }
+            if (tecnica == "FUE" && (edad >= 18 && edad <= 30) && (rango1 >= 1500 && rango2 <= 2500))
+            {
+                return video = "../../Styles/caso/2637.mp4";
+            }
+            if (tecnica == "FUE" && (edad >= 18 && edad <= 30) && (rango1 >= 2500 && rango2 <= 2500))
+            {
+                return video = "../../Styles/caso/940.mp4";
+            }
+            if (tecnica == "FUE" && (edad >= 31 && edad <= 45) && (rango1 >= 1000 && rango2 <= 1500))
+            {
+                return video = "../../Styles/caso/2079.mp4";
+            }
+            if (tecnica == "FUE" && (edad >= 31 && edad <= 45) && (rango1 >= 1500 && rango2 <= 2500))
+            {
+                return video = "../../Styles/caso/2561.mp4";
+            }
+            if (tecnica == "FUE" && (edad >= 31 && edad <= 45) && (rango1 >= 2500 && rango2 <= 2500))
+            {
+                return video = "../../Styles/caso/1611.mp4";
+            }
+            if (tecnica == "FUE" && (edad >= 18 && edad <= 30) && (rango1 >= 1000 && rango2 <= 1500))
+            {
+                return video = "../../Styles/caso/2079.mp4";
+            }
+            if (tecnica == "FUE" && (edad >= 46 && edad <= 9999) && (rango1 >= 1000 && rango2 <= 1500))
+            {
+                return video = "../../Styles/caso/2742.mp4";
+            }
+            if (tecnica == "FUE" && (edad >= 46 && edad <= 9999) && (rango1 >= 1500 && rango2 <= 2500))
+            {
+                return video = "../../Styles/caso/2738.mp4";
+            }
+            if (tecnica == "FUE" && (edad >= 46 && edad <= 9999) && (rango1 >= 2500 && rango2 <= 2500))
+            {
+                return video = "../../Styles/caso/1611.mp4";
+            }
+            if (tecnica == "FUSS" && (edad >= 18 && edad <= 30) && (rango1 >= 1000 && rango2 <= 1500))
+            {
+                return video = "../../Styles/caso/373.mp4";
+            }
+            if (tecnica == "FUSS" && (edad >= 18 && edad <= 30) && (rango1 >= 1500 && rango2 <= 2500))
+            {
+                return video = "../../Styles/caso/373.mp4";
+            }
+            if (tecnica == "FUSS" && (edad >= 18 && edad <= 30) && (rango1 >= 2500 && rango2 <= 2500))
+            {
+                return video = "../../Styles/caso/2905.mp4";
+            }
+            if (tecnica == "FUSS" && (edad >= 31 && edad <= 45) && (rango1 >= 1000 && rango2 <= 1500))
+            {
+                return video = "../../Styles/caso/373.mp4";
+            }
+            if (tecnica == "FUSS" && (edad >= 31 && edad <= 45) && (rango1 >= 1500 && rango2 <= 2500))
+            {
+                return video = "../../Styles/caso/2447.mp4";
+            }
+            if (tecnica == "FUSS" && (edad >= 31 && edad <= 45) && (rango1 >= 2500 && rango2 <= 2500))
+            {
+                return video = "../../Styles/caso/2905.mp4";
+            }
+            if (tecnica == "FUSS" && (edad >= 46 && edad <= 9999) && (rango1 >= 1000 && rango2 <= 1500))
+            {
+                return video = "../../Styles/caso/2447.mp4";
+            }
+            if (tecnica == "FUSS" && (edad >= 46 && edad <= 9999) && (rango1 >= 1500 && rango2 <= 2500))
+            {
+                return video = "../../Styles/caso/611.mp4";
+            }
+            if (tecnica == "FUSS" && (edad >= 46 && edad <= 9999) && (rango1 >= 2500 && rango2 <= 2500))
+            {
+                return video = "../../Styles/caso/213.mp4";
+            }
+
+            return video;
+        }
     }
 }

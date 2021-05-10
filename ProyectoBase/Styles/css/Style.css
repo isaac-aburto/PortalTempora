@@ -84,6 +84,13 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 15px;
   z-index: 995;
 }
+.messenger {
+    position: fixed;
+    display: none;
+    right: 15px;
+    bottom: 15px;
+    z-index: 995;
+}
 
 .back-to-top i {
   display: flex;
@@ -166,12 +173,13 @@ h1, h2, h3, h4, h5, h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-  background: rgba(255, 255, 255, 0.952);
-  border-bottom: 1px solid rgba(12, 11, 9, 0.6);
-  transition: all 0.5s;
-  z-index: 997;
-  padding: 15px 0;
-  top: 40px;
+    background: rgba(255, 255, 255, 0.952);
+    border-bottom: 1px solid rgba(12, 11, 9, 0.6);
+    transition: all 0.5s;
+    z-index: 997;
+    padding: 15px 0;
+    top: 13px;
+    height: 112px;
 }
 #header > a{
   top: 0;
@@ -186,9 +194,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header.header-scrolled {
-  top: 0;
-  background: rgba(0, 0, 0, 0.85);
-  border-bottom: 1px solid #37332a;
+    top: -37px;
+    background: rgba(0, 0, 0, 0.85);
+    border-bottom: 1px solid #37332a;
 }
 #header.header-scrolled > a{
   top: 0;

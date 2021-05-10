@@ -99,6 +99,7 @@
                                     <label style="color: black">Fecha de Nacimiento </label>
                                     <div id="selDiv">
                                         <input disabled id="txtFechaNacimiento" name="txtFechaNacimiento" type='text' class='form-control' value='<%= ViewData["FechaNacimiento"] %>'>
+                                        <input hidden name="Nacimiento" value="<%= ViewData["FechaNacimiento"] %>"/>
                                     </div>
                                     <div class="invalid-feedback">Seleccione una opción</div>
                                     <br />

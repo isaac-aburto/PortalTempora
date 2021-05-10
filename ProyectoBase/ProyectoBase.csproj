@@ -188,6 +188,7 @@
     <Compile Include="Controllers\CasosController.cs" />
     <Compile Include="Controllers\ConversorBase64.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PipeDriveAPI.cs" />
     <Compile Include="Controllers\SolicitudesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\Util.cs" />
@@ -406,6 +407,18 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\moment.js" />
+    <Content Include="Styles\caso\1611.mp4" />
+    <Content Include="Styles\caso\2079.mp4" />
+    <Content Include="Styles\caso\213.mp4" />
+    <Content Include="Styles\caso\2447.mp4" />
+    <Content Include="Styles\caso\2561.mp4" />
+    <Content Include="Styles\caso\2637.mp4" />
+    <Content Include="Styles\caso\2738.mp4" />
+    <Content Include="Styles\caso\2742.mp4" />
+    <Content Include="Styles\caso\2905.mp4" />
+    <Content Include="Styles\caso\373.mp4" />
+    <Content Include="Styles\caso\611.mp4" />
+    <Content Include="Styles\caso\940.mp4" />
     <Content Include="Styles\css\bootstrap-theme.css" />
     <Content Include="Styles\css\bootstrap-theme.min.css" />
     <Content Include="Styles\css\bootstrap-toggle.min.css" />
@@ -428,6 +441,7 @@
     <Content Include="Styles\img\antes2.jpg" />
     <Content Include="Styles\img\antes3.jpg" />
     <Content Include="Styles\img\apple-touch-icon.png" />
+    <Content Include="Styles\img\casos\Caso FUE.mp4" />
     <Content Include="Styles\img\chefs\chefs-1.jpg" />
     <Content Include="Styles\img\chefs\chefs-2.jpg" />
     <Content Include="Styles\img\chefs\chefs-3.jpg" />
@@ -458,6 +472,8 @@
     <Content Include="Styles\img\logo_tempora.png" />
     <Content Include="Styles\img\logo_tempora.svg" />
     <Content Include="Styles\img\logo_tempora_o.png" />
+    <Content Include="Styles\img\mensaje1.png" />
+    <Content Include="Styles\img\mensaje2.png" />
     <Content Include="Styles\img\menu\bread-barrel.jpg" />
     <Content Include="Styles\img\menu\caesar.jpg" />
     <Content Include="Styles\img\menu\cake.jpg" />
