@@ -419,6 +419,7 @@
     <Content Include="Styles\caso\373.mp4" />
     <Content Include="Styles\caso\611.mp4" />
     <Content Include="Styles\caso\940.mp4" />
+    <Content Include="Styles\clinica\Esto es Clínica Témpora.mp4" />
     <Content Include="Styles\css\bootstrap-theme.css" />
     <Content Include="Styles\css\bootstrap-theme.min.css" />
     <Content Include="Styles\css\bootstrap-toggle.min.css" />
@@ -656,6 +657,9 @@
     <Content Include="Views\Home\Index - Copia.aspx" />
     <Content Include="Views\Home\Pass.aspx" />
     <Content Include="Views\Home\OlvidePassword.aspx" />
+    <Content Include="Views\Solicitudes\Solicitud1.aspx" />
+    <Content Include="Views\Solicitudes\Solicitud2 - Copia.aspx" />
+    <Content Include="Views\Solicitudes\Solicitud2.aspx" />
     <Content Include="Views\Solicitudes\Solicitud.aspx" />
     <Content Include="Views\Solicitudes\Pagina1.aspx" />
     <Content Include="Views\Solicitudes\Enviado.aspx" />

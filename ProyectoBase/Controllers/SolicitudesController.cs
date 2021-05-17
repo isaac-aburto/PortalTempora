@@ -398,6 +398,14 @@ namespace WebSolicitudes.Controllers
         {  
             return View();
         }
+        public ActionResult Solicitud1(string idcliente)
+        {
+            return View();
+        }
+        public ActionResult Solicitud2(string idcliente)
+        {
+            return View();
+        }
 
     }
 

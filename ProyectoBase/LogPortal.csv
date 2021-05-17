@@ -36,3 +36,12 @@ Nombre del parámetro: s"
 Nombre del parámetro: s"
 "06-05-2021";"11:26";"Solicitud";"Solicitudes (GET)";"El valor no puede ser nulo.
 Nombre del parámetro: s"
+"13-05-2021";"9:56";"Solicitud";"Solicitudes (GET)";"La entrada no es una cadena Base 64 válida porque contiene un carácter que no es Base 64, más de dos caracteres de relleno o un carácter no válido entre los caracteres de relleno. "
+"13-05-2021";"10:53";"Solicitud";"Solicitudes (GET)";"El valor no puede ser nulo.
+Nombre del parámetro: s"
+"13-05-2021";"15:15";"Solicitud";"Solicitudes (GET)";"El valor agregado o eliminado da como resultado un campo DateTime que no se puede representar.
+Nombre del parámetro: value"
+"13-05-2021";"15:15";"Solicitud";"Solicitudes (GET)";"El valor agregado o eliminado da como resultado un campo DateTime que no se puede representar.
+Nombre del parámetro: value"
+"13-05-2021";"15:34";"Solicitud";"Solicitudes (GET)";"El valor no puede ser nulo.
+Nombre del parámetro: s"
