@@ -42,19 +42,23 @@
           transition: transform 0.3s linear;
           font-size: 27px;
 }
+        .card {
+        border-radius: 0.60rem;
+        border-color: #00000033;
+        }
 
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <main id="main">
+    <main id="main" style="    margin-top: -1pc;">
 
     <!-- ======= About Section ======= -->
 
 
         <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Solicitudes/GestionSolicitudes") %>">
         <section id="about" class="about">
-            <div class="card border-secondary <%--border-0--%> shadow rounded-lg mt-5" style="margin-top: -55px">
+            <div class="card border-secondary <%--border-0--%> shadow rounded-lg mt-5" style="margin-top: -55px;     background-color: #e3e3e3;">
                 <div class="container" data-aos="fade-up">
                     <input hidden name="idSolicitud" value="<%= ViewData["idSolicitud"]%>"/>
                     <div class="row">
@@ -68,8 +72,8 @@
 
                                     })(document);
                                 </script>
-                                <h1 style="color: #C6D41D; font-family: 'Open Sans', sans-serif;">Solicitud N°<%= ViewData["idSolicitud"]%> </h1>
-                                <h1 style="color: #C6D41D; font-family: 'Open Sans', sans-serif;"><%= ViewData["NombreCompleto"]  %></h1>
+                                <h1 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: inherit;">Solicitud N°<%= ViewData["idSolicitud"]%> </h1>
+                                <h1 style="color: #b8c517; font-style: inherit;"><%= ViewData["NombreCompleto"]  %></h1>
                             </div>
                             <hr />
                             <br />
@@ -235,7 +239,7 @@
                             
                             <%-- Gestion --%>
 
-                            <h1><a id="btnGestionar" style="color:#C6D41D; font-family: 'Open Sans', sans-serif !important" data-toggle="collapse" data-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <h1><a id="btnGestionar" style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important" data-toggle="collapse" data-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                 Gestionar<i style="color: #C6D41D;" id="icon" class="fa fa-arrow-down"></i>
                             </a></h1>
 <%--                            <h6 class="collapse" id="collapseExample">

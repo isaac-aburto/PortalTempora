@@ -29,7 +29,7 @@ namespace WebSolicitudes.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(/*IEnumerable<HttpPostedFileBase> files,*/ FormCollection collection) {
+        public ActionResult Index(IEnumerable<HttpPostedFileBase> files, FormCollection collection) {
             try
             {
                 //Usuario
@@ -209,36 +209,62 @@ namespace WebSolicitudes.Controllers
                     //string segundoNombre = "";
                     //bool igual = false;
 
-                    if (true) {
-                        //foreach (Fotos item in listafotos)
-                        //{
-                        //    if (item.nombreArchivo == filename)
-                        //    {
-                        //        n++;
-                        //        igual = true;
-                        //        if (igual == true)
-                        //        {
-                        //            string nombrefile = filename.Split('.').FirstOrDefault();
-                        //            string exten = filename.Split('.').LastOrDefault();
-                        //            if (n != 1)
-                        //            {
-                        //                string nombrefileparnt = nombrefile.Split('(').FirstOrDefault();
-                        //                segundoNombre = nombrefileparnt + "(" + n.ToString() + ")." + exten;
-                        //            }
-                        //            else
-                        //            {
-                        //                segundoNombre = nombrefile + "(" + n.ToString() + ")." + exten;
-                        //            }
-                        //        }
-                        //    }
-                        //}
                     
+                    foreach (var file in files)
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            var nombrearchivo = Path.GetFileName(file.FileName);
+                            //var path = Path.GetTempPath();
+                            var local = Path.Combine(Server.MapPath("~/App_Data/"), filename);
+                            file.SaveAs(path);
 
-                    //if (igual == false)
-                    //{
-                    //    segundoNombre = filename;
-                    //}
+                            Fotos archivo = new Fotos();
+
+                            //Ver si existe otro archivo con el mismo nombre.
+                            List<Fotos> listaarchivos = conexionDB.Fotos.ToList();
+                            String opciones = string.Empty;
+                            int n = 0;
+                            string segundoNombre = "";
+                            bool igual = false;
+                            foreach (Fotos item in listaarchivos)
+                            {
+                                if (item.nombreArchivo == filename)
+                                {
+                                    n++;
+                                    igual = true;
+                                    if (igual == true)
+                                    {
+                                        string nombrefile = filename.Split('.').FirstOrDefault();
+                                        string exten = filename.Split('.').LastOrDefault();
+                                        if (n != 1)
+                                        {
+                                            string nombrefileparnt = nombrefile.Split('(').FirstOrDefault();
+                                            segundoNombre = nombrefileparnt + "(" + n.ToString() + ")." + exten;
+                                        }
+                                        else
+                                        {
+                                            segundoNombre = nombrefile + "(" + n.ToString() + ")." + exten;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (igual == false)
+                            {
+                                segundoNombre = filename;
+                            }
+                            archivo.nombreFalso =
+                            archivo.nombreArchivo = filename;
+                            archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
+                            var ultimoId2 = solicitud.idSolicitud;
+                            archivo.FK_idSolicitud = ultimoId2;
+                            conexionDB.Fotos.Add(archivo);
+                            conexionDB.SaveChanges();
+                            //respuesta.AdjuntoEvidencias = archivo.id_archivo;
+                        }
                     }
+                    
 
                     //fotos.nombreFalso =
                     fotos.nombreArchivo = filename;

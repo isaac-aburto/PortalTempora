@@ -12,15 +12,19 @@
         h5 {
             font-family: "Open Sans", sans-serif !important;
         }
+        .card {
+        border-radius: 0.6rem;
+        border-color: #00000033;
+        }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <main id="main">
+    <main id="main" style="margin-top: -1pc;">
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
-        <div class="card border-secondary <%--border-0--%> shadow rounded-lg mt-5" style="margin-top: -55px">
+        <div class="card border-secondary <%--border-0--%> shadow rounded-lg mt-5" style="margin-top: -55px; background-color: #e3e3e3;">
       <div class="container" data-aos="fade-up">
         <div class="row">
             <div class="card-body"> 
@@ -31,10 +35,10 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color: #C6D41D">
+                                <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color: #8e8e8e">
                                     Solicitudes
                                 </div>
-                                <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color: #C6D41D">
+                                <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color: #8e8e8e">
                                      Totales
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
@@ -50,8 +54,8 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #C6D41D">Estado </div>
-                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #C6D41D"> Abierto</div>
+                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #8e8e8e">Estado </div>
+                                <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #8e8e8e"> Abierto</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     <h5 style="color: #C6D41D">15</h5>
                                 </div>
@@ -65,8 +69,8 @@
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #C6D41D">Estado </div>
-                                    <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #C6D41D">En proceso</div>
+                                    <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #8e8e8e">Estado </div>
+                                    <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #8e8e8e">En proceso</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                         <h5 style="color: #C6D41D">0</h5>
                                     </div>
@@ -80,8 +84,8 @@
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color: #C6D41D">Estado </div>
-                                    <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color: #C6D41D"> En Espera</div>
+                                    <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color: #8e8e8e">Estado </div>
+                                    <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color: #8e8e8e"> En Espera</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
                                         <h5 style="color: #C6D41D">0</h5>
                                     

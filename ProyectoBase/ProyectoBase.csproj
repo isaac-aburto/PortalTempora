@@ -438,6 +438,8 @@
     <Content Include="Styles\css\normalize.css" />
     <Content Include="Styles\img\about-bg.jpg" />
     <Content Include="Styles\img\about.jpg" />
+    <Content Include="Styles\img\alopecia2.jpg" />
+    <Content Include="Styles\img\alopecia3.jpg" />
     <Content Include="Styles\img\antes.jpg" />
     <Content Include="Styles\img\antes2.jpg" />
     <Content Include="Styles\img\antes3.jpg" />
@@ -496,6 +498,7 @@
     <Content Include="Styles\img\specials-5.png" />
     <Content Include="assets\tempora.mp4" />
     <Content Include="Styles\img\tempora.mp4" />
+    <Content Include="Styles\img\alopecia1.jpeg" />
     <Content Include="Styles\img\testimonials\testimonials-1.jpg" />
     <Content Include="Styles\img\testimonials\testimonials-2.jpg" />
     <Content Include="Styles\img\testimonials\testimonials-3.jpg" />

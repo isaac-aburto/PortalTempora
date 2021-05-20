@@ -3,12 +3,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <title>Login</title>
     <link href="<%: Url.Content("~/Styles/css/custom.css") %>" rel="stylesheet" />
+    <style>
+        .box-contenedor {
+            background-color: #e3e3e3;
+        }
+    </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
-                <main>
+                <main style="    background-color: #e3e3e3;">
                     <br />
                     <br />
                     <br />
@@ -18,7 +23,7 @@
                     <br />
                     <br />
                     <div class="container">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center" style="margin-top: -4pc;margin-bottom: 3pc;">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg rounded-lg mt-5">
                                     <div class="card-header" style="background-color: #f7f7f7;"><h3 class="text-center font-weight-light my-4" ><img src="<%: Url.Content("~/Styles/img/logo_tempora.png") %>"/></h3></div>

@@ -28,6 +28,7 @@
                     console.log(data_uri)
                     document.getElementById('fotoArriba').value = data_uri;
                 });
+                
             });
             Webcam.attach('#idwebcam2');
             $("#btnCapturar2").click(function () {
@@ -96,8 +97,32 @@
         $(document).ready(function () {
             $("#divCamara1").hide();
             $("#Camara1").click(function () {
-                $("#divCamara1").show();
+ 
+                if ($("#Camara1").val() == "Activar Cámara") {
+                    $("#divCamara1").show();
+                    console.log("asdasd")
+                    $("#Camara1").html('Desactivar Cámara');
+                    $("#Camara1").css('background', "#8d9d17");
+                    $("#Camara1").attr("value", "Desactivar Cámara");
+                } else {
+                    $("#divCamara1").hide();
+                    console.log("asdasdoo")
+                    $("#Camara1").html('Activar Cámara');
+                    $("#Camara1").css('background', "#bad305");
+                    $("#Camara1").attr("value", "Activar Cámara");
+                    console.log("aaaa")
+                }
+
             });
+            $("#CerrarCamara1").click(function () {
+                $("#divCamara1").hide();
+                console.log("asdasdoo")
+                $("#CerrarCamara1").html('Activar Cámara');
+                $("#CerrarCamara1").css('background', "#bad305");
+                $("#CerrarCamara1").attr("id", "Camara1");
+                console.log("aaaa")
+            });
+
             $("#divCamara2").hide();
             $("#Camara2").click(function () {
                 $("#divCamara2").show();
@@ -239,6 +264,18 @@
         }
 
     </style>
+                            <style>       
+                            .boton-file{
+                                display: inline-block;
+                                background-color: #bad305;
+                                color: white;
+                                padding: 0.5rem;
+                                font-family: sans-serif;
+                                border-radius: 1.3rem;
+                                cursor: pointer;
+                                margin-top: 1rem;
+                            }
+                        </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -249,7 +286,7 @@
 
       <div class="video-header wrap">
           <div class="fullscreen-video-wrap">
-            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" style="filter: brightness(0.5);">
                 <source src="../../assets/video/tempora.mp4" type="video/mp4">
             </video>
           </div>
@@ -273,6 +310,7 @@
 
   </section><!-- End Hero -->
 <main id="main">
+            <form action="<%: Url.Content("~/Home/Index") %>" method="post" enctype="multipart/form-data" id="formSolicitud" class="needs-validation" novalidate>
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
@@ -374,7 +412,6 @@
               <div id="baraDeCarga" class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
         </div>
-        <form action="<%: Url.Content("~/Home/Index") %>" enctype="multipart/form-data" id="formSolicitud" method="post" class="needs-validation" novalidate>
 <%--        <form action="<%: Url.Content("~/Home/Index") %>" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">--%>
          <%--  Paso 1 --%>
             <div id="divPaso1">
@@ -601,7 +638,8 @@
                   </div>
               </div>
             </div>
-        </form>
+
+        
           <script>
               // Example starter JavaScript for disabling form submissions if there are invalid fields
               (function () {
@@ -649,8 +687,7 @@
 
       </div>
     </section><!-- End Contact Section -->
-
-    <%-- Modals --%>
+                                <%-- Modals --%>
 
     <div class="modal fade" id="ModalArriba" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -673,7 +710,45 @@
                     </div>
                     <div class="row align-items-center">
                     <div class="col-sm text-center">
-                        <button type="button" value="Activar Cámara" id="Camara1" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Activar Cámara</button>
+                      
+                        <button  type="button" value="Activar Cámara" id="Camara1" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Activar Cámara</button>
+                        <div class="row">
+                            <div class="col">
+                                o
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="button" id="cancelar1" value="Limpiar" style="margin-bottom: -7.7px"/>
+                                <input type="file" id="upload1" name="files" hidden>
+                                <label id="labelupload1" class="boton-file" for="upload1">Subir Foto</label>
+                                <script>
+                                    $(document).ready(function () {
+                                        if ($('#upload1').val() == "") {
+                                            $("#cancelar1").hide();
+                                        } else {
+                                            $("#cancelar1").show();
+                                            $('#labelupload1').css("background-color", "#8d9d17")
+                                        }
+
+                                        $("#cancelar1").click(function () {
+                                            $("#upload1").val('');
+                                            $('#labelupload1').css("background-color", "#BAD305")
+                                            $("#cancelar1").hide();
+                                        });
+                                        $('#upload1').change(function () {
+                                            if ($('#upload1').val() == "") {
+                                                $('#labelupload1').css("background-color", "#BAD305")
+                                                $("#cancelar1").hide();
+                                            } else {
+                                                $('#labelupload1').css("background-color", "#8d9d17")
+                                                $("#cancelar1").show();
+                                            }
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
                     </div>
                     </div>
                 </div>
@@ -706,6 +781,17 @@
                     <div class="row align-items-center">
                     <div class="col-sm text-center">
                         <button type="button" value="Activar Cámara" id="Camara2" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Activar Cámara</button>
+                        <div class="row">
+                            <div class="col">
+                                o
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="file" id="upload2" name="files" hidden>
+                                <label class="boton-file" for="upload2">Subir Foto</label>
+                            </div>
+                        </div>
                     </div>
                     </div>
                 </div>
@@ -738,6 +824,17 @@
                     <div class="row align-items-center">
                     <div class="col-sm text-center">
                         <button type="button" value="Activar Cámara" id="Camara3" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Activar Cámara</button>
+                        <div class="row">
+                            <div class="col">
+                                o
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="file" id="upload3" name="files" hidden>
+                                <label class="boton-file" for="upload3">Subir Foto</label>
+                            </div>
+                        </div>
                     </div>
                     </div>
                 </div>
@@ -770,6 +867,17 @@
                     <div class="row align-items-center">
                     <div class="col-sm text-center">
                         <button type="button" value="Activar Cámara" id="Camara4" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Activar Cámara</button>
+                        <div class="row">
+                            <div class="col">
+                                o
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="file" id="upload4" name="files" >
+                                <label class="boton-file" for="upload4">Subir Foto</label>
+                            </div>
+                        </div>
                     </div>
                     </div>
                 </div>
@@ -802,6 +910,17 @@
                     <div class="row align-items-center">
                     <div class="col-sm text-center">
                         <button type="button" value="Activar Cámara" id="Camara5" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Activar Cámara</button>
+                        <div class="row">
+                            <div class="col">
+                                o
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="file" id="upload5" name="files" hidden>
+                                <label class="boton-file" for="upload5">Subir Foto</label>
+                            </div>
+                        </div>
                     </div>
                     </div>
                 </div>
@@ -812,6 +931,6 @@
             </div>
         </div>
     </div>
-    
+</form>
   </main><!-- End #main -->
 </asp:Content>

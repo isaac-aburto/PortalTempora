@@ -117,6 +117,7 @@ namespace WebSolicitudes.Controllers
                         //Validación de Usuario
                         if (usuario == null)
                             throw new Exception("El usuario no existe");
+                        Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Encontró el usuario");
                         Solicitud solicitud = conexionDB.Solicitud.Find(id);
                         //Datos Solicitud
                         ViewData["NombreCompleto"] = solicitud.Cliente.nombre + " " +solicitud.Cliente.apellido;
@@ -129,7 +130,7 @@ namespace WebSolicitudes.Controllers
                         ViewData["RespuestaDerma"] = solicitud.RespDerm;
                         ViewData["RespuestaPelo"] = solicitud.RespPelo;
                         ViewData["Observacion"] = solicitud.ObserMed;
-
+                        Util.escribirLog("Solicitudes", "GestionSolicitud (GET)","Seteo todos los ViewData");
                         //Datos de la Gestión
                         List<Tecnica> listaTecnicas = conexionDB.Tecnica.ToList();
                         string opcionesTecnicas = string.Empty;
@@ -144,8 +145,9 @@ namespace WebSolicitudes.Controllers
                             }
                             
                         }
-                        ViewData["opcionesTecnicas"] = opcionesTecnicas;
 
+                        ViewData["opcionesTecnicas"] = opcionesTecnicas;
+                        Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó todoas las técnias");
                         List<ZonaAReparar> listaZonas = conexionDB.ZonaAReparar.ToList();
                         string opcionesZonas = string.Empty;
                         opcionesZonas += "<option value='0'>-- Selecciona opción --</option>";
@@ -153,7 +155,7 @@ namespace WebSolicitudes.Controllers
                             opcionesZonas += "<option  value='" + item.idZona + "'>" + item.nombreZona + "</option>";
                         }
                         ViewData["opcionesZonas"] = opcionesZonas;
-
+                        Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó todoas las zonas a reparar");
                         List<EstadoSolicitud> listaEstados = conexionDB.EstadoSolicitud.ToList();
                         string opcionesEstados = string.Empty;
                         opcionesEstados += "<option value='0'>-- Selecciona opción --</option>";
@@ -166,7 +168,7 @@ namespace WebSolicitudes.Controllers
                             }
                         }
                         ViewData["opcionesEstados"] = opcionesEstados;
-
+                        Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó todoas los Estados");
                         List<RangoFoliculos> listaRangos = conexionDB.RangoFoliculos.ToList();
                         string opcionesRangos = string.Empty;
 
@@ -192,7 +194,7 @@ namespace WebSolicitudes.Controllers
 
                         }
                         ViewData["opcionesRangos1"] = opcionesRangos;
-
+                        Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó todoas los Rangos 1");
                         List<RangoFoliculos> listaRangos2 = conexionDB.RangoFoliculos.ToList();
                         string opcionesRangos2 = string.Empty;
 
@@ -218,41 +220,48 @@ namespace WebSolicitudes.Controllers
 
                         }
                         ViewData["opcionesRangos2"] = opcionesRangos2;
-
+                        Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó todoas los Rangos 2");
 
                         //Fotos
 
-
-                        List<Fotos> listaFotos = conexionDB.Fotos.ToList();
-                        int cont = 0;
-                        foreach (Fotos item in listaFotos)
+                        int conteoFotos = conexionDB.Fotos.Count();
+                        if (conteoFotos != 0)
                         {
-                            if (item.FK_idSolicitud == id)
+                            List<Fotos> listaFotos = conexionDB.Fotos.ToList();
+                            int cont = 0;
+                            foreach (Fotos item in listaFotos)
                             {
-                                if (item.FK_idSolicitud == id && cont == 0)
+                                if (item.FK_idSolicitud == id)
                                 {
-                                    ViewData["Foto1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                    if (item.FK_idSolicitud == id && cont == 0)
+                                    {
+                                        ViewData["Foto1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 1)
+                                    {
+                                        ViewData["Foto2"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 2)
+                                    {
+                                        ViewData["Foto3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 3)
+                                    {
+                                        ViewData["Foto4"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 4)
+                                    {
+                                        ViewData["Foto5"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                    }
+                                    cont++;
                                 }
-                                if (item.FK_idSolicitud == id && cont == 1)
-                                {
-                                    ViewData["Foto2"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                }
-                                if (item.FK_idSolicitud == id && cont == 2)
-                                {
-                                    ViewData["Foto3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                }
-                                if (item.FK_idSolicitud == id && cont == 3)
-                                {
-                                    ViewData["Foto4"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                }
-                                if (item.FK_idSolicitud == id && cont == 4)
-                                {
-                                    ViewData["Foto5"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                }
-                                cont++;
                             }
+                            Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó todas la Fotos");
                         }
-
+                        else {
+                            Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó ninguna Foto");
+                        }
+                        
 
                         ViewData["idSolicitud"] = id;
                         return View();

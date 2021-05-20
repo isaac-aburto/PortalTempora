@@ -501,6 +501,34 @@ body {
 .h2, h2 {
     font-size: 1rem;
 }
+#header {
+    background: rgba(255, 255, 255, 0.952);
+    border-bottom: 1px solid rgba(12, 11, 9, 0.6);
+    transition: all 0.5s;
+    z-index: 997;
+    padding: 14px 0;
+    top: 10px;
+    height: 103px;
+        font-size: 15px;
+}
+#header.header-scrolled {
+    top: -33px;
+    background: rgba(0, 0, 0, 0.85);
+    border-bottom: 1px solid #37332a;
+        font-size: 15px;
+}
+.circular--portrait {
+  position: relative;
+  width: 20vw;
+  height: 20vw;
+  overflow: hidden;
+  border-radius: 50%;
+}
+.circular--portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
     </style>
 
 </asp:Content>
@@ -606,21 +634,28 @@ body {
                         })
                     </script>
                 <div class="col" data-aos="zoom-in" data-aos-delay="100">
-                    <img class="img1" style="border-radius: 50%; width: 15pc; height: 15pc;" src="../../Styles/img/antes.jpg" />
+                    <div class="circular--portrait" style="    width: 17vw; height: 17vw;">
+                        <img class="img1" src="../../Styles/img/alopecia1.jpeg" />
+                    </div>
                 </div>
                 <script>
                     gsap.from('img1', {opacity: 0, duration: 1, y: -50, ease: 'elastic(1, 0.3)'})
                 </script>
                 <div class="col" style="margin-top: 10pc; margin-left: -15pc;" data-aos="zoom-in" data-aos-delay="100">
-                    <img style="border-radius: 50%; width: 19pc; height: 19pc;" src="../../Styles/img/antes.jpg" />
+                    <div class="circular--portrait">
+                        <img style="border-radius: 50%; width: 19pc; height: 19pc;" src="../../Styles/img/alopecia2.jpg" />
+                    </div>
                 </div>
+                <%--<div class="col" style="margin-top: 10pc; margin-left: -15pc;" data-aos="zoom-in" data-aos-delay="100">
+                        <img style="border-radius: 50%; width: 19pc; height: 19pc;" src="../../Styles/img/alopecia2.jpg" />
+                </div>--%>
             </div>
             <div class="row">
-                <div class="col" style="    margin-top: 5pc;" data-aos="zoom-in" data-aos-delay="100">
-                    <img class="img3" style="border-radius: 50%; width: 15pc; height: 15pc; margin-left: 4pc;" src="../../Styles/img/antes.jpg" />
-
+                <div class="col" style="margin-top: 5pc;" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="circular--portrait">
+                        <img class="img3" src="../../Styles/img/alopecia1.jpeg" />
+                    </div>
                 </div>
-  
                 <div class="col">
                     <div class="circle ciruclo2" style="margin-left: -3pc;" data-aos="zoom-in" data-aos-delay="100">
                         <h2>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Distribution of letters, as opposed to using</h2>
@@ -639,9 +674,12 @@ body {
                             }
                         })
                     </script>
+                    
                 </div>
                 <div class="col" data-aos="zoom-in" data-aos-delay="100" style="    margin-top: 2pc;">
-                    <img style="border-radius: 50%; width: 15pc; height: 15pc;" src="../../Styles/img/antes.jpg" />
+                    <div class="circular--portrait">
+                        <img  src="../../Styles/img/alopecia3.jpg" />
+                    </div>
                 </div>
             </div>
 

@@ -178,8 +178,8 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.5s;
     z-index: 997;
     padding: 15px 0;
-    top: 13px;
-    height: 112px;
+    top: 27px;
+    height: 89px;
 }
 #header > a{
   top: 0;
@@ -193,11 +193,11 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Open Sans", sans-serif;
 }
 
-#header.header-scrolled {
-    top: -37px;
-    background: rgba(0, 0, 0, 0.85);
-    border-bottom: 1px solid #37332a;
-}
+    #header.header-scrolled {
+        top: -16px;
+        background: rgba(0, 0, 0, 0.85);
+        border-bottom: 1px solid #37332a;
+    }
 #header.header-scrolled > a{
   top: 0;
   background: rgba(0, 0, 0, 0.85);
