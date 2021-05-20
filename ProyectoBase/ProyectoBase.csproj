@@ -457,6 +457,7 @@
     <Content Include="Styles\img\events-bg.jpg" />
     <Content Include="Styles\img\favicon.png" />
     <Content Include="Styles\img\fondo-plantas.jpg" />
+    <Content Include="Styles\img\fondo-solicitud.jpg" />
     <Content Include="Styles\img\Fotografias.PNG" />
     <Content Include="Styles\img\gallery\gallery-1.jpg" />
     <Content Include="Styles\img\gallery\gallery-2.jpg" />

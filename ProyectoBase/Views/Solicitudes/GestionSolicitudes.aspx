@@ -12,17 +12,43 @@
     <script>
 
         $(document).ready(function () {
+            var open = false;
+            $('#btnInformacion').click();
+
             
             $("#btnGestionar").click(function () {
-                var div = document.getElementById('container');
                 var icon = document.getElementById('icon');
-                var open = false;
+                
                 if (open) {
-                    icon.className = 'fa fa-arrow-down';
+                    icon.className = 'fa fa-angle-down';
                 } else {
-                    icon.className = 'fa fa-arrow-down open';
+                    icon.className = 'fa fa-angle-up';
                 }
                 open = !open;
+
+            });
+            var open2 = false;
+            $("#btnFotografias").click(function () {
+                var icon2 = document.getElementById('icon2');
+
+                if (open2) {
+                    icon2.className = 'fa fa-angle-down';
+                } else {
+                    icon2.className = 'fa fa-angle-up';
+                }
+                open2 = !open2;
+
+            });
+            var open3 = true;
+            $("#btnInformacion").click(function () {
+                var icon3 = document.getElementById('icon3');
+
+                if (open3) {
+                    icon3.className = 'fa fa-angle-down';
+                } else {
+                    icon3.className = 'fa fa-angle-up';
+                }
+                open3 = !open3;
 
             });
         });
@@ -46,7 +72,16 @@
         border-radius: 0.60rem;
         border-color: #00000033;
         }
-
+        .carousel-inner > .item > img {
+  width:640px;
+  height:360px;
+}
+        .imgen-carrusel {
+            float: left;
+            width:  100px;
+            height: 500px;
+            object-fit: cover;
+        }
     </style>
 </asp:Content>
 
@@ -57,26 +92,30 @@
 
 
         <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Solicitudes/GestionSolicitudes") %>">
-        <section id="about" class="about">
-            <div class="card border-secondary <%--border-0--%> shadow rounded-lg mt-5" style="margin-top: -55px;     background-color: #e3e3e3;">
+        <section id="about" class="about" style="    margin-top: 8pc;">
+            <div class="card border-secondary <%--border-0--%> shadow rounded-lg mt-5" style="margin-top: -55px; background-color: #e3e3e3;">
                 <div class="container" data-aos="fade-up">
                     <input hidden name="idSolicitud" value="<%= ViewData["idSolicitud"]%>"/>
                     <div class="row">
-                        <div class="card-body">
+                        <div class="card-body" style="    margin-top: -5pc;">
                         <div class="card border-left-warning shadow ">
                         <div class="card-body">
-                            <div>
-
-                                <script>
-                                    (function (document) {
-
-                                    })(document);
-                                </script>
+                            <div style="text-align: center;">
                                 <h1 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: inherit;">Solicitud N°<%= ViewData["idSolicitud"]%> </h1>
                                 <h1 style="color: #b8c517; font-style: inherit;"><%= ViewData["NombreCompleto"]  %></h1>
+                                <h6 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: inherit;">Fecha Solicitud: <%= ViewData["FechaSolicitud"] %></h6>
+                                <h6 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: inherit;">Estado: <%= ViewData["EstadoSolicitud"] %></h6>
                             </div>
+                            <div class="row">
+                                    <div class="col">
+                                        <h4 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important">Información</h4>
+                                    </div>
+                                    <div class="col" style="    text-align: end;">
+                                        <a id="btnInformacion" style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important" data-toggle="collapse" data-target="#collapseExample3" role="button"  aria-controls="collapseExample3"><i style="color: #C6D41D;     font-size: 31px;" id="icon3" class="fa fa-angle-up"></i></a>
+                                    </div>
+                                </div>
                             <hr />
-                            <br />
+                            <div class="collapse" id="collapseExample3">
                             <div class="row">
                                 <div class="col">
                                     <label for="txtNombre"></label>
@@ -172,11 +211,22 @@
                                     <br />
                                 </div>
                             </div>      
+                                </div>  
                             <%-- Fotografías --%>
                             <div class="row">
                                 <div class="col-12">
                                     <label for="txtFotos"></label>
-                                    <label style="color:black"> Fotografías</label>
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important">Fotografías</h4>
+                                    </div>
+                                    <div class="col" style="    text-align: end;">
+                                        <a id="btnFotografias" style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important" data-toggle="collapse" data-target="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2"><i style="color: #C6D41D;     font-size: 31px;" id="icon2" class="fa fa-angle-down"></i></a>
+                                    </div>
+                                </div>
+                                    <hr />
+                                    <div class="collapse" id="collapseExample2">
+                                    
                                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                         <ol class="carousel-indicators">
                                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -186,37 +236,37 @@
                                         <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
          
                                         </ol>
-                                        <div class="carousel-inner">
+                                        <div class="carousel-inner" style="border-radius: 7px;border-color: #ededed;border-style: solid;">
                                         <div class="carousel-item active">
-                                            <img class="d-block w-100" src="<%= ViewData["Foto1"]%>" alt="First slide">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto1"]%>" alt="First slide">
                                           <div class="carousel-caption d-none d-md-block">
                                             <h5>Desde arriba</h5>
                                             <p>imagen1.jpg</p>
                                           </div>
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="<%= ViewData["Foto2"]%>" alt="Second slide">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto2"]%>" alt="Second slide">
                                              <div class="carousel-caption d-none d-md-block">
                                                 <h5>Perfil izquierdo</h5>
                                                 <p>imagen2.jpg</p>
                                             </div>
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="<%= ViewData["Foto3"]%>" alt="Third slide">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto3"]%>" alt="Third slide">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <h5>Perfil Derecho</h5>
                                                 <p>imagen3.jpg</p>
                                             </div>
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="<%= ViewData["Foto4"]%>" alt="Third slide">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto4"]%>" alt="Third slide">
                                              <div class="carousel-caption d-none d-md-block">
                                                 <h5>De atrás</h5>
                                                 <p>imagen4.jpg</p>
                                             </div>
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100" src="<%= ViewData["Foto5"]%>" alt="Third slide">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto5"]%>" alt="Third slide">
                                             <div class="carousel-caption d-none d-md-block">
                                                 <h5>De frente</h5>
                                                 <p>imagen5.jpg</p>
@@ -232,16 +282,22 @@
                                         <span class="sr-only">Next</span>
                                         </a>
                                     </div>
+                                        </div>
                                     <br />
                                 </div>
                             </div>
                             
                             
                             <%-- Gestion --%>
-
-                            <h1><a id="btnGestionar" style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important" data-toggle="collapse" data-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                Gestionar<i style="color: #C6D41D;" id="icon" class="fa fa-arrow-down"></i>
-                            </a></h1>
+                            <div class="row">
+                                <div class="col">
+                                    <h4 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important">Gestionar</h4>
+                                </div>
+                                <div class="col" style="    text-align: end;">
+                                    <a id="btnGestionar"  data-toggle="collapse" data-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i style="color: #C6D41D;     font-size: 31px;" id="icon" class="fa fa-angle-down"></i></a>
+                                </div>
+                            </div>
+                            <hr />
 <%--                            <h6 class="collapse" id="collapseExample">
                                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
                             </h6>
@@ -249,7 +305,6 @@
                                 <a id="btnGestionar" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="background-color: #C6D41D; border-color: #C6D41D;">Gestionar</a>
                             </div>--%>
                             <div class="collapse" id="collapseExample">
-                                <hr />
 
                                 <div class="row">
                                 <div class="col">

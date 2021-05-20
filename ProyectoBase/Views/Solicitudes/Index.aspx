@@ -23,11 +23,11 @@
     <main id="main" style="margin-top: -1pc;">
 
     <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+    <section id="about" class="about" style="    margin-top: 5pc;">
         <div class="card border-secondary <%--border-0--%> shadow rounded-lg mt-5" style="margin-top: -55px; background-color: #e3e3e3;">
       <div class="container" data-aos="fade-up">
         <div class="row">
-            <div class="card-body"> 
+            <div class="card-body" style="margin-top: -5pc;"> 
             <br />
                 <div class="row">
                   <div class="col-6 col-md-3"> 

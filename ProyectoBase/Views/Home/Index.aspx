@@ -95,18 +95,18 @@
     </script>
     <script>
         $(document).ready(function () {
+
+            //  CAMARA 1 //
             $("#divCamara1").hide();
             $("#Camara1").click(function () {
  
                 if ($("#Camara1").val() == "Activar Cámara") {
                     $("#divCamara1").show();
-                    console.log("asdasd")
                     $("#Camara1").html('Desactivar Cámara');
                     $("#Camara1").css('background', "#8d9d17");
                     $("#Camara1").attr("value", "Desactivar Cámara");
                 } else {
                     $("#divCamara1").hide();
-                    console.log("asdasdoo")
                     $("#Camara1").html('Activar Cámara');
                     $("#Camara1").css('background', "#bad305");
                     $("#Camara1").attr("value", "Activar Cámara");
@@ -123,21 +123,72 @@
                 console.log("aaaa")
             });
 
+            // CAMARA 2 //
+
             $("#divCamara2").hide();
             $("#Camara2").click(function () {
-                $("#divCamara2").show();
+                if ($("#Camara2").val() == "Activar Cámara") {
+                    $("#divCamara2").show();
+                    $("#Camara2").html('Desactivar Cámara');
+                    $("#Camara2").css('background', "#8d9d17");
+                    $("#Camara2").attr("value", "Desactivar Cámara");
+                } else {
+                    $("#divCamara2").hide();
+                    $("#Camara2").html('Activar Cámara');
+                    $("#Camara2").css('background', "#bad305");
+                    $("#Camara2").attr("value", "Activar Cámara");
+                }
             });
+
+
+            // CAMARA 3//
             $("#divCamara3").hide();
             $("#Camara3").click(function () {
-                $("#divCamara3").show();
+                if ($("#Camara3").val() == "Activar Cámara") {
+                    $("#divCamara3").show();
+                    $("#Camara3").html('Desactivar Cámara');
+                    $("#Camara3").css('background', "#8d9d17");
+                    $("#Camara3").attr("value", "Desactivar Cámara");
+                } else {
+                    $("#divCamara3").hide();
+                    $("#Camara3").html('Activar Cámara');
+                    $("#Camara3").css('background', "#bad305");
+                    $("#Camara3").attr("value", "Activar Cámara");
+                }
             });
+
+            // CAMARA 4 //
+
             $("#divCamara4").hide();
             $("#Camara4").click(function () {
-                $("#divCamara4").show();
+                if ($("#Camara4").val() == "Activar Cámara") {
+                    $("#divCamara4").show();
+                    $("#Camara4").html('Desactivar Cámara');
+                    $("#Camara4").css('background', "#8d9d17");
+                    $("#Camara4").attr("value", "Desactivar Cámara");
+                } else {
+                    $("#divCamara4").hide();
+                    $("#Camara4").html('Activar Cámara');
+                    $("#Camara4").css('background', "#bad305");
+                    $("#Camara4").attr("value", "Activar Cámara");
+                }
             });
+
+            // CAMARA 5 //
+
             $("#divCamara5").hide();
             $("#Camara5").click(function () {
-                $("#divCamara5").show();
+                if ($("#Camara5").val() == "Activar Cámara") {
+                    $("#divCamara5").show();
+                    $("#Camara5").html('Desactivar Cámara');
+                    $("#Camara5").css('background', "#8d9d17");
+                    $("#Camara5").attr("value", "Desactivar Cámara");
+                } else {
+                    $("#divCamara5").hide();
+                    $("#Camara5").html('Activar Cámara');
+                    $("#Camara5").css('background', "#bad305");
+                    $("#Camara5").attr("value", "Activar Cámara");
+                }
             });
         });
     </script>
@@ -788,8 +839,34 @@
                         </div>
                         <div class="row">
                             <div class="col">
+                                <input type="button" id="cancelar2" value="Limpiar" style="margin-bottom: -7.7px"/>
                                 <input type="file" id="upload2" name="files" hidden>
-                                <label class="boton-file" for="upload2">Subir Foto</label>
+                                <label id="labelupload2" class="boton-file" for="upload2">Subir Foto</label>
+                                <script>
+                                    $(document).ready(function () {
+                                        if ($('#upload2').val() == "") {
+                                            $("#cancelar2").hide();
+                                        } else {
+                                            $("#cancelar2").show();
+                                            $('#labelupload2').css("background-color", "#8d9d17")
+                                        }
+
+                                        $("#cancelar2").click(function () {
+                                            $("#upload2").val('');
+                                            $('#labelupload2').css("background-color", "#BAD305")
+                                            $("#cancelar2").hide();
+                                        });
+                                        $('#upload2').change(function () {
+                                            if ($('#upload2').val() == "") {
+                                                $('#labelupload2').css("background-color", "#BAD305")
+                                                $("#cancelar2").hide();
+                                            } else {
+                                                $('#labelupload2').css("background-color", "#8d9d17")
+                                                $("#cancelar2").show();
+                                            }
+                                        });
+                                    });
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -831,8 +908,34 @@
                         </div>
                         <div class="row">
                             <div class="col">
+                                <input type="button" id="cancelar3" value="Limpiar" style="margin-bottom: -7.7px"/>
                                 <input type="file" id="upload3" name="files" hidden>
-                                <label class="boton-file" for="upload3">Subir Foto</label>
+                                <label id="labelupload3" class="boton-file" for="upload3">Subir Foto</label>
+                                <script>
+                                    $(document).ready(function () {
+                                        if ($('#upload3').val() == "") {
+                                            $("#cancelar3").hide();
+                                        } else {
+                                            $("#cancelar3").show();
+                                            $('#labelupload3').css("background-color", "#8d9d17")
+                                        }
+
+                                        $("#cancelar3").click(function () {
+                                            $("#upload3").val('');
+                                            $('#labelupload3').css("background-color", "#BAD305")
+                                            $("#cancelar3").hide();
+                                        });
+                                        $('#upload3').change(function () {
+                                            if ($('#upload3').val() == "") {
+                                                $('#labelupload3').css("background-color", "#BAD305")
+                                                $("#cancelar3").hide();
+                                            } else {
+                                                $('#labelupload3').css("background-color", "#8d9d17")
+                                                $("#cancelar3").show();
+                                            }
+                                        });
+                                    });
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -874,8 +977,34 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <input type="file" id="upload4" name="files" >
-                                <label class="boton-file" for="upload4">Subir Foto</label>
+                                <input type="button" id="cancelar4" value="Limpiar" style="margin-bottom: -7.7px"/>
+                                <input type="file" id="upload4" name="files" hidden>
+                                <label id="labelupload4" class="boton-file" for="upload4">Subir Foto</label>
+                                <script>
+                                    $(document).ready(function () {
+                                        if ($('#upload4').val() == "") {
+                                            $("#cancelar4").hide();
+                                        } else {
+                                            $("#cancelar4").show();
+                                            $('#labelupload4').css("background-color", "#8d9d17")
+                                        }
+
+                                        $("#cancelar4").click(function () {
+                                            $("#upload4").val('');
+                                            $('#labelupload4').css("background-color", "#BAD305")
+                                            $("#cancelar4").hide();
+                                        });
+                                        $('#upload4').change(function () {
+                                            if ($('#upload4').val() == "") {
+                                                $('#labelupload4').css("background-color", "#BAD305")
+                                                $("#cancelar4").hide();
+                                            } else {
+                                                $('#labelupload4').css("background-color", "#8d9d17")
+                                                $("#cancelar4").show();
+                                            }
+                                        });
+                                    });
+                                </script>
                             </div>
                         </div>
                     </div>
@@ -917,8 +1046,34 @@
                         </div>
                         <div class="row">
                             <div class="col">
+                                <input type="button" id="cancelar5" value="Limpiar" style="margin-bottom: -7.7px"/>
                                 <input type="file" id="upload5" name="files" hidden>
-                                <label class="boton-file" for="upload5">Subir Foto</label>
+                                <label id="labelupload5" class="boton-file" for="upload5">Subir Foto</label>
+                                <script>
+                                    $(document).ready(function () {
+                                        if ($('#upload5').val() == "") {
+                                            $("#cancelar5").hide();
+                                        } else {
+                                            $("#cancelar5").show();
+                                            $('#labelupload5').css("background-color", "#8d9d17")
+                                        }
+
+                                        $("#cancelar5").click(function () {
+                                            $("#upload5").val('');
+                                            $('#labelupload5').css("background-color", "#BAD305")
+                                            $("#cancelar5").hide();
+                                        });
+                                        $('#upload5').change(function () {
+                                            if ($('#upload5').val() == "") {
+                                                $('#labelupload5').css("background-color", "#BAD305")
+                                                $("#cancelar5").hide();
+                                            } else {
+                                                $('#labelupload5').css("background-color", "#8d9d17")
+                                                $("#cancelar5").show();
+                                            }
+                                        });
+                                    });
+                                </script>
                             </div>
                         </div>
                     </div>

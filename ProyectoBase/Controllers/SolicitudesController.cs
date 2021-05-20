@@ -155,23 +155,27 @@ namespace WebSolicitudes.Controllers
                             opcionesZonas += "<option  value='" + item.idZona + "'>" + item.nombreZona + "</option>";
                         }
                         ViewData["opcionesZonas"] = opcionesZonas;
+
                         Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó todoas las zonas a reparar");
                         List<EstadoSolicitud> listaEstados = conexionDB.EstadoSolicitud.ToList();
                         string opcionesEstados = string.Empty;
+                        ViewData["EstadoSolicitud"] = "Sin Estado";
                         opcionesEstados += "<option value='0'>-- Selecciona opción --</option>";
                         foreach (EstadoSolicitud item in listaEstados) {
                             if ( item.idEstado == solicitud.Fk_idEstado) {
                                 opcionesEstados += "<option selected value='" + item.idEstado + "'>" + item.nombreEstado + "</option>";
+                                ViewData["EstadoSolicitud"] = item.nombreEstado;
                             } else {
                                 opcionesEstados += "<option  value='" + item.idEstado + "'>" + item.nombreEstado + "</option>";
 
                             }
                         }
                         ViewData["opcionesEstados"] = opcionesEstados;
+
                         Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó todoas los Estados");
                         List<RangoFoliculos> listaRangos = conexionDB.RangoFoliculos.ToList();
                         string opcionesRangos = string.Empty;
-
+                        
                         foreach (RangoFoliculos item in listaRangos)
                         {
                             if (solicitud.RangoxSolicitud.Count() != 0)
@@ -261,8 +265,8 @@ namespace WebSolicitudes.Controllers
                         else {
                             Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó ninguna Foto");
                         }
-                        
 
+                        ViewData["FechaSolicitud"] = solicitud.FechaSolicitud;
                         ViewData["idSolicitud"] = id;
                         return View();
 

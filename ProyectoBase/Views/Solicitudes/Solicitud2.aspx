@@ -530,7 +530,150 @@ body {
   object-fit: cover;
 }
     </style>
+    <style>
+       
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
 
+    section.spacer {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      max-width: 100%;
+      border: 1px solid;
+    }
+
+    .grid {
+      background: CornflowerBlue no-repeat fixed;
+      background-image: url("../../Styles/img/fondo-solicitud.jpg");
+      background-size: cover;
+      position: relative;
+      
+      /*background-blend-mode: saturation;*/
+      color: #fff;
+    }
+
+    .section.--mask {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #000000;
+      z-index: 1000;
+    }
+
+
+    .content {
+      display: grid;
+      grid-template-columns: minmax(0px, 1fr) repeat(6, [col] minmax(auto, 160px)) minmax(0px, 1fr);
+      grid-gap: 20px;
+      grid-template-rows: 1fr;
+      align-items: center;
+      margin: 40px 0;
+    }
+    .content.--image-right .content__text {
+      grid-column: col/span 4;
+      margin-right: 20px;
+    }
+    .content.--image-right .content__image {
+      grid-column: 6/-1;
+      margin-right: 29px;
+    }
+    @media (min-width: 1200px) {
+      .content.--image-right .content__image {
+        grid-column: 7/-1;
+        margin-right: 129px;
+      }
+    }
+    .content.--image-right-large .content__text {
+      grid-column: col/span 3;
+      margin-right: 20px;
+    }
+    .content.--image-right-large .content__image {
+      grid-column: 5/-1;
+      margin-left: 20px;
+      margin-right: 57px;
+    }
+    .content.--image-left .content__text {
+      grid-column: col 3/span 3;
+      margin-left: 20px;
+    }
+    .content.--image-left .content__image {
+      grid-column: 1/span 3;
+    }
+    @media (min-width: 1200px) {
+      .content.--image-left .content__image {
+        margin-right: 80px;
+        margin-left: 100px;
+      }
+    }
+    .content.--image-full .content__image {
+      grid-column: col/span 6;
+    }
+    .content.--image-overhang {
+      min-height: 700px;
+    }
+
+
+
+    .content__text {
+      grid-column: col/span 6;
+      grid-row: 1;
+    }
+    .content__text.--center-4-cols {
+      grid-column: col 2/span 4;
+      text-align: center;
+    }
+
+    .content__image {
+      min-height: 50px;
+      grid-row: 1;
+    }
+    .content__image img {
+      margin: 0;
+      object-fit: cover;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .content__image--animate,
+    .content__image--animate img {
+      will-change: transform;
+    }
+
+    .mask__title {
+      z-index: 100;
+    }
+
+    .mask__title {
+      font-size: 65px;
+      line-height: 1.2;
+      text-align: center;
+      color: #000000;
+      max-width: 20ch;
+      margin: auto;
+    }
+
+
+    #svg-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+    }
+</style>
+    
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -840,26 +983,230 @@ body {
     <br />
     <br />
     <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+<div class="grid">
+    <section class="section --mask">
+        <svg id="svg-mask" width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <mask id="mask">
+                    <rect width="100%" height="100%" fill="#fff"></rect>
+                    <circle id="inner-mask" stroke="green" stroke-width="3" cx="50%" cy="50%" r="100" fill="black"></circle>
+                </mask>
+            </defs>
+            <g>
+                <rect mask="url(#mask)" width="100%" height="100%" fill="#fff"></rect>
+            </g>
+        </svg>
+        <h1 class="mask__title">Bienvenido a Tempora</h1>
+    </section>
+    <section class="section --fixed">
+        <div class="content --image-right-large">
+            
+            <div class="content__text">
+                <div class="eyebrow gt-Sectra-Regular fs-20 c-purple-2">
+                    <h1 style="font-family: 'Poppins';font-size: 22px; font-style: inherit;">El mejor equipo</h1>
+                </div>
+                <div class="title fs-24 c-white">
+                    En Tempora contamos con el mejor equipo para cirujías de la región.
+                </div>
+            </div>
+            <div class="content__image content__image--animate o-image-1" data-offset-y="25" data-scrub="0.1">
+                <div class="content__image-inner">
+                    <img src="https://via.placeholder.com/788x473/" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="content --image-right">
+            <div class="content__text">
+                <div class="fs-40 c-purple-3 fw-semi">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco  
+                </div>
+            </div>
+            <div class="content__image content__image--animate o-image-2" data-offset-y="-25" data-scrub="0.1">
+                <div class="content__image-inner">
+                    <img src="https://via.placeholder.com/408/" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="content --image-full">
+            <div class="content__image">
+                <div class="content__image-inner">
+                    <img src="https://via.placeholder.com/1060x400/" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="content --image-left">
+            <div class="content__text">
+                <p class="fs-24">Lorem ipsum dolor sit amet, consectetur adipiscing elitullamco</p>
+                <p class="fs-24">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
+            </div>
+            <div class="content__image content__image--animate o-image-3" data-offset-y="12" data-scrub="0.7">
+                <div class="content__image-inner">
+                    <img src="https://via.placeholder.com/510/" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content__text --center-4-cols">
+                <div class="eyebrow gt-Sectra-Regular fs-20 c-purple-2">
+                    Tempora
+                </div>
+                <div class="title fs-65 fw-semi">
+                    Lorem ipsum dolor sit amet
+                </div>
+            </div>
+        </div>
+
+
+        <div class="content">
+            <div class="content__text">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus commodi, consectetur cumque dignissimos eos excepturi expedita maiores modi, molestiae molestias nihil nisi officiis, perferendis provident quibusdam reprehenderit rerum totam ut?
+              <br><br><br><br><br><br>
+            </div>
+        </div>
+    </section>
+</div>
+
+<section class="spacer"><h2>Another Section</h2></section>
+
+<script>
+
+
+    const svg = document.querySelector("#svg-mask");
+    const img = document.querySelector("#fixed-image");
+    const maskTitle = document.querySelector(".mask__title");
+    const chevron = document.querySelector("#inner-mask");
+
+    gsap.set(maskTitle, {
+        y: chevron.getBoundingClientRect().height / 2
+    });
+    gsap.set(chevron, {
+        transformOrigin: "center center"
+    });
+
+    //I don't know if I should just get the elements I want to animate and add them to a timeline
+    // const image1 = document.querySelector('.o-image-1');
+    // const image2 = document.querySelector('.o-image-2');
+    // const image3 = document.querySelector('.o-image-3');
+
+    //At the moment I am grabbing them all and then looping through them, this feels like it could be done using .batch?
+    const imageContainers = document.querySelectorAll(".content__image--animate");
+    imageContainers.forEach(imageContainer => {
+        const imageAnim = gsap.to(imageContainer.querySelector('img'), {
+            // ease: 'none',
+            paused: true,
+            yPercent: parseFloat(imageContainer.dataset.offsetY) || 0,
+            duration: parseFloat(imageContainer.dataset.scrub) || 0.1
+        });
+
+        ScrollTrigger.create({
+            animation: imageAnim,
+            scrub: true,
+            trigger: imageContainer,
+            start: "top center",
+            end: "bottom top"
+        });
+    });
+
+    // Setup a timeline for the Mask and text
+    var tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.--mask',
+            pin: true,
+            start: "top top",
+            end: '+=925',
+            scrub: 0.2,
+            pinSpacing: false
+        },
+        defaults: {
+            duration: 2,
+            ease: "power3"
+        }
+    }).to(maskTitle, {
+        opacity: 0,
+        duration: 0.15
+    }, 0).to(chevron, {
+        scale: 35,
+        yPercent: -550,
+        duration: 4
+    }, 0);
+
+
+    // Fade in the text
+    gsap.set(".content__text", {
+        y: 50
+    });
+
+    ScrollTrigger.batch(".content__text", {
+        interval: 0.2,
+        batchMax: 2,
+        onEnter: batch => gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            overwrite: true
+        }),
+        onLeave: batch => gsap.set(batch, {
+            opacity: 0,
+            y: -50,
+            overwrite: true
+        }),
+        onEnterBack: batch => gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.15,
+            overwrite: true
+        }),
+        onLeaveBack: batch => gsap.set(batch, {
+            opacity: 0,
+            y: 50,
+            overwrite: true
+        }),
+        start: "top bottom",
+        end: "bottom top",
+        // markers: true
+    });
+
+    window.addEventListener("load", init);
+    window.addEventListener("resize", resize);
+
+    function init() {
+        resize();
+    }
+
+    function resize() {
+        tl.progress(0);
+        tl.invalidate();
+        ScrollTrigger.refresh();
+    }
+
+    ScrollTrigger.addEventListener("refreshInit", () => gsap.set(".content__text", {
+        y: 0
+    }));
+
+
+</script>
         <br />
         <br />
         <br />
