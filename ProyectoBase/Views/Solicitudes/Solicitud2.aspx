@@ -38,7 +38,7 @@
     <style>
         html {
             resize: none;
-            background-color: #DCFABD
+            background-color: white;
         }
         .contenedor{
             position: relative;
@@ -355,14 +355,14 @@ border-radius: 28px;
   padding-bottom: 300px;
 }
 
-.container {
+/*.container {
   padding: 20px;
   margin: 0 auto;
   max-width: 1070px;
   position: relative;
   z-index: 1;
   margin-left: 5pc;
-}
+}*/
 
 .pContent {
   width: 99%;
@@ -498,6 +498,22 @@ body {
   background: #000;
      padding-top: 14pc;
 }
+
+.circle1 {
+
+  line-height: 500px !important;
+  border-radius: 50%;
+  font-size: 50px !important;
+  text-align: center;
+  background: #000;
+    padding-top: 14pc;
+    background: #b8b8b8; 
+    color: #000; margin-left: 11pc; 
+    padding-top: 14pc;   
+    width: 500px; 
+    height: 500px;
+}
+
 .h2, h2 {
     font-size: 1rem;
 }
@@ -673,11 +689,78 @@ body {
       height: 100vh;
     }
 </style>
-    
+    <%-- Style para Celular --%>
+    <style>
+        .card1 {
+            width: 100pc; margin-left:5pc; background-color: black;    margin-top: -3pc;
+            }
+        @media screen and (max-width: 480px) {
+            .card1 {
+                width: calc(100% - 0pc);
+                text-align: center;
+                margin-left: 10pc;
+            }
+            .card1 > .card-body > .text-center > h4{
+                font-size: 15px;
+                margin-left: -10pc;
+            }
+            .card1 > .card-body > .text-center > h2{
+                font-size: 24px;
+                margin-left: -10pc;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            .headera > h1 {
+                width: calc(100% - 0pc);
+                font-size: 60px;
+            }
+        }
+
+        /*Circulos*/
+        .section-circulos {
+         }
+            @media screen and (max-width: 480px) {
+                .section-circulos{
+                    width: calc(100% - 0pc); 
+                }
+                .section-circulos > .row > .col > .ciruclo1{
+                    width: calc(100% - 0pc); 
+                    margin-left: 16pc;
+                }
+                .section-circulos > .row > .col > .ciruclo1 > .circle1{
+                    width: 300px;
+                    height: 300px;
+                    margin-left: 16pc;
+                }
+                .section-circulos > .row > .col > .ciruclo1 > .circle1 > h2{
+                    width: calc(100% - 0pc);
+                    font-size: 18px;
+                    margin-top: -10pc;
+                    padding: 3pc;
+                }
+                .section-circulos > .row > .col > .circular--portrait{
+                    margin-left: -7pc;
+                }
+                .section-circulos > .row > .col > .circle > .ciruclo2{
+                    width: 300px;
+                    height: 300px;
+                    margin-top: -1pc;
+                    margin-left: 26px;
+                    padding: 18px;
+                }
+                .section-circulos > .row > .col > .foto2 > .circular--portrait {
+                    margin-left: -46pc;
+                    width: 8pc;
+                    height: 8pc;
+                }
+
+            }
+    </style>
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <!-- ======= Hero Section ======= -->
 <main id="main" style="background-color: white;">
     <div class="scrollContainer">
@@ -698,8 +781,8 @@ body {
         <h1>aaaa</h1>
     </section>--%>
 
-    <section class="headera section" style="margin-top: -4pc;">
-        <h1  class="ha" style="color: white; z-index: 100; font-style: inherit; text-align: center;"><span style="color: white; z-index: 100;">REGINA CHIN</span> <span style="font-weight: lighter">tenemos el plan perfecto para tí. </span><br /><span style="    font-size: 27px;">Haz scroll.</span></h1>
+    <section class="headera" style="margin-top: -4pc;">
+        <h1  class="ha" style="color: white; z-index: 100; font-style: inherit; text-align: center; margin-top: 16pc;"><span style="color: white; z-index: 100;">REGINA CHIN</span> <span style="font-weight: lighter">tenemos el plan perfecto para tí. </span><br /><span style="    font-size: 27px;">Haz scroll.</span></h1>
 
         <div class="fullscreen-video-wrap">
             <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" style="filter: brightness(0.5);">
@@ -736,16 +819,17 @@ body {
         })
     </script>
         <br />
-        <div class="card card1" style="  width: 100pc; margin-left:5pc; background-color: black;    margin-top: -3pc;">
+        <div class="card card1">
             <div class="card-body" style=" width: 98pc; margin-left:-14pc">
                 <div class="text-center" style="margin-left: 28pc;">
                     <h4 data-aos="zoom-in" data-aos-delay="100"style="color:white">Según nuestro análisis capilar, usted padece de</h4>
                     <h2 data-aos="zoom-in" data-aos-delay="100"style="color: white">Alopecia Androgenética</h2>
                     <h4 data-aos="zoom-in" data-aos-delay="100"class="text8" style="color:white">Con una perdida de cabello aproximada a </h4>
-                <h2 data-aos="zoom-in" data-aos-delay="100"class="text8" style="color:white">2000 fóliculos</h2>
+                    <h2 data-aos="zoom-in" data-aos-delay="100"class="text8" style="color:white">2000 fóliculos</h2>
                 </div>
             </div>
         </div>
+
         <script>
             gsap.from('card1', {
                 scrollTrigger: {
@@ -757,11 +841,13 @@ body {
             })
         </script>
 
-        <section style="margin-left: 16pc;">
+        <section class="section-circulos" style="margin-left: 16pc;">
             <div class="row">
-                <div class="col ciruclo1" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="circle cir2" style="background: #b8b8b8; color: #000; margin-left: 11pc; padding-top: 14pc;   width: 500px; height: 500px;"  >
-                        <h2 style="">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h2>
+                <div class="col" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="ciruclo1">
+                        <div class="circle1">
+                            <h2 style="">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </h2>
+                        </div>
                     </div>
                 </div>
                     <script>
@@ -800,11 +886,12 @@ body {
                     </div>
                 </div>
                 <div class="col">
-                    <div class="circle ciruclo2" style="margin-left: -3pc;" data-aos="zoom-in" data-aos-delay="100">
-                        <h2>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Distribution of letters, as opposed to using</h2>
-                        
-                        
+                    <div class="circle" style="margin-left: -3pc;" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="ciruclo2" >
+                            <h2>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Distribution of letters, as opposed to using</h2>
+                        </div>
                     </div>
+
                     <script>
                         gsap.set(".ciruclo2", { xPercent: -10, yPercent: -10 });
                         gsap.to(".ciruclo2", {
@@ -820,58 +907,74 @@ body {
                     
                 </div>
                 <div class="col" data-aos="zoom-in" data-aos-delay="100" style="    margin-top: 2pc;">
-                    <div class="circular--portrait">
-                        <img  src="../../Styles/img/alopecia3.jpg" />
+                    <div class="foto2">
+                        <div class="circular--portrait">
+                            <img  src="../../Styles/img/alopecia3.jpg" />
+                        </div>
+                        
                     </div>
                 </div>
             </div>
-
-
-
         </section>
-    
-    <div class="row" style="margin-left: 12pc; text-align: center;">
-        <div class="col-6 ">
-            <div class="card rango1" style=" border-color: transparent; background: transparent;">
-                <div class="card-body" style="background-color: #e0e0e0; border-radius: 14px ; border-color: white; width: 35pc;" >
-                    <h5 class="card-title">2000 Fóliculos</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">$3.100.000</h6>
-                    <p style="color: #000000" class="card-text">Pesos Chilenos</p>
+    <div class="col">
+        <div class="row" style="margin-left: 12pc; text-align: center;">
+            <div class="col-6 ">
+                <div class="card rango1" style=" border-color: transparent; background: transparent;">
+                    <div class="card-body" style="background-color: #e0e0e0; border-radius: 14px ; border-color: white; width: 35pc;" >
+                        <h5 class="card-title">2000 Fóliculos</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">$3.100.000</h6>
+                        <p style="color: #000000" class="card-text">Pesos Chilenos</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <script>
-            gsap.from(".rango1", {
-                duration: 2,
-                opacity: 0,
-                scrollTrigger: {
-                    y: 2000,
-                    trigger: ".rango1",
-                    scrub: true,
-                }
-            })
-                    </script>
-        <div class="col-6">
-            <div class="card rango2" style=" border-color: transparent; background: transparent;">
-                <div class="card-body" style="background-color: #e0e0e0; border-radius: 14px ; border-color: white; width: 35pc;">
-                    <h5 class="card-title">2500 Fóliculos</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">$3.600.000</h6>
-                    <p style="color: #000000" class="card-text">Pesos Chilenos</p>
+<%--            <script>
+                gsap.from(".rango1", {
+                    duration: 1,
+                    opacity: 0,
+                    scrollTrigger: {
+                        y: 500,
+                        trigger: ".ciruclo1",
+                        scrub: true,
+                    }
+                })
+            </script>--%>
+            <div class="col-6">
+                <div class="card rango2" style=" border-color: transparent; background: transparent;">
+                    <div class="card-body" style="background-color: #e0e0e0; border-radius: 14px ; border-color: white; width: 35pc;">
+                        <h5 class="card-title">2500 Fóliculos</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">$3.600.000</h6>
+                        <p style="color: #000000" class="card-text">Pesos Chilenos</p>
+                    </div>
                 </div>
             </div>
+<%--            <script>
+                gsap.from(".rango2", {
+                    duration: 1,
+                    opacity: 0,
+                    scrollTrigger: {
+                        y: 500,
+                        trigger: ".ciruclo1",
+                        scrub: true,
+                    }
+                })
+            </script>--%>
         </div>
-        <script>
-            gsap.from(".rango2", {
-                duration: 2,
-                opacity: 0,
-                scrollTrigger: {
-                    y: 2000,
-                    trigger: ".rango2",
-                    scrub: true,
-                }
-            })
-        </script>
     </div>
+    <style>
+        .precios {
+         }
+        @media screen and (max-width: 480px) {
+            .col > .row > .col-6 {
+                width: calc(100% - 0pc);
+                margin-left: 23pc;
+                padding: 15px;
+            }
+            .col > .row > .col-6 > .card > .card-body {
+                width: 24pc !important;
+                margin-left: 5pc;
+            }
+        }
+    </style>
     </div>
         <br />
         <br />
@@ -949,6 +1052,44 @@ body {
       </div>
     </div>
     <br />
+        <style>
+        .containera {
+         }
+        @media screen and (max-width: 480px) {
+            .containera > .scaleDowna {
+                width: calc(100% - 0pc);
+                height: 159vh;
+                min-width: 112vw;
+                max-width: 112vw;
+                max-height: 112vw;
+                min-height: 140vh;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                resize: none;
+                background-image:url(../../Styles/img/celular.png);
+                background-repeat: no-repeat;
+                background-size: 46pc;
+                padding-left: 24pc;
+                /*background-color: black;*/
+                transform-origin: 54% 50%;  
+            }
+            .containera > .scaleDowna > .pantalla{
+                width: calc(100% - 0pc);
+                background-color: black;
+                margin-top: -10pc;
+                margin-left: -37pc;
+                /*height: 51pc;
+                width: 1284px;*/
+            }
+            .containera > .scaleDowna > .pantalla > video{
+                height: 261px !important;
+                margin-top: 294px !important;
+                margin-left: 344.1px !important;
+            }
+            
+        }
+    </style>
     <br />
     <br />
     <script>
@@ -1356,7 +1497,7 @@ body {
         <br />
         <br />
     <br />
-    <div class="box6">
+<%--    <div class="box6">
     </div>
     <script>
         gsap.to(".box6", {
@@ -1375,7 +1516,7 @@ body {
             x: 500,
 
         });
-    </script>
+    </script>--%>
     <br />
     <br />
     <br />

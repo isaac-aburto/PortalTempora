@@ -265,7 +265,7 @@
         }
     </style>
     <style>
-        *{box-sizing: border-box;}
+                *{box-sizing: border-box;}
 
         .video-header {
             height: 100vh;
@@ -313,36 +313,96 @@
             font-size: 1rem;
             }
         }
+        @media screen and (max-width: 480px) {
+            html {
+              overflow-x: hidden;
+            }
+            body {
+              position: relative
+            }
+            .video-header {
+                width: calc(100% - 80px);
+            }
+
+            .wrap {
+                max-width: 960px;
+                padding-left: 2rem;
+                padding-right: 2rem;
+                margin: auto;
+                text-align: center;
+            }
+
+            .fullscreen-video-wrap {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 113vh;
+                width: 100%;
+            }
+
+                .fullscreen-video-wrap video {
+                    min-height: 112%;
+                    min-width: 341%;
+                }
+
+            .header-content {
+                z-index: 2;
+                margin-top: 20%;
+                padding: 0 5rem;
+            }
+
+                .header-content h1 {
+                    font-size: 70px;
+                    margin-bottom: 0;
+                }
+
+                .header-content p {
+                    font-size: 1.5rem;
+                    display: block
+                }
+
+            @media (max-width: 768px) {
+                .header-content h1 {
+                    font-size: 40px;
+                }
+
+                .header-content p {
+                    font-size: 1rem;
+                }
+            }
+        }
 
     </style>
-                            <style>       
-                            .boton-file{
-                                display: inline-block;
-                                background-color: #bad305;
-                                color: white;
-                                padding: 0.5rem;
-                                font-family: sans-serif;
-                                border-radius: 1.3rem;
-                                cursor: pointer;
-                                margin-top: 1rem;
-                            }
-                        </style>
+    <%-- Boton de celular --%>
+    <style>       
+    .boton-file{
+        display: inline-block;
+        background-color: #bad305;
+        color: white;
+        padding: 0.5rem;
+        font-family: sans-serif;
+        border-radius: 1.3rem;
+        cursor: pointer;
+        margin-top: 1rem;
+    }
+
+</style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
       <!-- ======= Hero Section ======= -->
   <section class="d-flex align-items-center">
 
       <div class="video-header wrap">
           <div class="fullscreen-video-wrap">
-            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" style="filter: brightness(0.5);">
+            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" style="filter: brightness(0.5);object-fit: scale-down; max-width: 100%; height: auto; background-color: black;">
                 <source src="../../assets/video/tempora.mp4" type="video/mp4">
             </video>
           </div>
           <div class="header-overlay">
-              <div class="header-content">
+              <div class="headera-content">
             <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
           <h1>Bienvenido a <span style="color: #BAD305">Tempora</span></h1>
           <h4 style="color: #BAD305">Portal de solicitudes</h4>
@@ -682,6 +742,10 @@
               <div class="row">
                   <div class="col-sm">
                       <button disabled id="btnAtras" type="button" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Atrás</button>
+                        
+                  </div>
+                  <div class="col-sm">
+                    <br />    
                   </div>
                   <div class="col-sm">
                       <button id="btnSiguiente"type="button" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Siguiente</button>

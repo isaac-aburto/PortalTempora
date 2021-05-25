@@ -291,7 +291,7 @@
                             <%-- Gestion --%>
                             <div class="row">
                                 <div class="col">
-                                    <h4 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important">Gestionar</h4>
+                                    <h4 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important">Gestión</h4>
                                 </div>
                                 <div class="col" style="    text-align: end;">
                                     <a id="btnGestionar"  data-toggle="collapse" data-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i style="color: #C6D41D;     font-size: 31px;" id="icon" class="fa fa-angle-down"></i></a>

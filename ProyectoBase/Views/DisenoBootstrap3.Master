@@ -72,7 +72,17 @@
   color: #7d7d7d !important;
 }
     </style>
-
+        <style>
+        .mobile-nav-toggle {
+            top: 37px;
+        }
+        .mobile-nav-toggle i {
+            color: #979797;
+        }
+        .mobile-nav {
+            height: 17pc;
+        }
+    </style>
 
 <%--    <link href="<%: Url.Content("~/Styles/css/jquery.ui.css") %>" rel="stylesheet" />
     <script src="<%: Url.Content("~/Styles/js/jquery.ui.js") %>"></script>
@@ -105,7 +115,7 @@
 </style>
 </head>
 
-<body>
+<body style="background-color: #e0e0e0">
 
  <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top" style="background-color: black;">
@@ -129,7 +139,7 @@
       <a class="navbar-brand" href="<%: Url.Content("~/Home") %>"><img src="<%: Url.Content("~/Styles/img/logo_tempora.png") %>"/></a>
 
 
-      <nav class="nav-menu d-none d-lg-block" style="padding-left: 14pc;">
+      <nav class="nav-menu d-none d-lg-block" <%--style="padding-left: 14pc;"--%>>
         <ul>
           <li class="active"><a href="index.html">Home</a></li>
           <li><a href="#about">Sobre Nosotros</a></li>
