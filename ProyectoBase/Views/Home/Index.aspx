@@ -404,8 +404,10 @@
           <div class="header-overlay">
               <div class="headera-content">
             <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
-          <h1>Bienvenido a <span style="color: #BAD305">Tempora</span></h1>
-          <h4 style="color: #BAD305">Portal de solicitudes</h4>
+          <h1 style="font-family: 'Poppins';
+    font-style: inherit;">Bienvenido a <span style="color: #BAD305">Tempora</span></h1>
+          <h4 style="color: #BAD305;    font-family: -webkit-pictograph;
+    font-size: 22px;">Portal de solicitudes</h4>
 <%--          <div class="btns">
             <a href="#menu" class="btn-menu animated fadeInUp scrollto">Quienes somos</a>
             <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Evaluación</a>
@@ -492,7 +494,7 @@
         </div>
 
       </div>
-    </section><
+    </section>
 
     <!-- ======= Events Section ======= -->
     <section id="events" class="events">

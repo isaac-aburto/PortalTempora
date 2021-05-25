@@ -166,6 +166,19 @@
                 }
     </style>--%>
 <style>
+    .navbar-brand {
+        margin-top: 1pc;
+    }
+    .navbar-brand > img {
+    max-width: 100%;
+    border: 0px solid;
+    }
+    .mobile-nav-toggle {
+        margin-top: 1pc;
+    }
+    .nav-menu {
+    margin-top: 24px;
+    }
     .punto {
             width: 5px;
         height: 5px;
@@ -237,10 +250,10 @@
       position: relative;
     }
     .scaleDowna {
-      width: 50%;
-      height: 140vh;
-      min-width: 112vw;
-      max-width: 112vw;
+        width: 50%;
+        height: 144vh;
+        min-width: 118vw;
+        max-width: 118vw;
       max-height: 112vw;
       min-height: 140vh;
       position: absolute;
@@ -554,7 +567,7 @@ body {
     }
 
     section.spacer {
-      height: 100vh;
+      height: 34vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -689,74 +702,264 @@ body {
       height: 100vh;
     }
 </style>
-    <%-- Style para Celular --%>
-    <style>
+<%-- Style para Celular --%>
+<style>
+    #header {
+        background: rgb(0 0 0 / 95%);
+    }
+    .card1 {
+        width: 100pc; margin-left:5pc; background-color: black;    margin-top: -3pc;
+        }
+    @media screen and (max-width: 480px) {
+        html {
+            overflow-x: hidden;
+        }
+        body {
+            position: unset;
+        }
         .card1 {
-            width: 100pc; margin-left:5pc; background-color: black;    margin-top: -3pc;
-            }
-        @media screen and (max-width: 480px) {
-            .card1 {
-                width: calc(100% - 0pc);
-                text-align: center;
-                margin-left: 10pc;
-            }
-            .card1 > .card-body > .text-center > h4{
-                font-size: 15px;
-                margin-left: -10pc;
-            }
-            .card1 > .card-body > .text-center > h2{
-                font-size: 24px;
-                margin-left: -10pc;
-            }
+            width: calc(100% - 0pc);
+            text-align: center;
+            margin-left: 10pc;
+        }
+        .card1 > .card-body > .text-center > h4{
+            font-size: 15px;
+            margin-left: -10pc;
+        }
+        .card1 > .card-body > .text-center > h2{
+            font-size: 24px;
+            margin-left: -10pc;
+        }
+    }
+    @media screen and (max-width: 480px) {
+        .headera > h1 {
+            width: calc(100% - 0pc);
+            font-size: 60px;
+        }
+    }
+
+    /*Circulos*/
+    .section-circulos {
         }
         @media screen and (max-width: 480px) {
-            .headera > h1 {
+            .section-circulos{
+                width: calc(100% - 0pc); 
+            }
+            .section-circulos > .row > .col > .ciruclo1{
+                width: calc(100% - 0pc); 
+                margin-left: 16pc;
+            }
+            .section-circulos > .row > .col > .ciruclo1 > .circle1{
+                width: 300px;
+                height: 300px;
+                margin-left: 16pc;
+            }
+            .section-circulos > .row > .col > .ciruclo1 > .circle1 > h2{
                 width: calc(100% - 0pc);
-                font-size: 60px;
+                font-size: 18px;
+                margin-top: -10pc;
+                padding: 3pc;
+            }
+            .section-circulos > .row > .col > .circular--portrait{
+                margin-left: -7pc;
+            }
+            .section-circulos > .row > .col > .circle > .ciruclo2{
+                width: 300px;
+                height: 300px;
+                margin-top: -1pc;
+                margin-left: 26px;
+                padding: 18px;
+            }
+            .section-circulos > .row > .col > .circle > .ciruclo2 > h2{
+                margin-left: -1pc;
+                padding-right: 4pc;
+            }
+            .section-circulos > .row > .col > .foto2 > .circular--portrait {
+                margin-left: -46pc;
+                width: 8pc;
+                height: 8pc;
+            }
+
+        }
+        .precios {
+        }
+        @media screen and (max-width: 480px) {
+            .col > .row > .col-6 {
+                width: calc(100% - 0pc);
+                margin-left: 23pc;
+                padding: 15px;
+            }
+            .col > .row > .col-6 > .card > .card-body {
+                width: 24pc !important;
+                margin-left: 5pc;
             }
         }
+        .containera {
+        }
+    @media screen and (max-width: 480px) {
+        .containera > .scaleDowna {
+            width: calc(100% - 0pc);
+            height: 159vh;
+            min-width: 112vw;
+            max-width: 112vw;
+            max-height: 112vw;
+            min-height: 190vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            resize: none;
+            background-image:url(../../Styles/img/celular.png);
+            background-repeat: no-repeat;
+            background-size: 46pc;
+            padding-left: 24pc;
+            /*background-color: black;*/
+            transform-origin: 54% 50%;  
+        }
+        .containera > .scaleDowna > .pantalla{
+            width: calc(100% - 0pc);
+            background-color: black;
+            margin-top: -10pc;
+            margin-left: -37pc;
+            /*height: 51pc;
+            width: 1284px;*/
+        }
+        .containera > .scaleDowna > .pantalla > video{
+            height: 261px !important;
+            margin-top: 294px !important;
+            margin-left: 344.1px !important;
+        }
+            
+    }
+</style>
+<%-- Style para Iphone X+ --%>
+<%--<style>
+    #header {
+        background: rgb(0 0 0 / 95%);
+    }
+    .card1 {
+        width: 100pc; margin-left:5pc; background-color: black;    margin-top: -3pc;
+        }
+    @media screen and (max-width: 375px) {
+        html {
+            overflow-x: hidden;
+        }
+        body {
+            position: unset;
+        }
+        .card1 {
+            width: calc(100% - 0pc);
+            text-align: center;
+            margin-left: -8pc;
+        }
+        .card1 > .card-body > .text-center > h4{
+            font-size: 14px;
+            margin-left: -10pc;
+        }
+        .card1 > .card-body > .text-center > h2{
+            font-size: 24px;
+            margin-left: -10pc;
+        }
+    }
+    @media screen and (max-width: 375px) {
+        .headera > h1 {
+            width: calc(100% - 0pc);
+            font-size: 60px;
+        }
+    }
 
-        /*Circulos*/
-        .section-circulos {
-         }
-            @media screen and (max-width: 480px) {
-                .section-circulos{
-                    width: calc(100% - 0pc); 
-                }
-                .section-circulos > .row > .col > .ciruclo1{
-                    width: calc(100% - 0pc); 
-                    margin-left: 16pc;
-                }
-                .section-circulos > .row > .col > .ciruclo1 > .circle1{
-                    width: 300px;
-                    height: 300px;
-                    margin-left: 16pc;
-                }
-                .section-circulos > .row > .col > .ciruclo1 > .circle1 > h2{
-                    width: calc(100% - 0pc);
-                    font-size: 18px;
-                    margin-top: -10pc;
-                    padding: 3pc;
-                }
-                .section-circulos > .row > .col > .circular--portrait{
-                    margin-left: -7pc;
-                }
-                .section-circulos > .row > .col > .circle > .ciruclo2{
-                    width: 300px;
-                    height: 300px;
-                    margin-top: -1pc;
-                    margin-left: 26px;
-                    padding: 18px;
-                }
-                .section-circulos > .row > .col > .foto2 > .circular--portrait {
-                    margin-left: -46pc;
-                    width: 8pc;
-                    height: 8pc;
-                }
-
+    /*Circulos*/
+    .section-circulos {
+        }
+        @media screen and (max-width: 375px) {
+            .section-circulos{
+                width: calc(100% - 0pc); 
             }
-    </style>
+            .section-circulos > .row > .col > .ciruclo1{
+                width: calc(100% - 0pc); 
+                margin-left: 16pc;
+            }
+            .section-circulos > .row > .col > .ciruclo1 > .circle1{
+                width: 300px;
+                height: 300px;
+                margin-left: 16pc;
+            }
+            .section-circulos > .row > .col > .ciruclo1 > .circle1 > h2{
+                width: calc(100% - 0pc);
+                font-size: 18px;
+                margin-top: -10pc;
+                padding: 3pc;
+            }
+            .section-circulos > .row > .col > .circular--portrait{
+                margin-left: -7pc;
+            }
+            .section-circulos > .row > .col > .circle > .ciruclo2{
+                width: 300px;
+                height: 300px;
+                margin-top: -1pc;
+                margin-left: 26px;
+                padding: 18px;
+            }
+            .section-circulos > .row > .col > .circle > .ciruclo2 > h2{
+                margin-left: -1pc;
+                padding-right: 4pc;
+            }
+            .section-circulos > .row > .col > .foto2 > .circular--portrait {
+                margin-left: -46pc;
+                width: 8pc;
+                height: 8pc;
+            }
 
+        }
+        .precios {
+        }
+        @media screen and (max-width: 375px) {
+            .col > .row > .col-6 {
+                width: calc(100% - 0pc);
+                margin-left: 23pc;
+                padding: 15px;
+            }
+            .col > .row > .col-6 > .card > .card-body {
+                width: 24pc !important;
+                margin-left: 5pc;
+            }
+        }
+        .containera {
+        }
+    @media screen and (max-width: 375px) {
+        .containera > .scaleDowna {
+            width: calc(100% - 0pc);
+            height: 159vh;
+            min-width: 112vw;
+            max-width: 112vw;
+            max-height: 112vw;
+            min-height: 140vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            resize: none;
+            background-image:url(../../Styles/img/celular.png);
+            background-repeat: no-repeat;
+            background-size: 46pc;
+            padding-left: 24pc;
+            /*background-color: black;*/
+            transform-origin: 54% 50%;  
+        }
+        .containera > .scaleDowna > .pantalla{
+            width: calc(100% - 0pc);
+            background-color: black;
+            margin-top: -10pc;
+            margin-left: -37pc;
+            /*height: 51pc;
+            width: 1284px;*/
+        }
+        .containera > .scaleDowna > .pantalla > video{
+            height: 261px !important;
+            margin-top: 294px !important;
+            margin-left: 344.1px !important;
+        }
+            
+    }
+</style>--%>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -781,10 +984,10 @@ body {
         <h1>aaaa</h1>
     </section>--%>
 
-    <section class="headera" style="margin-top: -4pc;">
-        <h1  class="ha" style="color: white; z-index: 100; font-style: inherit; text-align: center; margin-top: 16pc;"><span style="color: white; z-index: 100;">REGINA CHIN</span> <span style="font-weight: lighter">tenemos el plan perfecto para tí. </span><br /><span style="    font-size: 27px;">Haz scroll.</span></h1>
+    <section class="headera" style="margin-top: -7pc;     height: 65pc;">
+        <h1  class="ha" style="color: white; z-index: 100; font-style: inherit; text-align: center; margin-top: 16pc;"><span style="color: white; z-index: 100;">REGINA CHIN</span> <span style="font-weight: lighter">tenemos el plan perfecto para ti. </span><br /><span style="    font-size: 27px;">Haz scroll.</span></h1>
 
-        <div class="fullscreen-video-wrap">
+        <div class="fullscreen-video-wrap" >
             <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" style="filter: brightness(0.5);">
                 <source src="../../assets/video/tempora.mp4" type="video/mp4">
             </video>
@@ -887,7 +1090,7 @@ body {
                 </div>
                 <div class="col">
                     <div class="circle" style="margin-left: -3pc;" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="ciruclo2" >
+                        <div class="ciruclo2" style="    margin-left: 5pc;">
                             <h2>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. Distribution of letters, as opposed to using</h2>
                         </div>
                     </div>
@@ -920,7 +1123,7 @@ body {
         <div class="row" style="margin-left: 12pc; text-align: center;">
             <div class="col-6 ">
                 <div class="card rango1" style=" border-color: transparent; background: transparent;">
-                    <div class="card-body" style="background-color: #e0e0e0; border-radius: 14px ; border-color: white; width: 35pc;" >
+                    <div class="card-body" style="background-color: #cfcfcf; border-radius: 14px ; border-color: white; width: 35pc;" >
                         <h5 class="card-title">2000 Fóliculos</h5>
                         <h6 class="card-subtitle mb-2 text-muted">$3.100.000</h6>
                         <p style="color: #000000" class="card-text">Pesos Chilenos</p>
@@ -940,7 +1143,7 @@ body {
             </script>--%>
             <div class="col-6">
                 <div class="card rango2" style=" border-color: transparent; background: transparent;">
-                    <div class="card-body" style="background-color: #e0e0e0; border-radius: 14px ; border-color: white; width: 35pc;">
+                    <div class="card-body" style="background-color: #cfcfcf; border-radius: 14px ; border-color: white; width: 35pc;">
                         <h5 class="card-title">2500 Fóliculos</h5>
                         <h6 class="card-subtitle mb-2 text-muted">$3.600.000</h6>
                         <p style="color: #000000" class="card-text">Pesos Chilenos</p>
@@ -960,21 +1163,6 @@ body {
             </script>--%>
         </div>
     </div>
-    <style>
-        .precios {
-         }
-        @media screen and (max-width: 480px) {
-            .col > .row > .col-6 {
-                width: calc(100% - 0pc);
-                margin-left: 23pc;
-                padding: 15px;
-            }
-            .col > .row > .col-6 > .card > .card-body {
-                width: 24pc !important;
-                margin-left: 5pc;
-            }
-        }
-    </style>
     </div>
         <br />
         <br />
@@ -1052,44 +1240,6 @@ body {
       </div>
     </div>
     <br />
-        <style>
-        .containera {
-         }
-        @media screen and (max-width: 480px) {
-            .containera > .scaleDowna {
-                width: calc(100% - 0pc);
-                height: 159vh;
-                min-width: 112vw;
-                max-width: 112vw;
-                max-height: 112vw;
-                min-height: 140vh;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                resize: none;
-                background-image:url(../../Styles/img/celular.png);
-                background-repeat: no-repeat;
-                background-size: 46pc;
-                padding-left: 24pc;
-                /*background-color: black;*/
-                transform-origin: 54% 50%;  
-            }
-            .containera > .scaleDowna > .pantalla{
-                width: calc(100% - 0pc);
-                background-color: black;
-                margin-top: -10pc;
-                margin-left: -37pc;
-                /*height: 51pc;
-                width: 1284px;*/
-            }
-            .containera > .scaleDowna > .pantalla > video{
-                height: 261px !important;
-                margin-top: 294px !important;
-                margin-left: 344.1px !important;
-            }
-            
-        }
-    </style>
     <br />
     <br />
     <script>
@@ -1230,9 +1380,7 @@ body {
     </section>
 </div>
 
-<section class="spacer"><h2>Another Section</h2></section>
-
-<script>
+<section class="spacer"></section><script>
 
 
     const svg = document.querySelector("#svg-mask");
@@ -1348,33 +1496,8 @@ body {
 
 
 </script>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <section style=" margin-top: -16pc;">
+
+          <section style=" margin-top: -16pc;">
         <div class="d-flex justify-content-center">
             <h2 style="font-size: 42px;"data-aos="zoom-in" data-aos-delay="100">En <span style="color: #BAD305">Tempora</span> transformaremos tu vida</h2>
         
@@ -1491,8 +1614,7 @@ body {
                 .fromTo(section.querySelector(".afterImage img"), { xPercent: -100, x: 0 }, { xPercent: 0 }, 0);
         });
         </script> 
-            </section>
-            </div>
+            </section>          </div>
        
         <br />
         <br />
