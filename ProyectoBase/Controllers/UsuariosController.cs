@@ -18,6 +18,7 @@ namespace WebSolicitudes.Controllers
             string usr = collection["inputEmail"];
             string pass = collection["inputPassword"];
             pass = Util.GetSHA1(pass);
+            string consultaApi = string.Empty;
             try
             {
                 using (ModeloTempora conexionDB = new ModeloTempora())
@@ -52,6 +53,86 @@ namespace WebSolicitudes.Controllers
             }
             return View();
         }
+
+        public ActionResult Perfil()
+        {
+            try
+            {
+                string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
+                using (ModeloTempora conexionDB = new ModeloTempora()) {
+                    if (int.TryParse(valorUsuario, out int idUsuario))
+                    {
+                        Usuario usuario = conexionDB.Usuario.Find(idUsuario);
+                        //Validación de Usuario
+                        if (usuario == null)
+                            throw new Exception("El usuario no existe");
+                        ViewData["id"] = usuario.idUsuario;
+                        ViewData["Nombre"] = usuario.Nombre + " " + usuario.Apellido;
+                        ViewData["Correo"] = usuario.Correo;
+                        ViewData["Telefono"] = usuario.Celular;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("Perfil", "Usuarios", ex.Message);
+                return RedirectToAction("Tickets");
+            }
+            return View();
+        }
+
+        public ActionResult Index()
+        {
+            try
+            {
+                string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    if (int.TryParse(valorUsuario, out int idUsuario))
+                    {
+                        Usuario usuario = conexionDB.Usuario.Find(idUsuario);
+                        //Validación de Usuario
+                        if (usuario == null)
+                            throw new Exception("El usuario no existe");
+                       
+                        //Lista Usuarios
+                        List<Usuario> listausuarios = conexionDB.Usuario.ToList();
+                        string filaUsuario = string.Empty;
+                        foreach (Usuario usuarios in listausuarios) {
+                            filaUsuario += "<tr>";
+                            filaUsuario += "  <td>";
+                            string URL = Url.Content("~/Solicitudes/GestionSolicitudes/");
+                            filaUsuario += "<a href='" + URL + usuarios.idUsuario + "'>" + usuarios.idUsuario + "</a>";
+                            filaUsuario += "  </td>";
+                            filaUsuario += "  <td>";
+                            filaUsuario += usuarios.Nombre+ " " + usuarios.Apellido;
+                            filaUsuario += "  </td>";
+                            filaUsuario += "  <td>";
+                            filaUsuario += usuarios.Correo;
+                            filaUsuario += "  </td>";
+                            filaUsuario += "  <td>";
+                            filaUsuario += usuarios.Celular;
+                            filaUsuario += "  </td>";
+                            filaUsuario += "  <td>";
+                            filaUsuario += "<button title='Delete' class='btn btn-icon btn-2 btn-danger btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-trash fa-1x'></i></span></button>";
+                            filaUsuario += "<button title='Delete' class='btn btn-icon btn-2 btn-primary btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-edit fa-1x'></i></span></button>";
+                            filaUsuario += "  </td>";
+                            filaUsuario += "</tr>";
+                        }
+                        ViewData["valoresUsuarios"] = filaUsuario;
+                        return View();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("Index", "Usuarios", ex.Message);
+                return RedirectToAction("Tickets");
+            }
+            return View();
+        }
+
 
     }
 }

@@ -131,6 +131,7 @@
           <Property Name="FK_Rango" Type="int" />
           <Property Name="FK_idUsuario" Type="int" />
           <Property Name="RespZona" Type="varchar" MaxLength="1000" />
+          <Property Name="SolicitudCompleta" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -588,6 +589,7 @@
           <NavigationProperty Name="ZonaxSolicitud" Relationship="Self.FK_ZonaxSolicitud_Solicitud" FromRole="Solicitud" ToRole="ZonaxSolicitud" />
           <Property Name="RespZona" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="RangoxSolicitud" Relationship="PortalModeloTemporal.FK_RangoxSolicitud_Solicitud" FromRole="Solicitud" ToRole="RangoxSolicitud" />
+          <Property Name="SolicitudCompleta" Type="Int32" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1068,6 +1070,7 @@
           <EntitySetMapping Name="Solicitud">
             <EntityTypeMapping TypeName="PortalModeloTemporal.Solicitud">
               <MappingFragment StoreEntitySet="Solicitud">
+                <ScalarProperty Name="SolicitudCompleta" ColumnName="SolicitudCompleta" />
                 <ScalarProperty Name="RespZona" ColumnName="RespZona" />
                 <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />

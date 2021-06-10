@@ -37,6 +37,7 @@ namespace WebSolicitudes.Models
         public Nullable<int> FK_Rango { get; set; }
         public Nullable<int> FK_idUsuario { get; set; }
         public string RespZona { get; set; }
+        public Nullable<int> SolicitudCompleta { get; set; }
     
         public virtual Ciudad Ciudad { get; set; }
         public virtual Cliente Cliente { get; set; }

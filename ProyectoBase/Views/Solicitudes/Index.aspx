@@ -98,6 +98,7 @@
                 </div>
                 <br />
         <%-- Fiktros --%>
+        
         <div class="card border-left-warning shadow ">
             <div class="card-body">
                 <div class="panel panel-primary">
@@ -123,9 +124,11 @@
                                     </select>
                                 </fieldset>
                                 <fieldset class="form-group col-md-2">
-                                    <label for="txtTecnica">Técnica</label>
+                                    <label for="txtTecnica">Completada</label>
                                     <select name="txtTecnica" id="txtTecnica" class="form-control">
-                                         <%=  ViewData["opcionesTecnicas"] %>
+                                        <option  value='0'>Todos</option>
+                                         <option  value='1'>Completa</option>
+                                        <option  value='2'>Incompleta</option>
                                     </select>
                                 </fieldset>
                             </div>
@@ -146,6 +149,7 @@
                                     <th class="col-xs-1">Fecha Solicitud</th>
                                     <th class="col-xs-2">Estado</th>
                                     <th class="col-xs-1">Técnica</th>
+                                    <th class="col-xs-1">Completada</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -223,12 +227,21 @@
                             var EstadoSeleccionada = EstadoActual == "-- Selecciona opción --" || EstadoActual == EstadoTabla;
 
                             //Técnica
-                            var TecnicoTabla = data[5];
+                            var TecnicoTabla = data[6];
                             var TecnicoActual = $("#txtTecnica").children(":selected").text();
                             var TecnicoSeleccionada = TecnicoActual == "-- Selecciona opción --" || TecnicoActual == TecnicoTabla;
-
-                            if (TecnicoSeleccionada && IsIdSolicitud && EstadoSeleccionada && estaEnRangoFechas) {
-                                return true;
+                            var TecnicoSeleccionadaTdos = TecnicoActual == "Todos" || TecnicoActual == TecnicoTabla;
+                            if (TecnicoSeleccionadaTdos) {
+                                if (TecnicoSeleccionadaTdos && IsIdSolicitud && EstadoSeleccionada && estaEnRangoFechas) {
+                                    return true;
+                                }
+                            } else {
+                                if (TecnicoSeleccionadaTdos) {
+                                    if (TecnicoSeleccionada && IsIdSolicitud && EstadoSeleccionada && estaEnRangoFechas) {
+                                        return true;
+                                    }    
+                                }
+                                   
                             }
                             return false;
                     });

@@ -25,6 +25,22 @@
     <%-- autoplay video --%>
     <script src="/bower_components/play-on-scroll/scripts/play-on-scroll.js"></script>
 
+
+    <%-- disable horizontal scroll --%>
+    <script>
+        $(function () {
+
+            var $body = $(document);
+            $body.bind('scroll', function () {
+                // "Disable" the horizontal scroll.
+                if ($body.scrollLeft() !== 0) {
+                    $body.scrollLeft(0);
+                }
+            });
+
+        });
+    </script> 
+
     
     <script>
         var size = [window.width, window.height];  //public variable
@@ -715,7 +731,9 @@ body {
             overflow-x: hidden;
         }
         body {
-            position: unset;
+            
+            position: relative
+
         }
         .card1 {
             width: calc(100% - 0pc);
@@ -805,7 +823,7 @@ body {
             max-height: 112vw;
             min-height: 190vh;
             position: absolute;
-            top: 50%;
+            top: 58%;
             left: 50%;
             resize: none;
             background-image:url(../../Styles/img/celular.png);
@@ -1496,8 +1514,29 @@ body {
 
 
 </script>
+                    <script>
+                        gsap.utils.toArray(".comparisonSection").forEach(section => {
+                            let tl = gsap.timeline({
+                                scrollTrigger: {
+                                    trigger: section,
+                                    start: "center center",
+                                    // makes the height of the scrolling (while pinning) match the width, thus the speed remains constant (vertical/horizontal)
+                                    end: () => "+=" + section.offsetWidth,
+                                    scrub: true,
 
-          <section style=" margin-top: -16pc;">
+                                    anticipatePin: 1,
+                                },
+                                defaults: { ease: "none" },
+
+
+                            });
+                            // animate the container one way...
+                            tl.fromTo(section.querySelector(".afterImage"), { xPercent: 100, x: 0 }, { xPercent: 0 })
+                                // ...and the image the opposite way (at the same time)
+                                .fromTo(section.querySelector(".afterImage img"), { xPercent: -100, x: 0 }, { xPercent: 0 }, 0);
+                        });
+                    </script> 
+<%--          <section style=" margin-top: -16pc;">
         <div class="d-flex justify-content-center">
             <h2 style="font-size: 42px;"data-aos="zoom-in" data-aos-delay="100">En <span style="color: #BAD305">Tempora</span> transformaremos tu vida</h2>
         
@@ -1614,75 +1653,76 @@ body {
                 .fromTo(section.querySelector(".afterImage img"), { xPercent: -100, x: 0 }, { xPercent: 0 }, 0);
         });
         </script> 
-            </section>          </div>
-       
+            </section>   --%>           
+    <div class="ultimodiv" style="margin-top: -13pc;">
+        <div class="d-flex justify-content-center">
+            <h1 style="font-style: unset;" data-aos="zoom-in" data-aos-delay="100">Sólo un paso más...</h1>
+        </div>
         <br />
-        <br />
-    <br />
-<%--    <div class="box6">
-    </div>
-    <script>
-        gsap.to(".box6", {
-            scrollTrigger: { trigger: ".box6", scrub: true }, // start the animation when ".box" enters the viewport (once)
-            x: 500,
+        <section id="about" class="about2" style="    width: 100pc;">
+            <div class="container" data-aos="fade-up">
 
-        });
-    </script>
-        <br />
-    <br />
-    <div class="box7">
-    </div>
-    <script>
-        gsap.from(".box7", {
-            scrollTrigger: { trigger: ".box7", scrub: true }, // start the animation when ".box" enters the viewport (once)
-            x: 500,
-
-        });
-    </script>--%>
-    <br />
-    <br />
-    <br />
-    <br />
-    <div class="d-flex justify-content-center">
-        <h1 data-aos="zoom-in" data-aos-delay="100">Sólo un paso más...</h1>
-    </div>
-    <br />
-    <section id="about" class="about2" style="    width: 100pc;">
-        <div class="container" data-aos="fade-up">
-
-        <div class="row">
-            <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
-                <div style="margin-top: 2pc;">
-                    <div class="about-img">
-                        <img src="<%: Url.Content("~/Styles/img/logo_tempora.png") %>" alt="" style="margin-left: 91px;">
+            <div class="row">
+                <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
+                    <div style="margin-top: 2pc;">
+                        <div class="about-img">
+                            <img src="<%: Url.Content("~/Styles/img/logo_tempora.png") %>" alt="" style="margin-left: 91px;">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-                <h3 style="color: greenyellow">Agendemos su visita</h3>
-                <p class="font-italic" style="color: white;">
-                    Por favor seleccione el día y hora que más le acomode para que pueda asistir a nuestra clínica
-                </p>
-                <div class="col-lg-6 col-md-6 form-group" style="margin-left: -1pc">
-                    <input id="txtFechaVisita" placeholder="Ingrese fecha" name="txtFechaVisita" required/>
-                    <script>
-                        $('#txtFechaVisita').datepicker({
-                            uiLibrary: 'bootstrap4',
-                            format: 'dd/mm/yyyy'
-                        });
-                    </script>
-                    <br />
-                    <br />
-                    
+                <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" style="margin-top: -5pc;">
+                    <h3 style="color: greenyellow;margin-top: -17pc;margin-left: 1pc;width: 25pc;">Agendemos tu visita</h3>
+                    <p  style="color: white;width: 18pc; font-size: 19px;
+    margin-top: -25px;">
+                        Por favor seleccione el día y hora que más le acomode para que pueda asistir a nuestra clínica
+                    </p>
+                    <div class="col-lg-6 col-md-6 form-group fecha" style="margin-left: -1pc;margin-left: -20pc;width: 63pc;     margin-top: 21pc;">
+                        <input id="txtFechaVisita" placeholder="Ingrese fecha" name="txtFechaVisita" required/>
+                        <script>
+                            $('#txtFechaVisita').datepicker({
+                                uiLibrary: 'bootstrap4',
+                                format: 'dd/mm/yyyy'
+                            });
+                        </script>
+                        <br />
+                        <br />
+                    <div class="btnAgendar">
+                        <button type="button" data-toggle="modal" data-target="#ModalArriba" style="background: #8aaf32; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Agendar</button>
+                    </div>
+                    </div>              
                 </div>
-                <button type="button" data-toggle="modal" data-target="#ModalArriba" style="background: #8aaf32; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Agendar</button>
             </div>
-        </div>
-        </div>
-    </section>
+            </div>
+        </section>
+    </div>
+    <style>
+        @media screen and (max-width: 480px) {
+            .ultimodiv > .about2 {
+                margin-left: 73pc;
+            }
+            .gj-unselectable{
+                    width: 20pc;
+            }
+            .order-1 {
+                -webkit-box-ordinal-group: 2;
+                -ms-flex-order: 1;
+                order: 1;
+                margin-left: 24pc;
+            }
+            [data-aos^=fade][data-aos^=fade].aos-animate {
+                opacity: 1;
+                transform: translateZ(0);
+                margin-top: -5pc;
+            }
+            .btnAgendar {
+                    margin-left: 5pc;
+            }
+            .ultimodiv > .d-flex > h1 {
+                font-size: 2pc;
+            }
+        }
+    </style>
         <br />
-    <br />
-    <br />
 	<script type="text/javascript" src="<%: Url.Content("~/Styles/js/tracking.js")%>"></script>	
         <%--<script>
             const intro = document.querySelector('.intro');

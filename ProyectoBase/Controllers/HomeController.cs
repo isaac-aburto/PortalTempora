@@ -33,6 +33,7 @@ namespace WebSolicitudes.Controllers
             try
             {
                 //Usuario
+                int idCliente = int.Parse(collection["idCliente"]);
                 string foto = collection["fotografia"];
                 string Nombre = collection["txtNombre"];
                 string Apellido = collection["txtApellido"];
@@ -44,6 +45,7 @@ namespace WebSolicitudes.Controllers
 
                 string idcliente;
                 //Solicitud
+                int idSolicitud = int.Parse(collection["idSolicitud"]);
                 //Zonas
                 string RespuestaZona = string.Empty;
 
@@ -164,7 +166,7 @@ namespace WebSolicitudes.Controllers
                 {
 
                     //Se guarda el Usuario.
-                    Cliente cliente = new Cliente();
+                    Cliente cliente = conexionDB.Cliente.Find(idCliente);
                     cliente.nombre = Nombre;
                     cliente.apellido = Apellido;
                     cliente.rut = Rut;
@@ -172,18 +174,19 @@ namespace WebSolicitudes.Controllers
                     cliente.celular = Celular;
                     cliente.correo = Correo;
                     cliente.fecha_nacimiento = DateTime.Parse(FechaDeNacimiento);
-                    conexionDB.Cliente.Add(cliente);
+                    //conexionDB.Cliente.Add(cliente);
                     conexionDB.SaveChanges();
 
                     //Se guarda la solicitud del usuario
-                    Solicitud solicitud = new Solicitud();
+                    Solicitud solicitud = conexionDB.Solicitud.Find(idSolicitud);
                     solicitud.FK_idCliente = cliente.idCliente;
                     idcliente = cliente.idCliente.ToString();
                     solicitud.RespPelo = RespuestaPelones;
                     solicitud.RespDerm = RespuestaDerma;
                     solicitud.RespZona = RespuestaZona;
                     solicitud.FechaSolicitud = DateTime.Now;
-                    conexionDB.Solicitud.Add(solicitud);
+                    solicitud.SolicitudCompleta = 1;
+                    //conexionDB.Solicitud.Add(solicitud);
                     conexionDB.SaveChanges();
 
                     //Agrego cada Foto.
@@ -352,6 +355,12 @@ namespace WebSolicitudes.Controllers
             string usr = collection["inputEmail"];
             string pass = collection["inputPassword"];
             pass = Util.GetSHA1(pass);
+            string ApiActibitiesPost = string.Empty;
+            string ApiActibitiesGet = string.Empty;
+            string ApiDealsPost = string.Empty;
+            //ApiActibitiesPost = PipeDriveAPI.PostActivities("11504009", "Primera Consulta", "2021-06-10");
+            //ApiActibitiesGet = PipeDriveAPI.GetAllDeals();
+            ApiDealsPost = PipeDriveAPI.PostDeal("Regina deal - Sandbox API", "11504009", "1.200.000", "open");
             try
             {
                 using (ModeloTempora conexionDB = new ModeloTempora())
@@ -522,7 +531,7 @@ namespace WebSolicitudes.Controllers
         public ActionResult CerrarSesion()
         {
             Session.Abandon();
-            return RedirectToAction("Login", "Home"); 
+            return RedirectToAction("Index", "Home"); 
         }
 
         //
@@ -531,6 +540,40 @@ namespace WebSolicitudes.Controllers
         public ActionResult Error404()
         {
             return View();
+        }
+
+        public string GuardarSolicitudInconclusa(string Nombre, string Email, string Telefono)
+        {
+            string idcliente = String.Empty;
+            string idSolicitud = String.Empty;
+            try
+            {
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Cliente cliente = new Cliente();
+                    cliente.nombre = Nombre;
+                    cliente.correo = Email;
+                    cliente.telefono = Telefono;
+                    conexionDB.Cliente.Add(cliente);
+                    conexionDB.SaveChanges();
+
+                    //Se guarda la solicitud del usuario
+                    Solicitud solicitud = new Solicitud();
+                    solicitud.FK_idCliente = cliente.idCliente;
+                    solicitud.SolicitudCompleta = 0;
+                    conexionDB.Solicitud.Add(solicitud);
+                    conexionDB.SaveChanges();
+
+                    idcliente = cliente.idCliente.ToString();
+                    idSolicitud = solicitud.idSolicitud.ToString();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("Home", "GuardarSolicitudInconclusa", ex.Message);
+            }
+            return idcliente + "," + idSolicitud;
         }
 
     }

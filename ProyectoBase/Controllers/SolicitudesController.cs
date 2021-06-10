@@ -90,6 +90,14 @@ namespace WebSolicitudes.Controllers
                                 filaSolicitud += solicitud.Tecnica.nombreTecnica;
                             }
                             filaSolicitud += "  </td>";
+                            filaSolicitud += "  <td>";
+                            if (solicitud.SolicitudCompleta == 1 || solicitud.SolicitudCompleta == null) {
+                                filaSolicitud += "Completa";
+                            }
+                            else {
+                                filaSolicitud += "Incompleta";
+                            }
+                            filaSolicitud += "  </td>";
                             filaSolicitud += "</tr>";
                         }
                         ViewData["valoresSolicitudes"] = filaSolicitud;
@@ -334,21 +342,33 @@ namespace WebSolicitudes.Controllers
                         }
                         solicitud.ObserMed = Obsrevación;
                         conexionDB.SaveChanges();
-
-                        //Guardar Rangos
-                        if (enviar == "1") {
-                            //Armar link
-                            string link = solicitud.Cliente.idCliente+";"+DateTime.Now.ToString("dd/MM/yyyy");
-                            link = Util.Base64Encode(link);
-                            //Enviar Correo
-                            string titulo = "He aquí tu evaluación - Portal Tempora";
-                            string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
-                            string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudPaso1.html")).Replace("[Nombre]", nombre).Replace("[Link]",link);
-                            Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
-
-                            
-                        
-                        
+                        // Enviar Primera revisión 
+                        if (Estado == "2") { 
+                            //Guardar Rangos
+                            if (enviar == "1") {
+                                //Armar link
+                                string link = solicitud.Cliente.idCliente+";"+DateTime.Now.ToString("dd/MM/yyyy");
+                                link = Util.Base64Encode(link);
+                                //Enviar Correo
+                                string titulo = "He aquí tu evaluación - Portal Tempora";
+                                string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudPaso1.html")).Replace("[Nombre]", nombre).Replace("[Link]",link);
+                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            }
+                        }
+                        //Solicitar fotografías nuevamente
+                        if (Estado == "9") {
+                            if (enviar == "1")
+                            {
+                                //Armar link
+                                string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                                link = Util.Base64Encode(link);
+                                //Enviar Correo
+                                string titulo = "Hubo un problema cons tus fotografías - Portal Tempora";
+                                string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotos.html")).Replace("[Nombre]", nombre).Replace("[Link]", link);
+                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            }
                         }
 
                         return RedirectToAction("GestionSolicitudes/" + idSolicitud.ToString()/*, "Tickets"*/);
@@ -399,6 +419,36 @@ namespace WebSolicitudes.Controllers
                 Util.escribirLog("Solicitud", "Solicitudes (GET)", ex.Message);
                 return RedirectToAction("Index", "Home");
             }
+            return View();
+        }
+
+        public ActionResult SolicitudFotos(string id) {
+            try
+            {
+                string[] linkDecod = Util.Base64Decode(id).Split(';');
+                int linkId = int.Parse(linkDecod[0]);
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Cliente cliente = conexionDB.Cliente.Find(linkId);
+                    if (cliente == null)
+                        throw new Exception("El usuario no existe");
+
+                    ViewData["NombreCompleto"] = cliente.nombre + " " + cliente.apellido;
+                    Solicitud solicitud = conexionDB.Solicitud.Where(w => w.FK_idCliente == cliente.idCliente).FirstOrDefault();
+                    ViewData["idSolicitud"] = solicitud.idSolicitud.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("SolicitudFotos", "Solicitudes (GET)", ex.Message);
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult SolicitudFotos(IEnumerable<HttpPostedFileBase> files, FormCollection collection){
             return View();
         }
 

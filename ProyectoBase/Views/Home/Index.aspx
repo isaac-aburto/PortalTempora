@@ -196,24 +196,70 @@
     <script>
         $(document).ready(function () {
             var cont = 0;
+            $("#inputGuardarDatos").val("true");
             $('#btnEnviar').hide();
             $("#divPaso2").hide();
             $("#divPaso3").hide();
+            $("#divPaso4").hide();
             $("#btnSiguiente").click(function () {
                 $("#divPaso1").hide(500);
                 $("#divPaso2").show(500);
+
+                <%-- AJAX Guardar Solicitud no terminada --%>
+
+                if (($("#inputGuardarDatos").val() == "true") && ($("#txtEmail").val() != "" || $("#txtTelefono").val() != "")) {
+                    console.log("AJAX Guardar Solicitud no terminada")
+                    var Nombre = $("#txtNombre").val();
+                    var Email = $("#txtEmail").val();
+                    var Telefono = $("#txtNombre").val();
+                    $.ajax({
+                        url: '<%: Url.Content("~/Home/GuardarSolicitudInconclusa/") %>',
+                        data: { Nombre: Nombre, Email: Email, Telefono: Telefono },
+                        cache: false,
+                        type: "POST",
+                        success: function (data) {
+                            // data is your result from controller
+                            console.log(data);
+                            if (data == "false") {
+                                console.log("error en Ajax")
+
+                            } else {
+                                console.log(data)   
+                                var Data = data.split(',');
+                                $("#idCliente").val(Data[0]);
+                                $("#idSolicitud").val(Data[1]);
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                }
                 cont++;
                 if (cont == 2) {
                     $("#baraDeCarga").css("width", "99%");
                     $("#divPaso2").hide(500);
                     $("#divPaso3").show(500);
-                    $('#btnSiguiente').hide();
-                    $('#btnEnviar').show();
+                    $("#inputGuardarDatos").val("false");
                 } else {
-                    $("#baraDeCarga").css("width", "66%");
-                    $("#divPaso1").hide(500);
-                    $("#divPaso2").show(500);
-                    $('#btnAtras').removeAttr('disabled');
+                    if (cont == 1) {
+                        $("#baraDeCarga").css("width", "66%");
+                        $("#divPaso1").hide(500);
+                        $("#divPaso2").show(500);
+                        $('#btnAtras').removeAttr('disabled');
+                        $("#inputGuardarDatos").val("false");
+                    }
+                    else {
+                        if (cont == 3) {
+                            $("#baraDeCarga").css("width", "99%");
+                            $("#divPaso3").hide(500);
+                            $("#divPaso4").show(500);
+                            $("#divPaso2").hide();
+                            $('#btnSiguiente').hide();
+                            $('#btnEnviar').show();
+                            $("#inputGuardarDatos").val("false");
+                        }
+                    }
                 }
                 console.log(cont)
             });
@@ -224,14 +270,26 @@
                     $("#divPaso1").show(500);
                     $("#divPaso2").hide(500);
                     $('#btnAtras').attr('disabled', 'disabled');
+                    $("#inputGuardarDatos").val("false");
 
                 } else {
-                    $("#baraDeCarga").css("width", "66%");
-                    $("#divPaso2").show(500);
-                    $("#divPaso3").hide(500);
-                    $('#btnSiguiente').show();
-                    $('#btnEnviar').hide();
-                    $('#btnSiguiente').removeAttr('disabled');
+                    if (cont == 1) {
+                        $("#baraDeCarga").css("width", "66%");
+                        $("#divPaso2").show(500);
+                        $("#divPaso3").hide(500);
+                        $("#inputGuardarDatos").val("false");
+                    } else {
+                        if (cont == 2) {
+                            $("#baraDeCarga").css("width", "66%");
+                            $("#divPaso3").show(500);
+                            $("#divPaso4").hide(500);
+                            $('#btnSiguiente').show();
+                            $('#btnEnviar').hide();
+                            $('#btnSiguiente').removeAttr('disabled');
+                            $("#inputGuardarDatos").val("false");
+                        }
+                    }
+
                 }
                 console.log(cont)
             });
@@ -258,6 +316,17 @@
             });
         });
     </script>
+
+    <%-- AJAX Guardar Solicitud no terminada --%>
+<%--    <script>
+        $(document).ready(function () {
+            $("#btnSiguiente").click(function () {
+                console.log("Intento AJAX Guardar Solicitud no terminada")
+                console.log($("#inputGuardarDatos").val())
+
+            });
+        });
+    </script>--%>
 
     <style>
         .progress-bar {
@@ -740,6 +809,99 @@
                 <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
               </div>--%>
           </div>
+          <%-- Por donde nos contactamos? --%>
+          <div id="divPaso4">
+            <h3>Cuarto Paso: Contacto</h3>
+            <%-- Primera pregunta --%>
+            <h6>¿Por dónde nos contactamos?</h6>
+            <div style="text-align: center;">
+                <br />
+            <div class="row" style="    width: 30pc;margin-left: 20pc;padding-bottom: 3pc;">
+                <div class="col">
+                    <img width="50" height="50" src="../../Styles/img/correo.png" />
+                    <div class="custom-control custom-checkbox" style="margin-right: 40px;">
+                      <input type="checkbox" class="custom-control-input" id="customCheck1" checked disabled>
+                      <label class="custom-control-label" for="customCheck1"></label>
+                    </div>
+                </div>
+                <div class="col">
+                    <img width="50" height="50" src="../../Styles/img/facebook.png" />
+                    <div class="custom-control custom-checkbox" style="margin-right: 40px;">
+                      <input type="checkbox" class="custom-control-input" id="customCheck2" >
+                      <label class="custom-control-label" for="customCheck2"></label>
+                    </div>
+
+                    <button id="btnFacebook" hidden onclick="onLogin();">Iniciar Sesión</button>
+                </div>
+                <div class="col">
+                    <img width="50" height="50" src="../../Styles/img/whatsapp.png" />
+                    <br />
+                    <div class="custom-control custom-checkbox" style="margin-right: 40px;">
+                      <input type="checkbox" class="custom-control-input" id="customCheck3">
+                      <label class="custom-control-label" for="customCheck3"></label>
+                        <a hidden id="btnWsp" class="button" href="https://api.whatsapp.com/send?phone=56953306060&text=Quiero que me contecten por favor." target="_blank">https://api.whatsapp.com/send?phone=56953306060&text=Quiero</a>
+                    </div>
+                </div>
+                </div>
+                <%--<fb:login-button 
+                  scope="public_profile,email"
+                  onlogin="checkLoginState();">
+                </fb:login-button>--%>
+            
+            
+            <script>
+                window.fbAsyncInit = function () {
+                    FB.init({
+                        appId: '2596657497293255',
+                        cookie: true,
+                        xfbml: true,
+                        version: 'v10.0'
+                    });
+
+                    FB.AppEvents.logPageView();
+
+                };
+
+                (function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) { return; }
+                    js = d.createElement(s); js.id = id;
+                    js.src = "https://connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+
+                function onLogin() {
+                    FB.login((response) => {
+                        if (response.authResponse) {
+                            FB.api('/me?fields=email,name,picture,accessToken', (response) => {
+                                console.log(response)
+                                console.log(response.name)
+                                console.log(response.id)
+                            })
+                        }
+                    })
+                }
+
+                //FB.getLoginStatus(function (response) {
+                //    statusChangeCallback(response);
+                //});
+            </script>
+                          <script>
+                              $("#customCheck2").change(function () {
+                                  if (this.checked) {
+                                      console.log("hola")
+                                      $('#btnFacebook').trigger('click');
+                                  }
+                              });
+                              $("#customCheck3").change(function () {
+                                  if (this.checked) {
+                                      console.log("hola")
+                                      $('#btnWsp')[0].click();
+                                  }
+                              });
+                          </script>
+            </div>
+          </div>
           <div class="text-center">
               <div class="row">
                   <div class="col-sm">
@@ -755,7 +917,9 @@
                   </div>
               </div>
             </div>
-
+        <input id="inputGuardarDatos" hidden value="false"/>
+          <input id="idCliente" name="idCliente" hidden/>
+          <input id="idSolicitud" name="idSolicitud" hidden/>
         
           <script>
               // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -782,19 +946,27 @@
       </div>
     </section>
 
- 
+<%--    <section class="book-a-table">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Facebook</h2>
+                <p>Prueba Integración</p>   
+            </div>
+           
+            
+        </div>
+    </section>--%>
 <!-- End Chefs Section -->
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Contacto</h2>
-          <p>Ubicación</p>
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Contacto</h2>
+                <p>Ubicación</p>
+            </div>
         </div>
-      </div>
-
+    
       <div data-aos="fade-up">
         <iframe style="border:0; width: 100%; height: 350px;" src="https://maps.google.com/maps?q=Cl%C3%ADnica%20T%C3%A9mpora%20-%20Implante%20Capilar%20-%20Suecia,%20Providencia,%20Chile&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" allowfullscreen></iframe>
       </div>
@@ -804,7 +976,9 @@
 
       </div>
     </section><!-- End Contact Section -->
-                                <%-- Modals --%>
+
+
+    <%-- Modals --%>
 
     <div class="modal fade" id="ModalArriba" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
