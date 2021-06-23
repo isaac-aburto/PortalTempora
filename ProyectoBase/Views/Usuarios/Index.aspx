@@ -114,6 +114,7 @@
                                             <tr>
                                                 <th class="col-xs-2">ID</th>
                                                 <th class="col-xs-1">Nombre</th>
+                                                <th class="col-xs-1">Perfil</th>
                                                 <th class="col-xs-1">Correo</th>
                                                 <th class="col-xs-1">Celular</th>
                                                 <th class="col-xs-2">Mantenedor</th>

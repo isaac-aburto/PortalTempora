@@ -152,8 +152,20 @@
             <li class="book-a-table text-center"><a href="<%: Url.Content("~/Home/Login") %>" <%--data-toggle="modal" data-target="#ModalLogin"--%>>Ingresar</a></li>
             <%}else{%>
             <li class="active"><a href="<%: Url.Content("~/Solicitudes") %>">Solicitudes</a></li>
-            <li><a href="<%: Url.Content("~/Usuarios") %>">Usuarios</a></li>
-            <li><a href="#events">Clientes</a></li>
+            <li><a class="dropdown-toggle"href="#" role="button" id="dropdownMenuLinkUsuarios" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ffffff00">Usuarios</a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkUsuarios">
+                    <a class="dropdown-item" href="<%: Url.Content("~/Usuarios/") %>"  style="border: 0px; color:white; border-radius: 0px">Listar Usuarios</a>
+                    <a class="dropdown-item" href="<%: Url.Content("~/Usuarios/AgregarUsuario") %>"  style="border: 0px; color:white; border-radius: 0px">Agregar Usuario</a>
+                  </div>
+            </li>
+            <li><a class="dropdown-toggle"href="#" role="button" id="dropdownMenuLinkClientes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ffffff00">Clientes</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkClientes">
+                    <a class="dropdown-item" href="<%: Url.Content("~/Solicitudes") %>"  style="border: 0px; color:white; border-radius: 0px">Solicitudes</a>
+                    <a class="dropdown-item" href="<%: Url.Content("~/Usuarios/Perfil") %>"  style="border: 0px; color:white; border-radius: 0px">Perfil</a>
+                    <a class="dropdown-item" href="<%: Url.Content("~/Home/CerrarSesion") %>"  style="border: 0px; color:white; border-radius: 0px">Cerrar Sesíón</a>
+                    
+                  </div>
+            </li>
             <li class="book-a-table text-center">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ffffff00">
                     <%: Session["Nombre"]%>
@@ -352,7 +364,42 @@ FIN CONTENEDOR PARA IMPLEMENTAR
             </div>
         </div>
 
-
+    <script>
+        var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?60142';
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = url;
+        var options = {
+            "enabled": true,
+            "chatButtonSetting": {
+                "backgroundColor": "#4dc247",
+                "ctaText": "",
+                "borderRadius": "25",
+                "marginLeft": "0",
+                "marginBottom": "50",
+                "marginRight": "50",
+                "position": "right"
+            },
+            "brandSetting": {
+                "brandName": "WATI",
+                "brandSubTitle": "Typically replies within a day",
+                "brandImg": "https://cdn.clare.ai/wati/images/WATI_logo_square_2.png",
+                "welcomeText": "Hola! Esta es una prueba de Wati para Isaac.",
+                "messageText": "Hola! quisiera usar este canal para que envíen mi página personalizada.",
+                "backgroundColor": "#0a5f54",
+                "ctaText": "Start Chat",
+                "borderRadius": "25",
+                "autoShow": false,
+                "phoneNumber": "14798024855"
+            }
+        };
+        s.onload = function () {
+            CreateWhatsappChatWidget(options);
+        };
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+    </script>
 </body>
 
 </html>

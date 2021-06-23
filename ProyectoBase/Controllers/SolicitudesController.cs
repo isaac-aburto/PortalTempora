@@ -452,6 +452,33 @@ namespace WebSolicitudes.Controllers
             return View();
         }
 
+
+        public string ConsultarDescripcion(string idEstado)
+        {
+            try
+            {
+                int idestado = int.Parse(idEstado);
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    EstadoSolicitud estado = conexionDB.EstadoSolicitud.Find(idestado);
+                    if (estado == null)
+                        throw new Exception("El estado no existe");
+
+                    return estado.Descripcion;
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("ConsultarDescripcion", "Solicitudes (GET)", ex.Message);
+                return "ERROR al cargar Descripcion";
+            }
+  
+        }
+
+
+
+
+        
         public ActionResult Enviado(string idcliente)
         {
             ViewData["Correo"] = Session["Correo"];

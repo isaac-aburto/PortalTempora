@@ -108,6 +108,9 @@ namespace WebSolicitudes.Controllers
                             filaUsuario += usuarios.Nombre+ " " + usuarios.Apellido;
                             filaUsuario += "  </td>";
                             filaUsuario += "  <td>";
+                            filaUsuario += usuarios.Perfil.nombrePerfil;
+                            filaUsuario += "  </td>";
+                            filaUsuario += "  <td>";
                             filaUsuario += usuarios.Correo;
                             filaUsuario += "  </td>";
                             filaUsuario += "  <td>";
@@ -132,7 +135,47 @@ namespace WebSolicitudes.Controllers
             }
             return View();
         }
+        public ActionResult AgregarUsuario()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult AgregarUsuario(FormCollection collection)
+        {
+            try
+            {
+                string nombre = collection["txtNombre"];
+                string apellido = collection["txtApellido"];
+                string Perfil = collection["txtPerfil"];
+                string Correo = collection["txtEmail"];
+                string Telefono = collection["txtTelefono"];
+                string Celular = collection["txtCelular"];
 
+                string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    if (int.TryParse(valorUsuario, out int idUsuario))
+                    {
+                        Usuario usuario = new Usuario();
+                        //Validación de Usuario
+                        usuario.Nombre = nombre;
+                        usuario.Apellido = apellido;
+                        usuario.FK_idPerfil = int.Parse(Perfil);
+                        usuario.Correo = Correo;
+                        usuario.Telefono = Telefono;
+                        usuario.Celular = Celular;
+                        conexionDB.Usuario.Add(usuario);
+                        conexionDB.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("AgregarUsuario", "Usuarios", ex.Message);
+                return RedirectToAction("AgregarUsuario");
+            }
+            return RedirectToAction("Index"); 
+        }
     }
 }

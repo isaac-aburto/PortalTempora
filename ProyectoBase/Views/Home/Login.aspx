@@ -3,11 +3,35 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <title>Login</title>
     <link href="<%: Url.Content("~/Styles/css/custom.css") %>" rel="stylesheet" />
+    <script>
+        $(document).ready(function () {
+            $("#btnSubmit").click(function () {
+                console.log("aaaaa")
+                var inputEmail = $("#inputEmail").val();
+                $.ajax({
+                    url: '<%: Url.Content("~/Home/EnviarWhatsapp/") %>',
+                    data: { inputEmail: inputEmail },
+                    cache: false,
+                    type: "GET",
+                    success: function (data) {
+                        // data is your result from controller
+                        console.log(data);
+                      
+                    },
+                    async: true,
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            });
+        });
+    </script>
     <style>
         .box-contenedor {
             background-color: #e3e3e3;
         }
     </style>
+    
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -48,7 +72,7 @@
                                                 <input id="Exp" type="hidden" name="Exp" value="<%= ViewData["Exp"] %>" / >
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 
-                                                <button class="btn btn-md btn-primary btn-block btn-signin" type="submit">Iniciar sesión</button>
+                                                <button class="btn btn-md btn-primary btn-block btn-signin" id="btnSubmit" type="submit">Iniciar sesión</button>
                                             </div>
                                             <a class="small" href="<%: Url.Content("~/Home/OlvidePassword") %>">No recuerdo mi contraseña</a>
                                         </form>

@@ -7,8 +7,31 @@
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap.min.js"></script>
-
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <%-- Scripts de Gestion --%>
+     
+    <script>
+        $(document).ready(function () {
+                $("#txtEstado").change(function () {
+                    var idEstado = $("#txtEstado").val();
+                    $.ajax({
+                        url: '<%: Url.Content("~/Solicitudes/ConsultarDescripcion/") %>',
+                        data: { idEstado: idEstado },
+                    cache: false,
+                    type: "GET",
+                    success: function (data) {
+                        // data is your result from controller
+                        console.log(data);
+                        $("#txtDescripcion").val(data);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            });
+        });
+    </script>
+    
     <script>
 
         $(document).ready(function () {
@@ -305,19 +328,30 @@
                                 <a id="btnGestionar" class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="background-color: #C6D41D; border-color: #C6D41D;">Gestionar</a>
                             </div>--%>
                             <div class="collapse" id="collapseExample">
-
                                 <div class="row">
-                                <div class="col">
-                                    <label for="txtEstado"></label>
-                                    <label style="color: /*#C6D41D*/ black">Estado </label>
-                                    <div id="selDiv">
-                                        <select name="txtEstado" id="txtEstado" class="form-control" >
-                                            <%= ViewData["opcionesEstados"] %>
-                                        </select>
+                                    <div class="col">
+                                        <label for="txtEstado"></label>
+                                        <label style="color: /*#C6D41D*/ black">Estado </label>
+                                        <div id="selDiv">
+                                            <select name="txtEstado" id="txtEstado" class="form-control" >
+                                                <%= ViewData["opcionesEstados"] %>
+                                            </select>
+                                        </div>
+                                        <div class="invalid-feedback">Seleccione una opción</div>
+                                        <br />
                                     </div>
-                                    <div class="invalid-feedback">Seleccione una opción</div>
-                                    <br />
+                                    <div class="col">
+                                        <label for="txtDescripcion"></label>
+                                        <label style="color:black"> Descripción Estado</label>
+                                        <div id="selDiv">
+                                            <textarea  disabled id="txtDescripcion" name="txtDescripcion" class='form-control'><%= ViewData["Observacion"] %></textarea>
+                                        </div>
+                                        <div class="invalid-feedback">Seleccione una opción</div>
+                                        <br />
+                                    </div>
                                 </div>
+                                <div class="row">
+
                                 <div class="col">
                                     <label for="txtTecnica"></label>
                                     <label style="color: black">Técnica </label>

@@ -52,6 +52,7 @@
           <Property Name="nombreEstado" Type="varchar" MaxLength="100" />
           <Property Name="cod_Estado" Type="varchar" MaxLength="20" />
           <Property Name="etapaPipeDrive" Type="nchar" MaxLength="10" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="Fotos">
           <Key>
@@ -509,6 +510,7 @@
           <Property Name="etapaPipeDrive" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Cliente1" FromRole="EstadoSolicitud" ToRole="Solicitud" />
           <NavigationProperty Name="ArchivoxEstado" Relationship="PortalModeloTemporal.FK_ArchivoxSolicitud_EstadoSolicitud1" FromRole="EstadoSolicitud" ToRole="ArchivoxEstado" />
+          <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Fotos">
           <Key>
@@ -1012,6 +1014,7 @@
           <EntitySetMapping Name="EstadoSolicitud">
             <EntityTypeMapping TypeName="PortalModeloTemporal.EstadoSolicitud">
               <MappingFragment StoreEntitySet="EstadoSolicitud">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="idEstado" ColumnName="idEstado" />
                 <ScalarProperty Name="nombreEstado" ColumnName="nombreEstado" />
                 <ScalarProperty Name="cod_Estado" ColumnName="cod_Estado" />

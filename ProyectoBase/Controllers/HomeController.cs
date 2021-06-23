@@ -15,6 +15,8 @@ using System.Xml;
 using WebSolicitudes.Models;
 using System.Globalization;
 using FiftyOne.Foundation.Bases;
+using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace WebSolicitudes.Controllers
 {
@@ -349,6 +351,42 @@ namespace WebSolicitudes.Controllers
 
         //
         // GET: /Home/Login
+
+
+        public string EnviarWhatsapp(string inputEmail)
+        {
+
+            var psi = new ProcessStartInfo();
+            psi.FileName = @"C:\Python\python.exe";
+
+            var script = @"C:\Users\PC\Desktop\whatsapp.py";
+
+            psi.Arguments = $"\"{script}";
+
+            psi.UseShellExecute = false;
+            psi.CreateNoWindow = true;
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
+
+            var errors = "";
+            var results = "";
+
+            using (var process = Process.Start(psi))
+            {
+                errors = process.StandardError.ReadToEnd();
+                results = process.StandardOutput.ReadToEnd();
+            }
+
+
+            Console.WriteLine("Errors:");
+            Console.WriteLine(errors);
+            Console.WriteLine();
+            Console.WriteLine("Resultados");
+            Console.WriteLine(results);
+            return results;
+        }
+
+
         [HttpPost]
         public ActionResult Login(FormCollection collection)
         {
@@ -358,6 +396,10 @@ namespace WebSolicitudes.Controllers
             string ApiActibitiesPost = string.Empty;
             string ApiActibitiesGet = string.Empty;
             string ApiDealsPost = string.Empty;
+
+            //var respuesta = Util.EnviarWhatsapp();
+
+            //string hola = Util.EnviarWhatsapp();
             //ApiActibitiesPost = PipeDriveAPI.PostActivities("11504009", "Primera Consulta", "2021-06-10");
             //ApiActibitiesGet = PipeDriveAPI.GetAllDeals();
             ApiDealsPost = PipeDriveAPI.PostDeal("Regina deal - Sandbox API", "11504009", "1.200.000", "open");

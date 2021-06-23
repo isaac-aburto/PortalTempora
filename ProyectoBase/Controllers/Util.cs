@@ -7,6 +7,9 @@ using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Diagnostics;
+using Microsoft.Scripting.Hosting;
+using IronPython.Hosting;
+using System.Threading.Tasks;
 
 namespace WebSolicitudes.Controllers
 {
@@ -143,11 +146,12 @@ namespace WebSolicitudes.Controllers
             return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
         }
 
-        public static void EnviarWhatsapp() {
+        public static string EnviarWhatsapp(string inputEmail) {
+
             var psi = new ProcessStartInfo();
             psi.FileName = @"C:\Python\python.exe";
-
-            var script = @"C:\Python\whatsapp.py";
+            
+            var script = @"C:\Users\PC\Desktop\whatsapp.py";
 
             psi.Arguments = $"\"{script}";
 
@@ -164,11 +168,22 @@ namespace WebSolicitudes.Controllers
                 results = process.StandardOutput.ReadToEnd();
             }
 
+
             Console.WriteLine("Errors:");
             Console.WriteLine(errors);
             Console.WriteLine();
             Console.WriteLine("Resultados");
             Console.WriteLine(results);
+            return results;
+        }
+
+        public static string EnviarWhatsappiron(){
+
+
+            //String FileName = 
+
+
+            return "";
         }
 
         public static void run_cmd()
