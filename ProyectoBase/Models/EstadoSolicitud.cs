@@ -26,6 +26,8 @@ namespace WebSolicitudes.Models
         public string cod_Estado { get; set; }
         public string etapaPipeDrive { get; set; }
         public string Descripcion { get; set; }
+        public Nullable<bool> Enviado { get; set; }
+        public Nullable<int> FK_ClasificacionEstado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Solicitud> Solicitud { get; set; }

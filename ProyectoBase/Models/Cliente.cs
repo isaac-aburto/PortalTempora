@@ -30,6 +30,7 @@ namespace WebSolicitudes.Models
         public string telefono { get; set; }
         public string celular { get; set; }
         public string facebook { get; set; }
+        public string idPipedrive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Solicitud> Solicitud { get; set; }

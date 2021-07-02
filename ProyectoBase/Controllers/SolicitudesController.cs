@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -323,27 +324,42 @@ namespace WebSolicitudes.Controllers
                         //Buscar Rangos                      
                         Solicitud solicitud = conexionDB.Solicitud.Find(idSolicitud);
                         solicitud.Fk_idEstado = int.Parse(Estado);
-                        solicitud.FK_Tecnica = int.Parse(Tecnica);
-                        if (solicitud.RangoxSolicitud.Count() == 0)
+                        if (Estado == "11")
                         {
-                            RangoxSolicitud rango1 = new RangoxSolicitud();
-                            rango1.FK_idRango = Rango1;
-                            rango1.FK_idSolicitud = idSolicitud;
-                            conexionDB.RangoxSolicitud.Add(rango1);
+                            
+                            solicitud.FK_Tecnica = int.Parse(Tecnica);
+                            if (solicitud.RangoxSolicitud.Count() == 0)
+                            {
+                                RangoxSolicitud rango1 = new RangoxSolicitud();
+                                rango1.FK_idRango = Rango1;
+                                rango1.FK_idSolicitud = idSolicitud;
+                                conexionDB.RangoxSolicitud.Add(rango1);
 
-                            RangoxSolicitud rango2 = new RangoxSolicitud();
-                            rango2.FK_idRango = Rango2;
-                            rango2.FK_idSolicitud = idSolicitud;
-                            conexionDB.RangoxSolicitud.Add(rango2);
+                                RangoxSolicitud rango2 = new RangoxSolicitud();
+                                rango2.FK_idRango = Rango2;
+                                rango2.FK_idSolicitud = idSolicitud;
+                                conexionDB.RangoxSolicitud.Add(rango2);
+                            }
+                            else
+                            {
+                                solicitud.RangoxSolicitud.FirstOrDefault().FK_idRango = Rango1;
+                                solicitud.RangoxSolicitud.LastOrDefault().FK_idRango = Rango2;
+                            }
+                            solicitud.ObserMed = Obsrevación;
                         }
-                        else {
-                            solicitud.RangoxSolicitud.FirstOrDefault().FK_idRango = Rango1;
-                            solicitud.RangoxSolicitud.LastOrDefault().FK_idRango = Rango2;
-                        }
-                        solicitud.ObserMed = Obsrevación;
                         conexionDB.SaveChanges();
+
+                        // Guardar Estado en PipeDrive
+
+                        string dealId = solicitud.idPipedrive;
+                        string publicDescription = solicitud.EstadoSolicitud.Descripcion;
+                        string personId = solicitud.Cliente.idPipedrive;
+                        string nombreEstado = solicitud.EstadoSolicitud.nombreEstado;
+                        var respuestaApiEstado = PipeDriveAPI.PostActivities(dealId, personId, "11504009", nombreEstado, publicDescription, "task");
+                        
+
                         // Enviar Primera revisión 
-                        if (Estado == "2") { 
+                        if (Estado == "2") {
                             //Guardar Rangos
                             if (enviar == "1") {
                                 //Armar link
@@ -464,7 +480,7 @@ namespace WebSolicitudes.Controllers
                     if (estado == null)
                         throw new Exception("El estado no existe");
 
-                    return estado.Descripcion;
+                    return estado.Descripcion + ";" + estado.FK_ClasificacionEstado;
                 }
             }
             catch (Exception ex)
@@ -476,9 +492,97 @@ namespace WebSolicitudes.Controllers
         }
 
 
+        public string ConsultarEstado(string fkCategoria, string idEstado)
+        {
+            try
+            {
+                int idfkCategoria = int.Parse(fkCategoria);
+                int estadoSeleccionado = int.Parse(idEstado);
+                string estados = "";
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    if (estadoSeleccionado == 6)
+                    {
+                        var listEstado = conexionDB.EstadoSolicitud
+                        .Where(w => w.FK_ClasificacionEstado == 3 || w.FK_ClasificacionEstado == 8 || w.idEstado == estadoSeleccionado)
+                        .Select(s => new
+                        {
+                            s.idEstado,
+                            s.nombreEstado
+                        }).ToList();
+
+                        if (listEstado == null)
+                            throw new Exception("El estado no existe");
+                        estados = JsonConvert.SerializeObject(listEstado);
+                    }
+                    if (estadoSeleccionado == 11)
+                    {
+                        var listEstado = conexionDB.EstadoSolicitud
+                        .Where(w => w.FK_ClasificacionEstado == 3 || w.FK_ClasificacionEstado == 6 || w.idEstado == estadoSeleccionado)
+                        .Select(s => new
+                        {
+                            s.idEstado,
+                            s.nombreEstado
+                        }).ToList();
+
+                        if (listEstado == null)
+                            throw new Exception("El estado no existe");
+                        estados = JsonConvert.SerializeObject(listEstado);
+                    }
+                    if (estadoSeleccionado == 19)
+                    {
+                        var listEstado = conexionDB.EstadoSolicitud
+                        .Where(w => w.FK_ClasificacionEstado == 4 || w.FK_ClasificacionEstado == 6 || w.idEstado == estadoSeleccionado)
+                        .Select(s => new
+                        {
+                            s.idEstado,
+                            s.nombreEstado
+                        }).ToList();
+
+                        if (listEstado == null)
+                            throw new Exception("El estado no existe");
+                        estados = JsonConvert.SerializeObject(listEstado);
+                    }
+                    if (estadoSeleccionado == 27)
+                    {
+                        var listEstado = conexionDB.EstadoSolicitud
+                        .Where(w => w.FK_ClasificacionEstado == 5 || w.FK_ClasificacionEstado == 6 || w.idEstado == estadoSeleccionado)
+                        .Select(s => new
+                        {
+                            s.idEstado,
+                            s.nombreEstado
+                        }).ToList();
+
+                        if (listEstado == null)
+                            throw new Exception("El estado no existe");
+                        estados = JsonConvert.SerializeObject(listEstado);
+                    }
+                    if (estadoSeleccionado != 6 && estadoSeleccionado !=  11 && estadoSeleccionado !=  19 && estadoSeleccionado !=  27)
+                    {
+                        var listEstado = conexionDB.EstadoSolicitud
+                        .Where(w => w.FK_ClasificacionEstado == idfkCategoria || w.FK_ClasificacionEstado == 6 || w.idEstado == estadoSeleccionado)
+                        .Select(s => new
+                        {
+                            s.idEstado,
+                            s.nombreEstado
+                        }).ToList();
+
+                        if (listEstado == null)
+                            throw new Exception("El estado no existe");
+                        estados = JsonConvert.SerializeObject(listEstado);
+                    }
+                    return estados;
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("ConsultarDescripcion", "Solicitudes (GET)", ex.Message);
+                return "ERROR al cargar Descripcion";
+            }
+
+        }
 
 
-        
         public ActionResult Enviado(string idcliente)
         {
             ViewData["Correo"] = Session["Correo"];

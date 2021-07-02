@@ -8,10 +8,64 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    
+    
+    
     <%-- Scripts de Gestion --%>
-     
+    <%-- AJAX de Descripción y estado --%>
     <script>
         $(document).ready(function () {
+            var idEstado = $("#txtEstado").val();
+            $.ajax({
+                url: '<%: Url.Content("~/Solicitudes/ConsultarDescripcion/") %>',
+                        data: { idEstado: idEstado },
+                        cache: false,
+                        type: "GET",
+                        success: function (data) {
+                            // data is your result from controller
+                            var res = data.split(";");
+                            var fkCategoria = res[1];
+                            console.log("Res split: " + res)
+                            console.log("Descripcion: " + res[0])
+                            console.log("FK fkCategoria: " + fkCategoria)
+                            console.log("Data completa: " + data);
+                            $("#txtDescripcion").val(data);
+
+                            // Manejo para acceder a estados.                  
+                            $.ajax({
+                                url: '<%: Url.Content("~/Solicitudes/ConsultarEstado/") %>',
+                            data: { fkCategoria: fkCategoria, idEstado: idEstado },
+                            cache: false,
+                            type: "GET",
+                            success: function (data) {
+                                if (data != "") {
+                                    var estados = JSON.parse(data);
+                                    console.log("estados")
+                                    console.log(estados);
+
+                                    //borro la lista anterior
+                                    $('#txtEstado').find('option').remove();
+                                    $.each(estados, function (i, item) {
+                                        if (estados[i].idEstado.toString() == idEstado.toString()) {
+                                            $("#txtEstado").append("<option selected value='" + estados[i].idEstado + "'>" + estados[i].nombreEstado + "</option>");
+                                            console.log("hola")
+                                        }
+                                        else {
+                                            $("#txtEstado").append("<option value='" + estados[i].idEstado + "'>" + estados[i].nombreEstado + "</option>");
+                                            console.log("hbai")
+                                        }
+
+                                    });
+
+                                }
+
+                            }
+                        });
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
                 $("#txtEstado").change(function () {
                     var idEstado = $("#txtEstado").val();
                     $.ajax({
@@ -21,8 +75,44 @@
                     type: "GET",
                     success: function (data) {
                         // data is your result from controller
-                        console.log(data);
+                        var res = data.split(";");
+                        var fkCategoria = res[1];
+                        console.log("Res split: " + res)
+                        console.log("Descripcion: " + res[0])
+                        console.log("FK fkCategoria: " + fkCategoria)
+                        console.log("Data completa: " + data);
                         $("#txtDescripcion").val(data);
+
+                        // Manejo para acceder a estados.                  
+                        $.ajax({
+                            url: '<%: Url.Content("~/Solicitudes/ConsultarEstado/") %>',
+                            data: { fkCategoria: fkCategoria, idEstado: idEstado },
+                            cache: false,
+                            type: "GET",
+                            success: function (data) {
+                                if (data != "") {
+                                    var estados = JSON.parse(data);
+                                    console.log("estados")
+                                    console.log(estados);
+
+                                    //borro la lista anterior
+                                    $('#txtEstado').find('option').remove();
+                                    $.each(estados, function (i, item) {
+                                        if (estados[i].idEstado.toString() == idEstado.toString()) {
+                                            $("#txtEstado").append("<option selected value='" + estados[i].idEstado + "'>" + estados[i].nombreEstado + "</option>");
+                                            console.log("hola")
+                                        }
+                                        else {
+                                            $("#txtEstado").append("<option value='" + estados[i].idEstado + "'>" + estados[i].nombreEstado + "</option>");
+                                            console.log("hbai")
+                                        }
+                                        
+                                    });
+
+                                }
+
+                            }
+                        });
                     },
                     error: function (err) {
                         console.log(err);
@@ -32,6 +122,9 @@
         });
     </script>
     
+
+
+
     <script>
 
         $(document).ready(function () {
@@ -72,10 +165,39 @@
                     icon3.className = 'fa fa-angle-up';
                 }
                 open3 = !open3;
-
+                
             });
         });
     </script>
+
+    <%-- Script de Estados para el Div --%>
+    <script>
+        $(document).ready(function () {
+            console.log("Estado Seleccionado: " + $("#txtEstado").val())
+            var Estado = $("#txtEstado").val();
+            if (Estado == 1) {
+                $("#divEstados").hide();
+            }
+            $("#txtEstado").change(function () {
+                console.log("Estado Seleccionado: " + $("#txtEstado").val())
+                var Estado = $("#txtEstado").val();
+                if (Estado == 6) {
+                    console.log("Estado 5")
+                    $("#divEstados").hide();
+                }
+                if (Estado == 2) {
+                    console.log("Estado 2")
+                    $("#divEstados").show();
+                }
+                else {
+                    console.log("Otro estado")
+                    $("#divEstados").hide();
+                }
+            });
+            //divEstados
+        });
+    </script>
+
     <style>
         .textarea {
             overflow: auto !important;
@@ -350,80 +472,82 @@
                                         <br />
                                     </div>
                                 </div>
-                                <div class="row">
-
-                                <div class="col">
-                                    <label for="txtTecnica"></label>
-                                    <label style="color: black">Técnica </label>
-                                    <div id="selDiv">
-                                        <select name="txtTecnica" id="txtTecnica" class="form-control" >
-                                            <%= ViewData["opcionesTecnicas"] %>
-                                        </select>                                    </div>
-                                    <div class="invalid-feedback">Seleccione una opción</div>
-                                    <br />
-                                </div>
-                                <div class="col">
-                                    <label for="txtZona"></label>
-                                    <label style="color: black">Zona </label>
-                                    <div id="selDiv">
-                                        <select name="txtZona" id="txtZona" class="form-control" >
-                                            <%= ViewData["opcionesZonas"] %>
-                                        </select>                                      </div>
-                                    <div class="invalid-feedback">Seleccione una opción</div>
-                                    <br />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="txtFoliculo1"></label>
-                                    <label style="color:black"> Rango Folículos </label>
-                                        <select name="txtFoliculo1" id="txtFoliculo1" class="form-control" >
-                                            <%= ViewData["opcionesRangos1"] %>
-                                        </select>  
-                                    <div class="invalid-feedback">Seleccione una opción</div>
-                                    <br />
-                                </div>
-                                <div class="col-6">
-                                    <label for="txtFoliculo2"></label>
-                                    <label style="color:white"> a </label>
-                                        <select name="txtFoliculo2" id="txtFoliculo2" class="form-control" >
-                                            <%= ViewData["opcionesRangos2"] %>
-                                        </select>  
-                                    <div class="invalid-feedback">Seleccione una opción</div>
-                                    <br />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="txtObservacion"></label>
-                                    <label style="color:black"> Observación </label>
-                                    <div id="selDiv">
-                                        <textarea  id="txtObservacion" name="txtObservacion" class='form-control'><%= ViewData["Observacion"] %></textarea>
-                                    </div>
-                                    <div class="invalid-feedback">Seleccione una opción</div>
-                                    <br />
-                                </div>
-                            </div>
-                                <div class=" text-center">
+                                <div id="divEstados">
                                     <div class="row">
-                                        <div class="col">
-                                            <button class="btn btn-primary" id="btnGuardar" type="submit" style="background-color: #55a247; border-color: #55a247;">Guardar</button>
 
+                                    <div class="col">
+                                        <label for="txtTecnica"></label>
+                                        <label style="color: black">Técnica </label>
+                                        <div id="selDiv">
+                                            <select name="txtTecnica" id="txtTecnica" class="form-control" >
+                                                <%= ViewData["opcionesTecnicas"] %>
+                                            </select>                                    </div>
+                                        <div class="invalid-feedback">Seleccione una opción</div>
+                                        <br />
+                                    </div>
+                                    <div class="col">
+                                        <label for="txtZona"></label>
+                                        <label style="color: black">Zona </label>
+                                        <div id="selDiv">
+                                            <select name="txtZona" id="txtZona" class="form-control" >
+                                                <%= ViewData["opcionesZonas"] %>
+                                            </select>                                      </div>
+                                        <div class="invalid-feedback">Seleccione una opción</div>
+                                        <br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="txtFoliculo1"></label>
+                                        <label style="color:black"> Rango Folículos </label>
+                                            <select name="txtFoliculo1" id="txtFoliculo1" class="form-control" >
+                                                <%= ViewData["opcionesRangos1"] %>
+                                            </select>  
+                                        <div class="invalid-feedback">Seleccione una opción</div>
+                                        <br />
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="txtFoliculo2"></label>
+                                        <label style="color:white"> a </label>
+                                            <select name="txtFoliculo2" id="txtFoliculo2" class="form-control" >
+                                                <%= ViewData["opcionesRangos2"] %>
+                                            </select>  
+                                        <div class="invalid-feedback">Seleccione una opción</div>
+                                        <br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label for="txtObservacion"></label>
+                                        <label style="color:black"> Observación </label>
+                                        <div id="selDiv">
+                                            <textarea  id="txtObservacion" name="txtObservacion" class='form-control'><%= ViewData["Observacion"] %></textarea>
                                         </div>
-                                        <div class="col">
-                                            <button class="btn btn-primary" id="btnEnviar" type="submit" style="background-color: #C6D41D; border-color: #C6D41D;">Enviar</button>
-                                            <input id="enviar" name="enviar" hidden value="0"/>
-                                            <script>
-                                                $(document).ready(function () {
-                                                    $("#btnEnviar").click(function () {
-                                                        $("#enviar").val(1);
+                                        <div class="invalid-feedback">Seleccione una opción</div>
+                                        <br />
+                                    </div>
+                                </div>
+                                    </div>
+                                    <div class=" text-center">
+                                        <div class="row">
+                                            <div class="col">
+                                                <button class="btn btn-primary" id="btnGuardar" type="submit" style="background-color: #55a247; border-color: #55a247;">Guardar</button>
+
+                                            </div>
+                                            <div class="col">
+                                                <button class="btn btn-primary" id="btnEnviar" type="submit" style="background-color: #C6D41D; border-color: #C6D41D;">Enviar</button>
+                                                <input id="enviar" name="enviar" hidden value="0"/>
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        $("#btnEnviar").click(function () {
+                                                            $("#enviar").val(1);
+                                                        });
                                                     });
-                                                });
-                                            </script>
+                                                </script>
+                                            </div>
                                         </div>
                                     </div>
-                                    
-                                </div>
+                            
                             </div>
                         </div>
                         </div>
@@ -432,6 +556,6 @@
                 </div> 
             </div> 
         </section>
-            </form>
-    </main>
+    </form>
+</main>
 </asp:Content>

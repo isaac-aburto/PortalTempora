@@ -17,6 +17,7 @@ using System.Globalization;
 using FiftyOne.Foundation.Bases;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace WebSolicitudes.Controllers
 {
@@ -177,7 +178,11 @@ namespace WebSolicitudes.Controllers
                     cliente.correo = Correo;
                     cliente.fecha_nacimiento = DateTime.Parse(FechaDeNacimiento);
                     //conexionDB.Cliente.Add(cliente);
+                    string personId = string.Empty;
+                    personId = PipeDriveAPI.AddPerson(Nombre, Correo, Celular);
+                    cliente.idPipedrive = personId;
                     conexionDB.SaveChanges();
+                    
 
                     //Se guarda la solicitud del usuario
                     Solicitud solicitud = conexionDB.Solicitud.Find(idSolicitud);
@@ -188,7 +193,11 @@ namespace WebSolicitudes.Controllers
                     solicitud.RespZona = RespuestaZona;
                     solicitud.FechaSolicitud = DateTime.Now;
                     solicitud.SolicitudCompleta = 1;
+                    solicitud.Fk_idEstado = 1;
                     //conexionDB.Solicitud.Add(solicitud);
+                    string dealId = string.Empty;
+                    dealId = PipeDriveAPI.PostDeal(Nombre + " - " + Rut, "11504009", "hola", "open", personId);
+                    solicitud.idPipedrive = dealId;
                     conexionDB.SaveChanges();
 
                     //Agrego cada Foto.
@@ -393,16 +402,16 @@ namespace WebSolicitudes.Controllers
             string usr = collection["inputEmail"];
             string pass = collection["inputPassword"];
             pass = Util.GetSHA1(pass);
-            string ApiActibitiesPost = string.Empty;
-            string ApiActibitiesGet = string.Empty;
-            string ApiDealsPost = string.Empty;
 
+
+            //string ApiActibitiesGet = string.Empty;
+            //ApiActibitiesGet = PipeDriveAPI.GetAllPersons();
             //var respuesta = Util.EnviarWhatsapp();
-
+            //PipeDriveAPI.AddUser("Fernanda", "fernanda.chin@uc.cl");
             //string hola = Util.EnviarWhatsapp();
             //ApiActibitiesPost = PipeDriveAPI.PostActivities("11504009", "Primera Consulta", "2021-06-10");
             //ApiActibitiesGet = PipeDriveAPI.GetAllDeals();
-            ApiDealsPost = PipeDriveAPI.PostDeal("Regina deal - Sandbox API", "11504009", "1.200.000", "open");
+
             try
             {
                 using (ModeloTempora conexionDB = new ModeloTempora())
@@ -603,6 +612,7 @@ namespace WebSolicitudes.Controllers
                     Solicitud solicitud = new Solicitud();
                     solicitud.FK_idCliente = cliente.idCliente;
                     solicitud.SolicitudCompleta = 0;
+                    solicitud.Fk_idEstado = 2;
                     conexionDB.Solicitud.Add(solicitud);
                     conexionDB.SaveChanges();
 

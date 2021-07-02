@@ -43,6 +43,7 @@
           <Property Name="telefono" Type="varchar" MaxLength="50" />
           <Property Name="celular" Type="varchar" MaxLength="50" />
           <Property Name="facebook" Type="varchar(max)" />
+          <Property Name="idPipedrive" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="EstadoSolicitud">
           <Key>
@@ -53,6 +54,8 @@
           <Property Name="cod_Estado" Type="varchar" MaxLength="20" />
           <Property Name="etapaPipeDrive" Type="nchar" MaxLength="10" />
           <Property Name="Descripcion" Type="varchar" MaxLength="1000" />
+          <Property Name="Enviado" Type="bit" />
+          <Property Name="FK_ClasificacionEstado" Type="int" />
         </EntityType>
         <EntityType Name="Fotos">
           <Key>
@@ -133,6 +136,7 @@
           <Property Name="FK_idUsuario" Type="int" />
           <Property Name="RespZona" Type="varchar" MaxLength="1000" />
           <Property Name="SolicitudCompleta" Type="int" />
+          <Property Name="idPipedrive" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -499,6 +503,7 @@
           <Property Name="celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="facebook" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Cliente2" FromRole="Cliente" ToRole="Solicitud" />
+          <Property Name="idPipedrive" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="EstadoSolicitud">
           <Key>
@@ -511,6 +516,8 @@
           <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Cliente1" FromRole="EstadoSolicitud" ToRole="Solicitud" />
           <NavigationProperty Name="ArchivoxEstado" Relationship="PortalModeloTemporal.FK_ArchivoxSolicitud_EstadoSolicitud1" FromRole="EstadoSolicitud" ToRole="ArchivoxEstado" />
           <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Enviado" Type="Boolean" />
+          <Property Name="FK_ClasificacionEstado" Type="Int32" />
         </EntityType>
         <EntityType Name="Fotos">
           <Key>
@@ -592,6 +599,7 @@
           <Property Name="RespZona" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="RangoxSolicitud" Relationship="PortalModeloTemporal.FK_RangoxSolicitud_Solicitud" FromRole="Solicitud" ToRole="RangoxSolicitud" />
           <Property Name="SolicitudCompleta" Type="Int32" />
+          <Property Name="idPipedrive" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -998,6 +1006,7 @@
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="PortalModeloTemporal.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="idPipedrive" ColumnName="idPipedrive" />
                 <ScalarProperty Name="idCliente" ColumnName="idCliente" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="apellido" ColumnName="apellido" />
@@ -1014,6 +1023,8 @@
           <EntitySetMapping Name="EstadoSolicitud">
             <EntityTypeMapping TypeName="PortalModeloTemporal.EstadoSolicitud">
               <MappingFragment StoreEntitySet="EstadoSolicitud">
+                <ScalarProperty Name="FK_ClasificacionEstado" ColumnName="FK_ClasificacionEstado" />
+                <ScalarProperty Name="Enviado" ColumnName="Enviado" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
                 <ScalarProperty Name="idEstado" ColumnName="idEstado" />
                 <ScalarProperty Name="nombreEstado" ColumnName="nombreEstado" />
@@ -1073,6 +1084,7 @@
           <EntitySetMapping Name="Solicitud">
             <EntityTypeMapping TypeName="PortalModeloTemporal.Solicitud">
               <MappingFragment StoreEntitySet="Solicitud">
+                <ScalarProperty Name="idPipedrive" ColumnName="idPipedrive" />
                 <ScalarProperty Name="SolicitudCompleta" ColumnName="SolicitudCompleta" />
                 <ScalarProperty Name="RespZona" ColumnName="RespZona" />
                 <ScalarProperty Name="idSolicitud" ColumnName="idSolicitud" />
