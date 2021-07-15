@@ -512,7 +512,7 @@ body {
     </section>--%>
 
     <section class="headera section" style="margin-top: -4pc;">
-        <h1  style="color: white; z-index: 100; font-style: inherit; text-align: center;"><span style="color: white; z-index: 100;">Regina Chin</span> tenemos el plan perfecto para tí. <br /><span style="    font-size: 28px;">Haz scroll.</span></h1>
+        <h1  style="color: white; z-index: 100; font-style: inherit; text-align: center;"><span style="color: white; z-index: 100;"><%= ViewData["Nombre"] %></span> tenemos el plan perfecto para tí. <br /><span style="    font-size: 28px;">Haz scroll.</span></h1>
         
         <div class="fullscreen-video-wrap">
             <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" style="filter: brightness(0.5);">

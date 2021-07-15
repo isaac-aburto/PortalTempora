@@ -8,13 +8,13 @@
         <EntityTypeShape EntityType="PortalModeloTemporal.Archivos" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.Ciudad" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.Cliente" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortalModeloTemporal.EstadoSolicitud" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.EstadoSolicitud" Width="2" PointX="3" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.Fotos" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.Perfil" Width="1.5" PointX="0.75" PointY="23.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.RangoFoliculos" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.Region" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.SLA" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortalModeloTemporal.Solicitud" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.Solicitud" Width="2" PointX="5.25" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.Tecnica" Width="1.5" PointX="3" PointY="20.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.Usuario" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />

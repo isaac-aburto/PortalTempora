@@ -110,9 +110,14 @@
     </script>
     <asp:ContentPlaceHolder ID="TitleContent" runat="server">
     </asp:ContentPlaceHolder>
-    <style>
+    <%
+        //Permisos de Usuario
+        WebSolicitudes.Models.PermisosPerfiles permisoUsuario = WebSolicitudes.Models.PermisosPerfiles.SinNivel;
+        if (Session["Permisos"] != null)
+            permisoUsuario = (WebSolicitudes.Models.PermisosPerfiles)Session["Permisos"];
+        int nivelPermiso = (int)permisoUsuario;
 
-</style>
+    %>
 </head>
 
 <body style="background-color: #e0e0e0">
@@ -155,15 +160,15 @@
             <li><a class="dropdown-toggle"href="#" role="button" id="dropdownMenuLinkUsuarios" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ffffff00">Usuarios</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkUsuarios">
                     <a class="dropdown-item" href="<%: Url.Content("~/Usuarios/") %>"  style="border: 0px; color:white; border-radius: 0px">Listar Usuarios</a>
-                    <a class="dropdown-item" href="<%: Url.Content("~/Usuarios/AgregarUsuario") %>"  style="border: 0px; color:white; border-radius: 0px">Agregar Usuario</a>
-                  </div>
+                    <%if (int.Parse(Session["IdPerfil"].ToString()) == 1)
+                        { %>
+                        <a class="dropdown-item" href="<%: Url.Content("~/Usuarios/AgregarUsuario") %>"  style="border: 0px; color:white; border-radius: 0px">Agregar Usuario</a>
+                    <%} %>  
+                </div>
             </li>
             <li><a class="dropdown-toggle"href="#" role="button" id="dropdownMenuLinkClientes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ffffff00">Clientes</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkClientes">
-                    <a class="dropdown-item" href="<%: Url.Content("~/Solicitudes") %>"  style="border: 0px; color:white; border-radius: 0px">Solicitudes</a>
-                    <a class="dropdown-item" href="<%: Url.Content("~/Usuarios/Perfil") %>"  style="border: 0px; color:white; border-radius: 0px">Perfil</a>
-                    <a class="dropdown-item" href="<%: Url.Content("~/Home/CerrarSesion") %>"  style="border: 0px; color:white; border-radius: 0px">Cerrar Sesíón</a>
-                    
+                    <a class="dropdown-item" href="<%: Url.Content("~/Clientes") %>"  style="border: 0px; color:white; border-radius: 0px">Clientes</a>
                   </div>
             </li>
             <li class="book-a-table text-center">
@@ -173,7 +178,7 @@
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="<%: Url.Content("~/Solicitudes") %>"  style="border: 0px; color:white; border-radius: 0px">Solicitudes</a>
                     <a class="dropdown-item" href="<%: Url.Content("~/Usuarios/Perfil") %>"  style="border: 0px; color:white; border-radius: 0px">Perfil</a>
-                    <a class="dropdown-item" href="<%: Url.Content("~/Home/CerrarSesion") %>"  style="border: 0px; color:white; border-radius: 0px">Cerrar Sesíón</a>
+                    <a class="dropdown-item" href="<%: Url.Content("~/Home/CerrarSesion") %>"  style="border: 0px; color:white; border-radius: 0px">Cerrar Sesión</a>
                     
                   </div>
             </li>

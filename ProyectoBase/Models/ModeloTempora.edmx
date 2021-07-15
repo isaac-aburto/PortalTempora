@@ -137,6 +137,9 @@
           <Property Name="RespZona" Type="varchar" MaxLength="1000" />
           <Property Name="SolicitudCompleta" Type="int" />
           <Property Name="idPipedrive" Type="varchar" MaxLength="10" />
+          <Property Name="FechaEvaluacionPresencial" Type="datetime" />
+          <Property Name="FechaCirugia" Type="datetime" />
+          <Property Name="FechaLlamada" Type="datetime" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -600,6 +603,9 @@
           <NavigationProperty Name="RangoxSolicitud" Relationship="PortalModeloTemporal.FK_RangoxSolicitud_Solicitud" FromRole="Solicitud" ToRole="RangoxSolicitud" />
           <Property Name="SolicitudCompleta" Type="Int32" />
           <Property Name="idPipedrive" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FechaEvaluacionPresencial" Type="DateTime" Precision="3" />
+          <Property Name="FechaCirugia" Type="DateTime" Precision="3" />
+          <Property Name="FechaLlamada" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1084,6 +1090,9 @@
           <EntitySetMapping Name="Solicitud">
             <EntityTypeMapping TypeName="PortalModeloTemporal.Solicitud">
               <MappingFragment StoreEntitySet="Solicitud">
+                <ScalarProperty Name="FechaLlamada" ColumnName="FechaLlamada" />
+                <ScalarProperty Name="FechaCirugia" ColumnName="FechaCirugia" />
+                <ScalarProperty Name="FechaEvaluacionPresencial" ColumnName="FechaEvaluacionPresencial" />
                 <ScalarProperty Name="idPipedrive" ColumnName="idPipedrive" />
                 <ScalarProperty Name="SolicitudCompleta" ColumnName="SolicitudCompleta" />
                 <ScalarProperty Name="RespZona" ColumnName="RespZona" />

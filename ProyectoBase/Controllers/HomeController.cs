@@ -324,12 +324,11 @@ namespace WebSolicitudes.Controllers
                     conexionDB.Fotos.Add(fotos5);
                     conexionDB.SaveChanges();
 
-
                     //Enviar Correo
                     string titulo  = "Nueva Solicitud - Portal Tempora";
                     string nombre  = cliente.nombre + " " + cliente.apellido;
                     string correo  = cliente.correo;
-                    string rut     = cliente.rut;
+                    string rut = cliente.rut;
                     string celular = cliente.celular;
                     string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudUsuario.html")).Replace("[Nombre]", nombre).Replace("[Correo]", correo).Replace("[Rut]", rut).Replace("[Celular]", celular);
                     Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
@@ -576,6 +575,8 @@ namespace WebSolicitudes.Controllers
                 return RedirectToAction("Pass", "Usuarios");
             }
         }
+
+
         //
         // GET: /Home/CerrarSesion
 
@@ -619,6 +620,17 @@ namespace WebSolicitudes.Controllers
                     idcliente = cliente.idCliente.ToString();
                     idSolicitud = solicitud.idSolicitud.ToString();
 
+                    //Armar link
+                    string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                    link = Util.Base64Encode(link);
+                    //Enviar Correo
+                    string titulo = "Complete su solicitud - Tempora";
+                    string nombre = Nombre;
+                    string correo = cliente.correo;
+                    string rut = cliente.rut;
+                    string celular = cliente.celular;
+                    string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudIncompleta.html")).Replace("[Link]", link);
+                    Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
                 }
             }
             catch (Exception ex)
@@ -627,6 +639,54 @@ namespace WebSolicitudes.Controllers
             }
             return idcliente + "," + idSolicitud;
         }
+
+        public PermisosPerfiles NivelDePermisos(int idUsuario)
+        {
+            PermisosPerfiles permiso = PermisosPerfiles.SinNivel;
+            try
+            {
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Usuario usuario = conexionDB.Usuario.Find(idUsuario);
+
+                    //ver que exista
+                    if (usuario == null)
+                        return (permiso);
+
+                    Perfil perfil = usuario.Perfil;
+
+                    if (perfil == null) { return (permiso); }
+
+
+                    switch (perfil.idPerfil)
+                    {
+
+                        case 1:
+                            permiso = PermisosPerfiles.Administrador;
+                            break;
+
+                        case 2:
+                            permiso = PermisosPerfiles.Medico;
+                            break;
+
+                        case 3:
+                            permiso = PermisosPerfiles.Otro;
+                            break;
+
+                        default:
+                            permiso = PermisosPerfiles.SinNivel;
+                            break;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+            }
+            return (permiso);
+
+        }
+
 
     }
 }

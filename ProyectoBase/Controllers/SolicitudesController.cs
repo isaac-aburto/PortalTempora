@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -139,6 +140,8 @@ namespace WebSolicitudes.Controllers
                         ViewData["RespuestaDerma"] = solicitud.RespDerm;
                         ViewData["RespuestaPelo"] = solicitud.RespPelo;
                         ViewData["Observacion"] = solicitud.ObserMed;
+                        ViewData["FechaCirugia"] = solicitud.FechaCirugia;
+                        ViewData["FechaLlamada"] = solicitud.FechaLlamada;
                         Util.escribirLog("Solicitudes", "GestionSolicitud (GET)","Seteo todos los ViewData");
                         //Datos de la Gestión
                         List<Tecnica> listaTecnicas = conexionDB.Tecnica.ToList();
@@ -304,7 +307,8 @@ namespace WebSolicitudes.Controllers
             int Rango1 = int.Parse(collection["txtFoliculo1"]);
             int Rango2 = int.Parse(collection["txtFoliculo2"]);
             string enviar = collection["enviar"];
-
+            string fechaEvaluacion = collection["txtFechaEvaluacion"];
+            int idCliente;
 
             try
             {
@@ -323,8 +327,10 @@ namespace WebSolicitudes.Controllers
 
                         //Buscar Rangos                      
                         Solicitud solicitud = conexionDB.Solicitud.Find(idSolicitud);
-                        solicitud.Fk_idEstado = int.Parse(Estado);
-                        if (Estado == "11")
+                        int idEstado = int.Parse(Estado);
+                        solicitud.Fk_idEstado = idEstado;
+                        idCliente = int.Parse(solicitud.FK_idCliente.ToString()); 
+                        if (Estado == "6")
                         {
                             
                             solicitud.FK_Tecnica = int.Parse(Tecnica);
@@ -347,38 +353,66 @@ namespace WebSolicitudes.Controllers
                             }
                             solicitud.ObserMed = Obsrevación;
                         }
-                        conexionDB.SaveChanges();
+                        
 
                         // Guardar Estado en PipeDrive
 
                         string dealId = solicitud.idPipedrive;
-                        string publicDescription = solicitud.EstadoSolicitud.Descripcion;
+                        string publicDescription = conexionDB.EstadoSolicitud.Where(w => w.idEstado == idEstado).Select(s=> s.Descripcion).FirstOrDefault().ToString();
                         string personId = solicitud.Cliente.idPipedrive;
-                        string nombreEstado = solicitud.EstadoSolicitud.nombreEstado;
+                        string nombreEstado = conexionDB.EstadoSolicitud.Where(w => w.idEstado == idEstado).Select(s => s.nombreEstado).FirstOrDefault().ToString(); ;
                         var respuestaApiEstado = PipeDriveAPI.PostActivities(dealId, personId, "11504009", nombreEstado, publicDescription, "task");
                         
 
                         // Enviar Primera revisión 
-                        if (Estado == "2") {
+                        if (Estado == "6") {
                             //Guardar Rangos
                             if (enviar == "1") {
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente+";"+DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
+                                string pass = solicitud.Cliente.idCliente + ";" + solicitud.Cliente.rut;
+                                var password = Util.Base64Encode(pass);
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string Pass = Util.GetSHA1(password);
+                                cliente.password = Pass;
+                                conexionDB.SaveChanges();
                                 //Enviar Correo
                                 string titulo = "He aquí tu evaluación - Portal Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
-                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudPaso1.html")).Replace("[Nombre]", nombre).Replace("[Link]",link);
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudPaso1.html")).Replace("[Nombre]", nombre).Replace("[Link]",link).Replace("[Password]", password);
+                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            }
+                        }
+                        // Enviar evaluación presencial 
+                        if (Estado == "4")
+                        {
+                            DateTime oDate = Convert.ToDateTime(fechaEvaluacion);
+                            solicitud.FechaEvaluacionPresencial = oDate;
+                            //Guardar Rangos
+                            if (enviar == "1")
+                            {
+
+                                //Armar link
+                                string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                                link = Util.Base64Encode(link);
+
+
+                                //Enviar Correo
+                                string titulo = "Evaluación Presencial - Tempora";
+                                string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudEvaluacionPresencial.html")).Replace("[Nombre]", nombre).Replace("[Fecha]", fechaEvaluacion);
                                 Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
                             }
                         }
                         //Solicitar fotografías nuevamente
-                        if (Estado == "9") {
+                        if (Estado == "5") {
                             if (enviar == "1")
                             {
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
+
                                 //Enviar Correo
                                 string titulo = "Hubo un problema cons tus fotografías - Portal Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
@@ -387,6 +421,67 @@ namespace WebSolicitudes.Controllers
                             }
                         }
 
+                        if (Estado == "13")
+                        {
+                            string Observacion = collection["txtObservacion2"];
+                            if (enviar == "1")
+                            {
+                                //Enviar Correo
+                                string titulo = "Procedimiento Previo - Tempora";
+                                string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudProcedimientoPrevio.html")).Replace("[Observacion]", Observacion).Replace("[Nombre]", nombre);
+                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            }
+                        }
+                        //Agengar fecha cirugía
+                        if (Estado == "14")
+                        {
+                            string FechaCirugiaMandar = collection["txtFechaCirugiaMandar"];
+                            DateTime oDate = Convert.ToDateTime(FechaCirugiaMandar);
+                            solicitud.FechaCirugia = oDate;
+                            if (enviar == "1")
+                            {
+                                //Enviar Correo
+                                string titulo = "Fecha de Cirugía - Tempora";
+                                string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFechaCirugia.html")).Replace("[FechaCirugiaMandar]", FechaCirugiaMandar).Replace("[Nombre]", nombre);
+                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            }
+                        }
+                        //Enviar tercer micrositio - Cuidados Preoperatorios
+                        if (Estado == "15")
+                        {
+                            string Observacion3 = collection["txtObservacion3"];
+                            if (enviar == "1")
+                            {
+                                //Armar link
+                                string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                                link = Util.Base64Encode(link);
+                                //Enviar Correo
+                                string titulo = "Cuidados Preoperatorios - Tempora";
+                                string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudCuidadosPreoperatorios.html")).Replace("[Nombre]", nombre).Replace("[Observacion]", Observacion3).Replace("[link]", link);
+                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            }
+                        }
+                        //Enviar nueva fecha de cirugia
+                        if (Estado == "17")
+                        {
+                            string FechaNuevaCirugia = collection["txtFechaReagendarCirugia"];
+                            DateTime oDate = Convert.ToDateTime(FechaNuevaCirugia);
+                            solicitud.FechaCirugia = oDate;
+                            if (enviar == "1")
+                            {
+                                //Enviar Correo
+                                string titulo = "Nueva fecha cirugía     - Tempora";
+                                string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFechaNuevaCirugia.html")).Replace("[FechaCirugiaMandar]", FechaNuevaCirugia).Replace("[Nombre]", nombre);
+                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            }
+                        }
+
+
+                        conexionDB.SaveChanges();
                         return RedirectToAction("GestionSolicitudes/" + idSolicitud.ToString()/*, "Tickets"*/);
 
                     }
@@ -401,7 +496,8 @@ namespace WebSolicitudes.Controllers
             return View();
         }
 
-        public ActionResult Solicitud(string id)
+        
+        public ActionResult Solicitud2(string id)
         {
             try 
             {
@@ -428,6 +524,8 @@ namespace WebSolicitudes.Controllers
 
                     ViewData["src"] = src;
                     ViewData["Nombre"] = cliente.nombre +" "+ cliente.apellido;
+                    ViewData["idSolicitud"] = solicitud.idSolicitud;
+                    ViewData["idCliente"] = cliente.idCliente;
 
                 }
             }
@@ -438,9 +536,43 @@ namespace WebSolicitudes.Controllers
             return View();
         }
 
+        
+        public ActionResult Solicitud2Agendar(string Cirugia, string Llamada, string idCliente, string idSolicitud)
+        {
+            try
+            {
+                //Usuario
+                int Cliente = int.Parse(idCliente);
+                int Solicitud = int.Parse(idSolicitud);   
+                string fechaCirugia = Cirugia;
+                DateTime oDate = Convert.ToDateTime(fechaCirugia);
+                String fechaLlamada = Llamada;
+                DateTime oDate2 = Convert.ToDateTime(fechaLlamada);
+
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Cliente cliente = conexionDB.Cliente.Find(Cliente);
+                    if (cliente == null)
+                        throw new Exception("El usuario no existe");
+
+                    Solicitud solicitud = conexionDB.Solicitud.Find(Solicitud);
+                    solicitud.FechaCirugia = oDate;
+                    solicitud.FechaLlamada = oDate2;
+                    conexionDB.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("Solicitud", "Solicitudes (GET)", ex.Message);
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
         public ActionResult SolicitudFotos(string id) {
             try
             {
+
                 string[] linkDecod = Util.Base64Decode(id).Split(';');
                 int linkId = int.Parse(linkDecod[0]);
                 using (ModeloTempora conexionDB = new ModeloTempora())
@@ -588,16 +720,416 @@ namespace WebSolicitudes.Controllers
             ViewData["Correo"] = Session["Correo"];
             return View();
         }
-        public ActionResult Pagina1(string idcliente)
-        {  
+
+        public ActionResult CompletarSolicitud(string id)
+        {
+            try
+            {
+                string[] linkDecod = Util.Base64Decode(id).Split(';');
+                int linkId = int.Parse(linkDecod[0]);
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Cliente cliente = conexionDB.Cliente.Find(linkId);
+                    if (cliente == null)
+                        throw new Exception("El usuario no existe");
+
+                    ViewData["idCliente"] = linkId;
+                    Solicitud solicitud = conexionDB.Solicitud.Where(w => w.FK_idCliente == cliente.idCliente).FirstOrDefault();
+                    ViewData["idSolicitud"] = solicitud.idSolicitud.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("CompletarSolicitud", "Solicitudes (GET)", ex.Message);
+                return RedirectToAction("Index", "Home");
+            }
             return View();
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult CompletarSolicitud(IEnumerable<HttpPostedFileBase> files, FormCollection collection)
+        {
+            try
+            {
+                //Usuario
+                int idCliente = int.Parse(collection["idCliente"]);
+                string foto = collection["fotografia"];
+                string Nombre = collection["txtNombre"];
+                string Apellido = collection["txtApellido"];
+                string Rut = collection["txtRut"];
+                string Correo = collection["txtEmail"];
+                string Telefono = collection["txtTelefono"];
+                string Celular = collection["txtCelular"];
+                string FechaDeNacimiento = collection["txtFechaNacimiento"];
+
+                string idcliente;
+                //Solicitud
+                int idSolicitud = int.Parse(collection["idSolicitud"]);
+                //Zonas
+                string RespuestaZona = string.Empty;
+
+                string RespuestaZonaCima = collection["chkZonaCima"];
+                string RespuestaZonaRegion = collection["chkZonaRegion"];
+                string RespuestaZonaCoronilla = collection["chkZonaCoronilla"];
+                string RespuestaZonaOccipital = collection["chkZonaOccipital"];
+                string RespuestaZonaNuca = collection["chkZonaNuca"];
+                string RespuestaZonaSien = collection["chkZonaSien"];
+
+                if (RespuestaZonaCima == "on")
+                {
+                    RespuestaZona = RespuestaZona + "Cima, ";
+                }
+                if (RespuestaZonaRegion == "on")
+                {
+                    RespuestaZona = RespuestaZona + "Región Parietal, ";
+                }
+                if (RespuestaZonaCoronilla == "on")
+                {
+                    RespuestaZona = RespuestaZona + "Coronilla, ";
+                }
+                if (RespuestaZonaOccipital == "on")
+                {
+                    RespuestaZona = RespuestaZona + "Hueso Occipital, ";
+                }
+                if (RespuestaZonaNuca == "on")
+                {
+                    RespuestaZona = RespuestaZona + "Nuca, ";
+                }
+                if (RespuestaZonaSien == "on")
+                {
+                    RespuestaZona = RespuestaZona + "Sien, ";
+                }
+                if (RespuestaZona != string.Empty)
+                {
+                    int n = RespuestaZona.Length;
+                    RespuestaZona = RespuestaZona.TrimEnd(' ').TrimEnd(',');
+                }
+
+                //Dermatólogo 
+                string RespuestaDerma = string.Empty;
+
+                string RespuestaDermaSi = collection["chkDermaSi"];
+                string RespuestaDermaNo = collection["chkDermaNo"];
+                if (RespuestaDermaSi == "on")
+                {
+                    string RespuestaDermaDermatitis = collection["chkDermaDermatitis"];
+                    string RespuestaDermaAlopecia = collection["chkDermaAlopecia"];
+                    string RespuestaDermaAutoinmunes = collection["chkDermaAutoinmunes"];
+                    string RespuestaDermaEsclerodermia = collection["chkDermaEsclerodermia"];
+                    string RespuestaDermaOtra = collection["chkDermaOtra"];
+
+                    if (RespuestaDermaDermatitis == "on")
+                    {
+                        RespuestaDerma = RespuestaDerma + "Dermatitis seborreica, ";
+                    }
+                    if (RespuestaDermaAlopecia == "on")
+                    {
+                        RespuestaDerma = RespuestaDerma + "Alopecia areata, ";
+                    }
+                    if (RespuestaDermaAutoinmunes == "on")
+                    {
+                        RespuestaDerma = RespuestaDerma + "Enfermedades autoinmunes, ";
+                    }
+                    if (RespuestaDermaEsclerodermia == "on")
+                    {
+                        RespuestaDerma = RespuestaDerma + "Esclerodermia, ";
+                    }
+                    if (RespuestaDermaOtra == "on")
+                    {
+                        RespuestaDerma = RespuestaDerma + "Otra, ";
+                    }
+                    if (RespuestaDerma != string.Empty)
+                    {
+                        int n = RespuestaDerma.Length;
+                        RespuestaDerma = RespuestaDerma.TrimEnd(' ').TrimEnd(',');
+                    }
+
+                }
+                else
+                {
+                    RespuestaDerma = "No";
+                }
+
+                //Pelones
+                string RespuestaPelones = string.Empty;
+
+                string RespuestaPeloSi = collection["chkPeloSi"];
+                string RespuestaPeloNo = collection["chkPeloNo"];
+                if (RespuestaPeloSi == "on")
+                {
+                    RespuestaPelones = "Sí";
+                }
+                else
+                {
+                    RespuestaPelones = "No";
+                }
+
+                //Fotos
+                string base64FotoArriba = collection["fotoArriba"];
+                base64FotoArriba = base64FotoArriba.Replace("data:image/jpeg;base64,", "");
+
+                string base64FotoIzquierdo = collection["fotoIzquierdo"];
+                base64FotoIzquierdo = base64FotoIzquierdo.Replace("data:image/jpeg;base64,", "");
+
+                string base64FotoDerecho = collection["fotoDerecho"];
+                base64FotoDerecho = base64FotoDerecho.Replace("data:image/jpeg;base64,", "");
+
+                string base64FotoAtras = collection["fotoAtras"];
+                base64FotoAtras = base64FotoAtras.Replace("data:image/jpeg;base64,", "");
+
+                string base64FotoFrente = collection["fotoFrente"];
+                base64FotoFrente = base64FotoFrente.Replace("data:image/jpeg;base64,", "");
+
+
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+
+                    //Se guarda el Usuario.
+                    Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                    cliente.nombre = Nombre;
+                    cliente.apellido = Apellido;
+                    cliente.rut = Rut;
+                    cliente.telefono = Telefono;
+                    cliente.celular = Celular;
+                    cliente.correo = Correo;
+                    cliente.fecha_nacimiento = DateTime.Parse(FechaDeNacimiento);
+                    //conexionDB.Cliente.Add(cliente);
+                    string personId = string.Empty;
+                    personId = PipeDriveAPI.AddPerson(Nombre, Correo, Celular);
+                    cliente.idPipedrive = personId;
+                    conexionDB.SaveChanges();
+
+
+                    //Se guarda la solicitud del usuario
+                    Solicitud solicitud = conexionDB.Solicitud.Find(idSolicitud);
+                    solicitud.FK_idCliente = cliente.idCliente;
+                    idcliente = cliente.idCliente.ToString();
+                    solicitud.RespPelo = RespuestaPelones;
+                    solicitud.RespDerm = RespuestaDerma;
+                    solicitud.RespZona = RespuestaZona;
+                    solicitud.FechaSolicitud = DateTime.Now;
+                    solicitud.SolicitudCompleta = 1;
+                    solicitud.Fk_idEstado = 1;
+                    //conexionDB.Solicitud.Add(solicitud);
+                    string dealId = string.Empty;
+                    dealId = PipeDriveAPI.PostDeal(Nombre + " - " + Rut, "11504009", "hola", "open", personId);
+                    solicitud.idPipedrive = dealId;
+                    conexionDB.SaveChanges();
+
+                    //Agrego cada Foto.
+
+                    var filename = "fotoArriba.jpg";
+                    var filename2 = "fotoIzquierdo.jpg";
+                    var filename3 = "fotoDerecho.jpg";
+                    var filename4 = "fotoAtras.jpg";
+                    var filename5 = "fotoFrente.jpg";
+
+
+                    //var filename = Path.GetFileName(file.FileName);
+                    //var path = Path.GetTempPath();
+
+                    Fotos fotos = new Fotos();
+
+                    var path = Path.Combine(Server.MapPath("~/App_Data/"), filename);
+                    System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoArriba));
+                    //Ver si existe otro archivo con el mismo nombre.
+                    //List<Fotos> listafotos = conexionDB.Fotos.ToList();
+                    //String opciones = string.Empty;
+                    //int n = 0;
+                    //string segundoNombre = "";
+                    //bool igual = false;
+
+
+                    foreach (var file in files)
+                    {
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            var nombrearchivo = Path.GetFileName(file.FileName);
+                            //var path = Path.GetTempPath();
+                            var local = Path.Combine(Server.MapPath("~/App_Data/"), filename);
+                            file.SaveAs(path);
+
+                            Fotos archivo = new Fotos();
+
+                            //Ver si existe otro archivo con el mismo nombre.
+                            List<Fotos> listaarchivos = conexionDB.Fotos.ToList();
+                            String opciones = string.Empty;
+                            int n = 0;
+                            string segundoNombre = "";
+                            bool igual = false;
+                            foreach (Fotos item in listaarchivos)
+                            {
+                                if (item.nombreArchivo == filename)
+                                {
+                                    n++;
+                                    igual = true;
+                                    if (igual == true)
+                                    {
+                                        string nombrefile = filename.Split('.').FirstOrDefault();
+                                        string exten = filename.Split('.').LastOrDefault();
+                                        if (n != 1)
+                                        {
+                                            string nombrefileparnt = nombrefile.Split('(').FirstOrDefault();
+                                            segundoNombre = nombrefileparnt + "(" + n.ToString() + ")." + exten;
+                                        }
+                                        else
+                                        {
+                                            segundoNombre = nombrefile + "(" + n.ToString() + ")." + exten;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (igual == false)
+                            {
+                                segundoNombre = filename;
+                            }
+                            archivo.nombreFalso =
+                            archivo.nombreArchivo = filename;
+                            archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
+                            var ultimoId2 = solicitud.idSolicitud;
+                            archivo.FK_idSolicitud = ultimoId2;
+                            conexionDB.Fotos.Add(archivo);
+                            conexionDB.SaveChanges();
+                            //respuesta.AdjuntoEvidencias = archivo.id_archivo;
+                        }
+                    }
+
+
+                    //fotos.nombreFalso =
+                    fotos.nombreArchivo = filename;
+                    fotos.baseArchivo = Util.ConvertirArchivoABase64(path);
+                    var ultimoId = solicitud.idSolicitud;
+                    fotos.FK_idSolicitud = ultimoId;
+                    conexionDB.Fotos.Add(fotos);
+                    conexionDB.SaveChanges();
+
+                    Fotos fotos2 = new Fotos();
+                    var path2 = Path.Combine(Server.MapPath("~/App_Data/"), filename2);
+                    System.IO.File.WriteAllBytes(path2, Util.ConvertirBase64ABytes(base64FotoIzquierdo));
+                    fotos2.nombreArchivo = filename2;
+                    fotos2.baseArchivo = Util.ConvertirArchivoABase64(path2);
+                    fotos2.FK_idSolicitud = ultimoId;
+                    conexionDB.Fotos.Add(fotos2);
+                    conexionDB.SaveChanges();
+
+                    Fotos fotos3 = new Fotos();
+                    var path3 = Path.Combine(Server.MapPath("~/App_Data/"), filename3);
+                    System.IO.File.WriteAllBytes(path3, Util.ConvertirBase64ABytes(base64FotoDerecho));
+                    fotos3.nombreArchivo = filename3;
+                    fotos3.baseArchivo = Util.ConvertirArchivoABase64(path3);
+                    fotos3.FK_idSolicitud = ultimoId;
+                    conexionDB.Fotos.Add(fotos3);
+                    conexionDB.SaveChanges();
+
+                    Fotos fotos4 = new Fotos();
+                    var path4 = Path.Combine(Server.MapPath("~/App_Data/"), filename4);
+                    System.IO.File.WriteAllBytes(path4, Util.ConvertirBase64ABytes(base64FotoAtras));
+                    fotos4.nombreArchivo = filename4;
+                    fotos4.baseArchivo = Util.ConvertirArchivoABase64(path4);
+                    fotos4.FK_idSolicitud = ultimoId;
+                    conexionDB.Fotos.Add(fotos4);
+                    conexionDB.SaveChanges();
+
+                    Fotos fotos5 = new Fotos();
+                    var path5 = Path.Combine(Server.MapPath("~/App_Data/"), filename5);
+                    System.IO.File.WriteAllBytes(path5, Util.ConvertirBase64ABytes(base64FotoFrente));
+                    fotos5.nombreArchivo = filename5;
+                    fotos5.baseArchivo = Util.ConvertirArchivoABase64(path5);
+                    fotos5.FK_idSolicitud = ultimoId;
+                    conexionDB.Fotos.Add(fotos5);
+                    conexionDB.SaveChanges();
+
+                    //Enviar Correo
+                    string titulo = "Nueva Solicitud - Portal Tempora";
+                    string nombre = cliente.nombre + " " + cliente.apellido;
+                    string correo = cliente.correo;
+                    string rut = cliente.rut;
+                    string celular = cliente.celular;
+                    string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudUsuario.html")).Replace("[Nombre]", nombre).Replace("[Correo]", correo).Replace("[Rut]", rut).Replace("[Celular]", celular);
+                    Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+
+                }
+                return RedirectToAction("Enviado/" + idcliente, "Solicitudes");
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("Home", "Solicitud (GET)", ex.Message);
+                return RedirectToAction("Index", "Home");
+            }
         }
         public ActionResult Solicitud1(string idcliente)
         {
             return View();
         }
-        public ActionResult Solicitud2(string idcliente)
+        //public ActionResult Solicitud2(string idcliente)
+        //{
+        //    return View();
+        //}
+
+        public ActionResult Login(string id)
         {
+            string[] linkDecod = Util.Base64Decode(id).Split(';');
+            int linkId = int.Parse(linkDecod[0]);
+            ViewData["idCliente"] = linkId;
+            ViewData["id"] = id;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(FormCollection collection)
+        {
+            
+            string id = collection["id"];
+            string usr = collection["inputEmail"];
+            string pass = collection["inputPassword"];
+            int idCliente = int.Parse(collection["idCliente"]);
+            pass = Util.GetSHA1(pass);
+
+
+            //string ApiActibitiesGet = string.Empty;
+            //ApiActibitiesGet = PipeDriveAPI.GetAllPersons();
+            //var respuesta = Util.EnviarWhatsapp();
+            //PipeDriveAPI.AddUser("Fernanda", "fernanda.chin@uc.cl");
+            //string hola = Util.EnviarWhatsapp();
+            //ApiActibitiesPost = PipeDriveAPI.PostActivities("11504009", "Primera Consulta", "2021-06-10");
+            //ApiActibitiesGet = PipeDriveAPI.GetAllDeals();
+
+            try
+            {
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Cliente cliente = conexionDB.Cliente.Where(w => w.correo == usr && w.password == pass).FirstOrDefault();
+                    if (cliente != null)
+                    {
+                        if (cliente.idCliente == idCliente) {
+                            return RedirectToAction("Solicitud2/" + id, "Solicitudes");
+                        }
+                        //Session.Timeout = 60;
+                        //Session["Conectado"] = true;
+                        //Session["IdUsuario"] = usuario.idUsuario;
+                        //Session["IdPerfil"] = usuario.FK_idPerfil;
+                        //Session["Usuario"] = usuario;
+                        //Session["Nombre"] = usuario.Nombre + " " + usuario.Apellido;
+                        //Session["Correo"] = usuario.Correo;
+                        //Session["Celular"] = usuario.Telefono;
+                        //Session["Telefono"] = usuario.Celular;
+                        //Session["Permisos"] = new HomeController().NivelDePermisos(usuario.id_Usuarios);
+
+                        
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Util.escribirLog("Login", "Post", ex.Message);
+                Util.escribirLog("Login", "Post", ex.InnerException.Message);
+                return RedirectToAction("Index", "Home");
+
+
+            }
             return View();
         }
 

@@ -39,6 +39,9 @@ namespace WebSolicitudes.Models
         public string RespZona { get; set; }
         public Nullable<int> SolicitudCompleta { get; set; }
         public string idPipedrive { get; set; }
+        public Nullable<System.DateTime> FechaEvaluacionPresencial { get; set; }
+        public Nullable<System.DateTime> FechaCirugia { get; set; }
+        public Nullable<System.DateTime> FechaLlamada { get; set; }
     
         public virtual Ciudad Ciudad { get; set; }
         public virtual Cliente Cliente { get; set; }

@@ -2,7 +2,9 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-
+            <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap.min.css">
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
@@ -177,23 +179,142 @@
             var Estado = $("#txtEstado").val();
             if (Estado == 1) {
                 $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+            }
+            if (Estado == 6) {
+                $("#divEstados").show();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+            }
+            if (Estado == 4) {
+                console.log("Estado 4")
+                $("#divEstados").hide();
+                $("#divEstado4").show();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+            }
+            if (Estado == 13) {
+                console.log("Estado 13")
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").show();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+            }
+            if (Estado == 14) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").show();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+            }
+            if (Estado == 15) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").show();
+                $("#divEstado17").hide();
+            }
+            if (Estado == 17) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").show();
             }
             $("#txtEstado").change(function () {
                 console.log("Estado Seleccionado: " + $("#txtEstado").val())
                 var Estado = $("#txtEstado").val();
                 if (Estado == 6) {
-                    console.log("Estado 5")
-                    $("#divEstados").hide();
-                }
-                if (Estado == 2) {
-                    console.log("Estado 2")
+                    console.log("Estado 6")
+                    console.log("Estado 6" + Estado)
                     $("#divEstados").show();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
                 }
-                else {
-                    console.log("Otro estado")
+                //if (Estado == 2) {
+                //    console.log("Estado 2")
+                //    $("#divEstados").show();
+                //}
+                if (Estado == 4) {
+                    console.log("Estado 4")
                     $("#divEstados").hide();
+                    $("#divEstado4").show();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
                 }
+                if (Estado == 13) {
+                    console.log("Estado 13")
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").show();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                }
+                if (Estado == 14) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").show(); 
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                }
+                if (Estado == 15) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").show();
+                    $("#divEstado17").hide();
+                }
+                if (Estado == 17) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").show();
+                }
+                //else {
+                //    console.log("Otro estado")
+                //    $("#divEstados").hide();
+                //    $("#divEstado4").hide();
+                //}
             });
+            var valorEscrito = $("#txtObservacion2").val();
+            $("#txtObservacion2").change(function () {
+                 valorEscrito = $("#txtObservacion2").val();
+            });
+            $("#chxObservacion2").change(function () {
+                $("#txtObservacion2").val("");
+                var valorSelect = $("#chxObservacion2").val();
+                if (valorSelect == "") {
+                    $("#txtObservacion2").val(valorEscrito);
+                } else {
+                    $("#txtObservacion2").val(valorSelect);
+                }              
+            });
+
+            
             //divEstados
         });
     </script>
@@ -356,6 +477,26 @@
                                     <br />
                                 </div>
                             </div>      
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for="txtFechaCirugia"></label>
+                                    <label style="color: black">Fecha Cirugía </label>
+                                    <div id="selDiv">
+                                        <input disabled id="txtFechaCirugia" name="txtFechaCirugia" type='text' class='form-control' value='<%= ViewData["FechaCirugia"] %>'>
+                                    </div>
+                          
+                                    <br />
+                                </div>
+                                <div class="col-4">
+                                    <label for="txtFechaLlamada"></label>        
+                                    <label style="color: black">Fecha Llamada </label>
+                                    <div id="selDiv">
+                                        <input disabled  name="txtFechaLlamada" type='text' class='form-control' value='<%= ViewData["FechaLlamada"] %>'>
+                                    </div>
+          
+                                    <br />
+                                </div>
+                            </div>
                                 </div>  
                             <%-- Fotografías --%>
                             <div class="row">
@@ -527,27 +668,88 @@
                                         <br />
                                     </div>
                                 </div>
-                                    </div>
-                                    <div class=" text-center">
-                                        <div class="row">
-                                            <div class="col">
-                                                <button class="btn btn-primary" id="btnGuardar" type="submit" style="background-color: #55a247; border-color: #55a247;">Guardar</button>
+                            </div>
+                            <div id="divEstado4">
+                                <div class="col-lg-6 col-md-6 form-group">
+                                    <input id="txtFechaEvaluacion" placeholder="Fecha de evaluación presencial" name="txtFechaEvaluacion" />
+                                    <script>
+                                        $('#txtFechaEvaluacion').datepicker({
+                                            uiLibrary: 'bootstrap4',
+                                            format: 'dd/mm/yyyy'
+                                        });
+                                    </script>
 
-                                            </div>
-                                            <div class="col">
-                                                <button class="btn btn-primary" id="btnEnviar" type="submit" style="background-color: #C6D41D; border-color: #C6D41D;">Enviar</button>
-                                                <input id="enviar" name="enviar" hidden value="0"/>
-                                                <script>
-                                                    $(document).ready(function () {
-                                                        $("#btnEnviar").click(function () {
-                                                            $("#enviar").val(1);
-                                                        });
-                                                    });
-                                                </script>
-                                            </div>
-                                        </div>
+                                </div>
+                            </div>
+                            <div id="divEstado13">
+                                <div class="col-lg-12 col-md-12 form-group">
+                                    <label style="color:black"> Observación </label>
+                                    <select id="chxObservacion2" name="chxObservacion2" class="form-control">
+                                        <option value="">--Comentarios--</option>
+                                        <option value="No se puede calcular bien el numero de foliculos">No se puede calcular bien el numero de foliculos</option>
+                                        <option value="El paciente requiere por su estado...">El paciente requiere por su estado...</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-12 col-md-12 form-group">
+                                    <label for="txtObservacion2"></label>
+                                    <div id="selDiv">
+                                        <textarea  id="txtObservacion2" name="txtObservacion2" class='form-control'><%= ViewData["Observacion"] %></textarea>
                                     </div>
-                            
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div id="divEstado14">
+                                <div class="col-lg-6 col-md-6 form-group">
+                                    <input id="txtFechaCirugiaMandar" placeholder="Fecha de cirugia" name="txtFechaCirugiaMandar" />
+                                    <script>
+                                        $('#txtFechaCirugiaMandar').datepicker({
+                                            uiLibrary: 'bootstrap4',
+                                            format: 'dd/mm/yyyy'
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <div id="divEstado15">
+                                <div class="col-lg-6 col-md-6 form-group">
+                                    <label for="txtObservacion3"></label>
+                                    <label style="color:black"> Observación </label>
+                                    <div id="selDiv">
+                                        <textarea  id="txtObservacion3" name="txtObservacion3" class='form-control'></textarea>
+                                    </div>
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                </div>
+                            </div>
+                            <div id="divEstado17">
+                                <div class="col-lg-6 col-md-6 form-group">
+                                    <input id="txtFechaReagendarCirugia" placeholder="Nueva fecha de cirugia" name="txtFechaReagendarCirugia" />
+                                    <script>
+                                        $('#txtFechaReagendarCirugia').datepicker({
+                                            uiLibrary: 'bootstrap4',
+                                            format: 'dd/mm/yyyy'
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <div class=" text-center">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn btn-primary" id="btnGuardar" type="submit" style="background-color: #55a247; border-color: #55a247;">Guardar</button>
+
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary" id="btnEnviar" type="submit" style="background-color: #C6D41D; border-color: #C6D41D;">Enviar</button>
+                                        <input id="enviar" name="enviar" hidden value="0"/>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $("#btnEnviar").click(function () {
+                                                    $("#enviar").val(1);
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>    
                             </div>
                         </div>
                         </div>

@@ -210,8 +210,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\CasosController.cs" />
+    <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\ConversorBase64.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Permisos.cs" />
     <Compile Include="Controllers\PipeDriveAPI.cs" />
     <Compile Include="Controllers\RestClient.cs" />
     <Compile Include="Controllers\SolicitudesController.cs" />
@@ -260,6 +262,7 @@
     <Compile Include="Models\Perfil.cs">
       <DependentUpon>ModeloTempora.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PermisosPerfiles.cs" />
     <Compile Include="Models\RangoFoliculos.cs">
       <DependentUpon>ModeloTempora.tt</DependentUpon>
     </Compile>
@@ -425,6 +428,16 @@
     <Content Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <Content Include="Scripts\Additional-Validations.js" />
+    <Content Include="Styles\MensajeSolicitudFechaNuevaCirugia.html" />
+    <Content Include="Styles\MensajeSolicitudFechaCirugia.html" />
+    <Content Include="Styles\MensajeSolicitudCuidadosPreoperatorios.html" />
+    <Content Include="Styles\MensajeSolicitudProcedimientoPrevio.html" />
+    <Content Include="Styles\MensajeSolicitudEvaluacionPresencial.html" />
+    <Content Include="Styles\MensajeSolicitudIncompleta.html" />
+    <Content Include="Views\Clientes\Index.aspx" />
+    <Content Include="Views\Solicitudes\CompletarSolicitud.aspx" />
+    <Content Include="Views\Solicitudes\Login.aspx" />
+    <Content Include="Views\Solicitudes\CuidadosPreoperatorios.aspx" />
     <Content Include="Views\Usuarios\AgregarUsuario.aspx" />
     <Content Include="Views\Usuarios\Index.aspx" />
     <Content Include="Views\Usuarios\Perfil.aspx" />
