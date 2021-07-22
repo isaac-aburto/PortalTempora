@@ -195,7 +195,7 @@
       <!-- ======= Hero Section ======= -->
 <main id="main">
     <br />
-        <form style="background: #F7F7F7;" action="<%: Url.Content("~/Solicitudes/SolicitudFotos") %>" method="post" enctype="multipart/form-data" id="formSolicitud" class="needs-validation" novalidate>
+        <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Solicitudes/SolicitudFotoUnMes") %>">
             <section id="about" class="about" style="    margin-top: 5pc;">
                 <div class="card border-secondary <%--border-0--%> shadow rounded-lg mt-5" style="margin-top: -55px; background-color: #e3e3e3;">
                     <div class="container" data-aos="fade-up">
@@ -205,7 +205,7 @@
                                 <div class="card border-left-warning shadow ">
                                     <div class="card-body">
                                         <div style="text-align: center;">
-                                            <h1 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: inherit;">Fotografías Solicitud N°<%= ViewData["idSolicitud"]%> </h1>
+                                            <h1 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: inherit;">Fotografías Un Mes Desupúes Solicitud N°<%= ViewData["idSolicitud"]%> </h1>
                                             <h1 style="color: #b8c517; font-style: inherit;"><%= ViewData["NombreCompleto"]  %></h1>                                 
                                         </div>
                                         <hr />

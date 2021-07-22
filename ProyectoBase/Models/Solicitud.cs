@@ -20,6 +20,9 @@ namespace WebSolicitudes.Models
             this.Fotos = new HashSet<Fotos>();
             this.ZonaxSolicitud = new HashSet<ZonaxSolicitud>();
             this.RangoxSolicitud = new HashSet<RangoxSolicitud>();
+            this.FotosSeisMeses = new HashSet<FotosSeisMeses>();
+            this.FotosTresMeses = new HashSet<FotosTresMeses>();
+            this.FotosUnMes = new HashSet<FotosUnMes>();
         }
     
         public int idSolicitud { get; set; }
@@ -42,6 +45,14 @@ namespace WebSolicitudes.Models
         public Nullable<System.DateTime> FechaEvaluacionPresencial { get; set; }
         public Nullable<System.DateTime> FechaCirugia { get; set; }
         public Nullable<System.DateTime> FechaLlamada { get; set; }
+        public Nullable<System.DateTime> FechaEvaluaciónOnceMeses { get; set; }
+        public string ObserCuidado { get; set; }
+        public Nullable<System.DateTime> FechaCirugiaGarantia { get; set; }
+        public Nullable<System.DateTime> UltimoCambio { get; set; }
+        public Nullable<System.DateTime> EvaluacionPresencial { get; set; }
+        public Nullable<bool> Foto1Mes { get; set; }
+        public Nullable<bool> Foto3Mes { get; set; }
+        public Nullable<bool> Foto6Mes { get; set; }
     
         public virtual Ciudad Ciudad { get; set; }
         public virtual Cliente Cliente { get; set; }
@@ -56,5 +67,11 @@ namespace WebSolicitudes.Models
         public virtual ICollection<ZonaxSolicitud> ZonaxSolicitud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RangoxSolicitud> RangoxSolicitud { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FotosSeisMeses> FotosSeisMeses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FotosTresMeses> FotosTresMeses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FotosUnMes> FotosUnMes { get; set; }
     }
 }

@@ -43,5 +43,9 @@ namespace WebSolicitudes.Models
         public virtual DbSet<ArchivoxEstado> ArchivoxEstado { get; set; }
         public virtual DbSet<País> País { get; set; }
         public virtual DbSet<RangoxSolicitud> RangoxSolicitud { get; set; }
+        public virtual DbSet<ClasificacionEstado> ClasificacionEstado { get; set; }
+        public virtual DbSet<FotosSeisMeses> FotosSeisMeses { get; set; }
+        public virtual DbSet<FotosTresMeses> FotosTresMeses { get; set; }
+        public virtual DbSet<FotosUnMes> FotosUnMes { get; set; }
     }
 }

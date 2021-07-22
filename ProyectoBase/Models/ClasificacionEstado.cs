@@ -12,26 +12,19 @@ namespace WebSolicitudes.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario
+    public partial class ClasificacionEstado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuario()
+        public ClasificacionEstado()
         {
-            this.Solicitud = new HashSet<Solicitud>();
+            this.EstadoSolicitud = new HashSet<EstadoSolicitud>();
         }
     
-        public int idUsuario { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Correo { get; set; }
-        public string Password { get; set; }
-        public string Telefono { get; set; }
-        public string Celular { get; set; }
-        public Nullable<int> FK_idPerfil { get; set; }
-        public string idPipeDrive { get; set; }
+        public int idClasificacion { get; set; }
+        public string clasificacion { get; set; }
+        public string cod_clasificacion { get; set; }
     
-        public virtual Perfil Perfil { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Solicitud> Solicitud { get; set; }
+        public virtual ICollection<EstadoSolicitud> EstadoSolicitud { get; set; }
     }
 }

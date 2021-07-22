@@ -1684,7 +1684,7 @@ body {
         });
         </script> 
             </section>   --%>     
-    <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Solicitudes/Solictud2") %>">
+    <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Solicitudes/Solicitud2Agendar") %>">
     <input hidden name="idSolicitud" id="idSolicitud" value="<%= ViewData["idSolicitud"] %>"/>
      <input hidden name="idCliente" id="idCliente" value="<%= ViewData["idCliente"] %>""/>
     <div class="ultimodiv" style="margin-top: -13pc;">
@@ -1728,7 +1728,7 @@ body {
                         <br />
                         <br />
                     <div class="btnAgendar">
-                        <button id="btnAgendar" type="button" data-toggle="modal" data-target="#ModalArriba" style="background: #8aaf32; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Agendar</button>
+                        <button id="btnAgendar" type="submit" data-toggle="modal" data-target="#ModalArriba" style="background: #8aaf32; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Agendar</button>
                     </div>
                     </div>              
                 </div>
@@ -1801,7 +1801,174 @@ body {
             }, 33.3);
 
         </script>--%>
+
+    <br /><br /><br /><br /><br /><br />
+
+
+        
+    <%-- SEGUNDO MICRIOSITIO --%>
+    
+    <div class='gallery1'>
+        <h1 class='titulo-gracias' style="font-style: unset; font-size: 55px" data-aos="zoom-in" data-aos-delay="100">¡Gracias por elegir clínica Tempora!</h1>
+        <div class="d-flex justify-content-center">
+            <h1 style="font-style: unset; color: #797979; font-size: 20px" data-aos="zoom-in" data-aos-delay="100">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h1>
         </div>
+        <br /><br />
+        <div class="d-flex justify-content-center">
+            <div class=''>
+                <div class="video-gracias">
+                    <video class="video-gracias" src="../../Styles/caso/940.mp4" controls="controls" />
+                </div> 
+                <%--<img class="animate-image" src="https://images.unsplash.com/photo-1466695108335-44674aa2058b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80" alt="">--%>
+            </div>
+        </div>
+       <br /><br />
+        <h1 style="font-style: unset; font-size: 55px" data-aos="zoom-in" data-aos-delay="100">Conoce a tu Médico...</h1>
+    </div>
+    <br /><br /><br />
+    <div class="gallery2">
+        <div style="margin-left: -34pc;" class="row">
+            <div class="col" style="margin-left: 38pc;">
+                <div class="wrappera">
+                <img class="image1" style="border-color: white;" src="https://clinicatempora.cl/media/images/Castellon.2e16d0ba.fill-245x245.jpg" alt=""> 
+            <div class="covera"></div>
+    </div>
+                </div>
+            <div class="col cuadro-informacion">
+                <h1 style="margin-left: 0pc;margin-top: 40px;font-size: 31px;">Dr. [Nombre] [Apelllido]</h1>
+                <h1 style="padding-right: 3pc; font-size: 18px;" data-aos="zoom-in" data-aos-delay="100">"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."</h1>
+            </div>
+        </div>
+    </div>
+     <br /><br /><br />  
+    <style>
+        .gallery1{
+            text-align: center;
+        }
+        .video-gracias {
+            opacity: 0;
+            display: block;
+            margin: auto;
+        }
+        .cuadro-informacion {
+            background-color: #ededed;
+            height: 23pc;
+    width: 52pc;
+    margin-left: -8pc;
+        }
+    </style>
+    <script>
+        //document.querySelectorAll(".video-gracias")
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.utils.toArray('.video-gracias').forEach((el, index) => {
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: document.querySelectorAll(".titulo-gracias"),
+                    start: "center center",
+                    toggleActions: "play none none reverse",
+                    markers: true
+                }
+            })
+
+            tl
+                .set(el, { transformOrigin: 'center center' })
+                .fromTo(el, { opacity: 0, scale: 0.8, y: "+=100" }, { opacity: 1, scale: 1, y: 0, duration: 1, immediateRender: false })
+        })
+    </script>
+<section style="background-color:#ededed; width: 96pc;" class="fecha-evaluacion">
+    <div class="d-flex justify-content-center">
+        <h1 style="padding-right: 16pc;margin-left: -13pc;margin-top: 40px;font-size: 50px;">¿Cuándo nos veremos?</h1>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h1 style="padding-left: 10pc;font-size: 18px;margin-left: 5pc;" data-aos="zoom-in" data-aos-delay="100">"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. [Fecha]"</h1>
+        </div>
+        <div class="col" style="margin-left: 10pc;">
+            <div class="wrappera2">
+            <img class="image1"style="height: 23pc;width: 52pc;" class="image1" src="https://lh3.googleusercontent.com/proxy/rYi74WBvN5O6a_xEE1MyMzk5MjukxpyXt61Qc-Glr2U7lKVAzPX2c4c7zLvP68ccisW_p4bhnC6vtOshjYKfXnXiEfVcKYL_2ZrFo1-aSGzf3OsGCDNoHqlSjaMhicp7r14">
+        <div class="covera2"></div>
+            </div>
+            </div>
+    </div>
+
+    <style>
+
+        .wrappera {
+          width: 250px;
+          height: 250px;
+          position: relative;
+          margin: 40px;
+        }
+        .wrappera2 {
+          width: 600px;
+          height: 370px;
+          position: relative;
+          margin: 40px;
+        }
+
+        .covera,
+        .image1 {
+          position: absolute;
+        }
+
+        .covera {
+          width: 100%;
+          height: 100%;
+          background: #C4D600;
+        }
+        .covera2 {
+          width: 100%;
+          height: 100%;
+          background: black;
+        }
+    </style>
+    <script>
+        var controller = new ScrollMagic.Controller();
+
+        $(".wrappera").each(function () {
+            var tl = new TimelineMax();
+            var cov = $(this).find(".covera");
+            var img = $(this).find("img");
+
+            tl.from(cov, 1, { scaleX: 0, transformOrigin: "left" });
+            tl.to(cov, 1, { scaleX: 0, transformOrigin: "right" }, "reveal");
+            tl.from(img, 1, { opacity: 0 }, "reveal");
+
+            var scene = new ScrollMagic.Scene({
+                triggerElement: this,
+                triggerHook: 0.7
+            })
+                .setTween(tl)
+                .addIndicators()
+                .addTo(controller);
+        });
+        $(".wrappera2").each(function () {
+            var tl = new TimelineMax();
+            var cov = $(this).find(".covera2");
+            var img = $(this).find("img");
+
+            tl.from(cov, 1, { scaleX: 0, transformOrigin: "left" });
+            tl.to(cov, 1, { scaleX: 0, transformOrigin: "right" }, "reveal");
+            tl.from(img, 1, { opacity: 0 }, "reveal");
+
+            var scene = new ScrollMagic.Scene({
+                triggerElement: this,
+                triggerHook: 0.7
+            })
+                .setTween(tl)
+                .addIndicators()
+                .addTo(controller);
+        });
+    </script>
+    <br />
+    <br />
+
+    <br />
+</section>
+     <br />
+    <br /> 
+    <br />
+    <br />
 </main><!-- End #main -->
 
 </asp:Content>

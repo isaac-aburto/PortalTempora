@@ -232,6 +232,9 @@
     <Compile Include="Models\Ciudad.cs">
       <DependentUpon>ModeloTempora.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClasificacionEstado.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cliente.cs">
       <DependentUpon>ModeloTempora.tt</DependentUpon>
     </Compile>
@@ -239,6 +242,15 @@
       <DependentUpon>ModeloTempora.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Fotos.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FotosSeisMeses.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FotosTresMeses.cs">
+      <DependentUpon>ModeloTempora.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FotosUnMes.cs">
       <DependentUpon>ModeloTempora.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModeloTempora.Context.cs">
@@ -428,9 +440,18 @@
     <Content Include="Properties\DataSources\System.Xml.XmlNode.datasource" />
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <Content Include="Scripts\Additional-Validations.js" />
+    <Content Include="Styles\MensajeSolicitudFechaCirugiaGarantia.html" />
+    <Content Include="Styles\MensajeSolicitudQuintoMicrositio.html" />
+    <Content Include="Styles\MensajeSolicitudSegundoMicrositio.html" />
+    <Content Include="Styles\MensajeSolicitudUltimo.html" />
+    <Content Include="Styles\MensajeSolicitudTratamientoEspecial.html" />
+    <Content Include="Styles\MensajeSolicitudEvaluacionOnceMeses.html" />
     <Content Include="Styles\MensajeSolicitudFechaNuevaCirugia.html" />
     <Content Include="Styles\MensajeSolicitudFechaCirugia.html" />
     <Content Include="Styles\MensajeSolicitudCuidadosPreoperatorios.html" />
+    <Content Include="Styles\MensajeSolicitudFotoSeisMeses.html" />
+    <Content Include="Styles\MensajeSolicitudFotoTresMeses.html" />
+    <Content Include="Styles\MensajeSolicitudFotoUnMes.html" />
     <Content Include="Styles\MensajeSolicitudProcedimientoPrevio.html" />
     <Content Include="Styles\MensajeSolicitudEvaluacionPresencial.html" />
     <Content Include="Styles\MensajeSolicitudIncompleta.html" />
@@ -438,6 +459,10 @@
     <Content Include="Views\Solicitudes\CompletarSolicitud.aspx" />
     <Content Include="Views\Solicitudes\Login.aspx" />
     <Content Include="Views\Solicitudes\CuidadosPreoperatorios.aspx" />
+    <Content Include="Views\Solicitudes\SolicitudFotoSeisMeses.aspx" />
+    <Content Include="Views\Solicitudes\SolicitudFotoTresMeses.aspx" />
+    <Content Include="Views\Solicitudes\SolicitudFotoUnMes.aspx" />
+    <Content Include="Views\Usuarios\EditarUsuario.aspx" />
     <Content Include="Views\Usuarios\AgregarUsuario.aspx" />
     <Content Include="Views\Usuarios\Index.aspx" />
     <Content Include="Views\Usuarios\Perfil.aspx" />

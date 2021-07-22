@@ -101,7 +101,7 @@ namespace WebSolicitudes.Controllers
                         foreach (Usuario usuarios in listausuarios) {
                             filaUsuario += "<tr>";
                             filaUsuario += "  <td>";
-                            string URL = Url.Content("~/Solicitudes/GestionSolicitudes/");
+                            string URL = Url.Content("~/Usuarios/EditarUsuario/");
                             filaUsuario += "<a href='" + URL + usuarios.idUsuario + "'>" + usuarios.idUsuario + "</a>";
                             filaUsuario += "  </td>";
                             filaUsuario += "  <td>";
@@ -117,8 +117,8 @@ namespace WebSolicitudes.Controllers
                             filaUsuario += usuarios.Celular;
                             filaUsuario += "  </td>";
                             filaUsuario += "  <td>";
-                            filaUsuario += "<button title='Delete' class='btn btn-icon btn-2 btn-danger btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-trash fa-1x'></i></span></button>";
-                            filaUsuario += "<button title='Delete' class='btn btn-icon btn-2 btn-primary btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-edit fa-1x'></i></span></button>";
+                            filaUsuario += "<button title='Borrar' class='btn btn-icon btn-2 btn-danger btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-trash fa-1x'></i></span></button>";
+                            filaUsuario += "<button title='Editar' class='btn btn-icon btn-2 btn-primary btnEditar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><a href='" + URL + usuarios.idUsuario + "'><i style='color: white'class='fa fa-edit fa-1x'></i></a></span></button>";
                             filaUsuario += "  </td>";
                             filaUsuario += "</tr>";
                         }
@@ -151,6 +151,7 @@ namespace WebSolicitudes.Controllers
                 string Correo = collection["txtEmail"];
                 string Telefono = collection["txtTelefono"];
                 string Celular = collection["txtCelular"];
+                string PipeDrive = collection["txtPipeDrive"];
 
                 string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
                 using (ModeloTempora conexionDB = new ModeloTempora())
@@ -165,6 +166,7 @@ namespace WebSolicitudes.Controllers
                         usuario.Correo = Correo;
                         usuario.Telefono = Telefono;
                         usuario.Celular = Celular;
+                        usuario.idPipeDrive = PipeDrive;
                         conexionDB.Usuario.Add(usuario);
                         conexionDB.SaveChanges();
                     }
@@ -176,6 +178,12 @@ namespace WebSolicitudes.Controllers
                 return RedirectToAction("AgregarUsuario");
             }
             return RedirectToAction("Index"); 
+        }
+
+        public ActionResult EditarUsuario(int idUsuario)
+        {
+
+            return View();
         }
     }
 }

@@ -91,7 +91,7 @@
     <!-- ======= About Section ======= -->
 
 
-        <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Usuarios/AgregarUsuario") %>">
+        <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Usuarios/EditarUsuario") %>">
 
         <section id="about" class="about" style="    margin-top: 8pc;">
             
@@ -102,7 +102,7 @@
                         <div class="card-body" style="    margin-top: -5pc;">
                         <div class="card border-left-warning shadow ">
                         <div class="card-body">
-                            <h1 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: inherit;">Agregar Usuario</h1>
+                            <h1 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: inherit;">Editar Usuario</h1>
                             <br />
                             <div style="text-align: center;"></div>                                                
                             <div class="form-row">

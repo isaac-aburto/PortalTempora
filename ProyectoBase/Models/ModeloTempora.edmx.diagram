@@ -32,14 +32,22 @@
         <AssociationConnector Association="PortalModeloTemporal.FK_Solicitud_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="PortalModeloTemporal.FK_ZonaxSolicitud_Solicitud" ManuallyRouted="false" />
         <AssociationConnector Association="PortalModeloTemporal.FK_ZonaxSolicitud_ZonaAReparar" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="PortalModeloTemporal.ArchivoxEstado" Width="1.5" PointX="7.5" PointY="12.5" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.ArchivoxEstado" Width="1.5" PointX="8.875" PointY="12.625" />
         <EntityTypeShape EntityType="PortalModeloTemporal.País" Width="1.5" PointX="0.75" PointY="7.25" />
         <AssociationConnector Association="PortalModeloTemporal.FK_ArchivoxEstado_Archivos" />
         <AssociationConnector Association="PortalModeloTemporal.FK_ArchivoxSolicitud_EstadoSolicitud1" />
         <AssociationConnector Association="PortalModeloTemporal.FK_Region_País" />
-        <EntityTypeShape EntityType="PortalModeloTemporal.RangoxSolicitud" Width="1.5" PointX="7.5" PointY="9.75" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.RangoxSolicitud" Width="1.5" PointX="9.75" PointY="9.75" />
         <AssociationConnector Association="PortalModeloTemporal.FK_RangoxSolicitud_RangoFoliculos" />
         <AssociationConnector Association="PortalModeloTemporal.FK_RangoxSolicitud_Solicitud" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.ClasificacionEstado" Width="1.5" PointX="1.75" PointY="13.125" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.FotosSeisMeses" Width="1.5" PointX="9" PointY="19" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.FotosTresMeses" Width="1.5" PointX="9" PointY="16" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.FotosUnMes" Width="1.5" PointX="9" PointY="21.875" />
+        <AssociationConnector Association="PortalModeloTemporal.FK_EstadoSolicitud_ClasificacionEstado" />
+        <AssociationConnector Association="PortalModeloTemporal.FK_FotosSeisMeses_Solicitud" />
+        <AssociationConnector Association="PortalModeloTemporal.FK_FotosTresMeses_Solicitud" />
+        <AssociationConnector Association="PortalModeloTemporal.FK_FotosUnMes_Solicitud" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

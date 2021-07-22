@@ -33,5 +33,6 @@ namespace WebSolicitudes.Models
         public virtual ICollection<Solicitud> Solicitud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ArchivoxEstado> ArchivoxEstado { get; set; }
+        public virtual ClasificacionEstado ClasificacionEstado { get; set; }
     }
 }

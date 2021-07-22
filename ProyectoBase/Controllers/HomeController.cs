@@ -198,6 +198,9 @@ namespace WebSolicitudes.Controllers
                     string dealId = string.Empty;
                     dealId = PipeDriveAPI.PostDeal(Nombre + " - " + Rut, "11504009", "hola", "open", personId);
                     solicitud.idPipedrive = dealId;
+                    solicitud.Foto1Mes = false;
+                    solicitud.Foto3Mes = false;
+                    solicitud.Foto6Mes = false;
                     conexionDB.SaveChanges();
 
                     //Agrego cada Foto.
@@ -214,8 +217,7 @@ namespace WebSolicitudes.Controllers
 
                     Fotos fotos = new Fotos();
 
-                    var path = Path.Combine(Server.MapPath("~/App_Data/"), filename);
-                    System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoArriba));
+
                     //Ver si existe otro archivo con el mismo nombre.
                     //List<Fotos> listafotos = conexionDB.Fotos.ToList();
                     //String opciones = string.Empty;
@@ -223,106 +225,126 @@ namespace WebSolicitudes.Controllers
                     //string segundoNombre = "";
                     //bool igual = false;
 
-                    
+                    int cont = 1;
                     foreach (var file in files)
                     {
                         if (file != null && file.ContentLength > 0)
                         {
                             var nombrearchivo = Path.GetFileName(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
+                            
+                            if (cont == 1) {
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoArriba));
+                            }
+                            if (cont == 2)
+                            {
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoIzquierdo));
+                            }
+                            if (cont == 3)
+                            {
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoDerecho));
+                            }
+                            if (cont == 4)
+                            {
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoAtras));
+                            }
+                            if (cont == 5)
+                            {
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoFrente));
+                            }
+                            cont++;
                             //var path = Path.GetTempPath();
-                            var local = Path.Combine(Server.MapPath("~/App_Data/"), filename);
+                            var local = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
                             file.SaveAs(path);
-
                             Fotos archivo = new Fotos();
-
-                            //Ver si existe otro archivo con el mismo nombre.
-                            List<Fotos> listaarchivos = conexionDB.Fotos.ToList();
-                            String opciones = string.Empty;
-                            int n = 0;
-                            string segundoNombre = "";
-                            bool igual = false;
-                            foreach (Fotos item in listaarchivos)
-                            {
-                                if (item.nombreArchivo == filename)
-                                {
-                                    n++;
-                                    igual = true;
-                                    if (igual == true)
-                                    {
-                                        string nombrefile = filename.Split('.').FirstOrDefault();
-                                        string exten = filename.Split('.').LastOrDefault();
-                                        if (n != 1)
-                                        {
-                                            string nombrefileparnt = nombrefile.Split('(').FirstOrDefault();
-                                            segundoNombre = nombrefileparnt + "(" + n.ToString() + ")." + exten;
-                                        }
-                                        else
-                                        {
-                                            segundoNombre = nombrefile + "(" + n.ToString() + ")." + exten;
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (igual == false)
-                            {
-                                segundoNombre = filename;
-                            }
                             archivo.nombreFalso =
-                            archivo.nombreArchivo = filename;
+                            archivo.nombreArchivo = file.FileName;
                             archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
                             var ultimoId2 = solicitud.idSolicitud;
                             archivo.FK_idSolicitud = ultimoId2;
                             conexionDB.Fotos.Add(archivo);
                             conexionDB.SaveChanges();
+                            //Ver si existe otro archivo con el mismo nombre.
+                            //List<Fotos> listaarchivos = conexionDB.Fotos.ToList();
+                            //String opciones = string.Empty;
+                            //int n = 0;
+                            //string segundoNombre = "";
+                            //bool igual = false;
+                            //foreach (Fotos item in listaarchivos)
+                            //{
+                            //    if (item.nombreArchivo == filename)
+                            //    {
+                            //        n++;
+                            //        igual = true;
+                            //        if (igual == true)
+                            //        {
+                            //            string nombrefile = filename.Split('.').FirstOrDefault();
+                            //            string exten = filename.Split('.').LastOrDefault();
+                            //            if (n != 1)
+                            //            {
+                            //                string nombrefileparnt = nombrefile.Split('(').FirstOrDefault();
+                            //                segundoNombre = nombrefileparnt + "(" + n.ToString() + ")." + exten;
+                            //            }
+                            //            else
+                            //            {
+                            //                segundoNombre = nombrefile + "(" + n.ToString() + ")." + exten;
+                            //            }
+                            //        }
+                            //    }
+                            //}
+                            //if (igual == false)
+                            //{
+                            //    segundoNombre = filename;
+                            //}
+
                             //respuesta.AdjuntoEvidencias = archivo.id_archivo;
                         }
                     }
                     
 
                     //fotos.nombreFalso =
-                    fotos.nombreArchivo = filename;
-                    fotos.baseArchivo = Util.ConvertirArchivoABase64(path);
-                    var ultimoId = solicitud.idSolicitud;
-                    fotos.FK_idSolicitud = ultimoId;
-                    conexionDB.Fotos.Add(fotos);
-                    conexionDB.SaveChanges();
+                    //fotos.nombreArchivo = filename;
+                    //fotos.baseArchivo = Util.ConvertirArchivoABase64(path);
+                    //var ultimoId = solicitud.idSolicitud;
+                    //fotos.FK_idSolicitud = ultimoId;
+                    //conexionDB.Fotos.Add(fotos);
+                    //conexionDB.SaveChanges();
 
-                    Fotos fotos2 = new Fotos();
-                    var path2 = Path.Combine(Server.MapPath("~/App_Data/"), filename2);
-                    System.IO.File.WriteAllBytes(path2, Util.ConvertirBase64ABytes(base64FotoIzquierdo));
-                    fotos2.nombreArchivo = filename2;
-                    fotos2.baseArchivo = Util.ConvertirArchivoABase64(path2);
-                    fotos2.FK_idSolicitud = ultimoId;
-                    conexionDB.Fotos.Add(fotos2);
-                    conexionDB.SaveChanges();
+                    //Fotos fotos2 = new Fotos();
+                    //var path2 = Path.Combine(Server.MapPath("~/App_Data/"), filename2);
+                    //System.IO.File.WriteAllBytes(path2, Util.ConvertirBase64ABytes(base64FotoIzquierdo));
+                    //fotos2.nombreArchivo = filename2;
+                    //fotos2.baseArchivo = Util.ConvertirArchivoABase64(path2);
+                    //fotos2.FK_idSolicitud = ultimoId;
+                    //conexionDB.Fotos.Add(fotos2);
+                    //conexionDB.SaveChanges();
 
-                    Fotos fotos3 = new Fotos();
-                    var path3 = Path.Combine(Server.MapPath("~/App_Data/"), filename3);
-                    System.IO.File.WriteAllBytes(path3, Util.ConvertirBase64ABytes(base64FotoDerecho));
-                    fotos3.nombreArchivo = filename3;
-                    fotos3.baseArchivo = Util.ConvertirArchivoABase64(path3);
-                    fotos3.FK_idSolicitud = ultimoId;
-                    conexionDB.Fotos.Add(fotos3);
-                    conexionDB.SaveChanges();
+                    //Fotos fotos3 = new Fotos();
+                    //var path3 = Path.Combine(Server.MapPath("~/App_Data/"), filename3);
+                    //System.IO.File.WriteAllBytes(path3, Util.ConvertirBase64ABytes(base64FotoDerecho));
+                    //fotos3.nombreArchivo = filename3;
+                    //fotos3.baseArchivo = Util.ConvertirArchivoABase64(path3);
+                    //fotos3.FK_idSolicitud = ultimoId;
+                    //conexionDB.Fotos.Add(fotos3);
+                    //conexionDB.SaveChanges();
 
-                    Fotos fotos4 = new Fotos();
-                    var path4 = Path.Combine(Server.MapPath("~/App_Data/"), filename4);
-                    System.IO.File.WriteAllBytes(path4, Util.ConvertirBase64ABytes(base64FotoAtras));
-                    fotos4.nombreArchivo = filename4;
-                    fotos4.baseArchivo = Util.ConvertirArchivoABase64(path4);
-                    fotos4.FK_idSolicitud = ultimoId;
-                    conexionDB.Fotos.Add(fotos4);
-                    conexionDB.SaveChanges();
+                    //Fotos fotos4 = new Fotos();
+                    //var path4 = Path.Combine(Server.MapPath("~/App_Data/"), filename4);
+                    //System.IO.File.WriteAllBytes(path4, Util.ConvertirBase64ABytes(base64FotoAtras));
+                    //fotos4.nombreArchivo = filename4;
+                    //fotos4.baseArchivo = Util.ConvertirArchivoABase64(path4);
+                    //fotos4.FK_idSolicitud = ultimoId;
+                    //conexionDB.Fotos.Add(fotos4);
+                    //conexionDB.SaveChanges();
 
-                    Fotos fotos5 = new Fotos();
-                    var path5 = Path.Combine(Server.MapPath("~/App_Data/"), filename5);
-                    System.IO.File.WriteAllBytes(path5, Util.ConvertirBase64ABytes(base64FotoFrente));
-                    fotos5.nombreArchivo = filename5;
-                    fotos5.baseArchivo = Util.ConvertirArchivoABase64(path5);
-                    fotos5.FK_idSolicitud = ultimoId;
-                    conexionDB.Fotos.Add(fotos5);
-                    conexionDB.SaveChanges();
+                    //Fotos fotos5 = new Fotos();
+                    //var path5 = Path.Combine(Server.MapPath("~/App_Data/"), filename5);
+                    //System.IO.File.WriteAllBytes(path5, Util.ConvertirBase64ABytes(base64FotoFrente));
+                    //fotos5.nombreArchivo = filename5;
+                    //fotos5.baseArchivo = Util.ConvertirArchivoABase64(path5);
+                    //fotos5.FK_idSolicitud = ultimoId;
+                    //conexionDB.Fotos.Add(fotos5);
+                    //conexionDB.SaveChanges();
 
                     //Enviar Correo
                     string titulo  = "Nueva Solicitud - Portal Tempora";
@@ -401,7 +423,7 @@ namespace WebSolicitudes.Controllers
             string usr = collection["inputEmail"];
             string pass = collection["inputPassword"];
             pass = Util.GetSHA1(pass);
-
+            
 
             //string ApiActibitiesGet = string.Empty;
             //ApiActibitiesGet = PipeDriveAPI.GetAllPersons();

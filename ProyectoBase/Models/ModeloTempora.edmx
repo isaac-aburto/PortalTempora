@@ -29,6 +29,14 @@
           <Property Name="nombreCiudad" Type="varchar" MaxLength="100" />
           <Property Name="FK_idRegion" Type="int" />
         </EntityType>
+        <EntityType Name="ClasificacionEstado">
+          <Key>
+            <PropertyRef Name="idClasificacion" />
+          </Key>
+          <Property Name="idClasificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clasificacion" Type="varchar" MaxLength="100" />
+          <Property Name="cod_clasificacion" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="idCliente" />
@@ -65,6 +73,36 @@
           <Property Name="nombreArchivo" Type="varchar" MaxLength="200" />
           <Property Name="baseArchivo" Type="varchar(max)" />
           <Property Name="FK_idSolicitud" Type="int" Nullable="false" />
+          <Property Name="nombreFalso" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="FotosSeisMeses">
+          <Key>
+            <PropertyRef Name="idFotosSeis" />
+          </Key>
+          <Property Name="idFotosSeis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreArchivo" Type="varchar" MaxLength="200" />
+          <Property Name="baseArchivo" Type="varchar(max)" />
+          <Property Name="FK_idSolicitud" Type="int" />
+          <Property Name="nombreFalso" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="FotosTresMeses">
+          <Key>
+            <PropertyRef Name="idFotosTres" />
+          </Key>
+          <Property Name="idFotosTres" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreArchivo" Type="varchar" MaxLength="200" />
+          <Property Name="baseArchivo" Type="varchar(max)" />
+          <Property Name="FK_idSolicitud" Type="int" />
+          <Property Name="nombreFalso" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="FotosUnMes">
+          <Key>
+            <PropertyRef Name="idFotosUn" />
+          </Key>
+          <Property Name="idFotosUn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreArchivo" Type="varchar" MaxLength="200" />
+          <Property Name="baseArchivo" Type="varchar(max)" />
+          <Property Name="FK_idSolicitud" Type="int" />
           <Property Name="nombreFalso" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="País">
@@ -140,6 +178,14 @@
           <Property Name="FechaEvaluacionPresencial" Type="datetime" />
           <Property Name="FechaCirugia" Type="datetime" />
           <Property Name="FechaLlamada" Type="datetime" />
+          <Property Name="FechaEvaluaciónOnceMeses" Type="datetime" />
+          <Property Name="ObserCuidado" Type="varchar" MaxLength="1000" />
+          <Property Name="FechaCirugiaGarantia" Type="datetime" />
+          <Property Name="UltimoCambio" Type="datetime" />
+          <Property Name="EvaluacionPresencial" Type="datetime" />
+          <Property Name="Foto1Mes" Type="bit" />
+          <Property Name="Foto3Mes" Type="bit" />
+          <Property Name="Foto6Mes" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -173,6 +219,7 @@
           <Property Name="Telefono" Type="varchar" MaxLength="100" />
           <Property Name="Celular" Type="varchar" MaxLength="100" />
           <Property Name="FK_idPerfil" Type="int" />
+          <Property Name="idPipeDrive" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="ZonaAReparar">
           <Key>
@@ -228,6 +275,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_EstadoSolicitud_ClasificacionEstado">
+          <End Role="ClasificacionEstado" Type="Self.ClasificacionEstado" Multiplicity="0..1" />
+          <End Role="EstadoSolicitud" Type="Self.EstadoSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClasificacionEstado">
+              <PropertyRef Name="idClasificacion" />
+            </Principal>
+            <Dependent Role="EstadoSolicitud">
+              <PropertyRef Name="FK_ClasificacionEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Fotos_Solicitud">
           <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="1" />
           <End Role="Fotos" Type="Self.Fotos" Multiplicity="*" />
@@ -236,6 +295,42 @@
               <PropertyRef Name="idSolicitud" />
             </Principal>
             <Dependent Role="Fotos">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FotosSeisMeses_Solicitud">
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="0..1" />
+          <End Role="FotosSeisMeses" Type="Self.FotosSeisMeses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="FotosSeisMeses">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FotosTresMeses_Solicitud">
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="0..1" />
+          <End Role="FotosTresMeses" Type="Self.FotosTresMeses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="FotosTresMeses">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FotosUnMes_Solicitud">
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="0..1" />
+          <End Role="FotosUnMes" Type="Self.FotosUnMes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="FotosUnMes">
               <PropertyRef Name="FK_idSolicitud" />
             </Dependent>
           </ReferentialConstraint>
@@ -388,9 +483,13 @@
           <EntitySet Name="Archivos" EntityType="Self.Archivos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArchivoxEstado" EntityType="Self.ArchivoxEstado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClasificacionEstado" EntityType="Self.ClasificacionEstado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadoSolicitud" EntityType="Self.EstadoSolicitud" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fotos" EntityType="Self.Fotos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FotosSeisMeses" EntityType="Self.FotosSeisMeses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FotosTresMeses" EntityType="Self.FotosTresMeses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FotosUnMes" EntityType="Self.FotosUnMes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="País" EntityType="Self.País" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Perfil" EntityType="Self.Perfil" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RangoFoliculos" EntityType="Self.RangoFoliculos" Schema="dbo" store:Type="Tables" />
@@ -415,9 +514,25 @@
             <End Role="Region" EntitySet="Region" />
             <End Role="Ciudad" EntitySet="Ciudad" />
           </AssociationSet>
+          <AssociationSet Name="FK_EstadoSolicitud_ClasificacionEstado" Association="Self.FK_EstadoSolicitud_ClasificacionEstado">
+            <End Role="ClasificacionEstado" EntitySet="ClasificacionEstado" />
+            <End Role="EstadoSolicitud" EntitySet="EstadoSolicitud" />
+          </AssociationSet>
           <AssociationSet Name="FK_Fotos_Solicitud" Association="Self.FK_Fotos_Solicitud">
             <End Role="Solicitud" EntitySet="Solicitud" />
             <End Role="Fotos" EntitySet="Fotos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FotosSeisMeses_Solicitud" Association="Self.FK_FotosSeisMeses_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="FotosSeisMeses" EntitySet="FotosSeisMeses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FotosTresMeses_Solicitud" Association="Self.FK_FotosTresMeses_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="FotosTresMeses" EntitySet="FotosTresMeses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FotosUnMes_Solicitud" Association="Self.FK_FotosUnMes_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="FotosUnMes" EntitySet="FotosUnMes" />
           </AssociationSet>
           <AssociationSet Name="FK_RangoxSolicitud_RangoFoliculos" Association="Self.FK_RangoxSolicitud_RangoFoliculos">
             <End Role="RangoFoliculos" EntitySet="RangoFoliculos" />
@@ -521,6 +636,7 @@
           <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Enviado" Type="Boolean" />
           <Property Name="FK_ClasificacionEstado" Type="Int32" />
+          <NavigationProperty Name="ClasificacionEstado" Relationship="PortalModeloTemporal.FK_EstadoSolicitud_ClasificacionEstado" FromRole="EstadoSolicitud" ToRole="ClasificacionEstado" />
         </EntityType>
         <EntityType Name="Fotos">
           <Key>
@@ -606,6 +722,17 @@
           <Property Name="FechaEvaluacionPresencial" Type="DateTime" Precision="3" />
           <Property Name="FechaCirugia" Type="DateTime" Precision="3" />
           <Property Name="FechaLlamada" Type="DateTime" Precision="3" />
+          <Property Name="FechaEvaluaciónOnceMeses" Type="DateTime" Precision="3" />
+          <Property Name="ObserCuidado" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCirugiaGarantia" Type="DateTime" Precision="3" />
+          <Property Name="UltimoCambio" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FotosSeisMeses" Relationship="PortalModeloTemporal.FK_FotosSeisMeses_Solicitud" FromRole="Solicitud" ToRole="FotosSeisMeses" />
+          <NavigationProperty Name="FotosTresMeses" Relationship="PortalModeloTemporal.FK_FotosTresMeses_Solicitud" FromRole="Solicitud" ToRole="FotosTresMeses" />
+          <NavigationProperty Name="FotosUnMes" Relationship="PortalModeloTemporal.FK_FotosUnMes_Solicitud" FromRole="Solicitud" ToRole="FotosUnMes" />
+          <Property Name="EvaluacionPresencial" Type="DateTime" Precision="3" />
+          <Property Name="Foto1Mes" Type="Boolean" />
+          <Property Name="Foto3Mes" Type="Boolean" />
+          <Property Name="Foto6Mes" Type="Boolean" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -642,6 +769,7 @@
           <Property Name="FK_idPerfil" Type="Int32" />
           <NavigationProperty Name="Perfil" Relationship="Self.FK_Usuario_Perfil" FromRole="Usuario" ToRole="Perfil" />
           <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Usuario" FromRole="Usuario" ToRole="Solicitud" />
+          <Property Name="idPipeDrive" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ZonaAReparar">
           <Key>
@@ -895,6 +1023,26 @@
             <End Role="Solicitud" EntitySet="Solicitud" />
             <End Role="RangoxSolicitud" EntitySet="RangoxSolicitud" />
           </AssociationSet>
+          <EntitySet Name="ClasificacionEstado" EntityType="PortalModeloTemporal.ClasificacionEstado" />
+          <EntitySet Name="FotosSeisMeses" EntityType="PortalModeloTemporal.FotosSeisMeses" />
+          <EntitySet Name="FotosTresMeses" EntityType="PortalModeloTemporal.FotosTresMeses" />
+          <EntitySet Name="FotosUnMes" EntityType="PortalModeloTemporal.FotosUnMes" />
+          <AssociationSet Name="FK_EstadoSolicitud_ClasificacionEstado" Association="PortalModeloTemporal.FK_EstadoSolicitud_ClasificacionEstado">
+            <End Role="ClasificacionEstado" EntitySet="ClasificacionEstado" />
+            <End Role="EstadoSolicitud" EntitySet="EstadoSolicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FotosSeisMeses_Solicitud" Association="PortalModeloTemporal.FK_FotosSeisMeses_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="FotosSeisMeses" EntitySet="FotosSeisMeses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FotosTresMeses_Solicitud" Association="PortalModeloTemporal.FK_FotosTresMeses_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="FotosTresMeses" EntitySet="FotosTresMeses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FotosUnMes_Solicitud" Association="PortalModeloTemporal.FK_FotosUnMes_Solicitud">
+            <End Role="Solicitud" EntitySet="Solicitud" />
+            <End Role="FotosUnMes" EntitySet="FotosUnMes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ArchivoxEstado">
           <Key>
@@ -981,6 +1129,96 @@
               <PropertyRef Name="idSolicitud" />
             </Principal>
             <Dependent Role="RangoxSolicitud">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClasificacionEstado">
+          <Key>
+            <PropertyRef Name="idClasificacion" />
+          </Key>
+          <Property Name="idClasificacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clasificacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cod_clasificacion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="EstadoSolicitud" Relationship="PortalModeloTemporal.FK_EstadoSolicitud_ClasificacionEstado" FromRole="ClasificacionEstado" ToRole="EstadoSolicitud" />
+        </EntityType>
+        <EntityType Name="FotosSeisMeses">
+          <Key>
+            <PropertyRef Name="idFotosSeis" />
+          </Key>
+          <Property Name="idFotosSeis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreArchivo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="baseArchivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_idSolicitud" Type="Int32" />
+          <Property Name="nombreFalso" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Solicitud" Relationship="PortalModeloTemporal.FK_FotosSeisMeses_Solicitud" FromRole="FotosSeisMeses" ToRole="Solicitud" />
+        </EntityType>
+        <EntityType Name="FotosTresMeses">
+          <Key>
+            <PropertyRef Name="idFotosTres" />
+          </Key>
+          <Property Name="idFotosTres" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreArchivo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="baseArchivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_idSolicitud" Type="Int32" />
+          <Property Name="nombreFalso" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Solicitud" Relationship="PortalModeloTemporal.FK_FotosTresMeses_Solicitud" FromRole="FotosTresMeses" ToRole="Solicitud" />
+        </EntityType>
+        <EntityType Name="FotosUnMes">
+          <Key>
+            <PropertyRef Name="idFotosUn" />
+          </Key>
+          <Property Name="idFotosUn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreArchivo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="baseArchivo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_idSolicitud" Type="Int32" />
+          <Property Name="nombreFalso" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Solicitud" Relationship="PortalModeloTemporal.FK_FotosUnMes_Solicitud" FromRole="FotosUnMes" ToRole="Solicitud" />
+        </EntityType>
+        <Association Name="FK_EstadoSolicitud_ClasificacionEstado">
+          <End Type="PortalModeloTemporal.ClasificacionEstado" Role="ClasificacionEstado" Multiplicity="0..1" />
+          <End Type="PortalModeloTemporal.EstadoSolicitud" Role="EstadoSolicitud" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClasificacionEstado">
+              <PropertyRef Name="idClasificacion" />
+            </Principal>
+            <Dependent Role="EstadoSolicitud">
+              <PropertyRef Name="FK_ClasificacionEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FotosSeisMeses_Solicitud">
+          <End Type="PortalModeloTemporal.Solicitud" Role="Solicitud" Multiplicity="0..1" />
+          <End Type="PortalModeloTemporal.FotosSeisMeses" Role="FotosSeisMeses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="FotosSeisMeses">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FotosTresMeses_Solicitud">
+          <End Type="PortalModeloTemporal.Solicitud" Role="Solicitud" Multiplicity="0..1" />
+          <End Type="PortalModeloTemporal.FotosTresMeses" Role="FotosTresMeses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="FotosTresMeses">
+              <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FotosUnMes_Solicitud">
+          <End Type="PortalModeloTemporal.Solicitud" Role="Solicitud" Multiplicity="0..1" />
+          <End Type="PortalModeloTemporal.FotosUnMes" Role="FotosUnMes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Solicitud">
+              <PropertyRef Name="idSolicitud" />
+            </Principal>
+            <Dependent Role="FotosUnMes">
               <PropertyRef Name="FK_idSolicitud" />
             </Dependent>
           </ReferentialConstraint>
@@ -1090,6 +1328,14 @@
           <EntitySetMapping Name="Solicitud">
             <EntityTypeMapping TypeName="PortalModeloTemporal.Solicitud">
               <MappingFragment StoreEntitySet="Solicitud">
+                <ScalarProperty Name="Foto6Mes" ColumnName="Foto6Mes" />
+                <ScalarProperty Name="Foto3Mes" ColumnName="Foto3Mes" />
+                <ScalarProperty Name="Foto1Mes" ColumnName="Foto1Mes" />
+                <ScalarProperty Name="EvaluacionPresencial" ColumnName="EvaluacionPresencial" />
+                <ScalarProperty Name="UltimoCambio" ColumnName="UltimoCambio" />
+                <ScalarProperty Name="FechaCirugiaGarantia" ColumnName="FechaCirugiaGarantia" />
+                <ScalarProperty Name="ObserCuidado" ColumnName="ObserCuidado" />
+                <ScalarProperty Name="FechaEvaluaciónOnceMeses" ColumnName="FechaEvaluaciónOnceMeses" />
                 <ScalarProperty Name="FechaLlamada" ColumnName="FechaLlamada" />
                 <ScalarProperty Name="FechaCirugia" ColumnName="FechaCirugia" />
                 <ScalarProperty Name="FechaEvaluacionPresencial" ColumnName="FechaEvaluacionPresencial" />
@@ -1138,6 +1384,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="PortalModeloTemporal.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="idPipeDrive" ColumnName="idPipeDrive" />
                 <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Apellido" ColumnName="Apellido" />
@@ -1193,6 +1440,48 @@
                 <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
                 <ScalarProperty Name="FK_idRango" ColumnName="FK_idRango" />
                 <ScalarProperty Name="idRangoxSolicitud" ColumnName="idRangoxSolicitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClasificacionEstado">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.ClasificacionEstado">
+              <MappingFragment StoreEntitySet="ClasificacionEstado">
+                <ScalarProperty Name="cod_clasificacion" ColumnName="cod_clasificacion" />
+                <ScalarProperty Name="clasificacion" ColumnName="clasificacion" />
+                <ScalarProperty Name="idClasificacion" ColumnName="idClasificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FotosSeisMeses">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.FotosSeisMeses">
+              <MappingFragment StoreEntitySet="FotosSeisMeses">
+                <ScalarProperty Name="nombreFalso" ColumnName="nombreFalso" />
+                <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
+                <ScalarProperty Name="baseArchivo" ColumnName="baseArchivo" />
+                <ScalarProperty Name="nombreArchivo" ColumnName="nombreArchivo" />
+                <ScalarProperty Name="idFotosSeis" ColumnName="idFotosSeis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FotosTresMeses">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.FotosTresMeses">
+              <MappingFragment StoreEntitySet="FotosTresMeses">
+                <ScalarProperty Name="nombreFalso" ColumnName="nombreFalso" />
+                <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
+                <ScalarProperty Name="baseArchivo" ColumnName="baseArchivo" />
+                <ScalarProperty Name="nombreArchivo" ColumnName="nombreArchivo" />
+                <ScalarProperty Name="idFotosTres" ColumnName="idFotosTres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FotosUnMes">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.FotosUnMes">
+              <MappingFragment StoreEntitySet="FotosUnMes">
+                <ScalarProperty Name="nombreFalso" ColumnName="nombreFalso" />
+                <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
+                <ScalarProperty Name="baseArchivo" ColumnName="baseArchivo" />
+                <ScalarProperty Name="nombreArchivo" ColumnName="nombreArchivo" />
+                <ScalarProperty Name="idFotosUn" ColumnName="idFotosUn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

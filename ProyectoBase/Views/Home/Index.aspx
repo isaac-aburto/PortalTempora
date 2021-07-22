@@ -7,7 +7,7 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
     <%-- Script cámara --%>
-    <script type="text/javascript">
+<%--    <script type="text/javascript">
         $(function () {
             Webcam.set({
                 width: 320,
@@ -80,7 +80,7 @@
             });
 
         });
-    </script>
+    </script>--%>
     <script>
         $(document).ready(function () {
             $("#btnModalGuardar1").click(function () {
@@ -460,7 +460,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+   <%-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">--%>
       <!-- ======= Hero Section ======= -->
   <section class="d-flex align-items-center">
 
@@ -831,7 +831,7 @@
                       <label class="custom-control-label" for="customCheck2"></label>
                     </div>
 
-                    <button id="btnFacebook" hidden onclick="onLogin();">Iniciar Sesión</button>
+                <%--<button id="btnFacebook" hidden onclick="onLogin();">Iniciar Sesión</button>--%>
                 </div>
                 <div class="col">
                     <img width="50" height="50" src="../../Styles/img/whatsapp.png" />
@@ -849,7 +849,7 @@
                 </fb:login-button>--%>
             
             
-            <script>
+<%--            <script>
                 window.fbAsyncInit = function () {
                     FB.init({
                         appId: '2596657497293255',
@@ -885,8 +885,8 @@
                 //FB.getLoginStatus(function (response) {
                 //    statusChangeCallback(response);
                 //});
-            </script>
-                          <script>
+            </script>--%>
+<%--                          <script>
                               $("#customCheck2").change(function () {
                                   if (this.checked) {
                                       console.log("hola")
@@ -899,7 +899,7 @@
                                       $('#btnWsp')[0].click();
                                   }
                               });
-                          </script>
+                          </script>--%>
             </div>
           </div>
           <div class="text-center">

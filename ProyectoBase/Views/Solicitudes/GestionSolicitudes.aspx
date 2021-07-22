@@ -177,14 +177,6 @@
         $(document).ready(function () {
             console.log("Estado Seleccionado: " + $("#txtEstado").val())
             var Estado = $("#txtEstado").val();
-            if (Estado == 1) {
-                $("#divEstados").hide();
-                $("#divEstado4").hide();
-                $("#divEstado13").hide();
-                $("#divEstado14").hide();
-                $("#divEstado15").hide();
-                $("#divEstado17").hide();
-            }
             if (Estado == 6) {
                 $("#divEstados").show();
                 $("#divEstado4").hide();
@@ -192,6 +184,10 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
             }
             if (Estado == 4) {
                 console.log("Estado 4")
@@ -201,6 +197,22 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+            }
+            if (Estado == 11) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").show();
             }
             if (Estado == 13) {
                 console.log("Estado 13")
@@ -210,6 +222,10 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
             }
             if (Estado == 14) {
                 $("#divEstados").hide();
@@ -218,6 +234,10 @@
                 $("#divEstado14").show();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
             }
             if (Estado == 15) {
                 $("#divEstados").hide();
@@ -226,6 +246,10 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").show();
                 $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
             }
             if (Estado == 17) {
                 $("#divEstados").hide();
@@ -234,6 +258,95 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").show();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+            }
+            if (Estado == 1 || Estado == 2 || Estado == 3 || Estado == 5 || Estado == 7 || Estado == 8 || Estado == 9) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+            }
+            if (Estado == 20 || Estado == 22 || Estado == 24) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+            }
+            if (Estado == 10 || Estado == 12 || Estado == 16 || Estado == 18 || Estado == 19) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+            }
+            if (Estado == 21 || Estado == 23 || Estado == 25 || Estado == 26 || Estado == 28 || Estado == 31 || Estado == 32) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+            }
+            if (Estado == 27) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado27").show();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+            }
+            if (Estado == 29) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").show();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+            }
+            if (Estado == 30) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").show();
+                $("#divEstado11").hide();
+
             }
             $("#txtEstado").change(function () {
                 console.log("Estado Seleccionado: " + $("#txtEstado").val())
@@ -247,6 +360,10 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
                 }
                 //if (Estado == 2) {
                 //    console.log("Estado 2")
@@ -260,15 +377,22 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
                 }
                 if (Estado == 13) {
-                    console.log("Estado 13")
                     $("#divEstados").hide();
                     $("#divEstado4").hide();
                     $("#divEstado13").show();
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado11").hide();
                 }
                 if (Estado == 14) {
                     $("#divEstados").hide();
@@ -277,6 +401,10 @@
                     $("#divEstado14").show(); 
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
                 }
                 if (Estado == 15) {
                     $("#divEstados").hide();
@@ -285,6 +413,9 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").show();
                     $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado11").hide();
                 }
                 if (Estado == 17) {
                     $("#divEstados").hide();
@@ -293,6 +424,106 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").show();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
+                }
+                if (Estado == 20 || Estado == 22 || Estado == 24) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
+                }
+                if (Estado == 1 || Estado == 2 || Estado == 3 || Estado == 5 || Estado == 7 || Estado == 8 || Estado == 9) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
+                }
+                if (Estado == 11) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").show();
+                }
+                if (Estado == 10 || Estado == 12 || Estado == 16 || Estado == 18 || Estado == 19) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
+                }
+                if (Estado == 21 || Estado == 23 || Estado == 25 || Estado == 26 || Estado == 28 || Estado == 31 || Estado == 32) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
+                }
+                if (Estado == 27) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado27").show();  
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
+                }
+                if (Estado == 29) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").show(); 
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
+                }
+                if (Estado == 30) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").show();
+                    $("#divEstado11").hide();
                 }
                 //else {
                 //    console.log("Otro estado")
@@ -353,9 +584,10 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <main id="main" style="    margin-top: -1pc;">
-
+   <%-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' http://onlineerp.solution.quebec 'unsafe-inline' 'unsafe-eval';** ">
+    <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">--%>
     <!-- ======= About Section ======= -->
-
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'self';font-src 'self'; img-src 'self' data: https:; style-src 'self' ; script-src 'self'">
 
         <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Solicitudes/GestionSolicitudes") %>">
         <section id="about" class="about" style="    margin-top: 8pc;">
@@ -509,7 +741,7 @@
                                     <div class="col" style="    text-align: end;">
                                         <a id="btnFotografias" style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important" data-toggle="collapse" data-target="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2"><i style="color: #C6D41D;     font-size: 31px;" id="icon2" class="fa fa-angle-down"></i></a>
                                     </div>
-                                </div>
+                                </div>                                  
                                     <hr />
                                     <div class="collapse" id="collapseExample2">
                                     
@@ -681,6 +913,26 @@
 
                                 </div>
                             </div>
+                            <div id="divEstado11">
+                                <div class="col-6">
+                                    <label for="txtMedico"></label>
+                                    <label style="color:black"> Médico </label>
+                                        <select name="txtMedico" id="txtMedico" class="form-control" >
+                                            <%= ViewData["opcionesMedicos"] %>
+                                        </select>  
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                    <label style="color:black"> Fecha Evaluación Presencial</label>
+                                    <input id="txtFechaPresencial" placeholder="Fecha de evaluación presencial" name="txtFechaPresencial" />
+                                    <script>
+                                        $('#txtFechaPresencial').datepicker({
+                                            uiLibrary: 'bootstrap4',
+                                            format: 'dd/mm/yyyy'
+                                        });
+                                    </script>
+                                    <br />
+                                 </div>
+                            </div>                            
                             <div id="divEstado13">
                                 <div class="col-lg-12 col-md-12 form-group">
                                     <label style="color:black"> Observación </label>
@@ -725,6 +977,46 @@
                                     <input id="txtFechaReagendarCirugia" placeholder="Nueva fecha de cirugia" name="txtFechaReagendarCirugia" />
                                     <script>
                                         $('#txtFechaReagendarCirugia').datepicker({
+                                            uiLibrary: 'bootstrap4',
+                                            format: 'dd/mm/yyyy'
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <div id="divEstado27">
+                                <div class="col-lg-6 col-md-6 form-group">
+                                    <input id="txtFechaEvaluacion2" placeholder="Nueva fecha de evaluación" name="txtFechaEvaluacion2" value="<%= ViewData["FechaEvaluacionOnceMeses"] %>" />
+                                    <script>
+                                        $('#txtFechaEvaluacion2').datepicker({
+                                            uiLibrary: 'bootstrap4',
+                                            format: 'dd/mm/yyyy'
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <div id="divEstado29">
+                                <div class="col-lg-6 col-md-6 form-group">
+                                    <label style="color:black"> Observación </label>
+                                    <select id="chxObservacion4" name="chxObservacion4" class="form-control">
+                                        <option value="">--Comentarios--</option>
+                                        <option value="No se puede calcular bien el numero de foliculos">No se puede calcular bien el numero de foliculos</option>
+                                        <option value="El paciente requiere por su estado...">El paciente requiere por su estado...</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-12 col-md-12 form-group">
+                                    <label for="txtObservacion4"></label>
+                                    <div id="selDiv">
+                                        <textarea  id="txtObservacion4" name="txtObservacion4" class='form-control'><%= ViewData["Observacion"] %></textarea>
+                                    </div>
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div id="divEstado30">
+                                <div class="col-lg-6 col-md-6 form-group">
+                                    <input id="txtFechaCirugiaGarantia" placeholder="Fecha cirugía garantía" name="txtFechaCirugiaGarantia" value="<%= ViewData["FechaCirugíaGarantía"] %>" />
+                                    <script>
+                                        $('#txtFechaCirugiaGarantia').datepicker({
                                             uiLibrary: 'bootstrap4',
                                             format: 'dd/mm/yyyy'
                                         });
