@@ -117,7 +117,7 @@ namespace WebSolicitudes.Controllers
                             filaUsuario += usuarios.Celular;
                             filaUsuario += "  </td>";
                             filaUsuario += "  <td>";
-                            filaUsuario += "<button title='Borrar' class='btn btn-icon btn-2 btn-danger btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-trash fa-1x'></i></span></button>";
+                            filaUsuario += "<button title='Borrar' class='btn btn-icon btn-2 btn-danger btnEliminar' type='button' data-toggle='modal' data-target='#exampleModal' ><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-trash fa-1x'></i></span></button>";
                             filaUsuario += "<button title='Editar' class='btn btn-icon btn-2 btn-primary btnEditar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><a href='" + URL + usuarios.idUsuario + "'><i style='color: white'class='fa fa-edit fa-1x'></i></a></span></button>";
                             filaUsuario += "  </td>";
                             filaUsuario += "</tr>";
@@ -180,10 +180,100 @@ namespace WebSolicitudes.Controllers
             return RedirectToAction("Index"); 
         }
 
-        public ActionResult EditarUsuario(int idUsuario)
+        public ActionResult EditarUsuario(int id)
         {
+            try
+            {
+                
+                string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    if (int.TryParse(valorUsuario, out int idUsuario))
+                    {
+                        Usuario usuario = conexionDB.Usuario.Find(id);
+                        if (usuario == null)
+                            throw new Exception("El usuario no existe");
 
+                        List<Perfil> listaPerfiles = conexionDB.Perfil.ToList();
+                        string opcionesPerfiles = string.Empty;
+                        opcionesPerfiles += "<option value='0'>-- Selecciona opción --</option>";
+                        foreach (Perfil item in listaPerfiles)
+                        {
+                            if (item.idPerfil == usuario.FK_idPerfil)
+                            {
+                                opcionesPerfiles += "<option selected value='" + item.idPerfil + "'>" + item.nombrePerfil + "</option>";
+                            }
+                            else
+                            {
+                                opcionesPerfiles += "<option  value='" + item.idPerfil + "'>" + item.nombrePerfil + "</option>";
+                            }
+
+                        }
+                        ViewData["txtIdUsuario"] = id.ToString();
+                        ViewData["opcionesPerfil"] = opcionesPerfiles;
+                        ViewData["txtNombre"] = usuario.Nombre;
+                        ViewData["txtApellido"] = usuario.Apellido;
+                        ViewData["txtPerfil"] = usuario.Perfil.nombrePerfil;
+                        ViewData["txtCorreo"] = usuario.Correo;
+                        ViewData["txtTelefono"] = usuario.Telefono;
+                        ViewData["txtCelular"] = usuario.Celular;
+                        ViewData["txtPipeDrive"] = usuario.idPipeDrive;
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("AgregarUsuario", "Usuarios", ex.Message);
+                return RedirectToAction("AgregarUsuario");
+            }
+ 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditarUsuario(FormCollection collection)
+        {
+            int idusuario = int.Parse(collection["txtIdUsuario"]);
+            try
+            {
+                
+                
+                string nombre = collection["txtNombre"];
+                string apellido = collection["txtApellido"];
+                string Perfil = collection["txtPerfil"];
+                string Correo = collection["txtEmail"];
+                string Telefono = collection["txtTelefono"];
+                string Celular = collection["txtCelular"];
+                string PipeDrive = collection["txtPipeDrive"];
+
+                string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    if (int.TryParse(valorUsuario, out int idUsuario))
+                    {
+                        Usuario usuario = conexionDB.Usuario.Find(idusuario);
+                        if (usuario == null)
+                            throw new Exception("El usuario no existe");
+                        usuario.Nombre = nombre;
+                        usuario.Apellido = apellido;
+                        usuario.Correo = Correo;
+                        usuario.FK_idPerfil = int.Parse(Perfil);
+                        usuario.Telefono = Telefono;
+                        usuario.Celular = Celular;
+                        usuario.idPipeDrive = PipeDrive;
+                        conexionDB.SaveChanges();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("AgregarUsuario", "Usuarios", ex.Message);
+                return RedirectToAction("AgregarUsuario");
+            }
+
+            return RedirectToAction("EditarUsuario/" + idusuario.ToString(), "Usuarios");
         }
     }
 }

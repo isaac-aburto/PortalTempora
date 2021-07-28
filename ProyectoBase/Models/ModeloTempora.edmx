@@ -186,6 +186,8 @@
           <Property Name="Foto1Mes" Type="bit" />
           <Property Name="Foto3Mes" Type="bit" />
           <Property Name="Foto6Mes" Type="bit" />
+          <Property Name="DiaCirugiaEnviado" Type="bit" />
+          <Property Name="FechaCirugiaPaciente" Type="datetime" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -733,6 +735,8 @@
           <Property Name="Foto1Mes" Type="Boolean" />
           <Property Name="Foto3Mes" Type="Boolean" />
           <Property Name="Foto6Mes" Type="Boolean" />
+          <Property Name="DiaCirugiaEnviado" Type="Boolean" />
+          <Property Name="FechaCirugiaPaciente" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1328,6 +1332,8 @@
           <EntitySetMapping Name="Solicitud">
             <EntityTypeMapping TypeName="PortalModeloTemporal.Solicitud">
               <MappingFragment StoreEntitySet="Solicitud">
+                <ScalarProperty Name="FechaCirugiaPaciente" ColumnName="FechaCirugiaPaciente" />
+                <ScalarProperty Name="DiaCirugiaEnviado" ColumnName="DiaCirugiaEnviado" />
                 <ScalarProperty Name="Foto6Mes" ColumnName="Foto6Mes" />
                 <ScalarProperty Name="Foto3Mes" ColumnName="Foto3Mes" />
                 <ScalarProperty Name="Foto1Mes" ColumnName="Foto1Mes" />

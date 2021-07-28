@@ -8,6 +8,29 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="js/jquery.min.js" type="text/javascript"></script>
 <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script>
+            $(document).ready(function () {
+                var table = $('#tablasolicitudes').DataTable({
+                    "sDom": '<"top">rt<"bottom"ip><"clear">',
+                    "order": [
+                        [0, "asc"]
+                    ],
+                    "language": {
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": ">",
+                            "sPrevious": "<"
+                        },
+                    }
+                });
+                $("#tablasolicitudes").on("click", ".btnEliminar", function (e) {
+                    console.log("asdasd");
+                    //fila2 = e.currentTarget;
+                    $("#exampleModal").modal('show');
+                });
+            });
+        </script>
     <style>
         h5 {
             font-family: "Open Sans", sans-serif !important;
@@ -21,7 +44,26 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <main id="main" style="margin-top: -1pc;">
-
+                    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
     <!-- ======= About Section ======= -->
     <section id="about" class="about" style="    margin-top: 5pc;">
         <div class="card border-secondary <%--border-0--%> shadow rounded-lg mt-5" style="margin-top: -55px; background-color: #e3e3e3;">
@@ -140,7 +182,7 @@
             <div class="card border-left-warning shadow ">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover" id="tablasolicitudes">
+                        <table aria-describedby="datatable-basic_info" class="table table-flush table-striped table-bordered dataTable" role="grid" id="tablasolicitudes">
                             <thead>
                                 <tr>
                                     <th class="col-xs-2">N° Solicitud</th>

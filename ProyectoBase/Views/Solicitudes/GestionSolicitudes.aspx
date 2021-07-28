@@ -179,6 +179,7 @@
             var Estado = $("#txtEstado").val();
             if (Estado == 6) {
                 $("#divEstados").show();
+                $("#divEstado7").hide();
                 $("#divEstado4").hide();
                 $("#divEstado13").hide();
                 $("#divEstado14").hide();
@@ -193,6 +194,7 @@
                 console.log("Estado 4")
                 $("#divEstados").hide();
                 $("#divEstado4").show();
+                $("#divEstado7").hide();
                 $("#divEstado13").hide();
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
@@ -202,9 +204,24 @@
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
             }
+            if (Estado == 7) {
+                console.log("Estado 4")
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+                $("#divEstado7").show();
+            }
             if (Estado == 11) {
                 $("#divEstados").hide();
                 $("#divEstado4").hide();
+                $("#divEstado7").hide();
                 $("#divEstado13").hide();
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
@@ -226,6 +243,7 @@
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
+                $("#divEstado7").hide();
             }
             if (Estado == 14) {
                 $("#divEstados").hide();
@@ -238,6 +256,7 @@
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
+                $("#divEstado7").hide();
             }
             if (Estado == 15) {
                 $("#divEstados").hide();
@@ -250,6 +269,7 @@
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
+                $("#divEstado7").hide();
             }
             if (Estado == 17) {
                 $("#divEstados").hide();
@@ -262,8 +282,9 @@
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
+                $("#divEstado7").hide();
             }
-            if (Estado == 1 || Estado == 2 || Estado == 3 || Estado == 5 || Estado == 7 || Estado == 8 || Estado == 9) {
+            if (Estado == 1 || Estado == 2 || Estado == 3 || Estado == 5 || Estado == 8 || Estado == 9) {
                 $("#divEstados").hide();
                 $("#divEstado4").hide();
                 $("#divEstado13").hide();
@@ -274,6 +295,7 @@
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
+                $("#divEstado7").hide();
             }
             if (Estado == 20 || Estado == 22 || Estado == 24) {
                 $("#divEstados").hide();
@@ -286,6 +308,7 @@
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
+                $("#divEstado7").hide();
             }
             if (Estado == 10 || Estado == 12 || Estado == 16 || Estado == 18 || Estado == 19) {
                 $("#divEstados").hide();
@@ -298,6 +321,7 @@
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
+                $("#divEstado7").hide();
             }
             if (Estado == 21 || Estado == 23 || Estado == 25 || Estado == 26 || Estado == 28 || Estado == 31 || Estado == 32) {
                 $("#divEstados").hide();
@@ -310,6 +334,7 @@
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
+                $("#divEstado7").hide();
             }
             if (Estado == 27) {
                 $("#divEstados").hide();
@@ -322,6 +347,7 @@
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
+                $("#divEstado7").hide();
             }
             if (Estado == 29) {
                 $("#divEstados").hide();
@@ -334,6 +360,7 @@
                 $("#divEstado29").show();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
+                $("#divEstado7").hide();
             }
             if (Estado == 30) {
                 $("#divEstados").hide();
@@ -346,7 +373,7 @@
                 $("#divEstado29").hide();
                 $("#divEstado30").show();
                 $("#divEstado11").hide();
-
+                $("#divEstado7").hide();
             }
             $("#txtEstado").change(function () {
                 console.log("Estado Seleccionado: " + $("#txtEstado").val())
@@ -364,6 +391,7 @@
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
                 }
                 //if (Estado == 2) {
                 //    console.log("Estado 2")
@@ -381,6 +409,21 @@
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
+                }
+                if (Estado == 7) {
+                    console.log("Estado 4")
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
+                    $("#divEstado7").show();
                 }
                 if (Estado == 13) {
                     $("#divEstados").hide();
@@ -393,6 +436,7 @@
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
                 }
                 if (Estado == 14) {
                     $("#divEstados").hide();
@@ -405,6 +449,7 @@
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
                 }
                 if (Estado == 15) {
                     $("#divEstados").hide();
@@ -416,6 +461,7 @@
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
                 }
                 if (Estado == 17) {
                     $("#divEstados").hide();
@@ -428,6 +474,7 @@
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
                 }
                 if (Estado == 20 || Estado == 22 || Estado == 24) {
                     $("#divEstados").hide();
@@ -440,8 +487,9 @@
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
                 }
-                if (Estado == 1 || Estado == 2 || Estado == 3 || Estado == 5 || Estado == 7 || Estado == 8 || Estado == 9) {
+                if (Estado == 1 || Estado == 2 || Estado == 3 || Estado == 5 || Estado == 8 || Estado == 9) {
                     $("#divEstados").hide();
                     $("#divEstado4").hide();
                     $("#divEstado13").hide();
@@ -452,6 +500,7 @@
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
                 }
                 if (Estado == 11) {
                     $("#divEstados").hide();
@@ -464,6 +513,7 @@
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").show();
+                    $("#divEstado7").hide();
                 }
                 if (Estado == 10 || Estado == 12 || Estado == 16 || Estado == 18 || Estado == 19) {
                     $("#divEstados").hide();
@@ -476,6 +526,7 @@
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
                 }
                 if (Estado == 21 || Estado == 23 || Estado == 25 || Estado == 26 || Estado == 28 || Estado == 31 || Estado == 32) {
                     $("#divEstados").hide();
@@ -488,6 +539,7 @@
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
                 }
                 if (Estado == 27) {
                     $("#divEstados").hide();
@@ -500,6 +552,7 @@
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
                 }
                 if (Estado == 29) {
                     $("#divEstados").hide();
@@ -512,6 +565,7 @@
                     $("#divEstado29").show(); 
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
                 }
                 if (Estado == 30) {
                     $("#divEstados").hide();
@@ -524,6 +578,7 @@
                     $("#divEstado29").hide();
                     $("#divEstado30").show();
                     $("#divEstado11").hide();
+                    $("#divEstado7").hide();
                 }
                 //else {
                 //    console.log("Otro estado")
@@ -712,7 +767,7 @@
                             <div class="row">
                                 <div class="col-4">
                                     <label for="txtFechaCirugia"></label>
-                                    <label style="color: black">Fecha Cirugía </label>
+                                    <label style="color: black">Fecha Cirugía Paciente</label>
                                     <div id="selDiv">
                                         <input disabled id="txtFechaCirugia" name="txtFechaCirugia" type='text' class='form-control' value='<%= ViewData["FechaCirugia"] %>'>
                                     </div>
@@ -721,7 +776,7 @@
                                 </div>
                                 <div class="col-4">
                                     <label for="txtFechaLlamada"></label>        
-                                    <label style="color: black">Fecha Llamada </label>
+                                    <label style="color: black">Fecha Llamada Paciente</label>
                                     <div id="selDiv">
                                         <input disabled  name="txtFechaLlamada" type='text' class='form-control' value='<%= ViewData["FechaLlamada"] %>'>
                                     </div>
@@ -913,6 +968,20 @@
 
                                 </div>
                             </div>
+                            <div id="divEstado7">
+<%--                                <div class="col-lg-6 col-md-6 form-group">
+                                    <label for="txtFechaCirugiaDoctor"></label>
+                                    <label style="color:black">Confirmar Fecha Cirugía </label>
+                                    <input id="txtFechaCirugiaDoctor" placeholder="Fecha de cirugía " name="txtFechaCirugiaDoctor" />
+                                    <script>
+                                        $('#txtFechaCirugiaDoctor').datepicker({
+                                            uiLibrary: 'bootstrap4',
+                                            format: 'dd/mm/yyyy'
+                                        });
+                                    </script>
+
+                                </div>--%>
+                            </div>
                             <div id="divEstado11">
                                 <div class="col-6">
                                     <label for="txtMedico"></label>
@@ -923,7 +992,7 @@
                                     <div class="invalid-feedback">Seleccione una opción</div>
                                     <br />
                                     <label style="color:black"> Fecha Evaluación Presencial</label>
-                                    <input id="txtFechaPresencial" placeholder="Fecha de evaluación presencial" name="txtFechaPresencial" />
+                                    <input id="txtFechaPresencial" placeholder="Fecha de evaluación presencial" name="txtFechaPresencial" value="<%= ViewData["FechaEvaluacionPreciencial"] %>"/>
                                     <script>
                                         $('#txtFechaPresencial').datepicker({
                                             uiLibrary: 'bootstrap4',

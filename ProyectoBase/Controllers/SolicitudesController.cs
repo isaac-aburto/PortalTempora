@@ -141,9 +141,10 @@ namespace WebSolicitudes.Controllers
                         ViewData["RespuestaDerma"] = solicitud.RespDerm;
                         ViewData["RespuestaPelo"] = solicitud.RespPelo;
                         ViewData["Observacion"] = solicitud.ObserMed;
-                        ViewData["FechaCirugia"] = solicitud.FechaCirugia;
+                        ViewData["FechaCirugia"] = solicitud.FechaCirugiaPaciente;
                         ViewData["FechaLlamada"] = solicitud.FechaLlamada;
                         ViewData["FechaEvaluacionOnceMeses"] = solicitud.FechaEvaluaciónOnceMeses;
+                        ViewData["FechaEvaluacionPreciencial"] = solicitud.EvaluacionPresencial;
                         Util.escribirLog("Solicitudes", "GestionSolicitud (GET)","Seteo todos los ViewData");
                         //Datos de la Gestión
                         List<Tecnica> listaTecnicas = conexionDB.Tecnica.ToList();
@@ -329,6 +330,7 @@ namespace WebSolicitudes.Controllers
             string enviar = collection["enviar"];
             string fechaEvaluacion = collection["txtFechaEvaluacion"];
             int idCliente;
+            
 
             try
             {
@@ -395,8 +397,8 @@ namespace WebSolicitudes.Controllers
                                 string pass = solicitud.Cliente.idCliente + ";" + solicitud.Cliente.rut;
                                 var password = Util.Base64Encode(pass);
                                 Cliente cliente = conexionDB.Cliente.Find(idCliente);
-                                string Pass = Util.GetSHA1(password);
-                                cliente.password = Pass;
+                                //string Pass = Util.GetSHA1(password);
+                                cliente.password = password;
                                 conexionDB.SaveChanges();
                                 //Enviar Correo
                                 string titulo = "He aquí tu evaluación - Portal Tempora";
@@ -444,7 +446,24 @@ namespace WebSolicitudes.Controllers
                                 solicitud.UltimoCambio = DateTime.Now;
                             }
                         }
+                        //Agendar Cirugía
+                        //if (Estado == "7")
+                        //{
+                        //    string fechaCirugia = collection["txtFechaPresencial"];
+                        //    DateTime oDate = Convert.ToDateTime(fechaCirugia);
+                        //    solicitud.FechaCirugia = oDate;
+                        //    //Armar link
+                        //    string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                        //    link = Util.Base64Encode(link);
 
+                        //    //Enviar Correo
+                        //    string titulo = "Hubo un problema cons tus fotografías - Portal Tempora";
+                        //    string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                        //    string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotos.html")).Replace("[Nombre]", nombre).Replace("[Link]", link);
+                        //    Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                        //    solicitud.UltimoCambio = DateTime.Now;
+
+                        //}
                         //Enviar segundo micrositio
                         if (Estado == "11")
                         {
@@ -459,12 +478,14 @@ namespace WebSolicitudes.Controllers
 
                             if (enviar == "1")
                             {
+                                string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                                link = Util.Base64Encode(link);
                                 //Enviar Correo
                                 string titulo = "Su médico esta aquí - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 Cliente cliente = conexionDB.Cliente.Find(idCliente);
-                                string password = Util.Base64Decode(cliente.password);
-                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudSegundoMicrositio.html")).Replace("[nombreMedico]", nombreMedico).Replace("[Nombre]", nombre).Replace("[Password]", password).Replace("[FechaPresencial]", txtFechaPresencial);
+                                string password = cliente.password;
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudSegundoMicrositio.html")).Replace("[nombreMedico]", nombreMedico).Replace("[Nombre]", nombre).Replace("[Password]", password).Replace("[FechaPresencial]", txtFechaPresencial).Replace("[Link]", password);
                                 Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
 
                             }
@@ -527,9 +548,10 @@ namespace WebSolicitudes.Controllers
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFechaNuevaCirugia.html")).Replace("[FechaCirugiaMandar]", FechaNuevaCirugia).Replace("[Nombre]", nombre);
                                 Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                solicitud.DiaCirugiaEnviado = false;
                             }
                         }
-                        //Se realizó la cirugía con éxito
+                        //Enviar Quinto micrositio - Cuidados postoperatorios
                         if (Estado == "18")
                         {
                             //Armar link
@@ -682,6 +704,7 @@ namespace WebSolicitudes.Controllers
 
                     Solicitud solicitud = conexionDB.Solicitud.Where(w => w.FK_idCliente == cliente.idCliente).FirstOrDefault();
                     //Insertar video
+                    string estadoSolicitud = solicitud.Fk_idEstado.ToString();
                     int edad = Util.CalcularEdad(cliente.fecha_nacimiento.ToString());
                     string tecnica = solicitud.Tecnica.nombreTecnica;
                     int rango1 = int.Parse(conexionDB.RangoxSolicitud.Where(w=> w.FK_idSolicitud == solicitud.idSolicitud).Select(s=> s.FK_idRango).FirstOrDefault().ToString());
@@ -692,7 +715,7 @@ namespace WebSolicitudes.Controllers
 
                     //Obtener video
                     string src = Util.CalcularVideo(tecnica, Rango1, Rango2, edad);
-
+                    ViewData["idEstado"] = estadoSolicitud;
                     ViewData["src"] = src;
                     ViewData["Nombre"] = cliente.nombre +" "+ cliente.apellido;
                     ViewData["idSolicitud"] = solicitud.idSolicitud;
@@ -727,7 +750,7 @@ namespace WebSolicitudes.Controllers
                         throw new Exception("El usuario no existe");
 
                     Solicitud solicitud = conexionDB.Solicitud.Find(Solicitud);
-                    solicitud.FechaCirugia = oDate;
+                    solicitud.FechaCirugiaPaciente = oDate;
                     solicitud.FechaLlamada = oDate2;
                     solicitud.Fk_idEstado = 7;
                     conexionDB.SaveChanges();
@@ -951,6 +974,7 @@ namespace WebSolicitudes.Controllers
                     }
                 }
                 solicitud.Fk_idEstado = 21;
+                solicitud.Foto1Mes = true;
                 solicitud.UltimoCambio = DateTime.Now;
 
             }
@@ -1056,6 +1080,7 @@ namespace WebSolicitudes.Controllers
                     }
                 }
                 solicitud.Fk_idEstado = 23;
+                solicitud.Foto3Mes = true;
                 solicitud.UltimoCambio = DateTime.Now;
 
             }
@@ -1162,6 +1187,7 @@ namespace WebSolicitudes.Controllers
                 }
 
                 solicitud.Fk_idEstado = 25;
+                solicitud.Foto6Mes = true;
                 solicitud.UltimoCambio = DateTime.Now;
                 conexionDB.SaveChanges();
 
@@ -1283,7 +1309,25 @@ namespace WebSolicitudes.Controllers
 
         }
 
-
+        public string ConsultarMicrositio(string idSolucitud, string idEstado)
+        {
+            try
+            {
+                int estadoSeleccionado = int.Parse(idEstado);
+                int id = int.Parse(idSolucitud);
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Solicitud solicitud = conexionDB.Solicitud.Find(id);
+                    string estado = solicitud.Fk_idEstado.ToString();
+                    return estado;
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("ConsultarMicrositio", "Solicitudes (GET)", ex.Message);
+                return "ERROR al cargar ESTADO";
+            }
+        }
         public ActionResult Enviado(string idcliente)
         {
             ViewData["Correo"] = Session["Correo"];
@@ -1653,7 +1697,7 @@ namespace WebSolicitudes.Controllers
             string usr = collection["inputEmail"];
             string pass = collection["inputPassword"];
             int idCliente = int.Parse(collection["idCliente"]);
-            pass = Util.GetSHA1(pass);
+            //pass = Util.GetSHA1(pass);
 
 
             //string ApiActibitiesGet = string.Empty;
@@ -1704,7 +1748,6 @@ namespace WebSolicitudes.Controllers
 
         public void GestorFechasSolicitud()
         {
-
             try
             {
                 using (ModeloTempora conexionDB = new ModeloTempora())
@@ -1716,6 +1759,32 @@ namespace WebSolicitudes.Controllers
                     foreach (Solicitud solicitud in listaSolicitudes)
                     {
                         double meses = fechaActual.Subtract(Convert.ToDateTime(solicitud.FechaCirugia)).Days / (365.25 / 12);
+
+                        // El día de tu cirugía 
+                        if ((meses < 0.33 || meses > -0.89) && solicitud.DiaCirugiaEnviado == false)
+                        {
+                            solicitud.Fk_idEstado = 16;
+
+                            //Armar link
+                            string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                            link = Util.Base64Encode(link);
+                            string pass = solicitud.Cliente.idCliente + ";" + solicitud.Cliente.rut;
+                            var password = Util.Base64Encode(pass);
+                            Cliente cliente = conexionDB.Cliente.Find(solicitud.FK_idCliente);
+                            string Pass = Util.GetSHA1(password);
+                            cliente.password = Pass;
+                            
+                            //Enviar Correo
+                            string titulo = "El día de tu cirugía - Portal Tempora";
+                            string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                            string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudCuartoMicrositio.html")).Replace("[Nombre]", nombre).Replace("[Link]", link).Replace("[Password]", password);
+                            Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+
+                            solicitud.DiaCirugiaEnviado = true;
+                            solicitud.UltimoCambio = DateTime.Now;
+                            conexionDB.SaveChanges();
+
+                        }
                         if (meses >= 1.0 && solicitud.Foto1Mes == false) {
 
                             solicitud.Fk_idEstado = 20;
@@ -1729,6 +1798,7 @@ namespace WebSolicitudes.Controllers
                             string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotoUnMes.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
                             Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
 
+                            solicitud.Foto1Mes = true;
                             solicitud.UltimoCambio = DateTime.Now;
                         }
                         if (meses >= 3.0 && solicitud.Foto3Mes == false)
@@ -1743,7 +1813,7 @@ namespace WebSolicitudes.Controllers
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotoTresMeses.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
                                 Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
-
+                            solicitud.Foto3Mes = true;
                             solicitud.UltimoCambio = DateTime.Now;
                         }
                         if (meses >= 6.0 && solicitud.Foto6Mes == false)
@@ -1758,9 +1828,10 @@ namespace WebSolicitudes.Controllers
                             string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                             string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotoSeisMeses.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
                             Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
-
+                            solicitud.Foto6Mes = true;
                             solicitud.UltimoCambio = DateTime.Now;
                         }
+                        conexionDB.SaveChanges();
                     }
                 }
             }

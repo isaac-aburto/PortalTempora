@@ -106,10 +106,10 @@
                             <br />
                             <div style="text-align: center;"></div>                                                
                             <div class="form-row">
-                                
+                                <input hidden name="txtIdUsuario" value="<%= ViewData["txtIdUsuario"] %>"/>
                                 <div class="col-lg-6 col-md-6 form-group">
                                     <label for="txtNombre">Nombre</label>
-                                    <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" data-rule="minlen:1" data-msg="Please enter at least 4 chars" required>
+                                    <input value="<%= ViewData["txtNombre"] %>" type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" data-rule="minlen:1" data-msg="Please enter at least 4 chars" required>
                                     <div class="invalid-feedback">
                                         Por favor ingrese su nombre
                                     </div>
@@ -117,7 +117,7 @@
                                 
                                 <div class="col-lg-6 col-md-6 form-group">
                                     <label for="txtApellido">Apellido</label>
-                                    <input type="text" id="txtApellido" name="txtApellido" class="form-control" placeholder="Apellido" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                                    <input value="<%= ViewData["txtApellido"] %>" type="text" id="txtApellido" name="txtApellido" class="form-control" placeholder="Apellido" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
                                     <div class="invalid-feedback">
                                        Por favor ingrese su apellido
                                     </div>
@@ -126,16 +126,13 @@
                                 <div class="col-lg-6 col-md-6 form-group">
                                     <label for="txtPerfil">Perfil</label>
                                           <select class="custom-select mr-sm-2" name="txtPerfil"  id="txtPerfil" required>
-                                            <option selected>Perfil</option>
-                                            <option value="1">Administrador</option>
-                                            <option value="2">Médico</option>
-                                            <option value="3">Otro</option>
+                                            <%= ViewData["opcionesPerfil"] %>
                                           </select>
                                 </div>
                                 
                                 <div class="col-lg-6 col-md-6 form-group">
                                     <label for="txtEmail">Correo</label>
-                                    <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email" required>
+                                    <input value="<%= ViewData["txtCorreo"] %>" type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email" required>
                                     <div class="invalid-feedback">
                                         Por favor ingrese su correo
                                     </div>
@@ -143,7 +140,7 @@
                                 
                                 <div class="col-lg-6 col-md-6 form-group">
                                     <label for="txtTelefono">Teléfono</label>
-                                    <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" placeholder="Teléfono" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                                    <input value="<%= ViewData["txtTelefono"] %>" type="text" class="form-control" name="txtTelefono" id="txtTelefono" placeholder="Teléfono" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
                                     <div class="invalid-feedback">
                                         Por favor ingrese su telefono
                                     </div>
@@ -151,14 +148,14 @@
                                 
                                 <div class="col-lg-6 col-md-6 form-group">
                                     <label for="txtCelular">Celular</label>
-                                    <input type="text" class="form-control" name="txtCelular" id="txtCelular" placeholder="Celular" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                                    <input value="<%= ViewData["txtCelular"] %>" type="text" class="form-control" name="txtCelular" id="txtCelular" placeholder="Celular" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
                                     <div class="invalid-feedback">
                                         Por favor ingrese su celular
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 form-group">
                                     <label for="txtPipeDrive">ID Pipedrive</label>
-                                    <input type="text" class="form-control" name="txtPipeDrive" id="txtPipeDrive" placeholder="123456" data-rule="minlen:4" data-msg="Please enter at least 4 chars" >
+                                    <input value="<%= ViewData["txtPipeDrive"] %>" type="text" class="form-control" name="txtPipeDrive" id="txtPipeDrive" placeholder="123456" data-rule="minlen:4" data-msg="Please enter at least 4 chars" >
                                     <div class="invalid-feedback">
                                         Por favor ingrese su celular
                                     </div>
@@ -167,6 +164,7 @@
                                 </div>
                                 <div class="col">
                                 <div style="text-align: center;">
+                                    <button class="btn btn-primary" onclick="location.href ='';" style="background-color: grey; border-color: grey;" type="button">Volver</button>
                                     <button class="btn btn-primary"style="background-color: #C6D41D; border-color: #C6D41D;" type="submit">Agregar</button>
                                 </div> 
                                     </div> 

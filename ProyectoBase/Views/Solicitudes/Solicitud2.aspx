@@ -79,6 +79,92 @@
             window.resizeTo(size[0], size[1]);
         });
     </script>
+
+    <%-- Script Estados Micrositios --%>
+    <script>
+        $(document).ready(function () {
+            
+            var idSolucitud = $("#idSolicitud").val();
+            var idEstado = $("#idEstado").val();
+            if (idEstado == "6") {
+                $("#micrositio1").show();
+                $("#micrositio2").hide();
+                $("#micrositio3").hide();
+                $("#micrositio4").hide();
+                $("#micrositio5").hide();
+                $("#micrositio6").hide();
+                $("#micrositio7").hide();
+                $(window).scrollTop($("#micrositio1").offset().top);
+            } if (idEstado == "11") {
+                $("#micrositio1").show();
+                $("#micrositio2").show();
+                $("#micrositio3").hide();
+                $("#micrositio4").hide();   
+                $("#micrositio5").hide();
+                $("#micrositio6").hide();
+                $("#micrositio7").hide();
+                $(window).scrollTop($("#micrositio2").offset().top);
+            }
+            if (idEstado == "15") {
+                $("#micrositio1").show();
+                $("#micrositio2").show();
+                $("#micrositio3").show();
+                $("#micrositio4").hide();
+                $("#micrositio5").hide();
+                $("#micrositio6").hide();
+                $("#micrositio7").hide();
+                $(window).scrollTop($("#micrositio3").offset().top);
+            }
+            if (idEstado == "16") {
+                $("#micrositio1").show();
+                $("#micrositio2").show();
+                $("#micrositio3").show();
+                $("#micrositio4").show();
+                $("#micrositio5").hide();
+                $("#micrositio6").hide();
+                $(window).scrollTop($("#micrositio4").offset().top);
+            }
+            if (idEstado == "18") {
+                $("#micrositio1").show();
+                $("#micrositio2").show();
+                $("#micrositio3").show();
+                $("#micrositio4").show();
+                $("#micrositio5").show();
+                $("#micrositio6").hide();
+                $("#micrositio7").hide();
+                $(window).scrollTop($("#micrositio5").offset().top);
+            }
+            if (idEstado == "21" || idEstado == "23" || idEstado == "25") {
+                $("#micrositio1").show();
+                $("#micrositio2").show();
+                $("#micrositio3").show();
+                $("#micrositio4").show();
+                $("#micrositio5").show();
+                $("#micrositio6").show();
+                $("#micrositio7").hide();
+                $(window).scrollTop($("#micrositio6").offset().top);
+            }
+            if (idEstado == "31" || idEstado == "32") {
+                $("#micrositio1").show();
+                $("#micrositio2").show();
+                $("#micrositio3").show();
+                $("#micrositio4").show();
+                $("#micrositio5").show();
+                $("#micrositio6").show();
+                $("#micrositio7").show();
+                $(window).scrollTop($("#micrositio7").offset().top);
+            }
+            
+            //$("#micrositio1").hide();
+            //$("#micrositio2").hide();
+            //$("#micrositio3").hide();
+            //$("#micrositio4").hide();
+            //$("#micrositio5").hide();
+        });
+    </script>
+
+
+
  
     <%-- Video CSS/Script --%>
     <style>
@@ -1012,8 +1098,12 @@ body {
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-<!-- ======= Hero Section ======= -->
-<main id="main" style="background-color: white;">
+    <!-- ======= Hero Section ======= -->
+    <main id="main" style="background-color: white;">
+    <input value="<%= ViewData["idEstado"] %>" id="idEstado" name="idEstado" hidden/>
+    <div id="micrositio1">
+
+
     <div class="scrollContainer">
 
     <br />
@@ -1246,7 +1336,7 @@ body {
     <br />
     <br />
     <div class="containera" >
-      <div class="scaleDowna" data-aos="fade-up" style="    margin-left: -2pc;">
+      <div class="scaleDowna" data-aos="fade-up" style="    margin-left: 3pc;">
           <div class="pantalla">
               <video id="video"  src="<%= ViewData["src"] %>" controls="controls" style="height: 719.0px;margin-top: 47px;margin-left: 4.1px;"/>  
           </div>
@@ -1802,12 +1892,15 @@ body {
 
         </script>--%>
 
-    <br /><br /><br /><br /><br /><br />
+    
 
-
+       </div> 
+     <%-- FIN PRIMER MICRIOSITIO --%>
         
     <%-- SEGUNDO MICRIOSITIO --%>
     
+    <div id="micrositio2">
+        <br /><br /><br /><br /><br /><br />
     <div class='gallery1'>
         <h1 class='titulo-gracias' style="font-style: unset; font-size: 55px" data-aos="zoom-in" data-aos-delay="100">¡Gracias por elegir clínica Tempora!</h1>
         <div class="d-flex justify-content-center">
@@ -1853,8 +1946,8 @@ body {
         .cuadro-informacion {
             background-color: #ededed;
             height: 23pc;
-    width: 52pc;
-    margin-left: -8pc;
+            width: 52pc;
+            margin-left: -8pc;
         }
     </style>
     <script>
@@ -1866,7 +1959,7 @@ body {
                     trigger: document.querySelectorAll(".titulo-gracias"),
                     start: "center center",
                     toggleActions: "play none none reverse",
-                    markers: true
+                    //markers: true
                 }
             })
 
@@ -1884,11 +1977,11 @@ body {
             <h1 style="padding-left: 10pc;font-size: 18px;margin-left: 5pc;" data-aos="zoom-in" data-aos-delay="100">"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. [Fecha]"</h1>
         </div>
         <div class="col" style="margin-left: 10pc;">
-            <div class="wrappera2">
-            <img class="image1"style="height: 23pc;width: 52pc;" class="image1" src="https://lh3.googleusercontent.com/proxy/rYi74WBvN5O6a_xEE1MyMzk5MjukxpyXt61Qc-Glr2U7lKVAzPX2c4c7zLvP68ccisW_p4bhnC6vtOshjYKfXnXiEfVcKYL_2ZrFo1-aSGzf3OsGCDNoHqlSjaMhicp7r14">
-        <div class="covera2"></div>
-            </div>
-            </div>
+        <div class="wrappera2">
+            <img style="height: 23pc;width: 52pc;" class="image1" src="https://lh3.googleusercontent.com/proxy/rYi74WBvN5O6a_xEE1MyMzk5MjukxpyXt61Qc-Glr2U7lKVAzPX2c4c7zLvP68ccisW_p4bhnC6vtOshjYKfXnXiEfVcKYL_2ZrFo1-aSGzf3OsGCDNoHqlSjaMhicp7r14">
+            <div class="covera2"></div>
+        </div>
+        </div>
     </div>
 
     <style>
@@ -1939,7 +2032,7 @@ body {
                 triggerHook: 0.7
             })
                 .setTween(tl)
-                .addIndicators()
+                //.addIndicators()
                 .addTo(controller);
         });
         $(".wrappera2").each(function () {
@@ -1956,7 +2049,7 @@ body {
                 triggerHook: 0.7
             })
                 .setTween(tl)
-                .addIndicators()
+                //.addIndicators()
                 .addTo(controller);
         });
     </script>
@@ -1965,10 +2058,354 @@ body {
 
     <br />
 </section>
-     <br />
+
+    <%-- FIN SEGUNDO MICRIOSITIO --%>
+        
+    </div>
+
+    <%-- TERCER MICRIOSITIO --%>
+
+    
+    <br />
     <br /> 
     <br />
     <br />
+<div id="micrositio3">
+    <div class="cuidados">
+        <div class="d-flex justify-content-center">
+            <h1 data-aos="zoom-in" data-aos-delay="100" style="padding-right: 0pc;margin-left: 0pc;margin-top: 40px;font-size: 50px;">Cuidados preoperatorios</h1>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col">
+    
+                 <video style="height: 35pc; padding-left: 0pc;" src="../../Styles/caso/940.mp4" controls="controls" />
+            </div>
+            <div class="col cuadro-informacion" style=" height: 21pc;width: 35pc;margin-left: 1pc;">
+                <h1 style="padding-right: 4pc;margin-left: 0pc;margin-top: 40px;font-size: 25px;" data-aos="fade-up" data-aos-delay="100">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</h1>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <style>
+        .celular-volteado {
+            background-image:url(../../Styles/img/iphone.png);
+        }
+        .pantalla-celular {
+            background-color: black;
+            margin-top: -14pc;
+            margin-left: -62px;
+            height: 51pc;
+            width: 1284px;
+        }
+    </style>
+
+    </div>
+    <%-- FIN TERCER MICRIOSITIO --%>
+        
+    <%-- CUARTO MICRIOSITIO --%>
+    <div id="micrositio4">
+        <div class="cirugia">
+            <div class="d-flex justify-content-center">
+                <h1 data-aos="zoom-in" data-aos-delay="100" style="padding-right: 0pc;margin-left: 0pc;margin-top: 40px;font-size: 50px;">El día de tu cirugía</h1>
+            </div>
+            <div class="d-flex justify-content-center">
+                <h1 style="font-style: unset; color: #797979; font-size: 20px" data-aos="zoom-in" data-aos-delay="100">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h1>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col">
+                    <video style="height: 35pc; padding-left: 1pc;" src="../../Styles/caso/940.mp4" controls="controls" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <%-- FIN CUARTO MICRIOSITIO --%>
+    <div id="micrositio5">
+        CUIDADOS POST OPERATORIOS
+    </div>
+    
+    <div id="micrositio6">
+    <%-- QUINTO MICRIOSITIO --%>
+
+    <div class="wrapperRollingText">
+        <div class="rollingText text">
+            <h1>Progreso de tu cambio</h1>
+        </div>
+    </div>
+
+    <div class="wrapperRollingText02"l>
+        <div class="rollingText02 text">
+            <h1>Cínica Tempora</h1>
+        </div>
+    </div>
+    <div class='container-img-progreso'>
+        <div class="row">
+            <div class="col">
+                <div style="margin-right: 9pc;" class='reveal'>
+                    <img style="border-color: ghostwhite;" class="img-progreso" src='https://images.unsplash.com/photo-1526413232644-8a40f03cc03b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80%20634w'>
+                </div>
+            </div>
+            <div class="col">
+                <div  class="wrappera2">
+                    <div class="col cuadro-informacion">
+                        <h1 style="margin-left: -7pc;margin-top: 40px;font-size: 31px;padding-top: 5pc;padding-left: 9pc;">Progreso</h1>
+                        <h1 style="padding-left: 2pc; font-size: 18px;" data-aos="zoom-in" data-aos-delay="100">"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class='container-img-progreso'>
+        <div class="row">
+            <div class="col">
+                <div class="wrappera2" style="margin-top: -20pc;padding-top: 23pc;margin-left: 13pc;">
+                    <div class="col cuadro-informacion">
+                        <h1 style="margin-left: -7pc;margin-top: 40px;font-size: 31px;padding-top: 5pc;padding-left: 9pc;">Progreso</h1>
+                        <h1 data-aos="zoom-in" data-aos-delay="100" style="padding-left: 2pc; font-size: 18px;" data-aos="zoom-in" data-aos-delay="100">"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div style="margin-left: 52pc;" class='reveal'>
+                    <img style="border-color: ghostwhite;" class="img-progreso" src='https://images.unsplash.com/photo-1505201372024-aedc618d47c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80%20634w'>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='container-img-progreso'>
+      <div class='reveal'>
+        <img style="border-color: ghostwhite;" class="img-progreso" src='https://images.unsplash.com/photo-1531727991582-cfd25ce79613?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80%20634w'>
+      </div>
+    </div>
+    <style>
+        .wrapperRollingText {
+          white-space: nowrap;
+          font-family: 'Playfair Display', serif;
+          /*margin-top: 120vw;*/
+          border-top: 1px solid #6f6f6f;
+          color: #e3e3e3;
+           /*transform: translate(10px, 145px);*/
+  
+        }
+        .rollingText {
+          font-size: 6vw;
+          display: inline-block;
+          padding-left: 10px;
+          color: #e3e3e3;
+        }
+        .wrapperRollingText02 {
+          white-space: nowrap;
+          font-family: 'Playfair Display', serif;
+          margin-top: 10px;
+          color: #e3e3e3;
+              /*transform: translate(-410.4px, 240px);*/
+        }
+        .rollingText02 {
+          font-size: 6vw;
+          display: inline-block;
+          padding-left: 13px;
+          color: #e3e3e3;
+        }
+
+        .container-img-progreso {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          width: 100%;
+          position: relative;
+        }
+
+
+        .img-progreso {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          transform-origin: left;
+        }
+
+        .reveal {
+          visibility: hidden;
+          position: relative;
+          width: 80%;
+          height: 80%;
+          max-width: 500px;
+          overflow: hidden;
+        }
+
+ /*       * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }*/
+
+        .credit {
+          font-family: Termina, sans-serif;
+          position: absolute;
+          bottom: 10px;
+
+        }
+    </style>
+    <script>
+        var rollingTween = new TimelineMax({ paused: true });
+        var time = 20;
+        var $rollingTextgoLeft = $(".rollingText");
+        var $rollingTextgoRight = $(".rollingText02");
+        var $text = $(".text")
+
+        function startRolling() {
+
+            $text.css({ width: "auto" });
+            var width = $text.width();
+            $text.width(width);
+
+            TweenLite.set('.wrapperRollingText02', { x: -width - 20 })
+
+            rollingTween.to(".rollingText", time, {
+                x: -width,
+                ease: Linear.easeNone,
+                repeat: -1
+            }, 0)
+                .to(".rollingText02", time, {
+                    x: width,
+                    ease: Linear.easeNone,
+                    repeat: -1
+                }, 0)
+            return rollingTween;
+        }
+
+        function rollingText() {
+            $('.rollingText').clone().appendTo(".wrapperRollingText");
+            $('.rollingText02').clone().appendTo(".wrapperRollingText02");
+            startRolling();
+        }
+        rollingText();
+
+        function resizeCheck() {
+            var progress = rollingTween.progress(); //record the progress so that we can match it with the new tween (jump to the same spot)
+            rollingTween.time(0).kill(); //rewind and kill the original tween.
+            //time = 5;
+            startRolling().progress(progress); //create a new tween based on the new size, and jump to the same progress value.
+
+            var h = window.innerHeight;
+            var offset, scrollTop;
+
+            $(window).scroll(function () {
+                offset = $(".wrapperRollingText").offset();
+                scrollTop = $(window).scrollTop();
+
+                if (scrollTop > offset.top - h * 0.5) {
+                    TweenLite.to(rollingTween, 2, { timeScale: 1 });
+                }
+
+                if (scrollTop > offset.top - h * 0.7 && scrollTop < offset.top - h * 0.49) {
+                    rollingTween.play();
+                    TweenLite.to(rollingTween, 2, { timeScale: 0.5 });
+                }
+                if (scrollTop < offset.top - h * 0.7) {
+                    TweenLite.to(rollingTween, 2, { timeScale: 0 });
+                }
+                if (scrollTop > offset.top - h * 0.2) {
+                    TweenLite.to(rollingTween, 2, { timeScale: 0 });
+                }
+            });
+        }
+
+        resizeCheck();
+        $(window).resize(resizeCheck);
+
+
+
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        let revealContainers = document.querySelectorAll(".reveal");
+
+        revealContainers.forEach((container) => {
+            let image = container.querySelector(".img-progreso");
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: container,
+                    toggleActions: "restart none none reset"
+                }
+            });
+
+            tl.set(container, { autoAlpha: 1 });
+            tl.from(container, 1.5, {
+                xPercent: -100,
+                ease: Power2.out
+            });
+            tl.from(image, 1.5, {
+                xPercent: 100,
+                scale: 1.3,
+                delay: -1.5,
+                ease: Power2.out
+            });
+        });
+    </script>
+    <%-- FIN QUINTO MICRIOSITIO --%>
+    </div>
+    <%-- SEXTO MICRIOSITIO --%>
+    <div id="micrositio7">
+    <div class="familia">
+            <div class="containerea">
+      <div class="scaleDowne">
+                  <div class="d-flex justify-content-center">
+            <h1 style="padding-right: 0pc;margin-left: 0pc;margin-top: 40px;font-size: 50px;" data-aos="zoom-in" data-aos-delay="100">Ya eres parte de la familia Tempora.</h1>
+        </div>
+        <div class="d-flex justify-content-center">
+            <h1 style="font-style: unset; color: #797979; font-size: 20px" data-aos="zoom-in" data-aos-delay="100">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h1>
+        </div>
+      </div>
+    </div>
+        <div class="row">
+            <div class="col">
+                <video style="height: 35pc; padding-left: 1pc; margin-top: -34pc;" src="../../Styles/caso/940.mp4" controls="controls" />
+            </div>
+        </div>
+    </div>
+
+    <style>
+        body {
+  height: 300vh;
+}
+.containerea {
+  height: 100vh;
+  position: relative;
+}
+.scaleDowne {
+  width: 120vw;
+  height: 120vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: white;
+  transform-origin: 50% 50%;
+}
+    </style>
+    <script>
+        gsap.set(".scaleDowne", { xPercent: -50, yPercent: -50 });
+        gsap.to(".scaleDowne", {
+            scale: 0.6667, scrollTrigger: {
+                trigger: ".containerea",
+                pin: ".containerea",
+                scrub: true,
+                start: "end end",
+                markers: true,
+            }
+        })
+    </script>
+    </div>
 </main><!-- End #main -->
 
 </asp:Content>
