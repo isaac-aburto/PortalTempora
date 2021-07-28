@@ -441,9 +441,11 @@
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <Content Include="Scripts\Additional-Validations.js" />
     <Content Include="Styles\img\iphone.png" />
+    <Content Include="Styles\MensajeSolicitudBuenCamino.html" />
     <Content Include="Styles\MensajeSolicitudFechaCirugiaGarantia.html" />
     <Content Include="Styles\MensajeSolicitudQuintoMicrositio.html" />
     <Content Include="Styles\MensajeSolicitudCuartoMicrositio.html" />
+    <Content Include="Styles\MensajeSolicitudSextoMicrositio.html" />
     <Content Include="Styles\MensajeSolicitudSegundoMicrositio.html" />
     <Content Include="Styles\MensajeSolicitudUltimo.html" />
     <Content Include="Styles\MensajeSolicitudTratamientoEspecial.html" />

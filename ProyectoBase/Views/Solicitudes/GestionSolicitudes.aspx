@@ -185,10 +185,14 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
+                $("#divEstado33").hide();
             }
             if (Estado == 4) {
                 console.log("Estado 4")
@@ -199,10 +203,14 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
+                $("#divEstado33").hide();
             }
             if (Estado == 7) {
                 console.log("Estado 4")
@@ -212,11 +220,15 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
                 $("#divEstado7").show();
+                $("#divEstado33").hide();
             }
             if (Estado == 11) {
                 $("#divEstados").hide();
@@ -226,10 +238,14 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").show();
+                $("#divEstado33").hide();
             }
             if (Estado == 13) {
                 console.log("Estado 13")
@@ -239,11 +255,15 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
                 $("#divEstado7").hide();
+                $("#divEstado33").hide();
             }
             if (Estado == 14) {
                 $("#divEstados").hide();
@@ -252,11 +272,15 @@
                 $("#divEstado14").show();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
                 $("#divEstado7").hide();
+                $("#divEstado33").hide();
             }
             if (Estado == 15) {
                 $("#divEstados").hide();
@@ -265,11 +289,15 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").show();
                 $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
                 $("#divEstado7").hide();
+                $("#divEstado33").hide();
             }
             if (Estado == 17) {
                 $("#divEstados").hide();
@@ -278,11 +306,15 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").show();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
                 $("#divEstado7").hide();
+                $("#divEstado33").hide();
             }
             if (Estado == 1 || Estado == 2 || Estado == 3 || Estado == 5 || Estado == 8 || Estado == 9) {
                 $("#divEstados").hide();
@@ -291,11 +323,15 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
                 $("#divEstado7").hide();
+                $("#divEstado33").hide();
             }
             if (Estado == 20 || Estado == 22 || Estado == 24) {
                 $("#divEstados").hide();
@@ -304,11 +340,15 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
                 $("#divEstado7").hide();
+                $("#divEstado33").hide();
             }
             if (Estado == 10 || Estado == 12 || Estado == 16 || Estado == 18 || Estado == 19) {
                 $("#divEstados").hide();
@@ -317,24 +357,90 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
                 $("#divEstado7").hide();
+                $("#divEstado33").hide();
             }
-            if (Estado == 21 || Estado == 23 || Estado == 25 || Estado == 26 || Estado == 28 || Estado == 31 || Estado == 32) {
+            if (Estado == 26 || Estado == 28 || Estado == 31 || Estado == 32) {
                 $("#divEstados").hide();
                 $("#divEstado4").hide();
                 $("#divEstado13").hide();
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
                 $("#divEstado7").hide();
+                $("#divEstado33").hide();
+            }
+            if (Estado == 21) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado21").show();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+                $("#divEstado7").hide();
+                $("#divEstado33").hide();
+            }
+            if (Estado == 23) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").show();
+                $("#divEstado25").hide();
+                $("#divEstado21").hide();
+                $("#divEstado25").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+                $("#divEstado7").hide();
+                $("#divEstado33").hide();
+            }
+
+            if (Estado == 25) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").show();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+                $("#divEstado7").hide();
+                $("#divEstado33").hide();
             }
             if (Estado == 27) {
                 $("#divEstados").hide();
@@ -344,10 +450,14 @@
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
                 $("#divEstado27").show();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
                 $("#divEstado7").hide();
+                $("#divEstado33").hide();
             }
             if (Estado == 29) {
                 $("#divEstados").hide();
@@ -357,10 +467,14 @@
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
                 $("#divEstado27").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado29").show();
                 $("#divEstado30").hide();
                 $("#divEstado11").hide();
                 $("#divEstado7").hide();
+                $("#divEstado33").hide();
             }
             if (Estado == 30) {
                 $("#divEstados").hide();
@@ -369,11 +483,32 @@
                 $("#divEstado14").hide();
                 $("#divEstado15").hide();
                 $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
                 $("#divEstado27").hide();
                 $("#divEstado29").hide();
                 $("#divEstado30").show();
                 $("#divEstado11").hide();
                 $("#divEstado7").hide();
+                $("#divEstado33").hide();
+            }
+            if (Estado == 33) {
+                $("#divEstados").hide();
+                $("#divEstado4").hide();
+                $("#divEstado13").hide();
+                $("#divEstado14").hide();
+                $("#divEstado15").hide();
+                $("#divEstado17").hide();
+                $("#divEstado21").hide();
+                $("#divEstado23").hide();
+                $("#divEstado25").hide();
+                $("#divEstado27").hide();
+                $("#divEstado29").hide();
+                $("#divEstado30").hide();
+                $("#divEstado11").hide();
+                $("#divEstado7").hide();
+                $("#divEstado33").show();
             }
             $("#txtEstado").change(function () {
                 console.log("Estado Seleccionado: " + $("#txtEstado").val())
@@ -387,16 +522,16 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
-                //if (Estado == 2) {
-                //    console.log("Estado 2")
-                //    $("#divEstados").show();
-                //}
                 if (Estado == 4) {
                     console.log("Estado 4")
                     $("#divEstados").hide();
@@ -405,11 +540,15 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
                 if (Estado == 7) {
                     console.log("Estado 4")
@@ -420,10 +559,14 @@
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
                     $("#divEstado27").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").show();
+                    $("#divEstado33").hide();
                 }
                 if (Estado == 13) {
                     $("#divEstados").hide();
@@ -432,11 +575,15 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
                 if (Estado == 14) {
                     $("#divEstados").hide();
@@ -445,11 +592,15 @@
                     $("#divEstado14").show(); 
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
                 if (Estado == 15) {
                     $("#divEstados").hide();
@@ -458,10 +609,14 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").show();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
                 if (Estado == 17) {
                     $("#divEstados").hide();
@@ -470,11 +625,15 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").show();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
                 if (Estado == 20 || Estado == 22 || Estado == 24) {
                     $("#divEstados").hide();
@@ -483,11 +642,15 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
                 if (Estado == 1 || Estado == 2 || Estado == 3 || Estado == 5 || Estado == 8 || Estado == 9) {
                     $("#divEstados").hide();
@@ -496,11 +659,15 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
                 if (Estado == 11) {
                     $("#divEstados").hide();
@@ -509,11 +676,15 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").show();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
                 if (Estado == 10 || Estado == 12 || Estado == 16 || Estado == 18 || Estado == 19) {
                     $("#divEstados").hide();
@@ -522,24 +693,84 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
-                if (Estado == 21 || Estado == 23 || Estado == 25 || Estado == 26 || Estado == 28 || Estado == 31 || Estado == 32) {
+                if (Estado == 26 || Estado == 28 || Estado == 31 || Estado == 32) {
                     $("#divEstados").hide();
                     $("#divEstado4").hide();
                     $("#divEstado13").hide();
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
+                }
+                if (Estado == 21) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado21").show();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
+                    $("#divEstado7").hide();
+                    $("#divEstado33").hide();
+                }
+                if (Estado == 23) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").show();
+                    $("#divEstado25").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
+                    $("#divEstado7").hide();
+                    $("#divEstado33").hide();
+                }
+
+                if (Estado == 25) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").show();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
+                    $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
                 if (Estado == 27) {
                     $("#divEstados").hide();
@@ -548,11 +779,15 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").show();  
                     $("#divEstado29").hide();
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
                 if (Estado == 29) {
                     $("#divEstados").hide();
@@ -561,11 +796,15 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").show(); 
                     $("#divEstado30").hide();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
                 if (Estado == 30) {
                     $("#divEstados").hide();
@@ -574,17 +813,34 @@
                     $("#divEstado14").hide();
                     $("#divEstado15").hide();
                     $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
                     $("#divEstado27").hide();
                     $("#divEstado29").hide();
                     $("#divEstado30").show();
                     $("#divEstado11").hide();
                     $("#divEstado7").hide();
+                    $("#divEstado33").hide();
                 }
-                //else {
-                //    console.log("Otro estado")
-                //    $("#divEstados").hide();
-                //    $("#divEstado4").hide();
-                //}
+                if (Estado == 33) {
+                    $("#divEstados").hide();
+                    $("#divEstado4").hide();
+                    $("#divEstado13").hide();
+                    $("#divEstado14").hide();
+                    $("#divEstado15").hide();
+                    $("#divEstado17").hide();
+                    $("#divEstado21").hide();
+                    $("#divEstado23").hide();
+                    $("#divEstado25").hide();
+                    $("#divEstado27").hide();
+                    $("#divEstado29").hide();
+                    $("#divEstado30").hide();
+                    $("#divEstado11").hide();
+                    $("#divEstado7").hide();
+                    $("#divEstado33").show();
+                }
+                
             });
             var valorEscrito = $("#txtObservacion2").val();
             $("#txtObservacion2").change(function () {
@@ -1034,16 +1290,18 @@
                             <div id="divEstado15">
                                 <div class="col-lg-6 col-md-6 form-group">
                                     <label for="txtObservacion3"></label>
-                                    <label style="color:black"> Observación </label>
+                                    <label style="color:black"> Observación Cuidados Preoperatorios </label>
                                     <div id="selDiv">
-                                        <textarea  id="txtObservacion3" name="txtObservacion3" class='form-control'></textarea>
+                                        <textarea  id="txtObservacion3" name="txtObservacion3" class='form-control'><%= ViewData["ObservacionCuidadoPreoperatorio"] %></textarea>
                                     </div>
                                     <div class="invalid-feedback">Seleccione una opción</div>
                                 </div>
                             </div>
                             <div id="divEstado17">
                                 <div class="col-lg-6 col-md-6 form-group">
-                                    <input id="txtFechaReagendarCirugia" placeholder="Nueva fecha de cirugia" name="txtFechaReagendarCirugia" />
+                                    <label for="txtFechaReagendarCirugia"></label>
+                                    <label style="color:black"> Fecha para reagendar cirugía</label>
+                                    <input id="txtFechaReagendarCirugia" placeholder="Nueva fecha " name="txtFechaReagendarCirugia" />
                                     <script>
                                         $('#txtFechaReagendarCirugia').datepicker({
                                             uiLibrary: 'bootstrap4',
@@ -1052,9 +1310,265 @@
                                     </script>
                                 </div>
                             </div>
+                            <div id="divEstado21">
+                                <div class="row">
+                                <div class="col-12">
+                                    <label for="txtFotos"></label>
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important">Fotografías 1 mes después</h4>
+                                    </div>
+                                </div>                                  
+                                    <div id="carouselExampleIndicators3" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators3" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators3" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators3" data-slide-to="2"></li>
+                                        <li data-target="#carouselExampleIndicators3" data-slide-to="3"></li>
+                                        <li data-target="#carouselExampleIndicators3" data-slide-to="4"></li>
+         
+                                        </ol>
+                                        <div class="carousel-inner" style="border-radius: 7px;border-color: #ededed;border-style: solid;">
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto1Mes1"]%>" alt="First slide">
+                                          <div class="carousel-caption d-none d-md-block">
+                                            <h5>Desde arriba</h5>
+                                            <p>imagen1.jpg</p>
+                                          </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto2Mes1"]%>" alt="Second slide">
+                                             <div class="carousel-caption d-none d-md-block">
+                                                <h5>Perfil izquierdo</h5>
+                                                <p>imagen2.jpg</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto3Mes1"]%>" alt="Third slide">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>Perfil Derecho</h5>
+                                                <p>imagen3.jpg</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto4Mes1"]%>" alt="Third slide">
+                                             <div class="carousel-caption d-none d-md-block">
+                                                <h5>De atrás</h5>
+                                                <p>imagen4.jpg</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto5Mes1"]%>" alt="Third slide">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>De frente</h5>
+                                                <p>imagen5.jpg</p>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleIndicators3" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleIndicators3" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                           
+                                    <br />
+                                </div>
+                            </div>
+                            </div>
+                            <div id="divEstado23">
+                                <div class="row">
+                                <div class="col-12">
+                                    <label for="txtFotos"></label>
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important">Fotografías 3 meses después</h4>
+                                    </div>
+                                </div>                                  
+                                    <div id="carouselExampleIndicators4" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators4" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators4" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators4" data-slide-to="2"></li>
+                                        <li data-target="#carouselExampleIndicators4" data-slide-to="3"></li>
+                                        <li data-target="#carouselExampleIndicators4" data-slide-to="4"></li>
+         
+                                        </ol>
+                                        <div class="carousel-inner" style="border-radius: 7px;border-color: #ededed;border-style: solid;">
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto1Mes3"]%>" alt="First slide">
+                                          <div class="carousel-caption d-none d-md-block">
+                                            <h5>Desde arriba</h5>
+                                            <p>imagen1.jpg</p>
+                                          </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto2Mes3"]%>" alt="Second slide">
+                                             <div class="carousel-caption d-none d-md-block">
+                                                <h5>Perfil izquierdo</h5>
+                                                <p>imagen2.jpg</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto3Mes3"]%>" alt="Third slide">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>Perfil Derecho</h5>
+                                                <p>imagen3.jpg</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto4Mes3"]%>" alt="Third slide">
+                                             <div class="carousel-caption d-none d-md-block">
+                                                <h5>De atrás</h5>
+                                                <p>imagen4.jpg</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto5Mes3"]%>" alt="Third slide">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>De frente</h5>
+                                                <p>imagen5.jpg</p>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleIndicators4" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleIndicators4" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                           
+                                    <br />
+                                </div>
+                            </div>
+                            </div>
+                            <div id="divEstado25">
+                                <div class="row">
+                                <div class="col-12">
+                                    <label for="txtFotos"></label>
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important">Fotografías 3 meses después</h4>
+                                    </div>
+                                </div>                                  
+                                    <div id="carouselExampleIndicators5" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                        <li data-target="#carouselExampleIndicators5" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carouselExampleIndicators5" data-slide-to="1"></li>
+                                        <li data-target="#carouselExampleIndicators5" data-slide-to="2"></li>
+                                        <li data-target="#carouselExampleIndicators5" data-slide-to="3"></li>
+                                        <li data-target="#carouselExampleIndicators5" data-slide-to="4"></li>
+         
+                                        </ol>
+                                        <div class="carousel-inner" style="border-radius: 7px;border-color: #ededed;border-style: solid;">
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto1Mes6"]%>" alt="First slide">
+                                          <div class="carousel-caption d-none d-md-block">
+                                            <h5>Desde arriba</h5>
+                                            <p>imagen1.jpg</p>
+                                          </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto2Mes6"]%>" alt="Second slide">
+                                             <div class="carousel-caption d-none d-md-block">
+                                                <h5>Perfil izquierdo</h5>
+                                                <p>imagen2.jpg</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto3Mes6"]%>" alt="Third slide">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>Perfil Derecho</h5>
+                                                <p>imagen3.jpg</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto4Mes6"]%>" alt="Third slide">
+                                             <div class="carousel-caption d-none d-md-block">
+                                                <h5>De atrás</h5>
+                                                <p>imagen4.jpg</p>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto5Mes6"]%>" alt="Third slide">
+                                            <div class="carousel-caption d-none d-md-block">
+                                                <h5>De frente</h5>
+                                                <p>imagen5.jpg</p>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <a class="carousel-control-prev" href="#carouselExampleIndicators5" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carouselExampleIndicators5" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                           
+                                    <br />
+                                </div>
+                            </div>
+                            </div>
+                            <div id="divEstado33">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label style="color:black"> Foto primer mes </label>
+                                        <img id="imagen1MesSeleccionado" class="d-block w-100" src="<%= ViewData["Foto1Mes6"]%>">
+                                        <select id="foto1mes" name="foto1mes" class="form-control">
+                                            <%= ViewData["opcionfoto1"] %>
+                                        </select>
+                                    </div>
+                                    <div class="col-4">
+                                    <label style="color:black"> Foto tercer mes </label>
+                                        <img id="imagen3MesSeleccionado" class="d-block w-100" src="<%= ViewData["Foto1Mes6"]%>">
+                                    <select id="foto3mes" name="foto3mes" class="form-control">
+                                        <%= ViewData["opcionfoto3"] %>
+                                    </select>
+                                    </div>
+                                    <div class="col-4">
+                                    <label style="color:black"> Foto sexto mes </label>
+                                    <img id="imagen6MesSeleccionado" class="d-block w-100" src="<%= ViewData["Foto1Mes6"]%>">
+                                    <select id="foto6mes" name="foto4mes" class="form-control">
+                                        <%= ViewData["opcionfoto6"] %>
+                                    </select>
+                                    </div>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $("#foto1mes").change(function () {
+                                                var id = $(this).children(":selected").attr("id");
+                                                console.log("id" + id)
+                                                $("#imagen1MesSeleccionado").attr("src", id);
+                                            });
+
+                                            $("#foto3mes").change(function () {
+                                                var id = $(this).children(":selected").attr("id");
+                                                console.log("id" + id)
+                                                $("#imagen3MesSeleccionado").attr("src", id);
+                                            });
+
+                                            $("#foto6mes").change(function () {
+                                                var id = $(this).children(":selected").attr("id");
+                                                console.log("id" + id)
+                                                $("#imagen6MesSeleccionado").attr("src", id);
+                                            });
+
+                                        });
+                                    </script>
+                                </div>
+                                <br />
+                            </div>
                             <div id="divEstado27">
                                 <div class="col-lg-6 col-md-6 form-group">
-                                    <input id="txtFechaEvaluacion2" placeholder="Nueva fecha de evaluación" name="txtFechaEvaluacion2" value="<%= ViewData["FechaEvaluacionOnceMeses"] %>" />
+                                    <label style="color:black"> Nueva fecha de evaluación </label>
+                                    <input id="txtFechaEvaluacion2" placeholder="Seleccionar fecha" name="txtFechaEvaluacion2" value="<%= ViewData["FechaEvaluacionOnceMeses"] %>" />
                                     <script>
                                         $('#txtFechaEvaluacion2').datepicker({
                                             uiLibrary: 'bootstrap4',

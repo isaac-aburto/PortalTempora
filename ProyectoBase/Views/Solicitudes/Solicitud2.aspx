@@ -122,9 +122,10 @@
                 $("#micrositio4").show();
                 $("#micrositio5").hide();
                 $("#micrositio6").hide();
+                $("#micrositio7").hide();
                 $(window).scrollTop($("#micrositio4").offset().top);
             }
-            if (idEstado == "18") {
+            if (idEstado == "18" || idEstado == "19") {
                 $("#micrositio1").show();
                 $("#micrositio2").show();
                 $("#micrositio3").show();
@@ -134,7 +135,7 @@
                 $("#micrositio7").hide();
                 $(window).scrollTop($("#micrositio5").offset().top);
             }
-            if (idEstado == "21" || idEstado == "23" || idEstado == "25") {
+            if (idEstado == "33") {
                 $("#micrositio1").show();
                 $("#micrositio2").show();
                 $("#micrositio3").show();
@@ -1433,7 +1434,7 @@ body {
     <br />
     <br />
     <br />
-<div class="grid">
+<div class="grid" style="    margin-top: -26pc;">
     <section class="section --mask">
         <svg id="svg-mask" width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
             <defs>
@@ -1777,12 +1778,12 @@ body {
     <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Solicitudes/Solicitud2Agendar") %>">
     <input hidden name="idSolicitud" id="idSolicitud" value="<%= ViewData["idSolicitud"] %>"/>
      <input hidden name="idCliente" id="idCliente" value="<%= ViewData["idCliente"] %>""/>
-    <div class="ultimodiv" style="margin-top: -13pc;">
+    <div class="ultimodiv" style="margin-top: -13pc;    background-color: white;">
         <div class="d-flex justify-content-center">
             <h1 style="font-style: unset;" data-aos="zoom-in" data-aos-delay="100">Sólo un paso más...</h1>
         </div>
         <br />
-        <section id="about" class="about2" style="    width: 100pc;">
+        <section id="about" class="about2" style="    width: 104pc;">
             <div class="container" data-aos="fade-up">
 
             <div class="row">
@@ -1832,6 +1833,7 @@ body {
         @media screen and (max-width: 480px) {
             .ultimodiv > .about2 {
                 margin-left: 73pc;
+
             }
             .gj-unselectable{
                     width: 20pc;
@@ -1922,7 +1924,7 @@ body {
     <div class="gallery2">
         <div style="margin-left: -34pc;" class="row">
             <div class="col" style="margin-left: 38pc;">
-                <div class="wrappera">
+                <div class="wrappera" style="margin-left: 16pc;">
                 <img class="image1" style="border-color: white;" src="https://clinicatempora.cl/media/images/Castellon.2e16d0ba.fill-245x245.jpg" alt=""> 
             <div class="covera"></div>
     </div>
@@ -1978,7 +1980,7 @@ body {
         </div>
         <div class="col" style="margin-left: 10pc;">
         <div class="wrappera2">
-            <img style="height: 23pc;width: 52pc;" class="image1" src="https://lh3.googleusercontent.com/proxy/rYi74WBvN5O6a_xEE1MyMzk5MjukxpyXt61Qc-Glr2U7lKVAzPX2c4c7zLvP68ccisW_p4bhnC6vtOshjYKfXnXiEfVcKYL_2ZrFo1-aSGzf3OsGCDNoHqlSjaMhicp7r14">
+            <img style="height: 20pc;width: 52pc;" class="image1" src="https://clinicatempora.cl/media/images/_MAX5361.2e16d0ba.fill-1928x900.jpg">
             <div class="covera2"></div>
         </div>
         </div>
@@ -2150,7 +2152,7 @@ body {
         <div class="row">
             <div class="col">
                 <div style="margin-right: 9pc;" class='reveal'>
-                    <img style="border-color: ghostwhite;" class="img-progreso" src='https://images.unsplash.com/photo-1526413232644-8a40f03cc03b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80%20634w'>
+                    <img style="border-color: ghostwhite;" class="img-progreso" src='<%= ViewData["foto1"] %>'>
                 </div>
             </div>
             <div class="col">
@@ -2176,14 +2178,14 @@ body {
             </div>
             <div class="col">
                 <div style="margin-left: 52pc;" class='reveal'>
-                    <img style="border-color: ghostwhite;" class="img-progreso" src='https://images.unsplash.com/photo-1505201372024-aedc618d47c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80%20634w'>
+                    <img style="border-color: ghostwhite;" class="img-progreso" src='<%= ViewData["foto3"] %>'>
                 </div>
             </div>
         </div>
     </div>
     <div class='container-img-progreso'>
       <div class='reveal'>
-        <img style="border-color: ghostwhite;" class="img-progreso" src='https://images.unsplash.com/photo-1531727991582-cfd25ce79613?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80%20634w'>
+        <img style="border-color: ghostwhite;" class="img-progreso" src='<%= ViewData["foto6"] %>'>
       </div>
     </div>
     <style>
@@ -2356,26 +2358,26 @@ body {
     <%-- FIN QUINTO MICRIOSITIO --%>
     </div>
     <%-- SEXTO MICRIOSITIO --%>
-    <div id="micrositio7">
+    <div id="micrositio7" style="    margin-top: 0pc;">
     <div class="familia">
-            <div class="containerea">
-      <div class="scaleDowne">
-                  <div class="d-flex justify-content-center">
-            <h1 style="padding-right: 0pc;margin-left: 0pc;margin-top: 40px;font-size: 50px;" data-aos="zoom-in" data-aos-delay="100">Ya eres parte de la familia Tempora.</h1>
-        </div>
-        <div class="d-flex justify-content-center">
-            <h1 style="font-style: unset; color: #797979; font-size: 20px" data-aos="zoom-in" data-aos-delay="100">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h1>
-        </div>
-      </div>
-    </div>
-        <div class="row">
-            <div class="col">
-                <video style="height: 35pc; padding-left: 1pc; margin-top: -34pc;" src="../../Styles/caso/940.mp4" controls="controls" />
+
+            <div class="d-flex justify-content-center">
+                    <h1 style="padding-right: 0pc;margin-left: 0pc;margin-top: 40px;font-size: 50px;" data-aos="zoom-in" data-aos-delay="100">Ya eres parte de la familia Tempora.</h1>
             </div>
-        </div>
+            <div class="d-flex justify-content-center">
+                    <h1 style="font-style: unset; color: #797979; font-size: 20px" data-aos="zoom-in" data-aos-delay="100">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</h1>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col">
+                    <video style="height: 35pc; padding-left: 1pc;" src="../../Styles/caso/940.mp4" controls="controls" />
+                </div>
+            </div>
+
     </div>
 
-    <style>
+<%--    <style>
         body {
   height: 300vh;
 }
@@ -2404,7 +2406,7 @@ body {
                 markers: true,
             }
         })
-    </script>
+    </script>--%>
     </div>
 </main><!-- End #main -->
 

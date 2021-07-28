@@ -454,6 +454,17 @@
         cursor: pointer;
         margin-top: 1rem;
     }
+        body {
+        background-color: #ebebeb !important;
+        }
+        .section-title h2::after {
+  content: "";
+  width: 120px;
+  height: 1px;
+  display: inline-block;
+  background: rgb(85 85 85 / 20%);
+  margin: 4px 10px;
+}
 
 </style>
 </asp:Content>
@@ -596,7 +607,8 @@
         </div>
 <%--        <form action="<%: Url.Content("~/Home/Index") %>" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">--%>
          <%--  Paso 1 --%>
-            <div id="divPaso1">
+            <div class="card" id="divPaso1" style="border-radius: 10px">
+                <div class="card-body">
                 <h3>Primer Paso: Información Personal</h3>
                 <div class="form-row">
                     <div class="col-lg-6 col-md-6 form-group">
@@ -646,9 +658,11 @@
 
                     </div>
                 </div>
+                </div>
             </div>
           <%--  Paso 2 --%>
-            <div id="divPaso2">
+            <div class="card" id="divPaso2" style="border-radius: 10px">
+                <div class="card-body">
                 <h3>Segundo Paso: Cuestionario</h3>
                 <%-- Primera pregunta --%>
                 <h6>1.- ¿Qué zona deseas reparar?</h6>
@@ -759,9 +773,11 @@
                   <label class="custom-control-label" for="chkPeloNo">
                   </label>
                 </div>
+                </div>
             </div>
         <%-- Paso 3 --%>
-            <div id="divPaso3">
+            <div class="card" id="divPaso3"  style="border-radius: 10px">
+                <div class="card-body">
                 <h3>Tercer Paso: Fotografías</h3>
                 <p>Estas fotografías deben ser tomadas en un lugar con luz natural, sin flash y con la cámara trasera de su cámara o celular, no con la camara frontal, debido a que la calidad de imagen se ve afectada.</p>
                 <p>Es ideal que otra persona le ayude a tomar estas fotografías, posicionandose a un metro de distacia y no en modo selfie.</p>
@@ -789,7 +805,11 @@
                         </div>
                         <br />
                         <br />
-                        <div class="row">
+                        <br />
+                        <br />
+                        <div class="row" style="    margin-top: 2pc;">
+                        <br />
+                        <br />
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalAtras" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Atrás</button>
                                 <input type="text"  id="fotoAtras" name="fotoAtras" value="" hidden/>
@@ -808,9 +828,11 @@
                 <div class="error-message"></div>
                 <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
               </div>--%>
+                </div>
           </div>
           <%-- Por donde nos contactamos? --%>
-          <div id="divPaso4">
+          <div id="divPaso4" class="card" style="border-radius: 10px">
+              <div class="card-body">
             <h3>Cuarto Paso: Contacto</h3>
             <%-- Primera pregunta --%>
             <h6>¿Por dónde nos contactamos?</h6>
@@ -901,9 +923,10 @@
                               });
                           </script>--%>
             </div>
+              </div>
           </div>
           <div class="text-center">
-              <div class="row">
+              <div class="row" style="    margin-top: 2pc;">
                   <div class="col-sm">
                       <button disabled id="btnAtras" type="button" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Atrás</button>
                         

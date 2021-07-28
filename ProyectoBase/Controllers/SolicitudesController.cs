@@ -145,6 +145,7 @@ namespace WebSolicitudes.Controllers
                         ViewData["FechaLlamada"] = solicitud.FechaLlamada;
                         ViewData["FechaEvaluacionOnceMeses"] = solicitud.FechaEvaluaciónOnceMeses;
                         ViewData["FechaEvaluacionPreciencial"] = solicitud.EvaluacionPresencial;
+                        ViewData["ObservacionCuidadoPreoperatorio"] = solicitud.ObserCuidado;
                         Util.escribirLog("Solicitudes", "GestionSolicitud (GET)","Seteo todos los ViewData");
                         //Datos de la Gestión
                         List<Tecnica> listaTecnicas = conexionDB.Tecnica.ToList();
@@ -266,36 +267,194 @@ namespace WebSolicitudes.Controllers
                         {
                             List<Fotos> listaFotos = conexionDB.Fotos.ToList();
                             int cont = 0;
+  
                             foreach (Fotos item in listaFotos)
                             {
+                                
+                                
                                 if (item.FK_idSolicitud == id)
                                 {
                                     if (item.FK_idSolicitud == id && cont == 0)
                                     {
                                         ViewData["Foto1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+
                                     }
                                     if (item.FK_idSolicitud == id && cont == 1)
                                     {
                                         ViewData["Foto2"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        
                                     }
                                     if (item.FK_idSolicitud == id && cont == 2)
                                     {
                                         ViewData["Foto3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        
                                     }
                                     if (item.FK_idSolicitud == id && cont == 3)
                                     {
                                         ViewData["Foto4"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        
                                     }
                                     if (item.FK_idSolicitud == id && cont == 4)
                                     {
                                         ViewData["Foto5"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        
                                     }
                                     cont++;
                                 }
                             }
+                            
                             Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó todas la Fotos");
                         }
                         else {
+                            Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó ninguna Foto");
+                        }
+
+
+
+                        //Fotos 1 Mes Despues
+
+                        int conteoFotos1Mes = conexionDB.FotosUnMes.Count();
+                        if (conteoFotos1Mes != 0)
+                        {
+                            List<FotosUnMes> listaFotos = conexionDB.FotosUnMes.ToList();
+                            int cont = 0;
+                            string opcionfoto1 = string.Empty;
+                            opcionfoto1 += "<option value='0'>-- Selecciona opción --</option>";
+                            foreach (FotosUnMes item in listaFotos)
+                            {
+                                if (item.FK_idSolicitud == id)
+                                {
+                                    if (item.FK_idSolicitud == id && cont == 0)
+                                    {
+                                        ViewData["Foto1Mes1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 1)
+                                    {
+                                        ViewData["Foto2Mes1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 2)
+                                    {
+                                        ViewData["Foto3Mes1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 3)
+                                    {
+                                        ViewData["Foto4Mes1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 4)
+                                    {
+                                        ViewData["Foto5Mes1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    cont++;
+                                }
+                            }
+                            ViewData["opcionfoto1"] = opcionfoto1;
+                            Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó todas la Fotos");
+                        }
+                        else
+                        {
+                            Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó ninguna Foto");
+                        }
+
+                        //Fotos 3 Meses Despues
+
+                        int conteoFotos2Mes = conexionDB.FotosUnMes.Count();
+                        if (conteoFotos2Mes != 0)
+                        {
+                            List<FotosTresMeses> listaFotos = conexionDB.FotosTresMeses.ToList();
+                            int cont = 0;
+                            string opcionfoto3 = string.Empty;
+                            opcionfoto3 += "<option value='0'>-- Selecciona opción --</option>";
+                            foreach (FotosTresMeses item in listaFotos)
+                            {
+                                if (item.FK_idSolicitud == id)
+                                {
+                                    if (item.FK_idSolicitud == id && cont == 0)
+                                    {
+                                        ViewData["Foto1Mes3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 1)
+                                    {
+                                        ViewData["Foto2Mes3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 2)
+                                    {
+                                        ViewData["Foto3Mes3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 3)
+                                    {
+                                        ViewData["Foto4Mes3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 4)
+                                    {
+                                        ViewData["Foto5Mes3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    cont++;
+                                }
+                            }
+                            ViewData["opcionfoto3"] = opcionfoto3;
+                            Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó todas la Fotos");
+                        }
+                        else
+                        {
+                            Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó ninguna Foto");
+                        }
+
+                        //Fotos 6 Meses Despues
+
+                        int conteoFotos6Mes = conexionDB.FotosUnMes.Count();
+                        string opcionfoto6 = string.Empty;
+                        opcionfoto6 += "<option value='0'>-- Selecciona opción --</option>";
+                        if (conteoFotos6Mes != 0)
+                        {
+                            List<FotosSeisMeses> listaFotos = conexionDB.FotosSeisMeses.ToList();
+                            int cont = 0;
+                            foreach (FotosSeisMeses item in listaFotos)
+                            {
+                                if (item.FK_idSolicitud == id)
+                                {
+                                    if (item.FK_idSolicitud == id && cont == 0)
+                                    {
+                                        ViewData["Foto1Mes6"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 1)
+                                    {
+                                        ViewData["Foto2Mes6"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 2)
+                                    {
+                                        ViewData["Foto3Mes6"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 3)
+                                    {
+                                        ViewData["Foto4Mes6"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    if (item.FK_idSolicitud == id && cont == 4)
+                                    {
+                                        ViewData["Foto5Mes6"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
+                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreArchivo + "</option>";
+                                    }
+                                    cont++;
+                                }
+                            }
+                            ViewData["opcionfoto6"] = opcionfoto6;
+                            Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó todas la Fotos");
+                        }
+                        else
+                        {
                             Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó ninguna Foto");
                         }
 
@@ -523,15 +682,17 @@ namespace WebSolicitudes.Controllers
                         if (Estado == "15")
                         {
                             string Observacion3 = collection["txtObservacion3"];
+                            solicitud.ObserCuidado = Observacion3;
                             if (enviar == "1")
                             {
+                                string password = solicitud.Cliente.password;
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
                                 //Enviar Correo
                                 string titulo = "Cuidados Preoperatorios - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
-                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudCuidadosPreoperatorios.html")).Replace("[Nombre]", nombre).Replace("[Observacion]", Observacion3).Replace("[link]", link);
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudCuidadosPreoperatorios.html")).Replace("[Nombre]", nombre).Replace("[Observacion]", Observacion3).Replace("[link]", link).Replace("[Password]", password);
                                 Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
                             }
                         }
@@ -562,9 +723,10 @@ namespace WebSolicitudes.Controllers
                             {
                                 solicitud.Fk_idEstado = 19;
                                 //Enviar Correo
+                                string Pass = solicitud.Cliente.password;
                                 string titulo = "Cuidados postoperatorios - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
-                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudQuintoMicrositio.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudQuintoMicrositio.html")).Replace("[Link]", link).Replace("[Nombre]", nombre).Replace("[Password]", Pass);
                                 Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
                             }
                         }
@@ -583,6 +745,20 @@ namespace WebSolicitudes.Controllers
                                 Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
                             }
                         }
+                        if (Estado == "21")
+                        {
+                            if (enviar == "1")
+                            {
+                                //Armar link
+                                string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                                link = Util.Base64Encode(link);
+                                //Enviar Correo
+                                string titulo = "Vas por buen camino - Tempora";
+                                string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudBuenCamino.html")).Replace("[Nombre]", nombre);
+                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            }
+                        }
                         //Enviar Formulario 3 meses despues
                         if (Estado == "22")
                         {
@@ -598,6 +774,20 @@ namespace WebSolicitudes.Controllers
                                 Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
                             }
                         }
+                        if (Estado == "23")
+                        {
+                            if (enviar == "1")
+                            {
+                                //Armar link
+                                string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                                link = Util.Base64Encode(link);
+                                //Enviar Correo
+                                string titulo = "Vas por buen camino - Tempora";
+                                string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudBuenCamino.html")).Replace("[Nombre]", nombre);
+                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            }
+                        }
                         //Enviar Formulario 3 meses despues
                         if (Estado == "24")
                         {
@@ -610,6 +800,20 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "Fotografías seis meses después - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotoSeisMeses.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
+                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            }
+                        }
+                        if (Estado == "25")
+                        {
+                            if (enviar == "1")
+                            {
+                                //Armar link
+                                string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                                link = Util.Base64Encode(link);
+                                //Enviar Correo
+                                string titulo = "Vas por buen camino - Tempora";
+                                string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudBuenCamino.html")).Replace("[Nombre]", nombre);
                                 Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
                             }
                         }
@@ -660,19 +864,50 @@ namespace WebSolicitudes.Controllers
                             }
                         }
                         //Paciente es dado de alta
-                        if (Estado == "32")
+                        if (Estado == "31")
                         {
                             if (enviar == "1")
                             {
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
+                                string Pass = solicitud.Cliente.password;
                                 //Enviar Correo
                                 string titulo = "Ya eres parte de Tempora - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
-                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudUltimo.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudUltimo.html")).Replace("[Link]", link).Replace("[Nombre]", nombre).Replace("[Password]", Pass);
                                 Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
                                 solicitud.Fk_idEstado = 32;
+                            }
+                        }
+
+                        // Micrositio avance en fotos
+                        if (Estado == "33")
+                        {
+                            if (enviar == "1")
+                            {
+                                int foto1mes = int.Parse(collection["foto1mes"]);
+                                int foto3mes = int.Parse(collection["foto3mes"]);
+                                int foto6mes = int.Parse(collection["foto6mes"]);
+
+                                FotosUnMes foto1 = conexionDB.FotosUnMes.Find(foto1mes);
+                                FotosTresMeses foto3 = conexionDB.FotosTresMeses.Find(foto3mes);
+                                FotosSeisMeses foto6 = conexionDB.FotosSeisMeses.Find(foto6mes);
+
+                                foto1.seleccionado = true;
+                                foto3.seleccionado = true;
+                                foto6.seleccionado = true; 
+
+                                //Armar link
+                                string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                                link = Util.Base64Encode(link);
+                                //Enviar Correo
+                                string titulo = "Aquí está tu avance - Tempora";
+                                string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
+                                string Pass = solicitud.Cliente.password;
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudSextoMicrositio.html")).Replace("[Link]", link).Replace("[Nombre]", nombre).Replace("[Password]", Pass);
+                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                solicitud.Fk_idEstado = 33;
                             }
                         }
                         conexionDB.SaveChanges();
@@ -720,6 +955,13 @@ namespace WebSolicitudes.Controllers
                     ViewData["Nombre"] = cliente.nombre +" "+ cliente.apellido;
                     ViewData["idSolicitud"] = solicitud.idSolicitud;
                     ViewData["idCliente"] = cliente.idCliente;
+
+                    String fotos1 = conexionDB.FotosUnMes.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).FirstOrDefault().ToString();
+                    String fotos3 = conexionDB.FotosTresMeses.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).FirstOrDefault().ToString();
+                    String fotos6 = conexionDB.FotosSeisMeses.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).ToString();
+                    ViewData["foto1"] = "data: image / " + "jpeg" + "; base64, " + fotos1;
+                    ViewData["foto3"] = "data: image / " + "jpeg" + "; base64, " +fotos3;
+                    ViewData["foto6"] = "data: image / " + "jpeg" + "; base64, " +fotos6;
 
                 }
             }
@@ -901,9 +1143,9 @@ namespace WebSolicitudes.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult SolicitudFotoUMes(IEnumerable<HttpPostedFileBase> files, FormCollection collection)
+        public ActionResult SolicitudFotoUMesEnviar(IEnumerable<HttpPostedFileBase> files, FormCollection collection)
         {
-            var idSolicitud = collection["idSolicitud"];
+            int idSolicitud = int.Parse(collection["idSolicitud"]);
 
             //FotosUnMes
             string base64FotoArriba = collection["fotoArriba"];
@@ -963,23 +1205,24 @@ namespace WebSolicitudes.Controllers
                         //var path = Path.GetTempPath();
                         var local = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
                         file.SaveAs(path);
-                        Fotos archivo = new Fotos();
+                        FotosUnMes archivo = new FotosUnMes();
                         archivo.nombreFalso =
                         archivo.nombreArchivo = file.FileName;
                         archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
                         var ultimoId2 = solicitud.idSolicitud;
                         archivo.FK_idSolicitud = ultimoId2;
-                        conexionDB.Fotos.Add(archivo);
+                        conexionDB.FotosUnMes.Add(archivo);
                         conexionDB.SaveChanges();
                     }
                 }
                 solicitud.Fk_idEstado = 21;
                 solicitud.Foto1Mes = true;
                 solicitud.UltimoCambio = DateTime.Now;
+                conexionDB.SaveChanges();
 
             }
 
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult SolicitudFotoTresMeses(string id)
@@ -1008,9 +1251,9 @@ namespace WebSolicitudes.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult SolicitudFotoTresMeses(IEnumerable<HttpPostedFileBase> files, FormCollection collection)
+        public ActionResult SolicitudFotoTresMesesEnviar(IEnumerable<HttpPostedFileBase> files, FormCollection collection)
         {
-            var idSolicitud = collection["idSolicitud"];
+            int idSolicitud = int.Parse(collection["idSolicitud"]);
 
             //FotosTresMeses
             string base64FotoArriba = collection["fotoArriba"];
@@ -1069,22 +1312,23 @@ namespace WebSolicitudes.Controllers
                         //var path = Path.GetTempPath();
                         var local = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
                         file.SaveAs(path);
-                        Fotos archivo = new Fotos();
+                        FotosTresMeses archivo = new FotosTresMeses();
                         archivo.nombreFalso =
                         archivo.nombreArchivo = file.FileName;
                         archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
                         var ultimoId2 = solicitud.idSolicitud;
                         archivo.FK_idSolicitud = ultimoId2;
-                        conexionDB.Fotos.Add(archivo);
+                        conexionDB.FotosTresMeses.Add(archivo);
                         conexionDB.SaveChanges();
                     }
                 }
                 solicitud.Fk_idEstado = 23;
                 solicitud.Foto3Mes = true;
                 solicitud.UltimoCambio = DateTime.Now;
+                conexionDB.SaveChanges();
 
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult SolicitudFotoSeisMeses(string id)
@@ -1113,9 +1357,9 @@ namespace WebSolicitudes.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult SolicitudFotoSeisMeses(IEnumerable<HttpPostedFileBase> files, FormCollection collection)
+        public ActionResult SolicitudFotoSeisMesesEnviar(IEnumerable<HttpPostedFileBase> files, FormCollection collection)
         {
-            var idSolicitud = collection["idSolicitud"];
+            var idSolicitud = int.Parse(collection["idSolicitud"]);
 
             //FotosSeisMeses
             string base64FotoArriba = collection["fotoArriba"];
@@ -1175,13 +1419,13 @@ namespace WebSolicitudes.Controllers
                         //var path = Path.GetTempPath();
                         var local = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
                         file.SaveAs(path);
-                        Fotos archivo = new Fotos();
+                        FotosSeisMeses archivo = new FotosSeisMeses();
                         archivo.nombreFalso =
                         archivo.nombreArchivo = file.FileName;
                         archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
                         var ultimoId2 = solicitud.idSolicitud;
                         archivo.FK_idSolicitud = ultimoId2;
-                        conexionDB.Fotos.Add(archivo);
+                        conexionDB.FotosSeisMeses.Add(archivo);
                         conexionDB.SaveChanges();
                     }
                 }
@@ -1192,7 +1436,7 @@ namespace WebSolicitudes.Controllers
                 conexionDB.SaveChanges();
 
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -1752,7 +1996,7 @@ namespace WebSolicitudes.Controllers
             {
                 using (ModeloTempora conexionDB = new ModeloTempora())
                 {
-                    List <Solicitud> listaSolicitudes = conexionDB.Solicitud.Where(w=> w.FechaCirugia != null && (w.Foto1Mes == false && w.Foto3Mes == false && w.Foto6Mes == false)).ToList();
+                    List <Solicitud> listaSolicitudes = conexionDB.Solicitud.Where(w=> w.FechaCirugia != null && (w.Foto1Mes == false || w.Foto3Mes == false || w.Foto6Mes == false)).ToList();
                     string opcionesSolicitudes = string.Empty;
                     DateTime fechaActual = DateTime.Now;
              
@@ -1768,16 +2012,13 @@ namespace WebSolicitudes.Controllers
                             //Armar link
                             string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                             link = Util.Base64Encode(link);
-                            string pass = solicitud.Cliente.idCliente + ";" + solicitud.Cliente.rut;
-                            var password = Util.Base64Encode(pass);
-                            Cliente cliente = conexionDB.Cliente.Find(solicitud.FK_idCliente);
-                            string Pass = Util.GetSHA1(password);
-                            cliente.password = Pass;
-                            
+                            string Pass = solicitud.Cliente.password;
+                            string nombreMedico = solicitud.Usuario.Nombre + " " + solicitud.Usuario.Apellido;
+                            string FechaCirugia = solicitud.FechaCirugia.ToString();
                             //Enviar Correo
                             string titulo = "El día de tu cirugía - Portal Tempora";
                             string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
-                            string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudCuartoMicrositio.html")).Replace("[Nombre]", nombre).Replace("[Link]", link).Replace("[Password]", password);
+                            string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudCuartoMicrositio.html")).Replace("[Nombre]", nombre).Replace("[Link]", link).Replace("[Password]", Pass).Replace("[nombreMedico]", nombreMedico).Replace("[FechaCirugia]", FechaCirugia);
                             Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
 
                             solicitud.DiaCirugiaEnviado = true;

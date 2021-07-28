@@ -195,7 +195,7 @@
       <!-- ======= Hero Section ======= -->
 <main id="main">
     <br />
-        <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Solicitudes/SolicitudFotoSeisMeses") %>">
+        <form style="background: #F7F7F7;"  method="post" enctype="multipart/form-data" id="formSolicitud"" action="<%: Url.Content("~/Solicitudes/SolicitudFotoSeisMesesEnviar") %>">
             <section id="about" class="about" style="    margin-top: 5pc;">
                 <div class="card border-secondary <%--border-0--%> shadow rounded-lg mt-5" style="margin-top: -55px; background-color: #e3e3e3;">
                     <div class="container" data-aos="fade-up">

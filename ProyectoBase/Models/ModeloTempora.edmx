@@ -84,6 +84,7 @@
           <Property Name="baseArchivo" Type="varchar(max)" />
           <Property Name="FK_idSolicitud" Type="int" />
           <Property Name="nombreFalso" Type="varchar" MaxLength="200" />
+          <Property Name="seleccionado" Type="bit" />
         </EntityType>
         <EntityType Name="FotosTresMeses">
           <Key>
@@ -94,6 +95,7 @@
           <Property Name="baseArchivo" Type="varchar(max)" />
           <Property Name="FK_idSolicitud" Type="int" />
           <Property Name="nombreFalso" Type="varchar" MaxLength="200" />
+          <Property Name="seleccionado" Type="bit" />
         </EntityType>
         <EntityType Name="FotosUnMes">
           <Key>
@@ -104,6 +106,7 @@
           <Property Name="baseArchivo" Type="varchar(max)" />
           <Property Name="FK_idSolicitud" Type="int" />
           <Property Name="nombreFalso" Type="varchar" MaxLength="200" />
+          <Property Name="seleccionado" Type="bit" />
         </EntityType>
         <EntityType Name="País">
           <Key>
@@ -1156,6 +1159,7 @@
           <Property Name="FK_idSolicitud" Type="Int32" />
           <Property Name="nombreFalso" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Solicitud" Relationship="PortalModeloTemporal.FK_FotosSeisMeses_Solicitud" FromRole="FotosSeisMeses" ToRole="Solicitud" />
+          <Property Name="seleccionado" Type="Boolean" />
         </EntityType>
         <EntityType Name="FotosTresMeses">
           <Key>
@@ -1167,6 +1171,7 @@
           <Property Name="FK_idSolicitud" Type="Int32" />
           <Property Name="nombreFalso" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Solicitud" Relationship="PortalModeloTemporal.FK_FotosTresMeses_Solicitud" FromRole="FotosTresMeses" ToRole="Solicitud" />
+          <Property Name="seleccionado" Type="Boolean" />
         </EntityType>
         <EntityType Name="FotosUnMes">
           <Key>
@@ -1178,6 +1183,7 @@
           <Property Name="FK_idSolicitud" Type="Int32" />
           <Property Name="nombreFalso" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Solicitud" Relationship="PortalModeloTemporal.FK_FotosUnMes_Solicitud" FromRole="FotosUnMes" ToRole="Solicitud" />
+          <Property Name="seleccionado" Type="Boolean" />
         </EntityType>
         <Association Name="FK_EstadoSolicitud_ClasificacionEstado">
           <End Type="PortalModeloTemporal.ClasificacionEstado" Role="ClasificacionEstado" Multiplicity="0..1" />
@@ -1461,6 +1467,7 @@
           <EntitySetMapping Name="FotosSeisMeses">
             <EntityTypeMapping TypeName="PortalModeloTemporal.FotosSeisMeses">
               <MappingFragment StoreEntitySet="FotosSeisMeses">
+                <ScalarProperty Name="seleccionado" ColumnName="seleccionado" />
                 <ScalarProperty Name="nombreFalso" ColumnName="nombreFalso" />
                 <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
                 <ScalarProperty Name="baseArchivo" ColumnName="baseArchivo" />
@@ -1472,6 +1479,7 @@
           <EntitySetMapping Name="FotosTresMeses">
             <EntityTypeMapping TypeName="PortalModeloTemporal.FotosTresMeses">
               <MappingFragment StoreEntitySet="FotosTresMeses">
+                <ScalarProperty Name="seleccionado" ColumnName="seleccionado" />
                 <ScalarProperty Name="nombreFalso" ColumnName="nombreFalso" />
                 <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
                 <ScalarProperty Name="baseArchivo" ColumnName="baseArchivo" />
@@ -1483,6 +1491,7 @@
           <EntitySetMapping Name="FotosUnMes">
             <EntityTypeMapping TypeName="PortalModeloTemporal.FotosUnMes">
               <MappingFragment StoreEntitySet="FotosUnMes">
+                <ScalarProperty Name="seleccionado" ColumnName="seleccionado" />
                 <ScalarProperty Name="nombreFalso" ColumnName="nombreFalso" />
                 <ScalarProperty Name="FK_idSolicitud" ColumnName="FK_idSolicitud" />
                 <ScalarProperty Name="baseArchivo" ColumnName="baseArchivo" />
