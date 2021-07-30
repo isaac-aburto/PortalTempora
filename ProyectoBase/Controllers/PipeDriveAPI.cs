@@ -279,6 +279,183 @@ namespace WebSolicitudes.Controllers
 
             return "";
         }
+        public static string PostUser(string name, string email)
+        {
+            string ejecucionCorrecta = "";
+            try
+            {
+                string key = "name;email";
+                string values = name + ";" + email;
+                string url = "https://tempora-sandbox.pipedrive.com/v1/users?api_token=350cf4a120446f88a6cb27d3cbce6ec4109b50ae";
+                string xml = string.Empty;
+                string metodo = "POST";
+                var idUser = "";
+                LlamarAPIPost(metodo, url, key, values, xml);
+                string idUsers = GetAllUsers();
+                var User = idUsers.Split(';');
+                for (int i = 0; i < User.Length; i++)
+                {
+                    idUser = User[i];
+                }
+                return idUser;
+            }
+            catch (Exception ex)
+            {
+                // Crear log de error
+                ejecucionCorrecta = string.Empty;
+                Util.escribirLog("PipeDriveApi", "PostDeal", ex.Message);
+                return "";
+            }
+        }
+        public static string SincronizarUsers()
+        {
+            string correos = "";
+            using (ModeloTempora conexionDB = new ModeloTempora())
+            {
+
+                
+                var usuarios = conexionDB.Usuario.Select(s=> new { s.Correo, s.Nombre, s.Apellido }).ToList();
+                //Sincronizar de BD a PD
+                foreach (var usuarioBD in usuarios) {
+                    var correoBD = usuarioBD.Correo;
+                    bool encontro = GetUserbyEmail(usuarioBD.Correo, "0");
+                    if (encontro == false) {
+                        //CREAR USUARIO EN PD
+                        string resultado = PostUser(usuarioBD.Nombre + " " + usuarioBD.Apellido, usuarioBD.Correo);
+                    }
+                }
+                //Sincronizar de PD a BD
+                string usuariosPD = GetUsersSincronizar();
+                string[] separators = { ",", "\"", ";", ":", "{", "}", "[", "]", " ", "\n", "\r"};
+                string[] words = usuariosPD.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                var nombre = "";
+                var id = "";
+                for (int i = 0; i < words.Length; i++)
+                    if (words[i] == "name")
+                    {
+                        nombre = words[i + 1];
+                    }
+                    else
+                    {
+                        if (words[i] == "id") {
+                            id = words[i + 1];
+                        }
+                        if (words[i] == "email")
+                        {
+                            var correo = words[i + 1];
+                            Console.WriteLine(words[i]);
+                            Usuario usuario = conexionDB.Usuario.Where(w => w.Correo == correo).FirstOrDefault();
+                            if (usuario == null)
+                            {
+                                Usuario nuevoUsuario = new Usuario();
+                                nuevoUsuario.Nombre = nombre;
+                                nuevoUsuario.idPipeDrive = id;
+                                nuevoUsuario.Correo = correo;
+                                conexionDB.Usuario.Add(nuevoUsuario);
+                                conexionDB.SaveChanges();
+                            }
+                        }
+                    }
+
+            }
+
+            return "";
+        }
+        public static string GetAllUsers()
+        {
+            string ejecucionCorrecta = "";
+            try
+            {
+                string parametros = "";
+                string url = "https://tempora-sandbox.pipedrive.com/v1/users?api_token=350cf4a120446f88a6cb27d3cbce6ec4109b50ae";
+                string xml = string.Empty;
+                string metodo = "GET";
+                string respuestaAPI = LlamarAPIGet(metodo, url, parametros, xml);
+                var idUsers = "";
+                JObject json = JObject.Parse(respuestaAPI);
+                JsonTextReader reader = new JsonTextReader(new StringReader(respuestaAPI));
+                while (reader.Read())
+                {
+                    if (reader.Value != null)
+                    {
+                        if (reader.Value.ToString() == "id")
+                        {
+                            reader.Read();
+                            idUsers = idUsers + ";" + reader.Value;
+                        }
+                    }
+                    else
+                    {
+                        reader.Read();
+                    }
+                }
+                return (idUsers);
+            }
+            catch (Exception ex)
+            {
+                // Crear log de error
+                ejecucionCorrecta = string.Empty;
+                Util.escribirLog("PipeDriveApi", "PostDeal", ex.Message);
+            }
+
+            return "";
+        }
+
+        public static bool GetUserbyEmail(string term, string email)
+        {
+            string ejecucionCorrecta = "";
+            List<string> idUsers = new List<string>();
+            try
+            {
+                string parametros = "";
+                string url = "https://tempora-sandbox.pipedrive.com/v1/users/find?api_token=350cf4a120446f88a6cb27d3cbce6ec4109b50ae&term="+ term + "&search_by_email=1";
+                string xml = string.Empty;
+                string metodo = "GET";
+                string respuestaAPI = LlamarAPIGet(metodo, url, parametros, xml);
+                JObject json = JObject.Parse(respuestaAPI);
+                string a = json.ToString();
+                int numero = a.Length;
+                if (numero <= 40)
+                {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                // Crear log de error
+                ejecucionCorrecta = string.Empty;
+                Util.escribirLog("PipeDriveApi", "PostDeal", ex.Message);
+            }
+
+            return (true);
+        }
+        public static string GetUsersSincronizar()
+        {
+            string ejecucionCorrecta = "";
+            List<string> idUsers = new List<string>();
+            try
+            {
+                string parametros = "";
+                string url = "https://tempora-sandbox.pipedrive.com/v1/users?api_token=350cf4a120446f88a6cb27d3cbce6ec4109b50ae";
+                string xml = string.Empty;
+                string metodo = "GET";
+                string respuestaAPI = LlamarAPIGet(metodo, url, parametros, xml);
+                JObject json = JObject.Parse(respuestaAPI);
+                return json.ToString();
+            }
+            catch (Exception ex)
+            {
+                // Crear log de error
+                ejecucionCorrecta = string.Empty;
+                Util.escribirLog("PipeDriveApi", "PostDeal", ex.Message);
+            }
+
+            return ("");
+        }
 
         //
         // GET: /PipeDriveAPI/

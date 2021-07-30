@@ -11,8 +11,14 @@ namespace WebSolicitudes.Controllers
     {
         //
         // GET: /Usuarios/
+        
+        public void Sincronizar()
+        {
+            PipeDriveAPI.SincronizarUsers();
+        }
 
-        [HttpPost]
+
+            [HttpPost]
         public ActionResult Login(FormCollection collection)
         {
             string usr = collection["inputEmail"];
@@ -166,7 +172,8 @@ namespace WebSolicitudes.Controllers
                         usuario.Correo = Correo;
                         usuario.Telefono = Telefono;
                         usuario.Celular = Celular;
-                        usuario.idPipeDrive = PipeDrive;
+                        string idUsers = PipeDriveAPI.PostUser(nombre + " " + apellido, Correo);
+                        usuario.idPipeDrive = idUsers;
                         conexionDB.Usuario.Add(usuario);
                         conexionDB.SaveChanges();
                     }

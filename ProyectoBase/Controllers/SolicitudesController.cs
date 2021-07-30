@@ -327,27 +327,27 @@ namespace WebSolicitudes.Controllers
                                     if (item.FK_idSolicitud == id && cont == 0)
                                     {
                                         ViewData["Foto1Mes1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreFalso + "</option>";
                                     }
                                     if (item.FK_idSolicitud == id && cont == 1)
                                     {
                                         ViewData["Foto2Mes1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreFalso + "</option>";
                                     }
                                     if (item.FK_idSolicitud == id && cont == 2)
                                     {
                                         ViewData["Foto3Mes1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreFalso + "</option>";
                                     }
                                     if (item.FK_idSolicitud == id && cont == 3)
                                     {
                                         ViewData["Foto4Mes1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreFalso + "</option>";
                                     }
                                     if (item.FK_idSolicitud == id && cont == 4)
                                     {
                                         ViewData["Foto5Mes1"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto1 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosUn + "'>" + item.nombreFalso + "</option>";
                                     }
                                     cont++;
                                 }
@@ -376,27 +376,27 @@ namespace WebSolicitudes.Controllers
                                     if (item.FK_idSolicitud == id && cont == 0)
                                     {
                                         ViewData["Foto1Mes3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreFalso + "</option>";
                                     }
                                     if (item.FK_idSolicitud == id && cont == 1)
                                     {
                                         ViewData["Foto2Mes3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreFalso + "</option>";
                                     }
                                     if (item.FK_idSolicitud == id && cont == 2)
                                     {
                                         ViewData["Foto3Mes3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreFalso + "</option>";
                                     }
                                     if (item.FK_idSolicitud == id && cont == 3)
                                     {
                                         ViewData["Foto4Mes3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreFalso + "</option>";
                                     }
                                     if (item.FK_idSolicitud == id && cont == 4)
                                     {
                                         ViewData["Foto5Mes3"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto3 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosTres + "'>" + item.nombreFalso + "</option>";
                                     }
                                     cont++;
                                 }
@@ -425,27 +425,27 @@ namespace WebSolicitudes.Controllers
                                     if (item.FK_idSolicitud == id && cont == 0)
                                     {
                                         ViewData["Foto1Mes6"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreFalso + "</option>";
                                     }
                                     if (item.FK_idSolicitud == id && cont == 1)
                                     {
                                         ViewData["Foto2Mes6"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreFalso + "</option>";
                                     }
                                     if (item.FK_idSolicitud == id && cont == 2)
                                     {
                                         ViewData["Foto3Mes6"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreFalso + "</option>";
                                     }
                                     if (item.FK_idSolicitud == id && cont == 3)
                                     {
                                         ViewData["Foto4Mes6"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreFalso + "</option>";
                                     }
                                     if (item.FK_idSolicitud == id && cont == 4)
                                     {
                                         ViewData["Foto5Mes6"] = "data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "";
-                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreArchivo + "</option>";
+                                        opcionfoto6 += "<option id='data: image/" + "jpeg" + "; base64, " + item.baseArchivo + "' value='" + item.idFotosSeis + "'>" + item.nombreFalso + "</option>";
                                     }
                                     cont++;
                                 }
@@ -955,13 +955,15 @@ namespace WebSolicitudes.Controllers
                     ViewData["Nombre"] = cliente.nombre +" "+ cliente.apellido;
                     ViewData["idSolicitud"] = solicitud.idSolicitud;
                     ViewData["idCliente"] = cliente.idCliente;
+                    if (solicitud.Fk_idEstado > 25) {
+                        String fotos1 = conexionDB.FotosUnMes.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).FirstOrDefault().ToString();
+                        String fotos3 = conexionDB.FotosTresMeses.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).FirstOrDefault().ToString();
+                        String fotos6 = conexionDB.FotosSeisMeses.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).ToString();
+                        ViewData["foto1"] = "data: image / " + "jpeg" + "; base64, " + fotos1;
+                        ViewData["foto3"] = "data: image / " + "jpeg" + "; base64, " + fotos3;
+                        ViewData["foto6"] = "data: image / " + "jpeg" + "; base64, " + fotos6;
+                    }
 
-                    String fotos1 = conexionDB.FotosUnMes.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).FirstOrDefault().ToString();
-                    String fotos3 = conexionDB.FotosTresMeses.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).FirstOrDefault().ToString();
-                    String fotos6 = conexionDB.FotosSeisMeses.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).ToString();
-                    ViewData["foto1"] = "data: image / " + "jpeg" + "; base64, " + fotos1;
-                    ViewData["foto3"] = "data: image / " + "jpeg" + "; base64, " +fotos3;
-                    ViewData["foto6"] = "data: image / " + "jpeg" + "; base64, " +fotos6;
 
                 }
             }
@@ -1180,33 +1182,40 @@ namespace WebSolicitudes.Controllers
                     {
                         var nombrearchivo = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
-
+                        FotosUnMes archivo = new FotosUnMes();
                         if (cont == 1)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoArriba));
+                            archivo.nombreFalso = "Foto arriba";
                         }
                         if (cont == 2)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoIzquierdo));
+                            archivo.nombreFalso = "Foto lado izquierdo";
+
                         }
                         if (cont == 3)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoDerecho));
+                            archivo.nombreFalso = "Foto lado derecho";
+
                         }
                         if (cont == 4)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoAtras));
+                            archivo.nombreFalso = "Foto atrás";
+
                         }
                         if (cont == 5)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoFrente));
+                            archivo.nombreFalso = "Foto de frente";
+
                         }
                         cont++;
                         //var path = Path.GetTempPath();
                         var local = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
-                        file.SaveAs(path);
-                        FotosUnMes archivo = new FotosUnMes();
-                        archivo.nombreFalso =
+                        file.SaveAs(path);                       
                         archivo.nombreArchivo = file.FileName;
                         archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
                         var ultimoId2 = solicitud.idSolicitud;
@@ -1287,33 +1296,41 @@ namespace WebSolicitudes.Controllers
                     {
                         var nombrearchivo = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
+                        FotosTresMeses archivo = new FotosTresMeses();
 
                         if (cont == 1)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoArriba));
+                            archivo.nombreFalso = "Foto arriba";
+
                         }
                         if (cont == 2)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoIzquierdo));
+                            archivo.nombreFalso = "Foto lado izquierdo";
+
                         }
                         if (cont == 3)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoDerecho));
+                            archivo.nombreFalso = "Foto lado derecho";
+
                         }
                         if (cont == 4)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoAtras));
+                            archivo.nombreFalso = "Foto atrás";
                         }
                         if (cont == 5)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoFrente));
+                            archivo.nombreFalso = "Foto de frente";
                         }
                         cont++;
                         //var path = Path.GetTempPath();
                         var local = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
                         file.SaveAs(path);
-                        FotosTresMeses archivo = new FotosTresMeses();
-                        archivo.nombreFalso =
+
                         archivo.nombreArchivo = file.FileName;
                         archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
                         var ultimoId2 = solicitud.idSolicitud;
@@ -1394,33 +1411,42 @@ namespace WebSolicitudes.Controllers
                     {
                         var nombrearchivo = Path.GetFileName(file.FileName);
                         var path = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
+                        FotosSeisMeses archivo = new FotosSeisMeses();
 
                         if (cont == 1)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoArriba));
+                            archivo.nombreFalso = "Foto arriba";
+
                         }
                         if (cont == 2)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoIzquierdo));
+                            archivo.nombreFalso = "Foto lado izquierdo";
+
                         }
                         if (cont == 3)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoDerecho));
+                            archivo.nombreFalso = "Foto lado derecho";
+
                         }
                         if (cont == 4)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoAtras));
+                            archivo.nombreFalso = "Foto atrás";
+
                         }
                         if (cont == 5)
                         {
                             System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoFrente));
+                            archivo.nombreFalso = "Foto de frente";
+
                         }
                         cont++;
                         //var path = Path.GetTempPath();
                         var local = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
                         file.SaveAs(path);
-                        FotosSeisMeses archivo = new FotosSeisMeses();
-                        archivo.nombreFalso =
                         archivo.nombreArchivo = file.FileName;
                         archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
                         var ultimoId2 = solicitud.idSolicitud;

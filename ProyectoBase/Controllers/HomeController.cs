@@ -28,6 +28,7 @@ namespace WebSolicitudes.Controllers
 
         public ActionResult Index()
         {
+            
             return View();
         }
 
@@ -233,32 +234,35 @@ namespace WebSolicitudes.Controllers
                         {
                             var nombrearchivo = Path.GetFileName(file.FileName);
                             var path = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
-                            
+                            Fotos archivo = new Fotos();
                             if (cont == 1) {
                                 System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoArriba));
+                                archivo.nombreFalso = filename;
                             }
                             if (cont == 2)
                             {
                                 System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoIzquierdo));
+                                archivo.nombreFalso = filename2;
                             }
                             if (cont == 3)
                             {
                                 System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoDerecho));
+                                archivo.nombreFalso = filename3;
                             }
                             if (cont == 4)
                             {
                                 System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoAtras));
+                                archivo.nombreFalso = filename4;
                             }
                             if (cont == 5)
                             {
                                 System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoFrente));
+                                archivo.nombreFalso = filename5;
                             }
                             cont++;
                             //var path = Path.GetTempPath();
                             var local = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
                             file.SaveAs(path);
-                            Fotos archivo = new Fotos();
-                            archivo.nombreFalso =
                             archivo.nombreArchivo = file.FileName;
                             archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
                             var ultimoId2 = solicitud.idSolicitud;

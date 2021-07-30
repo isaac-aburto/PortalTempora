@@ -51,6 +51,21 @@
                 open3 = !open3;
 
             });
+            $("#btnSicronizar").click(function () {
+                $.ajax({
+                    url: '<%: Url.Content("~/Usuarios/Sincronizar/") %>',
+                        data: {  },
+                    cache: false,
+                    type: "GET",
+                    success: function (data) {
+                        // data is your result from controller
+
+                     },
+                     error: function (err) {
+                         console.log(err);
+                     }
+                 });
+            });
         });
     </script>
     <style>
@@ -102,7 +117,14 @@
                         <div class="card-body" style="    margin-top: -5pc;">
                         <div class="card border-left-warning shadow ">
                         <div class="card-body">
-                            <h1 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: inherit;">Usuarios Tempora</h1>
+                            <div class="row">
+                                <div class="col">
+                                    <h1 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: inherit;">Usuarios Tempora</h1>
+                                </div>
+                                <div class="col" style="padding-left: 60pc;margin-top: -2pc;">
+                                    <button id="btnSicronizar" class="btn btn-primary" type="button"><i class="fas fa-sync"></i>Sincronizar</button>
+                                </div>
+                            </div>
                             <br />
                             <div style="text-align: center;">
                             </div>                   
