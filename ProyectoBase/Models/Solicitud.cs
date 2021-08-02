@@ -55,6 +55,9 @@ namespace WebSolicitudes.Models
         public Nullable<bool> Foto6Mes { get; set; }
         public Nullable<bool> DiaCirugiaEnviado { get; set; }
         public Nullable<System.DateTime> FechaCirugiaPaciente { get; set; }
+        public Nullable<bool> Leido { get; set; }
+        public string Enviado { get; set; }
+        public string Guardado { get; set; }
     
         public virtual Ciudad Ciudad { get; set; }
         public virtual Cliente Cliente { get; set; }

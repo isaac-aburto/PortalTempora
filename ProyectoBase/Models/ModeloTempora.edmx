@@ -191,6 +191,9 @@
           <Property Name="Foto6Mes" Type="bit" />
           <Property Name="DiaCirugiaEnviado" Type="bit" />
           <Property Name="FechaCirugiaPaciente" Type="datetime" />
+          <Property Name="Leido" Type="bit" />
+          <Property Name="Enviado" Type="varchar" MaxLength="6" />
+          <Property Name="Guardado" Type="varchar" MaxLength="6" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -740,6 +743,9 @@
           <Property Name="Foto6Mes" Type="Boolean" />
           <Property Name="DiaCirugiaEnviado" Type="Boolean" />
           <Property Name="FechaCirugiaPaciente" Type="DateTime" Precision="3" />
+          <Property Name="Leido" Type="Boolean" />
+          <Property Name="Enviado" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Guardado" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1338,6 +1344,9 @@
           <EntitySetMapping Name="Solicitud">
             <EntityTypeMapping TypeName="PortalModeloTemporal.Solicitud">
               <MappingFragment StoreEntitySet="Solicitud">
+                <ScalarProperty Name="Guardado" ColumnName="Guardado" />
+                <ScalarProperty Name="Enviado" ColumnName="Enviado" />
+                <ScalarProperty Name="Leido" ColumnName="Leido" />
                 <ScalarProperty Name="FechaCirugiaPaciente" ColumnName="FechaCirugiaPaciente" />
                 <ScalarProperty Name="DiaCirugiaEnviado" ColumnName="DiaCirugiaEnviado" />
                 <ScalarProperty Name="Foto6Mes" ColumnName="Foto6Mes" />

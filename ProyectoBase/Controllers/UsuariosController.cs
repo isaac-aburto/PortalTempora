@@ -12,9 +12,10 @@ namespace WebSolicitudes.Controllers
         //
         // GET: /Usuarios/
         
-        public void Sincronizar()
+        public ActionResult Sincronizar()
         {
             PipeDriveAPI.SincronizarUsers();
+            return RedirectToAction("Index", "Usuarios");
         }
 
 

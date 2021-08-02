@@ -8,7 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="js/jquery.min.js" type="text/javascript"></script>
 <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script>
+<%--        <script>
             $(document).ready(function () {
                 var table = $('#tablasolicitudes').DataTable({
                     "sDom": '<"top">rt<"bottom"ip><"clear">',
@@ -30,7 +30,7 @@
                     $("#exampleModal").modal('show');
                 });
             });
-        </script>
+        </script>--%>
     <style>
         h5 {
             font-family: "Open Sans", sans-serif !important;
@@ -166,11 +166,11 @@
                                     </select>
                                 </fieldset>
                                 <fieldset class="form-group col-md-2">
-                                    <label for="txtTecnica">Completada</label>
+                                    <label for="txtTecnica">Técnica</label>
                                     <select name="txtTecnica" id="txtTecnica" class="form-control">
                                         <option  value='0'>Todos</option>
-                                         <option  value='1'>Completa</option>
-                                        <option  value='2'>Incompleta</option>
+                                         <option  value='1'>FUE</option>
+                                        <option  value='2'>FUSS</option>
                                     </select>
                                 </fieldset>
                             </div>
@@ -191,17 +191,19 @@
                                     <th class="col-xs-1">Fecha Solicitud</th>
                                     <th class="col-xs-2">Estado</th>
                                     <th class="col-xs-1">Técnica</th>
-                                    <th class="col-xs-1">Completada</th>
+                                    <th class="col-xs-1">Últiumo cambio</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <%= ViewData["valoresSolicitudes"] %>
                             </tbody>
                         </table>
+                        <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.24/sorting/date-uk.js"></script>
                     </div>
                 </div>
             </div>
             <script>
+
                 $(document).ready(function () {
                     // Datatable y propiedades
                     var table = $('#tablasolicitudes').DataTable({

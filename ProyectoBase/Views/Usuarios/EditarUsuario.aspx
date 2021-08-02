@@ -165,7 +165,7 @@
                                 <div class="col">
                                 <div style="text-align: center;">
                                     <button class="btn btn-primary" onclick="location.href ='';" style="background-color: grey; border-color: grey;" type="button">Volver</button>
-                                    <button class="btn btn-primary"style="background-color: #C6D41D; border-color: #C6D41D;" type="submit">Agregar</button>
+                                    <button class="btn btn-primary"style="background-color: #C6D41D; border-color: #C6D41D;" type="submit">Editar</button>
                                 </div> 
                                     </div> 
                             </div>

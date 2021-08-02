@@ -52,6 +52,7 @@
 
             });
             $("#btnSicronizar").click(function () {
+                console.log("Entró al sincronziar")
                 $.ajax({
                     url: '<%: Url.Content("~/Usuarios/Sincronizar/") %>',
                         data: {  },
@@ -59,7 +60,7 @@
                     type: "GET",
                     success: function (data) {
                         // data is your result from controller
-
+                        window.location.replace("http://localhost:4010/Usuarios/");
                      },
                      error: function (err) {
                          console.log(err);

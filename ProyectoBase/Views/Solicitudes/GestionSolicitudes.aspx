@@ -17,6 +17,7 @@
     <%-- AJAX de Descripción y estado --%>
     <script>
         $(document).ready(function () {
+
             var idEstado = $("#txtEstado").val();
             $.ajax({
                 url: '<%: Url.Content("~/Solicitudes/ConsultarDescripcion/") %>',
@@ -890,6 +891,40 @@
             height: 500px;
             object-fit: cover;
         }
+        .img{
+    margin: 8px auto;
+    border-radius: 5px;
+    border: 0px solid #999;
+    padding: 0px;
+    width: 266px;
+    height: 220px;
+  background-size: 100% 100%;
+  background-repeat:no-repeat;
+  background:url(../img/imagen.jpg);
+  background-size: cover;
+  }
+.img img{
+  width: 100%;
+}
+@media all and (min-width: 500px) and (max-width: 1000px)
+{  
+.img{
+    margin: 8px auto;
+    border-radius: 5px;
+    border: 0px solid #999;
+    padding: 0px;
+    width: 266px;
+    height: 220px;
+  background-size: 100% 100%;
+  background-repeat:no-repeat;
+  background:url(../img/imagen.jpg);
+  background-size: cover;
+  
+  }
+}
+.img img{
+   width:100%;
+}
     </style>
 </asp:Content>
 
@@ -904,11 +939,63 @@
         <section id="about" class="about" style="    margin-top: 8pc;">
             <div class="card border-secondary <%--border-0--%> shadow rounded-lg mt-5" style="margin-top: -55px; background-color: #e3e3e3;">
                 <div class="container" data-aos="fade-up">
-                    <input hidden name="idSolicitud" value="<%= ViewData["idSolicitud"]%>"/>
+                    <input hidden id="idSolicitud" name="idSolicitud" value="<%= ViewData["idSolicitud"]%>"/>
+                    <input hidden id="Guardado" name="Guardado" value="<%= ViewData["Guardado"]%>"/>
+                    <input hidden id="Enviado" name="Enviado" value="<%= ViewData["Enviado"]%>"/>
                     <div class="row">
+
                         <div class="card-body" style="    margin-top: -5pc;">
                         <div class="card border-left-warning shadow ">
                         <div class="card-body">
+                            <div id="alertaGuardado" class="alert alert-success alert-dismissible fade show" role="alert">
+                              <strong>Guardado con éxito</strong>.
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div id="alertaEnviado" class="alert alert-success alert-dismissible fade show" role="alert">
+                              <strong>Enviado con éxito</strong>.
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <%--  --%>
+                            <script>
+                                $(document).ready(function () {
+                                    console.log($("#Guardado").val())                                 
+                                    if ($("#Guardado").val() == "True") {
+                                        $("#alertaGuardado").alert()
+                                    }
+                                    else {
+                                        $("#alertaGuardado").alert('close')
+                                    }
+
+                                    if ($("#Enviado").val() == "True") {
+                                        $("#alertaEnviado").alert()
+                                    }
+                                    else {
+                                        $("#alertaEnviado").alert('close')
+                                    }
+
+                                    //Ajax para cambiar el estado
+                                    var id = $("#idSolicitud").val();
+                                    console.log("Ahora quiero cambiar alertas" + id)
+                                    $.ajax({
+                                        url: '<%: Url.Content("~/Solicitudes/CambiarAlertas/") %>',
+                                        data: { id: id },
+                                            cache: false,
+                                            type: "POST",
+                                            success: function (data) {
+                                                if (data != "") {
+                                                    console.log(data);
+                                                }
+
+                                            }
+                                        });
+
+
+                                });
+                            </script>
                             <div style="text-align: center;">
                                 <h1 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: inherit;">Solicitud N°<%= ViewData["idSolicitud"]%> </h1>
                                 <h1 style="color: #b8c517; font-style: inherit;"><%= ViewData["NombreCompleto"]  %></h1>
@@ -959,7 +1046,7 @@
 
                             </div>
                             <div class="row">
-                                <div class="col-4">
+<%--                                <div class="col-4">
                                     <label for="txtTelefono"></label>
                                     <label style="color: black">Teléfono </label>
                                     <div id="selDiv">
@@ -967,7 +1054,7 @@
                                     </div>
                                     <div class="invalid-feedback">Seleccione una opción</div>
                                     <br />
-                                </div>
+                                </div>--%>
                                 <div class="col-4">
                                     <label for="txtCelular"></label>        
                                     <label style="color: black">Celular </label>
@@ -1065,40 +1152,47 @@
                                         <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
          
                                         </ol>
-                                        <div class="carousel-inner" style="border-radius: 7px;border-color: #ededed;border-style: solid;">
+                                        <div class="carousel-inner" <%--style="border-radius: 7px;border-color: #ededed;border-style: solid;--%>">
                                         <div class="carousel-item active">
-                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto1"]%>" alt="First slide">
+                                            <div class="text-center" style="margin: 5px;"><h5 style="color: #a7a7a7;">Desde arriba</h5></div>
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto1"]%>" alt="First slide" onclick="window.open(this.src)">
                                           <div class="carousel-caption d-none d-md-block">
-                                            <h5>Desde arriba</h5>
-                                            <p>imagen1.jpg</p>
+
                                           </div>
                                         </div>
                                         <div class="carousel-item">
+                                            <div class="text-center" style="margin: 5px;"></div>
+                                            <div class="text-center" style="margin: 5px;"><h5 style="color: #a7a7a7;">Perfil izquierdo</h5></div>
                                             <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto2"]%>" alt="Second slide">
                                              <div class="carousel-caption d-none d-md-block">
-                                                <h5>Perfil izquierdo</h5>
-                                                <p>imagen2.jpg</p>
+
                                             </div>
                                         </div>
                                         <div class="carousel-item">
+                                            <div class="text-center" style="margin: 5px;"><h5 style="color: #a7a7a7;">Perfil Derecho</h5></div>
+                                                                                            
+                                     
                                             <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto3"]%>" alt="Third slide">
                                             <div class="carousel-caption d-none d-md-block">
-                                                <h5>Perfil Derecho</h5>
-                                                <p>imagen3.jpg</p>
+
                                             </div>
                                         </div>
                                         <div class="carousel-item">
+                                            <div class="text-center" style="margin: 5px;"><h5 style="color: #a7a7a7;">De atrás</h5></div>
+                                                                                            
+    
                                             <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto4"]%>" alt="Third slide">
                                              <div class="carousel-caption d-none d-md-block">
-                                                <h5>De atrás</h5>
-                                                <p>imagen4.jpg</p>
+
                                             </div>
                                         </div>
                                         <div class="carousel-item">
-                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto5"]%>" alt="Third slide">
+                                            <div class="text-center" style="margin: 5px;"><h5 style="color: #a7a7a7;">De frente</h5></div>
+                                                                                            
+
+                                            <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto5"]%>" alt="Third slide" >
                                             <div class="carousel-caption d-none d-md-block">
-                                                <h5>De frente</h5>
-                                                <p>imagen5.jpg</p>
+
                                             </div>
                                         </div>
                                         </div>
@@ -1521,22 +1615,28 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <label style="color:black"> Foto primer mes </label>
+                                        <div class="img">
                                         <img id="imagen1MesSeleccionado" class="d-block w-100" src="<%= ViewData["Foto1Mes6"]%>">
+                                            </div>
                                         <select id="foto1mes" name="foto1mes" class="form-control">
                                             <%= ViewData["opcionfoto1"] %>
                                         </select>
                                     </div>
                                     <div class="col-4">
                                     <label style="color:black"> Foto tercer mes </label>
+                                        <div class="img">
                                         <img id="imagen3MesSeleccionado" class="d-block w-100" src="<%= ViewData["Foto1Mes6"]%>">
+                                            </div>
                                     <select id="foto3mes" name="foto3mes" class="form-control">
                                         <%= ViewData["opcionfoto3"] %>
                                     </select>
                                     </div>
                                     <div class="col-4">
                                     <label style="color:black"> Foto sexto mes </label>
+                                        <div class="img">
                                     <img id="imagen6MesSeleccionado" class="d-block w-100" src="<%= ViewData["Foto1Mes6"]%>">
-                                    <select id="foto6mes" name="foto4mes" class="form-control">
+                                            </div>
+                                    <select id="foto6mes" name="foto6mes" class="form-control">
                                         <%= ViewData["opcionfoto6"] %>
                                     </select>
                                     </div>

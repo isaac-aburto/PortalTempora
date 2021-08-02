@@ -60,7 +60,14 @@ namespace WebSolicitudes.Controllers
                         List<Solicitud> listaSolicitud = conexionDB.Solicitud.ToList();
                         string filaSolicitud = string.Empty;
                         foreach (Solicitud solicitud in listaSolicitud) {
-                            filaSolicitud += "<tr>";
+                            if (solicitud.Leido == false)
+                            {
+                                filaSolicitud += "<tr style='background-color: #fdfdfd; '>";
+                            }
+                            else {
+                                filaSolicitud += "<tr style='background-color: #f3f3f3;  '>";
+                            }
+                            
                             filaSolicitud += "  <td>";
                             string URL = Url.Content("~/Solicitudes/GestionSolicitudes/");
                             filaSolicitud += "<a href='" + URL + solicitud.idSolicitud + "'>" + solicitud.idSolicitud + "</a>";
@@ -94,12 +101,13 @@ namespace WebSolicitudes.Controllers
                             }
                             filaSolicitud += "  </td>";
                             filaSolicitud += "  <td>";
-                            if (solicitud.SolicitudCompleta == 1 || solicitud.SolicitudCompleta == null) {
-                                filaSolicitud += "Completa";
-                            }
-                            else {
-                                filaSolicitud += "Incompleta";
-                            }
+                            filaSolicitud += solicitud.UltimoCambio;
+                            //if (solicitud.SolicitudCompleta == 1 || solicitud.SolicitudCompleta == null) {
+                            //    filaSolicitud += "Completa";
+                            //}
+                            //else {
+                            //    filaSolicitud += "Incompleta";
+                            //}
                             filaSolicitud += "  </td>";
                             filaSolicitud += "</tr>";
                         }
@@ -130,6 +138,7 @@ namespace WebSolicitudes.Controllers
                             throw new Exception("El usuario no existe");
                         Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Encontró el usuario");
                         Solicitud solicitud = conexionDB.Solicitud.Find(id);
+                        solicitud.Leido = true;
                         //Datos Solicitud
                         ViewData["NombreCompleto"] = solicitud.Cliente.nombre + " " +solicitud.Cliente.apellido;
                         ViewData["Rut"] = solicitud.Cliente.rut;
@@ -146,6 +155,8 @@ namespace WebSolicitudes.Controllers
                         ViewData["FechaEvaluacionOnceMeses"] = solicitud.FechaEvaluaciónOnceMeses;
                         ViewData["FechaEvaluacionPreciencial"] = solicitud.EvaluacionPresencial;
                         ViewData["ObservacionCuidadoPreoperatorio"] = solicitud.ObserCuidado;
+                        ViewData["Guardado"] = solicitud.Guardado;
+                        ViewData["Enviado"] = solicitud.Enviado;
                         Util.escribirLog("Solicitudes", "GestionSolicitud (GET)","Seteo todos los ViewData");
                         //Datos de la Gestión
                         List<Tecnica> listaTecnicas = conexionDB.Tecnica.ToList();
@@ -460,6 +471,7 @@ namespace WebSolicitudes.Controllers
 
                         ViewData["FechaSolicitud"] = solicitud.FechaSolicitud;
                         ViewData["idSolicitud"] = id;
+                        conexionDB.SaveChanges();
                         return View();
 
 
@@ -511,7 +523,17 @@ namespace WebSolicitudes.Controllers
                         int idEstado = int.Parse(Estado);
                         solicitud.Fk_idEstado = idEstado;
                         solicitud.UltimoCambio = DateTime.Now;
-                        idCliente = int.Parse(solicitud.FK_idCliente.ToString()); 
+                        idCliente = int.Parse(solicitud.FK_idCliente.ToString());
+                        if (enviar == "1")
+                        {  
+                            // Fue Enviado
+                            solicitud.Enviado = "True";
+                        }
+                        else {
+                            //Fue guardado
+                            solicitud.Guardado = "True";
+                        }
+
                         if (Estado == "6")
                         {
                             
@@ -958,7 +980,7 @@ namespace WebSolicitudes.Controllers
                     if (solicitud.Fk_idEstado > 25) {
                         String fotos1 = conexionDB.FotosUnMes.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).FirstOrDefault().ToString();
                         String fotos3 = conexionDB.FotosTresMeses.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).FirstOrDefault().ToString();
-                        String fotos6 = conexionDB.FotosSeisMeses.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).ToString();
+                        String fotos6 = conexionDB.FotosSeisMeses.Where(w => w.FK_idSolicitud == solicitud.idSolicitud && w.seleccionado == true).Select(s => s.baseArchivo).FirstOrDefault().ToString();
                         ViewData["foto1"] = "data: image / " + "jpeg" + "; base64, " + fotos1;
                         ViewData["foto3"] = "data: image / " + "jpeg" + "; base64, " + fotos3;
                         ViewData["foto6"] = "data: image / " + "jpeg" + "; base64, " + fotos6;
@@ -997,6 +1019,7 @@ namespace WebSolicitudes.Controllers
                     solicitud.FechaCirugiaPaciente = oDate;
                     solicitud.FechaLlamada = oDate2;
                     solicitud.Fk_idEstado = 7;
+                    solicitud.Leido = false;
                     conexionDB.SaveChanges();
                 }
             }
@@ -2049,6 +2072,7 @@ namespace WebSolicitudes.Controllers
 
                             solicitud.DiaCirugiaEnviado = true;
                             solicitud.UltimoCambio = DateTime.Now;
+                            solicitud.Leido = false;
                             conexionDB.SaveChanges();
 
                         }
@@ -2066,6 +2090,7 @@ namespace WebSolicitudes.Controllers
                             Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
 
                             solicitud.Foto1Mes = true;
+                            solicitud.Leido = false;
                             solicitud.UltimoCambio = DateTime.Now;
                         }
                         if (meses >= 3.0 && solicitud.Foto3Mes == false)
@@ -2081,6 +2106,7 @@ namespace WebSolicitudes.Controllers
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotoTresMeses.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
                                 Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
                             solicitud.Foto3Mes = true;
+                            solicitud.Leido = false;
                             solicitud.UltimoCambio = DateTime.Now;
                         }
                         if (meses >= 6.0 && solicitud.Foto6Mes == false)
@@ -2096,6 +2122,7 @@ namespace WebSolicitudes.Controllers
                             string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotoSeisMeses.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
                             Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
                             solicitud.Foto6Mes = true;
+                            solicitud.Leido = false;
                             solicitud.UltimoCambio = DateTime.Now;
                         }
                         conexionDB.SaveChanges();
@@ -2108,6 +2135,29 @@ namespace WebSolicitudes.Controllers
                 Util.escribirLog("GestorFechasSolicitud", "Solicitudes", ex.Message);
                 Util.escribirLog("GestorFechasSolicitud", "Solicitudes", ex.InnerException.Message);
  
+            }
+        }
+        public string CambiarAlertas(string id)
+        {
+
+            try
+            {
+                int idSolicitud = int.Parse(id);
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Solicitud solicitud = conexionDB.Solicitud.Find(idSolicitud);
+                    solicitud.Enviado = "False";
+                    solicitud.Guardado = "False";
+                    conexionDB.SaveChanges();
+                    return "Cambio exitoso en ENVIAR Y GUARDAR";
+                }
+
+            }
+
+            catch (Exception ex)
+            {
+                Util.escribirLog("ConsultarDescripcion", "Solicitudes (GET)", ex.Message);
+                return "ERROR al GUARDAR ENVIAR";
             }
         }
 

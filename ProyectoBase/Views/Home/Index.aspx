@@ -612,17 +612,17 @@
                 <h3>Primer Paso: Información Personal</h3>
                 <div class="form-row">
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" data-rule="minlen:1" data-msg="Please enter at least 4 chars" required>
+                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre Completo" data-rule="minlen:1" data-msg="Please enter at least 4 chars" required>
                         <div class="invalid-feedback">
                             Por favor ingrese su nombre
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 form-group">
+<%--                    <div class="col-lg-6 col-md-6 form-group">
                         <input type="text" id="txtApellido" name="txtApellido" class="form-control" placeholder="Apellido" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
                         <div class="invalid-feedback">
                            Por favor ingrese su apellido
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="col-lg-6 col-md-6 form-group">
                         <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="Rut" required>
                         <div class="invalid-feedback">
@@ -635,12 +635,12 @@
                             Por favor ingrese su correo
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 form-group">
+  <%--                  <div class="col-lg-6 col-md-6 form-group">
                         <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" placeholder="Teléfono" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
                         <div class="invalid-feedback">
                             Por favor ingrese su telefono
                         </div>
-                    </div>
+                    </div>--%>
                     <div class="col-lg-6 col-md-6 form-group">
                         <input type="text" class="form-control" name="txtCelular" id="txtCelular" placeholder="Celular" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
                         <div class="invalid-feedback">
@@ -787,7 +787,6 @@
                 </div>
                 <br />
                 <br />
-                <br />
                     <div class="text-center">
                         <div class="row">
                             <div class="col-sm">
@@ -803,13 +802,7 @@
                                 <input type="text"  id="fotoDerecho" name="fotoDerecho" value="" hidden/>
                             </div>
                         </div>
-                        <br />
-                        <br />
-                        <br />
-                        <br />
                         <div class="row" style="    margin-top: 2pc;">
-                        <br />
-                        <br />
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalAtras" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Atrás</button>
                                 <input type="text"  id="fotoAtras" name="fotoAtras" value="" hidden/>
@@ -839,13 +832,13 @@
             <div style="text-align: center;">
                 <br />
             <div class="row" style="    width: 30pc;margin-left: 20pc;padding-bottom: 3pc;">
-                <div class="col">
+<%--                <div class="col">
                     <img width="50" height="50" src="../../Styles/img/correo.png" />
                     <div class="custom-control custom-checkbox" style="margin-right: 40px;">
                       <input type="checkbox" class="custom-control-input" id="customCheck1" checked disabled>
                       <label class="custom-control-label" for="customCheck1"></label>
                     </div>
-                </div>
+                </div>--%>
                 <div class="col">
                     <img width="50" height="50" src="../../Styles/img/facebook.png" />
                     <div class="custom-control custom-checkbox" style="margin-right: 40px;">

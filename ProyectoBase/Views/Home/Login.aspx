@@ -36,6 +36,13 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+                    <div id="modalCargando" class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content" style="width: 48px">
+                    <span class="fa fa-spinner fa-spin fa-3x"></span>
+                </div>
+            </div>
+        </div>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main style="    background-color: #e3e3e3;">
@@ -72,8 +79,18 @@
                                                 <p style="color: red"><%= ViewData["Error"] %></p>
                                                 <input id="Exp" type="hidden" name="Exp" value="<%= ViewData["Exp"] %>" / >
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                
+                                                <span class="fa fa-spinner fa-spin fa-3x"></span>
                                                 <button class="btn btn-md btn-primary btn-block btn-signin" id="btnSubmit" type="submit">Iniciar sesión</button>
+                                                <button class="btn btn-md btn-primary btn-block btn-signin" id="btnSubmit2" type="button">Iniciar sesión2</button>
+                                                					<script>
+                                                                        $(document).ready(function () {
+
+                                                                            $("#btnSubmit2").click(function () {
+                                                                                $('#modalCargando').modal('show');
+                                                                            });
+                                                                        });
+                                                                        });
+                                                                    </script>
                                             </div>
                                             <a class="small" href="<%: Url.Content("~/Home/OlvidePassword") %>">No recuerdo mi contraseña</a>
                                         </form>
@@ -121,6 +138,6 @@
                     });
                 }, false);
             })();
-        </script>
+                                                                    </script>
     <!-- /container -->
 </asp:Content>

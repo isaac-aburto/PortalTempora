@@ -351,6 +351,7 @@ namespace WebSolicitudes.Controllers
                                 nuevoUsuario.Nombre = nombre;
                                 nuevoUsuario.idPipeDrive = id;
                                 nuevoUsuario.Correo = correo;
+                                nuevoUsuario.FK_idPerfil = 3;
                                 conexionDB.Usuario.Add(nuevoUsuario);
                                 conexionDB.SaveChanges();
                             }
