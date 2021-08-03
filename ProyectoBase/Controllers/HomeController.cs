@@ -204,6 +204,7 @@ namespace WebSolicitudes.Controllers
                     solicitud.Foto6Mes = false;
                     solicitud.DiaCirugiaEnviado = false;
                     solicitud.Leido = false;
+                    solicitud.UltimoCambio = DateTime.Now;
                     conexionDB.SaveChanges();
 
                     //Agrego cada Foto.

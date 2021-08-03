@@ -78,18 +78,23 @@
                                             </div>--%>
                                                 <p style="color: red"><%= ViewData["Error"] %></p>
                                                 <input id="Exp" type="hidden" name="Exp" value="<%= ViewData["Exp"] %>" / >
+                                            <div class="d-flex justify-content-center">
+                                                <div id="spiner" class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
+                                                  <span class="sr-only">Loading...</span>
+                                                </div>
+                                            </div>
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <span class="fa fa-spinner fa-spin fa-3x"></span>
                                                 <button class="btn btn-md btn-primary btn-block btn-signin" id="btnSubmit" type="submit">Iniciar sesión</button>
-                                                <button class="btn btn-md btn-primary btn-block btn-signin" id="btnSubmit2" type="button">Iniciar sesión2</button>
+<%--                                                <button class="btn btn-md btn-primary btn-block btn-signin" id="btnSubmit2" type="button">Iniciar sesión2</button>--%>
                                                 					<script>
                                                                         $(document).ready(function () {
-
-                                                                            $("#btnSubmit2").click(function () {
-                                                                                $('#modalCargando').modal('show');
+                                                                            $("#spiner").hide();
+                                                                            $("#btnSubmit").click(function () {
+                                                                                $("#spiner").show(100);
                                                                             });
                                                                         });
-                                                                        });
+                                                 
                                                                     </script>
                                             </div>
                                             <a class="small" href="<%: Url.Content("~/Home/OlvidePassword") %>">No recuerdo mi contraseña</a>

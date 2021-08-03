@@ -626,8 +626,45 @@
                     <div class="col-lg-6 col-md-6 form-group">
                         <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="Rut" required>
                         <div class="invalid-feedback">
+                            <h6 id="verificarRut" ></h6>
                             Por favor ingrese su rut
                         </div>
+                            <script>
+                                $(document).ready(function () {
+                                    $("#txtRut").change(function (event) {
+                                        var rutCompleto = $("#txtRut").val();
+                                        console.log("rutCompleto" + rutCompleto);
+                                        var Fn = {
+                                            // Valida el rut con su cadena completa "XXXXXXXX-X"
+                                            validaRut: function (rutCompleto) {
+                                                if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rutCompleto))
+                                                    return false;
+                                                var tmp = rutCompleto.split('-');
+                                                var digv = tmp[1];
+                                                var rut = tmp[0];
+                                                if (digv == 'K') digv = 'k';
+                                                return (Fn.dv(rut) == digv);
+                                            },
+                                            dv: function (T) {
+                                                var M = 0, S = 1;
+                                                for (; T; T = Math.floor(T / 10))
+                                                    S = (S + T % 10 * (9 - M++ % 6)) % 11;
+                                                return S ? S - 1 : 'k';
+                                            }
+                                        }
+
+                                        if (Fn.validaRut($("#txtRut").val())) {
+                                            $("#verificarRut").val("El rut ingresado es válido :D")
+                                            console.log("El rut ingresado es válido :D");
+                                        } else {
+                                            $("#verificarRut").val("El Rut no es válido :'( ")
+                                            console.log("El Rut no es válido :'( ");
+                                        }
+                                        // Uso de la función
+                                        //console.log(Fn.validaRut('11111111-1') ? 'Valido' : 'inválido');
+                                    }); 
+                                });
+                            </script>
                     </div>
                     <div class="col-lg-6 col-md-6 form-group">
                         <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email" required>

@@ -191,7 +191,7 @@
                                     <th class="col-xs-1">Fecha Solicitud</th>
                                     <th class="col-xs-2">Estado</th>
                                     <th class="col-xs-1">Técnica</th>
-                                    <th class="col-xs-1">Últiumo cambio</th>
+                                    <th class="col-xs-1">Último cambio</th>
                                 </tr>
                             </thead>
                             <tbody>
