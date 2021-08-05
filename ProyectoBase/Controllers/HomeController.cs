@@ -172,9 +172,9 @@ namespace WebSolicitudes.Controllers
                     //Se guarda el Usuario.
                     Cliente cliente = conexionDB.Cliente.Find(idCliente);
                     cliente.nombre = Nombre;
-                    cliente.apellido = Apellido;
+                    //cliente.apellido = Apellido;
                     cliente.rut = Rut;
-                    cliente.telefono = Telefono;
+                    //cliente.telefono = Telefono;
                     cliente.celular = Celular;
                     cliente.correo = Correo;
                     cliente.fecha_nacimiento = DateTime.Parse(FechaDeNacimiento);
@@ -643,23 +643,16 @@ namespace WebSolicitudes.Controllers
                     solicitud.FK_idCliente = cliente.idCliente;
                     solicitud.SolicitudCompleta = 0;
                     solicitud.Fk_idEstado = 2;
+                    solicitud.FechaSolicitudIncompleta = DateTime.Now;
+                    solicitud.UltimoCambio = DateTime.Now;
+                    solicitud.CorreoSolicitudIncompleta = false;
                     conexionDB.Solicitud.Add(solicitud);
                     conexionDB.SaveChanges();
 
                     idcliente = cliente.idCliente.ToString();
                     idSolicitud = solicitud.idSolicitud.ToString();
 
-                    //Armar link
-                    string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
-                    link = Util.Base64Encode(link);
-                    //Enviar Correo
-                    string titulo = "Complete su solicitud - Tempora";
-                    string nombre = Nombre;
-                    string correo = cliente.correo;
-                    string rut = cliente.rut;
-                    string celular = cliente.celular;
-                    string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudIncompleta.html")).Replace("[Link]", link);
-                    Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+
                 }
             }
             catch (Exception ex)

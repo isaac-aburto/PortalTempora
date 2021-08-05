@@ -86,7 +86,7 @@ namespace WebSolicitudes.Controllers
 
             {
                 mail.From = new MailAddress("isaac.aburto@backspace.cl");
-                mail.To.Add("isaac.aburto@backspace.cl");
+                mail.To.Add(txtCorreo);
                 mail.Subject = titulo;
                 mail.Body = texto;
                 mail.IsBodyHtml = true;

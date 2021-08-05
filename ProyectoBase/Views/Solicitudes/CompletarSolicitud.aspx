@@ -342,329 +342,375 @@
                                             </div>
                                             <%--        <form action="<%: Url.Content("~/Home/Index") %>" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">--%>
                                             <%--  Paso 1 --%>
-                                            <div id="divPaso1">
-                                                <h3>Primer Paso: Información Personal</h3>
-                                                <div class="form-row">
-                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" data-rule="minlen:1" data-msg="Please enter at least 4 chars" required>
-                                                        <div class="invalid-feedback">
-                                                            Por favor ingrese su nombre
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                        <input type="text" id="txtApellido" name="txtApellido" class="form-control" placeholder="Apellido" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
-                                                        <div class="invalid-feedback">
-                                                            Por favor ingrese su apellido
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                        <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="Rut" required>
-                                                        <div class="invalid-feedback">
-                                                            Por favor ingrese su rut
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                        <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email" required>
-                                                        <div class="invalid-feedback">
-                                                            Por favor ingrese su correo
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                        <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" placeholder="Teléfono" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
-                                                        <div class="invalid-feedback">
-                                                            Por favor ingrese su telefono
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                        <input type="text" class="form-control" name="txtCelular" id="txtCelular" placeholder="Celular" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
-                                                        <div class="invalid-feedback">
-                                                            Por favor ingrese su celular
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6 form-group">
-                                                        <input id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" required />
-                                                        <script>
-                                                            $('#txtFechaNacimiento').datepicker({
-                                                                uiLibrary: 'bootstrap4',
-                                                                format: 'dd/mm/yyyy'
-                                                            });
-                                                        </script>
+            <div class="card" id="divPaso1" style="border-radius: 10px">
+                <div class="card-body">
+                <h3>Primer Paso: Información Personal</h3>
+                <div class="form-row">
+                    <div class="col-lg-6 col-md-6 form-group">
+                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre Completo" data-rule="minlen:1" data-msg="Please enter at least 4 chars" required>
+                        <div class="invalid-feedback" >
+                            Por favor ingrese su nombre
+                        </div>
+                    </div>
+<%--                    <div class="col-lg-6 col-md-6 form-group">
+                        <input type="text" id="txtApellido" name="txtApellido" class="form-control" placeholder="Apellido" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                        <div class="invalid-feedback">
+                           Por favor ingrese su apellido
+                        </div>
+                    </div>--%>
+                    <div class="col-lg-6 col-md-6 form-group">
+                        <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="Rut" required>
+                        <h6 id="verificarRut" style="color: orangered;font-size: 12px;margin-top: 4px;margin-left: 6px;"></h6>
+                        <div class="invalid-feedback">
+                            
+                            Por favor ingrese su rut
+                        </div>
+                            <script>
+                                $(document).ready(function () {
+                                    $("#txtRut").change(function (event) {
+                                        var rutCompleto = $("#txtRut").val();
+                                        console.log("rutCompleto" + rutCompleto);
+                                        var Fn = {
+                                            // Valida el rut con su cadena completa "XXXXXXXX-X"
+                                            validaRut: function (rutCompleto) {
+                                                if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rutCompleto))
+                                                    return false;
+                                                var tmp = rutCompleto.split('-');
+                                                var digv = tmp[1];
+                                                var rut = tmp[0];
+                                                if (digv == 'K') digv = 'k';
+                                                return (Fn.dv(rut) == digv);
+                                            },
+                                            dv: function (T) {
+                                                var M = 0, S = 1;
+                                                for (; T; T = Math.floor(T / 10))
+                                                    S = (S + T % 10 * (9 - M++ % 6)) % 11;
+                                                return S ? S - 1 : 'k';
+                                            }
+                                        }
 
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        if (Fn.validaRut($("#txtRut").val())) {
+                                            $("#verificarRut").hide();
+                                            $("#verificarRut").text("El rut ingresado es válido :D")
+                                            console.log("El rut ingresado es válido :D");
+                                        } else {
+                                            $("#verificarRut").show();
+                                            $("#verificarRut").text("El Rut no es válido")
+                                            console.log("El Rut no es válido :'( ");
+                                        }
+                                        // Uso de la función
+                                        //console.log(Fn.validaRut('11111111-1') ? 'Valido' : 'inválido');
+                                    });
+                                });
+                            </script>
+                    </div>
+                    <div class="col-lg-6 col-md-6 form-group">
+                        <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email" required>
+                        <div class="invalid-feedback">
+                            Por favor ingrese su correo
+                        </div>
+                    </div>
+  <%--                  <div class="col-lg-6 col-md-6 form-group">
+                        <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" placeholder="Teléfono" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                        <div class="invalid-feedback">
+                            Por favor ingrese su telefono
+                        </div>
+                    </div>--%>
+                    <div class="col-lg-6 col-md-6 form-group">
+                        <input type="text" class="form-control" name="txtCelular" id="txtCelular" placeholder="Celular" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                        <div class="invalid-feedback">
+                            Por favor ingrese su celular
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 form-group">
+                        <input id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" required/>
+                        <script>
+                            $('#txtFechaNacimiento').datepicker({
+                                uiLibrary: 'bootstrap4',
+                                format: 'dd/mm/yyyy'
+                            });
+                        </script>
+
+                    </div>
+                </div>
+                </div>
+            </div>
                                             <%--  Paso 2 --%>
-                                            <div id="divPaso2">
-                                                <h3>Segundo Paso: Cuestionario</h3>
-                                                <%-- Primera pregunta --%>
-                                                <h6>1.- ¿Qué zona deseas reparar?</h6>
-                                                <div style="margin-left: 24px">
-                                                    <div class="form-check custom-radio custom-control-inline">
-                                                        <input class="form-check-input" type="checkbox" id="chkZonaCima" name="chkZonaCima">
-                                                        <label class="form-check-label" for="chkZonaCima">
-                                                            Cima
-                                                        </label>
+                                                        <div class="card" id="divPaso2" style="border-radius: 10px">
+                <div class="card-body">
+                <h3>Segundo Paso: Cuestionario</h3>
+                <%-- Primera pregunta --%>
+                <h6>1.- ¿Qué zona deseas reparar?</h6>
+                <div style="margin-left: 24px">
+                    <div class="form-check custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" id="chkZonaCima" name="chkZonaCima">
+                        <label class="form-check-label" for="chkZonaCima">
+                            Cima
+                        </label>
 
-                                                    </div>
-                                                    <div class="form-check custom-radio custom-control-inline">
-                                                        <input class="form-check-input" type="checkbox" id="chkZonaRegion" name="chkZonaRegion">
-                                                        <label class="form-check-label" for="chkZonaRegion">
-                                                            Región Parietal
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check custom-radio custom-control-inline">
-                                                        <input class="form-check-input" type="checkbox" id="chkZonaCoronilla" name="chkZonaCoronilla">
-                                                        <label class="form-check-label" for="chkZonaCoronilla">
-                                                            Coronilla
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check custom-radio custom-control-inline">
-                                                        <input class="form-check-input" type="checkbox" id="chkZonaOccipital" name="chkZonaOccipital">
-                                                        <label class="form-check-label" for="chkZonaOccipital">
-                                                            Hueso Occipital
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check custom-radio custom-control-inline">
-                                                        <input class="form-check-input" type="checkbox" id="chkZonaNuca" name="chkZonaNuca">
-                                                        <label class="form-check-label" for="chkZonaNuca">
-                                                            Nuca
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check custom-radio custom-control-inline">
-                                                        <input class="form-check-input" type="checkbox" id="chkZonaSien" name="chkZonaSien">
-                                                        <label class="form-check-label" for="chkZonaSien">
-                                                            Sien
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <br />
-                                                <%-- Segunda Pregunta --%>
-                                                <h6>2.- ¿Se ha estado tratando con algún dermatologo por alguna enfermedad capilar?</h6>
-                                                <div class="invalid-feedback">
-                                                    You must agree before submitting.
-                                                </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <label>Si</label>
-                                                    <input type="radio" id="chkDermaSi" name="chkDermaSi" class="custom-control-input">
-                                                    <label class="custom-control-label" for="chkDermaSi"></label>
-                                                </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <label>No</label>
-                                                    <input type="radio" id="chkDermaNo" name="chkDermaSi" class="custom-control-input" required>
-                                                    <label class="custom-control-label" for="chkDermaNo"></label>
+                    </div>
+                    <div class="form-check custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" id="chkZonaRegion" name="chkZonaRegion">
+                        <label class="form-check-label" for="chkZonaRegion">
+                            Región Parietal
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" id="chkZonaCoronilla" name="chkZonaCoronilla">
+                        <label class="form-check-label" for="chkZonaCoronilla">
+                           Coronilla
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" id="chkZonaOccipital" name="chkZonaOccipital">
+                        <label class="form-check-label" for="chkZonaOccipital">
+                            Hueso Occipital
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" id="chkZonaNuca" name="chkZonaNuca">
+                        <label class="form-check-label" for="chkZonaNuca">
+                            Nuca
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" id="chkZonaSien" name="chkZonaSien"> 
+                        <label class="form-check-label" for="chkZonaSien">
+                            Sien
+                        </label>
+                    </div>
+                </div>
+                <br />
+                <%-- Segunda Pregunta --%>
+                <h6>2.- ¿Se ha estado tratando con algún dermatologo por alguna enfermedad capilar?</h6>
+                <div class="invalid-feedback">
+                    You must agree before submitting.
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                                        <label>Si</label>
+                    <input type="radio" id="chkDermaSi" name="chkDermaSi" class="custom-control-input">
+                  <label class="custom-control-label" for="chkDermaSi"></label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                                      <label>No</label>
+                  <input type="radio" id="chkDermaNo" name="chkDermaSi" class="custom-control-input" required>
+                  <label class="custom-control-label" for="chkDermaNo"></label>
 
-                                                </div>
-                                                <%-- Chk Si --%>
-                                                <div id="divSegundaPregunta" style="margin-left: 24px">
-                                                    <h6>¿Cuál?</h6>
-                                                    <div class="form-check custom-radio custom-control-inline">
-                                                        <input class="form-check-input" type="checkbox" id="chkDermaDermatitis" name="chkDermaDermatitis">
-                                                        <label class="form-check-label" for="chkDermaDermatitis">
-                                                            Dermatitis seborreica
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check custom-radio custom-control-inline">
-                                                        <input class="form-check-input" type="checkbox" id="chkDermaAlopecia" name="chkDermaAlopecia">
-                                                        <label class="form-check-label" for="chkDermaAlopecia">
-                                                            Alopecia areata
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check custom-radio custom-control-inline">
-                                                        <input class="form-check-input" type="checkbox" id="chkDermaAutoinmunes" name="chkDermaAutoinmunes">
-                                                        <label class="form-check-label" for="chkDermaAutoinmunes">
-                                                            Enfermedades autoinmunes
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check custom-radio custom-control-inline">
-                                                        <input class="form-check-input" type="checkbox" id="chkDermaEsclerodermia" name="chkDermaEsclerodermia">
-                                                        <label class="form-check-label" for="chkDermaEsclerodermia">
-                                                            Esclerodermia
-                                                        </label>
-                                                    </div>
-                                                    <div class="form-check custom-radio custom-control-inline">
-                                                        <input class="form-check-input" type="checkbox" id="chkDermaOtra" name="chkDermaOtra">
-                                                        <label class="form-check-label" for="chkDermaOtra">
-                                                            Otra
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <br />
-                                                <br />
-                                                <%-- Tercera Pregunta --%>
-                                                <h6>3.- ¿Ha tenido pelones en la cabeza o barba?</h6>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <label>Si</label>
-                                                    <input type="radio" id="chkPeloSi" name="chkPeloSi" class="custom-control-input" required>
-                                                    <label class="custom-control-label" for="chkPeloSi">
-                                                    </label>
-                                                </div>
-                                                <div class="custom-control custom-radio custom-control-inline">
-                                                    <label>No</label>
-                                                    <input type="radio" id="chkPeloNo" name="chkPeloSi" class="custom-control-input">
-                                                    <label class="custom-control-label" for="chkPeloNo">
-                                                    </label>
-                                                </div>
-                                            </div>
+                </div>
+                <%-- Chk Si --%>
+                <div id="divSegundaPregunta" style="margin-left: 24px">
+                     <h6>¿Cuál?</h6>
+                    <div class="form-check custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" id="chkDermaDermatitis" name="chkDermaDermatitis">
+                        <label class="form-check-label" for="chkDermaDermatitis">
+                            Dermatitis seborreica
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" id="chkDermaAlopecia" name="chkDermaAlopecia">
+                        <label class="form-check-label" for="chkDermaAlopecia">
+                            Alopecia areata
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" id="chkDermaAutoinmunes" name="chkDermaAutoinmunes">
+                        <label class="form-check-label" for="chkDermaAutoinmunes">
+                            Enfermedades autoinmunes
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" id="chkDermaEsclerodermia" name="chkDermaEsclerodermia">
+                        <label class="form-check-label" for="chkDermaEsclerodermia">
+                            Esclerodermia
+                        </label>
+                    </div>
+                    <div class="form-check custom-radio custom-control-inline">
+                        <input class="form-check-input" type="checkbox" id="chkDermaOtra" name="chkDermaOtra">
+                        <label class="form-check-label" for="chkDermaOtra">
+                            Otra
+                        </label>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <%-- Tercera Pregunta --%>
+                <h6>3.- ¿Ha tenido pelones en la cabeza o barba?</h6>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <label>Si</label>
+                    <input type="radio" id="chkPeloSi" name="chkPeloSi" class="custom-control-input" required>
+                  <label class="custom-control-label" for="chkPeloSi">
+                      
+                  </label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <label>No</label>
+                    <input type="radio" id="chkPeloNo" name="chkPeloSi" class="custom-control-input">
+                  <label class="custom-control-label" for="chkPeloNo">
+                  </label>
+                </div>
+                </div>
+            </div>
                                             <%-- Paso 3 --%>
-                                            <div id="divPaso3">
-                                                <h3>Tercer Paso: Fotografías</h3>
-                                                <p>Estas fotografías deben ser tomadas en un lugar con luz natural, sin flash y con la cámara trasera de su cámara o celular, no con la camara frontal, debido a que la calidad de imagen se ve afectada.</p>
-                                                <p>Es ideal que otra persona le ayude a tomar estas fotografías, posicionandose a un metro de distacia y no en modo selfie.</p>
-                                                <p>El siguiente esquema muestra los ángulos en que se debe fotografiar. En el caso de que su zona a evaluar sean las entradras, por favor tirar su cabello hacia atrás para poder apreciar de mejor manera su complicación.</p>
-                                                <div class="text-center">
-                                                    <%--<img src="../Styles/img/Fotografias.PNG" />--%>
-                                                </div>
-                                                <br />
-                                                <br />
-                                                <br />
-                                                <div class="text-center">
-                                                    <div class="row">
-                                                        <div class="col-sm">
-                                                            <button type="button" data-toggle="modal" data-target="#ModalArriba" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Desde Arriba</button>
-                                                            <input type="text" id="fotoArriba" name="fotoArriba" value="" hidden />
-                                                        </div>
-                                                        <div class="col-sm">
-                                                            <button type="button" data-toggle="modal" data-target="#ModalIzquierdo" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Izquierdo</button>
-                                                            <input type="text" id="fotoIzquierdo" name="fotoIzquierdo" value="" hidden />
-                                                        </div>
-                                                        <div class="col-sm">
-                                                            <button type="button" data-toggle="modal" data-target="#ModalDerecho" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Derecho</button>
-                                                            <input type="text" id="fotoDerecho" name="fotoDerecho" value="" hidden />
-                                                        </div>
-                                                    </div>
-                                                    <br />
-                                                    <br />
-                                                    <div class="row">
-                                                        <div class="col-sm">
-                                                            <button type="button" data-toggle="modal" data-target="#ModalAtras" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Atrás</button>
-                                                            <input type="text" id="fotoAtras" name="fotoAtras" value="" hidden />
-                                                        </div>
-                                                        <div class="col-sm">
-                                                            <button type="button" data-toggle="modal" data-target="#ModalFrente" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Frente</button>
-                                                            <input type="text" id="fotoFrente" name="fotoFrente" value="" hidden />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br />
-                                                <br />
+                                                        <div class="card" id="divPaso3"  style="border-radius: 10px">
+                <div class="card-body">
+                <h3>Tercer Paso: Fotografías</h3>
+                <p>Estas fotografías deben ser tomadas en un lugar con luz natural, sin flash y con la cámara trasera de su cámara o celular, no con la camara frontal, debido a que la calidad de imagen se ve afectada.</p>
+                <p>Es ideal que otra persona le ayude a tomar estas fotografías, posicionandose a un metro de distacia y no en modo selfie.</p>
+                <p>El siguiente esquema muestra los ángulos en que se debe fotografiar. En el caso de que su zona a evaluar sean las entradras, por favor tirar su cabello hacia atrás para poder apreciar de mejor manera su complicación.</p>
+                <div class="text-center">
+                    <%--<img src="../Styles/img/Fotografias.PNG" />--%>
+                </div>
+                <br />
+                <br />
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-sm">
+                                <button type="button" data-toggle="modal" data-target="#ModalArriba" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Desde Arriba</button>
+                                <input type="text"  id="fotoArriba" name="fotoArriba" value="" hidden/>
+                            </div>
+                            <div class="col-sm">
+                                <button type="button" data-toggle="modal" data-target="#ModalIzquierdo" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Izquierdo</button>
+                                <input type="text"  id="fotoIzquierdo" name="fotoIzquierdo" value="" hidden/>
+                            </div>
+                            <div class="col-sm">
+                                <button type="button" data-toggle="modal" data-target="#ModalDerecho" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Derecho</button>
+                                <input type="text"  id="fotoDerecho" name="fotoDerecho" value="" hidden/>
+                            </div>
+                        </div>
+                        <div class="row" style="    margin-top: 2pc;">
+                            <div class="col-sm">
+                                <button type="button" data-toggle="modal" data-target="#ModalAtras" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Atrás</button>
+                                <input type="text"  id="fotoAtras" name="fotoAtras" value="" hidden/>
+                            </div>
+                            <div class="col-sm">
+                                <button type="button" data-toggle="modal" data-target="#ModalFrente" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Frente</button>
+                                <input type="text"  id="fotoFrente" name="fotoFrente" value="" hidden/>
+                            </div>
+                        </div>
+                    </div>
+                <br />
+                <br />
 
-                                                <%--        <div class="mb-3">
-                                                    <div class="loading">Loading</div>
-                                                    <div class="error-message"></div>
-                                                    <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
-                                                  </div>--%>
-                                            </div>
+    <%--        <div class="mb-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
+              </div>--%>
+                </div>
+          </div>
                                             <%-- Por donde nos contactamos? --%>
-                                            <div id="divPaso4">
-                                                <h3>Cuarto Paso: Contacto</h3>
-                                                <%-- Primera pregunta --%>
-                                                <h6>¿Por dónde nos contactamos?</h6>
-                                                <div style="text-align: center;">
-                                                    <br />
-                                                    <div class="row" style="width: 30pc; margin-left: 20pc; padding-bottom: 3pc;">
-                                                        <div class="col">
-                                                            <img width="50" height="50" src="../../Styles/img/correo.png" />
-                                                            <div class="custom-control custom-checkbox" style="margin-right: 40px;">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck1" checked disabled>
-                                                                <label class="custom-control-label" for="customCheck1"></label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col">
-                                                            <img width="50" height="50" src="../../Styles/img/facebook.png" />
-                                                            <div class="custom-control custom-checkbox" style="margin-right: 40px;">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                                                <label class="custom-control-label" for="customCheck2"></label>
-                                                            </div>
+            <div id="divPaso4" class="card" style="border-radius: 10px">
+              <div class="card-body">
+            <h3>Cuarto Paso: Contacto</h3>
+            <%-- Primera pregunta --%>
+            <h6>¿Por dónde nos contactamos?</h6>
+            <div style="text-align: center;">
+                <br />
+            <div class="row" style="    width: 30pc;margin-left: 20pc;padding-bottom: 3pc;">
+<%--                <div class="col">
+                    <img width="50" height="50" src="../../Styles/img/correo.png" />
+                    <div class="custom-control custom-checkbox" style="margin-right: 40px;">
+                      <input type="checkbox" class="custom-control-input" id="customCheck1" checked disabled>
+                      <label class="custom-control-label" for="customCheck1"></label>
+                    </div>
+                </div>--%>
+                <div class="col">
+                    <img width="50" height="50" src="../../Styles/img/facebook.png" />
+                    <div class="custom-control custom-checkbox" style="margin-right: 40px;">
+                      <input type="checkbox" class="custom-control-input" id="customCheck2" >
+                      <label class="custom-control-label" for="customCheck2"></label>
+                    </div>
 
-                                                            <button id="btnFacebook" hidden onclick="onLogin();">Iniciar Sesión</button>
-                                                        </div>
-                                                        <div class="col">
-                                                            <img width="50" height="50" src="../../Styles/img/whatsapp.png" />
-                                                            <br />
-                                                            <div class="custom-control custom-checkbox" style="margin-right: 40px;">
-                                                                <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                                                <label class="custom-control-label" for="customCheck3"></label>
-                                                                <a hidden id="btnWsp" class="button" href="https://api.whatsapp.com/send?phone=56953306060&text=Quiero que me contecten por favor." target="_blank">https://api.whatsapp.com/send?phone=56953306060&text=Quiero</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <%--<fb:login-button 
-                                                      scope="public_profile,email"
-                                                      onlogin="checkLoginState();">
-                                                    </fb:login-button>--%>
+                <%--<button id="btnFacebook" hidden onclick="onLogin();">Iniciar Sesión</button>--%>
+                </div>
+<%--                <div class="col">
+                    <img width="50" height="50" src="../../Styles/img/whatsapp.png" />
+                    <br />
+                    <div class="custom-control custom-checkbox" style="margin-right: 40px;">
+                      <input type="checkbox" class="custom-control-input" id="customCheck3">
+                      <label class="custom-control-label" for="customCheck3"></label>
+                        <a hidden id="btnWsp" class="button" href="https://api.whatsapp.com/send?phone=56953306060&text=Quiero que me contecten por favor." target="_blank">https://api.whatsapp.com/send?phone=56953306060&text=Quiero</a>
+                    </div>
+                </div>--%>
+                </div>
+                <%--<fb:login-button 
+                  scope="public_profile,email"
+                  onlogin="checkLoginState();">
+                </fb:login-button>--%>
+            
+            
+<%--            <script>
+                window.fbAsyncInit = function () {
+                    FB.init({
+                        appId: '2596657497293255',
+                        cookie: true,
+                        xfbml: true,
+                        version: 'v10.0'
+                    });
 
+                    FB.AppEvents.logPageView();
 
-                                                    <script>
-                                                        window.fbAsyncInit = function () {
-                                                            FB.init({
-                                                                appId: '2596657497293255',
-                                                                cookie: true,
-                                                                xfbml: true,
-                                                                version: 'v10.0'
-                                                            });
+                };
 
-                                                            FB.AppEvents.logPageView();
+                (function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) { return; }
+                    js = d.createElement(s); js.id = id;
+                    js.src = "https://connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
 
-                                                        };
+                function onLogin() {
+                    FB.login((response) => {
+                        if (response.authResponse) {
+                            FB.api('/me?fields=email,name,picture,accessToken', (response) => {
+                                console.log(response)
+                                console.log(response.name)
+                                console.log(response.id)
+                            })
+                        }
+                    })
+                }
 
-                                                        (function (d, s, id) {
-                                                            var js, fjs = d.getElementsByTagName(s)[0];
-                                                            if (d.getElementById(id)) { return; }
-                                                            js = d.createElement(s); js.id = id;
-                                                            js.src = "https://connect.facebook.net/en_US/sdk.js";
-                                                            fjs.parentNode.insertBefore(js, fjs);
-                                                        }(document, 'script', 'facebook-jssdk'));
-
-                                                        function onLogin() {
-                                                            FB.login((response) => {
-                                                                if (response.authResponse) {
-                                                                    FB.api('/me?fields=email,name,picture,accessToken', (response) => {
-                                                                        console.log(response)
-                                                                        console.log(response.name)
-                                                                        console.log(response.id)
-                                                                    })
-                                                                }
-                                                            })
-                                                        }
-
-                                                    //FB.getLoginStatus(function (response) {
-                                                    //    statusChangeCallback(response);
-                                                    //});
-                                                    </script>
-                                                    <script>
-                                                        $("#customCheck2").change(function () {
-                                                            if (this.checked) {
-                                                                console.log("hola")
-                                                                $('#btnFacebook').trigger('click');
-                                                            }
-                                                        });
-                                                        $("#customCheck3").change(function () {
-                                                            if (this.checked) {
-                                                                console.log("hola")
-                                                                $('#btnWsp')[0].click();
-                                                            }
-                                                        });
-                                                    </script>
-                                                </div>
-                                            </div>
-                                            <div class="text-center">
-                                                <div class="row">
-                                                    <div class="col-sm">
-                                                        <button disabled id="btnAtras" type="button" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Atrás</button>
-
-                                                    </div>
-                                                    <div class="col-sm">
-                                                        <br />
-                                                    </div>
-                                                    <div class="col-sm">
-                                                        <button id="btnSiguiente" type="button" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Siguiente</button>
-                                                        <button id="btnEnviar" type="submit" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Enviar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                //FB.getLoginStatus(function (response) {
+                //    statusChangeCallback(response);
+                //});
+            </script>--%>
+<%--                          <script>
+                              $("#customCheck2").change(function () {
+                                  if (this.checked) {
+                                      console.log("hola")
+                                      $('#btnFacebook').trigger('click');
+                                  }
+                              });
+                              $("#customCheck3").change(function () {
+                                  if (this.checked) {
+                                      console.log("hola")
+                                      $('#btnWsp')[0].click();
+                                  }
+                              });
+                          </script>--%>
+            </div>
+              </div>
+          </div>
+          <div class="text-center">
+              <div class="row" style="    margin-top: 2pc;">
+                  <div class="col-sm">
+                      <button disabled id="btnAtras" type="button" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Atrás</button>
+                        
+                  </div>
+                  <div class="col-sm">
+                    <br />    
+                  </div>
+                  <div class="col-sm">
+                      <button id="btnSiguiente"type="button" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Siguiente</button>
+                      <button id="btnEnviar" type="submit" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Enviar</button>
+                  </div>
+              </div>
+            </div>
                                             <input id="inputGuardarDatos" hidden value="false" />
-                                            <input id="idCliente" name="idCliente" hidden />
-                                            <input id="idSolicitud" name="idSolicitud" hidden />
+                                            <input id="idCliente" name="idCliente"  value="<%= ViewData["idCliente"] %>" hidden />
+                                            <input id="idSolicitud2" name="idSolicitud2" value="<%= ViewData["idSolicitud"] %>" hidden />
 
                                             <script>
                                                 // Example starter JavaScript for disabling form submissions if there are invalid fields

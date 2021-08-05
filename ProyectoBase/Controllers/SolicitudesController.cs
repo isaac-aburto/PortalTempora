@@ -20,6 +20,7 @@ namespace WebSolicitudes.Controllers
             try
             {
                 GestorFechasSolicitud();
+                GestorSolicitudIncompleta();
                 string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
                 using (ModeloTempora conexionDB = new ModeloTempora())
                 {
@@ -78,8 +79,11 @@ namespace WebSolicitudes.Controllers
                             filaSolicitud += "  <td>";
                             filaSolicitud += solicitud.Cliente.rut;
                             filaSolicitud += "  </td>";
-                            filaSolicitud += "  <td>";
-                            filaSolicitud += solicitud.FechaSolicitud;
+                            filaSolicitud += "  <td >";
+                            var fechau1 = solicitud.FechaSolicitud.ToString();
+                            DateTime bDate1 = DateTime.Now;
+                            bDate1 = Convert.ToDateTime(fechau1);
+                            filaSolicitud += (bDate1).ToString("dd/MM/yyyy");
                             filaSolicitud += "  </td>";
                             filaSolicitud += "  <td>";
                             if (solicitud.Fk_idEstado == null)
@@ -101,7 +105,11 @@ namespace WebSolicitudes.Controllers
                             }
                             filaSolicitud += "  </td>";
                             filaSolicitud += "  <td>";
-                            filaSolicitud += solicitud.UltimoCambio;
+                            var fechau = solicitud.UltimoCambio.ToString();
+                            DateTime bDate = DateTime.Now;
+                            bDate = Convert.ToDateTime(fechau);
+                            filaSolicitud += (bDate).ToString("dd/MM/yyyy");
+                            //filaSolicitud += solicitud.UltimoCambio;
                             //if (solicitud.SolicitudCompleta == 1 || solicitud.SolicitudCompleta == null) {
                             //    filaSolicitud += "Completa";
                             //}
@@ -566,7 +574,28 @@ namespace WebSolicitudes.Controllers
                         string personId = solicitud.Cliente.idPipedrive;
                         string nombreEstado = conexionDB.EstadoSolicitud.Where(w => w.idEstado == idEstado).Select(s => s.nombreEstado).FirstOrDefault().ToString(); ;
                         var respuestaApiEstado = PipeDriveAPI.PostActivities(dealId, personId, "11504009", nombreEstado, publicDescription, "task");
-                        
+
+                        //Solicitar Formulario Incompleto
+                        if (Estado == "2")
+                        {
+                            if (enviar == "1")
+                            {
+                                //Armar link
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
+                                //Enviar Correo
+                                string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;       
+                                //Armar link
+                                string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                                link = Util.Base64Encode(link);
+                                //Enviar Correo
+                                string titulo = "Complete su solicitud - Tempora";
+                                string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudIncompleta.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
+                                solicitud.CorreoSolicitudIncompleta = true;
+                                solicitud.UltimoCambio = DateTime.Now;
+                            }
+                        }
 
                         // Enviar Primera revisión 
                         if (Estado == "6") {
@@ -578,6 +607,7 @@ namespace WebSolicitudes.Controllers
                                 string pass = solicitud.Cliente.idCliente + ";" + solicitud.Cliente.rut;
                                 var password = Util.Base64Encode(pass);
                                 Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //string Pass = Util.GetSHA1(password);
                                 cliente.password = password;
                                 conexionDB.SaveChanges();
@@ -585,7 +615,7 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "He aquí tu evaluación - Portal Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudPaso1.html")).Replace("[Nombre]", nombre).Replace("[Link]",link).Replace("[Password]", password);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                                 solicitud.UltimoCambio = DateTime.Now;
                             }
                         }
@@ -604,10 +634,12 @@ namespace WebSolicitudes.Controllers
 
 
                                 //Enviar Correo
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 string titulo = "Evaluación Presencial - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudEvaluacionPresencial.html")).Replace("[Nombre]", nombre).Replace("[Fecha]", fechaEvaluacion);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                                 solicitud.UltimoCambio = DateTime.Now;
                             }
                         }
@@ -618,12 +650,13 @@ namespace WebSolicitudes.Controllers
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
-
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //Enviar Correo
-                                string titulo = "Hubo un problema cons tus fotografías - Portal Tempora";
+                                string titulo = "Hubo un problema con tus fotografías - Portal Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotos.html")).Replace("[Nombre]", nombre).Replace("[Link]", link);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                                 solicitud.UltimoCambio = DateTime.Now;
                             }
                         }
@@ -665,9 +698,10 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "Su médico esta aquí - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 string password = cliente.password;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudSegundoMicrositio.html")).Replace("[nombreMedico]", nombreMedico).Replace("[Nombre]", nombre).Replace("[Password]", password).Replace("[FechaPresencial]", txtFechaPresencial).Replace("[Link]", password);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
 
                             }
                         }
@@ -677,10 +711,12 @@ namespace WebSolicitudes.Controllers
                             if (enviar == "1")
                             {
                                 //Enviar Correo
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 string titulo = "Procedimiento Previo - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudProcedimientoPrevio.html")).Replace("[Observacion]", Observacion).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                                 solicitud.UltimoCambio = DateTime.Now;
                             }
                         }
@@ -692,11 +728,13 @@ namespace WebSolicitudes.Controllers
                             solicitud.FechaCirugia = oDate;
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //Enviar Correo
                                 string titulo = "Fecha de Cirugía - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFechaCirugia.html")).Replace("[FechaCirugiaMandar]", FechaCirugiaMandar).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
 
                             }
                         }
@@ -707,6 +745,8 @@ namespace WebSolicitudes.Controllers
                             solicitud.ObserCuidado = Observacion3;
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 string password = solicitud.Cliente.password;
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
@@ -715,7 +755,7 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "Cuidados Preoperatorios - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudCuidadosPreoperatorios.html")).Replace("[Nombre]", nombre).Replace("[Observacion]", Observacion3).Replace("[link]", link).Replace("[Password]", password);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                             }
                         }
                         //Enviar nueva fecha de cirugia
@@ -726,11 +766,13 @@ namespace WebSolicitudes.Controllers
                             solicitud.FechaCirugia = oDate;
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //Enviar Correo
-                                string titulo = "Nueva fecha cirugía     - Tempora";
+                                string titulo = "Nueva fecha cirugía - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFechaNuevaCirugia.html")).Replace("[FechaCirugiaMandar]", FechaNuevaCirugia).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                                 solicitud.DiaCirugiaEnviado = false;
                             }
                         }
@@ -743,13 +785,15 @@ namespace WebSolicitudes.Controllers
                             solicitud.Fk_idEstado = 18;
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 solicitud.Fk_idEstado = 19;
                                 //Enviar Correo
                                 string Pass = solicitud.Cliente.password;
                                 string titulo = "Cuidados postoperatorios - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudQuintoMicrositio.html")).Replace("[Link]", link).Replace("[Nombre]", nombre).Replace("[Password]", Pass);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                             }
                         }
                         //Enviar Formulario 1 mes despues
@@ -757,6 +801,8 @@ namespace WebSolicitudes.Controllers
                         {
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
@@ -764,13 +810,15 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "Fotografías un mes después - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotoUnMes.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                             }
                         }
                         if (Estado == "21")
                         {
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
@@ -778,7 +826,7 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "Vas por buen camino - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudBuenCamino.html")).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                             }
                         }
                         //Enviar Formulario 3 meses despues
@@ -786,6 +834,8 @@ namespace WebSolicitudes.Controllers
                         {
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
@@ -793,13 +843,15 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "Fotografías tres meses después - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotoTresMeses.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                             }
                         }
                         if (Estado == "23")
                         {
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
@@ -807,7 +859,7 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "Vas por buen camino - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudBuenCamino.html")).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                             }
                         }
                         //Enviar Formulario 3 meses despues
@@ -815,6 +867,8 @@ namespace WebSolicitudes.Controllers
                         {
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
@@ -822,13 +876,15 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "Fotografías seis meses después - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotoSeisMeses.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                             }
                         }
                         if (Estado == "25")
                         {
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
@@ -836,12 +892,14 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "Vas por buen camino - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudBuenCamino.html")).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                             }
                         }
                         //Enviar mensaje de evaluación
                         if (Estado == "27")
                         {
+                            Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                            string correo = cliente.correo;
                             string FechaEvaluacion2 = collection["txtFechaEvaluacion2"];
                             DateTime oDate = Convert.ToDateTime(FechaEvaluacion2);
                             solicitud.FechaEvaluaciónOnceMeses = oDate;
@@ -851,7 +909,7 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "Nueva Evaluación Presencial - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudEvaluacionOnceMeses.html")).Replace("[Fecha]", FechaEvaluacion2).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                                 solicitud.Fk_idEstado = 28;
                             }
                         }
@@ -861,11 +919,13 @@ namespace WebSolicitudes.Controllers
                             string Observacion4 = collection["txtObservacion4"];
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //Enviar Correo
                                 string titulo = "Tratamiento especial para usted - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudTratamientoEspecial.html")).Replace("[Observacion]", Observacion4).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                                 solicitud.ObserCuidado = Observacion4;
                             }
                         }
@@ -877,11 +937,13 @@ namespace WebSolicitudes.Controllers
                             
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //Enviar Correo
                                 string titulo = "Fecha cirugía de garantía - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFechaCirugiaGarantia.html")).Replace("[Fecha]", FechaCirugiaGarantia).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                                 solicitud.FechaCirugiaGarantia = oDate;
                             }
                         }
@@ -890,6 +952,8 @@ namespace WebSolicitudes.Controllers
                         {
                             if (enviar == "1")
                             {
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 //Armar link
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
@@ -898,7 +962,7 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "Ya eres parte de Tempora - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudUltimo.html")).Replace("[Link]", link).Replace("[Nombre]", nombre).Replace("[Password]", Pass);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                                 solicitud.Fk_idEstado = 32;
                             }
                         }
@@ -924,11 +988,13 @@ namespace WebSolicitudes.Controllers
                                 string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
                                 link = Util.Base64Encode(link);
                                 //Enviar Correo
+                                Cliente cliente = conexionDB.Cliente.Find(idCliente);
+                                string correo = cliente.correo;
                                 string titulo = "Aquí está tu avance - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string Pass = solicitud.Cliente.password;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudSextoMicrositio.html")).Replace("[Link]", link).Replace("[Nombre]", nombre).Replace("[Password]", Pass);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                                 solicitud.Fk_idEstado = 33;
                             }
                         }
@@ -996,17 +1062,21 @@ namespace WebSolicitudes.Controllers
             return View();
         }
 
-        
-        public ActionResult Solicitud2Agendar(string Cirugia, string Llamada, string idCliente, string idSolicitud)
+        public ActionResult EnviadoSolicitud()
+        {
+            return View();
+        }
+
+        public ActionResult Solicitud2Agendar(FormCollection collection)
         {
             try
             {
                 //Usuario
-                int Cliente = int.Parse(idCliente);
-                int Solicitud = int.Parse(idSolicitud);   
-                string fechaCirugia = Cirugia;
+                int Cliente = int.Parse(collection["idCliente"]);
+                int Solicitud = int.Parse(collection["idSolicitud"]);   
+                string fechaCirugia = collection["txtFechaCirugia"];
                 DateTime oDate = Convert.ToDateTime(fechaCirugia);
-                String fechaLlamada = Llamada;
+                String fechaLlamada = collection["txtFechaLlamada"];
                 DateTime oDate2 = Convert.ToDateTime(fechaLlamada);
 
                 using (ModeloTempora conexionDB = new ModeloTempora())
@@ -1028,7 +1098,7 @@ namespace WebSolicitudes.Controllers
                 Util.escribirLog("Solicitud", "Solicitudes (GET)", ex.Message);
                 return RedirectToAction("Index", "Home");
             }
-            return View();
+            return RedirectToAction("EnviadoSolicitud", "Solicitudes");
         }
 
         public ActionResult SolicitudFotos(string id) {
@@ -1086,6 +1156,7 @@ namespace WebSolicitudes.Controllers
 
 
                     Solicitud solicitud = conexionDB.Solicitud.Find(idSolicitud);
+                    solicitud.Leido = true;
                     if (solicitud == null)
                         throw new Exception("La solicitud no existe");
 
@@ -1139,6 +1210,10 @@ namespace WebSolicitudes.Controllers
                 Util.escribirLog("SolicitudFotos", "Solicitudes (GET)", ex.Message);
                 return RedirectToAction("Index", "Home");
             }
+            return RedirectToAction("FotosEnviadas", "Solicitudes");
+        }
+        public ActionResult FotosEnviadas()
+        {
             return View();
         }
 
@@ -1670,7 +1745,7 @@ namespace WebSolicitudes.Controllers
 
                 string idcliente;
                 //Solicitud
-                int idSolicitud = int.Parse(collection["idSolicitud"]);
+                int idSolicitud = int.Parse(collection["idSolicitud2"]);
                 //Zonas
                 string RespuestaZona = string.Empty;
 
@@ -1814,7 +1889,9 @@ namespace WebSolicitudes.Controllers
                     solicitud.RespDerm = RespuestaDerma;
                     solicitud.RespZona = RespuestaZona;
                     solicitud.FechaSolicitud = DateTime.Now;
+                    solicitud.UltimoCambio = DateTime.Now;
                     solicitud.SolicitudCompleta = 1;
+                    solicitud.Leido = true;
                     solicitud.Fk_idEstado = 1;
                     //conexionDB.Solicitud.Add(solicitud);
                     string dealId = string.Empty;
@@ -1830,124 +1907,58 @@ namespace WebSolicitudes.Controllers
                     var filename4 = "fotoAtras.jpg";
                     var filename5 = "fotoFrente.jpg";
 
+                    List<Fotos> listafotos = conexionDB.Fotos.Where(w => w.FK_idSolicitud == idSolicitud).ToList();
 
-                    //var filename = Path.GetFileName(file.FileName);
-                    //var path = Path.GetTempPath();
-
-                    Fotos fotos = new Fotos();
-
-                    var path = Path.Combine(Server.MapPath("~/App_Data/"), filename);
-                    System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoArriba));
-                    //Ver si existe otro archivo con el mismo nombre.
-                    //List<Fotos> listafotos = conexionDB.Fotos.ToList();
-                    //String opciones = string.Empty;
-                    //int n = 0;
-                    //string segundoNombre = "";
-                    //bool igual = false;
-
-
+                    //Agrego cada Foto.
+                    int cont = 0;
                     foreach (var file in files)
                     {
                         if (file != null && file.ContentLength > 0)
                         {
                             var nombrearchivo = Path.GetFileName(file.FileName);
+                            var path = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
+
+                            if (cont == 0)
+                            {
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoArriba));
+                                listafotos[cont].nombreFalso = filename;
+                            }
+                            if (cont == 1)
+                            {
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoIzquierdo));
+                                listafotos[cont].nombreFalso = filename2;
+                            }
+                            if (cont == 2)
+                            {
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoDerecho));
+                                listafotos[cont].nombreFalso = filename3;
+                            }
+                            if (cont == 3)
+                            {
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoAtras));
+                                listafotos[cont].nombreFalso = filename4;
+                            }
+                            if (cont == 4)
+                            {
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoFrente));
+                                listafotos[cont].nombreFalso = filename5;
+                            }
+
                             //var path = Path.GetTempPath();
-                            var local = Path.Combine(Server.MapPath("~/App_Data/"), filename);
+                            var local = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
                             file.SaveAs(path);
-
-                            Fotos archivo = new Fotos();
-
-                            //Ver si existe otro archivo con el mismo nombre.
-                            List<Fotos> listaarchivos = conexionDB.Fotos.ToList();
-                            String opciones = string.Empty;
-                            int n = 0;
-                            string segundoNombre = "";
-                            bool igual = false;
-                            foreach (Fotos item in listaarchivos)
-                            {
-                                if (item.nombreArchivo == filename)
-                                {
-                                    n++;
-                                    igual = true;
-                                    if (igual == true)
-                                    {
-                                        string nombrefile = filename.Split('.').FirstOrDefault();
-                                        string exten = filename.Split('.').LastOrDefault();
-                                        if (n != 1)
-                                        {
-                                            string nombrefileparnt = nombrefile.Split('(').FirstOrDefault();
-                                            segundoNombre = nombrefileparnt + "(" + n.ToString() + ")." + exten;
-                                        }
-                                        else
-                                        {
-                                            segundoNombre = nombrefile + "(" + n.ToString() + ")." + exten;
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (igual == false)
-                            {
-                                segundoNombre = filename;
-                            }
-                            archivo.nombreFalso =
-                            archivo.nombreArchivo = filename;
-                            archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
+                            
+                            listafotos[cont].nombreArchivo = file.FileName;
+                            listafotos[cont].baseArchivo = Util.ConvertirArchivoABase64(path);
                             var ultimoId2 = solicitud.idSolicitud;
-                            archivo.FK_idSolicitud = ultimoId2;
-                            conexionDB.Fotos.Add(archivo);
+                            listafotos[cont].FK_idSolicitud = ultimoId2;
                             conexionDB.SaveChanges();
-                            //respuesta.AdjuntoEvidencias = archivo.id_archivo;
+                            cont++;
                         }
                     }
 
-
-                    //fotos.nombreFalso =
-                    fotos.nombreArchivo = filename;
-                    fotos.baseArchivo = Util.ConvertirArchivoABase64(path);
-                    var ultimoId = solicitud.idSolicitud;
-                    fotos.FK_idSolicitud = ultimoId;
-                    conexionDB.Fotos.Add(fotos);
-                    conexionDB.SaveChanges();
-
-                    Fotos fotos2 = new Fotos();
-                    var path2 = Path.Combine(Server.MapPath("~/App_Data/"), filename2);
-                    System.IO.File.WriteAllBytes(path2, Util.ConvertirBase64ABytes(base64FotoIzquierdo));
-                    fotos2.nombreArchivo = filename2;
-                    fotos2.baseArchivo = Util.ConvertirArchivoABase64(path2);
-                    fotos2.FK_idSolicitud = ultimoId;
-                    conexionDB.Fotos.Add(fotos2);
-                    conexionDB.SaveChanges();
-
-                    Fotos fotos3 = new Fotos();
-                    var path3 = Path.Combine(Server.MapPath("~/App_Data/"), filename3);
-                    System.IO.File.WriteAllBytes(path3, Util.ConvertirBase64ABytes(base64FotoDerecho));
-                    fotos3.nombreArchivo = filename3;
-                    fotos3.baseArchivo = Util.ConvertirArchivoABase64(path3);
-                    fotos3.FK_idSolicitud = ultimoId;
-                    conexionDB.Fotos.Add(fotos3);
-                    conexionDB.SaveChanges();
-
-                    Fotos fotos4 = new Fotos();
-                    var path4 = Path.Combine(Server.MapPath("~/App_Data/"), filename4);
-                    System.IO.File.WriteAllBytes(path4, Util.ConvertirBase64ABytes(base64FotoAtras));
-                    fotos4.nombreArchivo = filename4;
-                    fotos4.baseArchivo = Util.ConvertirArchivoABase64(path4);
-                    fotos4.FK_idSolicitud = ultimoId;
-                    conexionDB.Fotos.Add(fotos4);
-                    conexionDB.SaveChanges();
-
-                    Fotos fotos5 = new Fotos();
-                    var path5 = Path.Combine(Server.MapPath("~/App_Data/"), filename5);
-                    System.IO.File.WriteAllBytes(path5, Util.ConvertirBase64ABytes(base64FotoFrente));
-                    fotos5.nombreArchivo = filename5;
-                    fotos5.baseArchivo = Util.ConvertirArchivoABase64(path5);
-                    fotos5.FK_idSolicitud = ultimoId;
-                    conexionDB.Fotos.Add(fotos5);
-                    conexionDB.SaveChanges();
-
                     //Enviar Correo
-                    string titulo = "Nueva Solicitud - Portal Tempora";
+                    string titulo = "Solicitud completada - Portal Tempora";
                     string nombre = cliente.nombre + " " + cliente.apellido;
                     string correo = cliente.correo;
                     string rut = cliente.rut;
@@ -2038,7 +2049,44 @@ namespace WebSolicitudes.Controllers
             }
             return View();
         }
+        public void GestorSolicitudIncompleta() {
+            try
+            {
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    List<Solicitud> listaSolicitudes = conexionDB.Solicitud.Where(w => w.SolicitudCompleta == 0).ToList();
+                    string opcionesSolicitudes = string.Empty;
+                    DateTime fechaActual = DateTime.Now;
+                    foreach (Solicitud solicitud in listaSolicitudes)
+                    {
+                        DateTime fechaSolicitudIncompleta = Convert.ToDateTime(solicitud.FechaSolicitudIncompleta);
+                        double minutosSolicitudIncompleta = fechaActual.Subtract(fechaSolicitudIncompleta).TotalMinutes;
 
+                        string correo = solicitud.Cliente.correo;
+                        string nombre = solicitud.Cliente.nombre;
+                        if (solicitud.CorreoSolicitudIncompleta == false && minutosSolicitudIncompleta > 10.0) {
+                            //Armar link
+                            string link = solicitud.Cliente.idCliente + ";" + DateTime.Now.ToString("dd/MM/yyyy");
+                            link = Util.Base64Encode(link);
+                            //Enviar Correo
+                            string titulo = "Complete su solicitud - Tempora";
+                            string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudIncompleta.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
+                            Util.EnviarMail(textoCorreo, correo, titulo);
+                            solicitud.CorreoSolicitudIncompleta = true;
+                            conexionDB.SaveChanges();
+                        }
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Util.escribirLog("GestorFechasSolicitud", "Solicitudes", ex.Message);
+                Util.escribirLog("GestorFechasSolicitud", "Solicitudes", ex.InnerException.Message);
+
+            }
+        }
         public void GestorFechasSolicitud()
         {
             try
@@ -2048,10 +2096,14 @@ namespace WebSolicitudes.Controllers
                     List <Solicitud> listaSolicitudes = conexionDB.Solicitud.Where(w=> w.FechaCirugia != null && (w.Foto1Mes == false || w.Foto3Mes == false || w.Foto6Mes == false)).ToList();
                     string opcionesSolicitudes = string.Empty;
                     DateTime fechaActual = DateTime.Now;
+                    
              
                     foreach (Solicitud solicitud in listaSolicitudes)
                     {
                         double meses = fechaActual.Subtract(Convert.ToDateTime(solicitud.FechaCirugia)).Days / (365.25 / 12);
+                        string correo = solicitud.Cliente.correo;
+
+
 
                         // El día de tu cirugía 
                         if ((meses < 0.33 || meses > -0.89) && solicitud.DiaCirugiaEnviado == false)
@@ -2065,10 +2117,11 @@ namespace WebSolicitudes.Controllers
                             string nombreMedico = solicitud.Usuario.Nombre + " " + solicitud.Usuario.Apellido;
                             string FechaCirugia = solicitud.FechaCirugia.ToString();
                             //Enviar Correo
+                            
                             string titulo = "El día de tu cirugía - Portal Tempora";
                             string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                             string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudCuartoMicrositio.html")).Replace("[Nombre]", nombre).Replace("[Link]", link).Replace("[Password]", Pass).Replace("[nombreMedico]", nombreMedico).Replace("[FechaCirugia]", FechaCirugia);
-                            Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            Util.EnviarMail(textoCorreo, correo, titulo);
 
                             solicitud.DiaCirugiaEnviado = true;
                             solicitud.UltimoCambio = DateTime.Now;
@@ -2087,7 +2140,7 @@ namespace WebSolicitudes.Controllers
                             string titulo = "Fotografías un mes después - Tempora";
                             string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                             string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotoUnMes.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
-                            Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            Util.EnviarMail(textoCorreo, correo, titulo);
 
                             solicitud.Foto1Mes = true;
                             solicitud.Leido = false;
@@ -2104,7 +2157,7 @@ namespace WebSolicitudes.Controllers
                                 string titulo = "Fotografías tres meses después - Tempora";
                                 string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotoTresMeses.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
-                                Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                                Util.EnviarMail(textoCorreo, correo, titulo);
                             solicitud.Foto3Mes = true;
                             solicitud.Leido = false;
                             solicitud.UltimoCambio = DateTime.Now;
@@ -2120,7 +2173,7 @@ namespace WebSolicitudes.Controllers
                             string titulo = "Fotografías seis meses después - Tempora";
                             string nombre = solicitud.Cliente.nombre + " " + solicitud.Cliente.apellido;
                             string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudFotoSeisMeses.html")).Replace("[Link]", link).Replace("[Nombre]", nombre);
-                            Util.EnviarMail(textoCorreo, "isaac.aburto@backspace.cl", titulo);
+                            Util.EnviarMail(textoCorreo, correo, titulo);
                             solicitud.Foto6Mes = true;
                             solicitud.Leido = false;
                             solicitud.UltimoCambio = DateTime.Now;

@@ -461,6 +461,8 @@
     <Content Include="Styles\MensajeSolicitudIncompleta.html" />
     <Content Include="Views\Clientes\Index.aspx" />
     <Content Include="Views\Solicitudes\CompletarSolicitud.aspx" />
+    <Content Include="Views\Solicitudes\EnviadoSolicitud.aspx" />
+    <Content Include="Views\Solicitudes\FotosEnviadas.aspx" />
     <Content Include="Views\Solicitudes\Login.aspx" />
     <Content Include="Views\Solicitudes\CuidadosPreoperatorios.aspx" />
     <Content Include="Views\Solicitudes\SolicitudFotoSeisMeses.aspx" />

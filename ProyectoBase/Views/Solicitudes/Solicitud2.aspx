@@ -42,7 +42,7 @@
     </script> 
 
     <%-- Script guardar fecha evaluacion --%>
-    <script>
+<%--    <script>
         $(document).ready(function () {
         $("#btnAgendar").click(function () {
             console.log("holaaaa")
@@ -68,9 +68,9 @@
                         console.log(err);
                     }
                 });
+            });
         });
-        });
-    </script>
+    </script>--%>
     
     <script>
         var size = [window.width, window.height];  //public variable
@@ -1775,7 +1775,7 @@ body {
         });
         </script> 
             </section>   --%>     
-    <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Solicitudes/Solicitud2Agendar") %>">
+   <form style="background: #F7F7F7;"  method="post" action="<%: Url.Content("~/Solicitudes/Solicitud2Agendar") %>">--%>
     <input hidden name="idSolicitud" id="idSolicitud" value="<%= ViewData["idSolicitud"] %>"/>
      <input hidden name="idCliente" id="idCliente" value="<%= ViewData["idCliente"] %>""/>
     <div class="ultimodiv" style="margin-top: -13pc;    background-color: white;">

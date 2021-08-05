@@ -4,10 +4,19 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 
 
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.24/af-2.3.5/b-1.7.0/b-colvis-1.7.0/b-html5-1.7.0/b-print-1.7.0/cr-1.5.3/date-1.0.3/fc-3.3.2/fh-3.1.8/kt-2.6.1/r-2.2.7/rg-1.1.2/rr-1.2.7/sc-2.0.3/sb-1.0.1/sp-1.2.2/sl-1.3.3/datatables.min.js"></script>
+    
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-<script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <%--    <script src="js/jquery.min.js" type="text/javascript"></script>--%>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.24/af-2.3.5/b-1.7.0/b-colvis-1.7.0/b-html5-1.7.0/b-print-1.7.0/cr-1.5.3/date-1.0.3/fc-3.3.2/fh-3.1.8/kt-2.6.1/r-2.2.7/rg-1.1.2/rr-1.2.7/sc-2.0.3/sb-1.0.1/sp-1.2.2/sl-1.3.3/datatables.min.css"/>
+ 
+    <%-- Moment --%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<%--<script src="js/jquery.dataTables.min.js" type="text/javascript"></script>--%>
 <%--        <script>
             $(document).ready(function () {
                 var table = $('#tablasolicitudes').DataTable({
@@ -198,17 +207,50 @@
                                 <%= ViewData["valoresSolicitudes"] %>
                             </tbody>
                         </table>
-                        <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.24/sorting/date-uk.js"></script>
+                        
                     </div>
                 </div>
             </div>
+                <style>
+                            .page-item.active .page-link {
+            z-index: 1 !important;
+            color: #fff !important;
+            background-color: #bad302 !important;
+            border-color: #bad302 !important;
+        }
+                </style>
+            <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.24/sorting/date-uk.js"></script>
             <script>
+                // Datatable y propiedades
+                jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+                    "date-uk-pre": function (a) {
+                        var ukDatea = a.split('-');
+                        return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+                    },
 
-                $(document).ready(function () {
-                    // Datatable y propiedades
+                    "date-uk-asc": function (a, b) {
+                        return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+                    },
+
+                    "date-uk-desc": function (a, b) {
+                        return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+                    }
+                });
+                    
+                    // Datatable y propiedades  
+
                     var table = $('#tablasolicitudes').DataTable({
+                        "aoColumns": [
+                            null,
+                            null,
+                            null,
+                            { "sType": "date-uk" },
+                            null,
+                            null,
+                            { "sType": "date-uk" }
+                        ],
                         "sDom": '<"top">rt<"bottom"ip><"clear">',
-                        "order": [ [0, "desc"] ],
+                        "order": [ [6, "dec"] ],
                         "language": {
                             "sProcessing": "Procesando...",
                             "sLengthMenu": "Mostrar _MENU_ registros",
@@ -234,6 +276,7 @@
                             }
                         }
                     }); 
+                    
 
                     $("#txtSolicitud").on("input", function () {
                         table.draw();
@@ -290,7 +333,7 @@
                             return false;
                     });
                         //table.draw();
-                });
+              
             </script>
             </div>
         </div>

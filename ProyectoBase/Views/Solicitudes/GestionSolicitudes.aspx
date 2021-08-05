@@ -17,7 +17,7 @@
     <%-- AJAX de Descripción y estado --%>
     <script>
         $(document).ready(function () {
-
+            
             var idEstado = $("#txtEstado").val();
             $.ajax({
                 url: '<%: Url.Content("~/Solicitudes/ConsultarDescripcion/") %>',
@@ -32,7 +32,9 @@
                             console.log("Descripcion: " + res[0])
                             console.log("FK fkCategoria: " + fkCategoria)
                             console.log("Data completa: " + data);
-                            $("#txtDescripcion").val(data);
+                            let descripcion = data.toString();
+                            $("#txtDescripcion").val(res[0]);
+                            
 
                             // Manejo para acceder a estados.                  
                             $.ajax({
@@ -68,9 +70,11 @@
                         error: function (err) {
                             console.log(err);
                         }
-                    });
+            });
+            var text = "a";
                 $("#txtEstado").change(function () {
                     var idEstado = $("#txtEstado").val();
+                    
                     $.ajax({
                         url: '<%: Url.Content("~/Solicitudes/ConsultarDescripcion/") %>',
                         data: { idEstado: idEstado },
@@ -84,8 +88,9 @@
                         console.log("Descripcion: " + res[0])
                         console.log("FK fkCategoria: " + fkCategoria)
                         console.log("Data completa: " + data);
-                        $("#txtDescripcion").val(data);
-
+                        $("#txtDescripcion").val(res[0]);
+                        $('#btnDescripcion').attr('title', res[0]).tooltip('dispose');
+                        $('#btnDescripcion').tooltip('show');
                         // Manejo para acceder a estados.                  
                         $.ajax({
                             url: '<%: Url.Content("~/Solicitudes/ConsultarEstado/") %>',
@@ -98,6 +103,8 @@
                                     console.log("estados")
                                     console.log(estados);
 
+
+                                    
                                     //borro la lista anterior
                                     $('#txtEstado').find('option').remove();
                                     $.each(estados, function (i, item) {
@@ -107,11 +114,13 @@
                                         }
                                         else {
                                             $("#txtEstado").append("<option value='" + estados[i].idEstado + "'>" + estados[i].nombreEstado + "</option>");
-                                            console.log("hbai")
+                                   
                                         }
                                         
+                                       
+                                        
                                     });
-
+                                    
                                 }
 
                             }
@@ -120,8 +129,12 @@
                     error: function (err) {
                         console.log(err);
                     }
+                    });
+                    //var text = $('#txtDescripcion').val();
+                    //console.log("TEXT2: " + text)
+                    //$('[data-toggle="tooltip"]').attr("title", text);
                 });
-            });
+            
         });
     </script>
     
@@ -1241,9 +1254,27 @@
                                         <br />
                                     </div>
                                     <div class="col">
+                                        <script>
+                                            $(function () {
+                                                //$('#btnDescripcion').tooltip()
+                                                $('#btnDescripcion').tooltip()
+                                                //$("#txtEstado").change(function () {
+                                                //    console.log("HOOOOOOOOOOOOOOOOOOLA")
+                                                //    var text = $('#txtDescripcion').val();
+                                                //    console.log("TEXT: " + text)
+                                                    
+                                                //});
+                                                
+                                                
+                                            })
+
+                                        </script>
+                                       <span id="btnDescripcion" class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="right"  title="Disabled tooltip" style="margin-top: 28px;">
+                                            <button style="pointer-events: none;background-color: white;border-color: white;" class="btn btn-primary"  type="button" disabled><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M13 7.5a1 1 0 11-2 0 1 1 0 012 0zm-3 3.75a.75.75 0 01.75-.75h1.5a.75.75 0 01.75.75v4.25h.75a.75.75 0 010 1.5h-3a.75.75 0 010-1.5h.75V12h-.75a.75.75 0 01-.75-.75z"></path><path fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z"></path></svg></button>
+                                        </span>
                                         <label for="txtDescripcion"></label>
-                                        <label style="color:black"> Descripción Estado</label>
-                                        <div id="selDiv">
+                                        <label hidden style="color:black"> Descripción Estado</label>
+                                        <div hidden id="selDiv">
                                             <textarea  disabled id="txtDescripcion" name="txtDescripcion" class='form-control'><%= ViewData["Observacion"] %></textarea>
                                         </div>
                                         <div class="invalid-feedback">Seleccione una opción</div>

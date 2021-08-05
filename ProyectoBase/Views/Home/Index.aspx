@@ -7,80 +7,92 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
     <%-- Script cámara --%>
-<%--    <script type="text/javascript">
-        $(function () {
-            Webcam.set({
-                width: 320,
-                height: 240,
-                image_format: 'jpeg',
-                jpeg_quality: 90,
-                force_flash: false
-            });
-            Webcam.attach('#idwebcam');
-            //Imagen capturada
-            $("#btnCapturar1").click(function () {
-                Webcam.snap(function (data_uri) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured').innerHTML =
-                        '<img id="fotografia1" name="fotografia1" width="320" height="185" src="' + data_uri + '"/>';
-                    console.log(data_uri)
-                    document.getElementById('fotoArriba').value = data_uri;
-                });
-                
-            });
-            Webcam.attach('#idwebcam2');
-            $("#btnCapturar2").click(function () {
-                Webcam.snap(function (data_uri2) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured2').innerHTML =
-                        '<img id="fotografia2" name="fotografia2" width="320" height="185" src="' + data_uri2 + '"/>';
-                    console.log(data_uri2)
-                    document.getElementById('fotoIzquierdo').value = data_uri2;
-                });
-            });
-            Webcam.attach('#idwebcam3');
-            $("#btnCapturar3").click(function () {
-                Webcam.snap(function (data_uri3) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured3').innerHTML =
-                        '<img id="fotografia3" name="fotografia3" width="320" height="185" src="' + data_uri3 + '"/>';
-                    console.log(data_uri3)
-                    document.getElementById('fotoDerecho').value = data_uri3;
-                });
-            });
-            Webcam.attach('#idwebcam4');
-            $("#btnCapturar4").click(function () {
-                Webcam.snap(function (data_uri4) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured4').innerHTML =
-                        '<img id="fotografia4" name="fotografia4" width="320" height="185" src="' + data_uri4 + '"/>';
-                    console.log(data_uri4)
-                    document.getElementById('fotoAtras').value = data_uri4;
-                });
-            });
-            Webcam.attach('#idwebcam5');
-            $("#btnCapturar5").click(function () {
-                Webcam.snap(function (data_uri5) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured5').innerHTML =
-                        '<img id="fotografia5" name="fotografia5" width="320" height="185" src="' + data_uri5 + '"/>';
-                    console.log(data_uri5)
-                    document.getElementById('fotoFrente').value = data_uri5;
-                });
-            });
+    <script type="text/javascript">
+        $(document).ready(function () {
+        var cont = 0;
+        console.log("cont antes de la funcion: " + cont)
+        //document.getElementById("btnSiguiente").onclick = function () { myFunction() };
+        $("#btnSiguiente").click(function () {
+            console.log("cont: " + cont)
+            if (cont == 1) {
+                $(function () {
+                    console.log("Entro al tema de la webcam")
+                    Webcam.set({
+                        width: 320,
+                        height: 240,
+                        image_format: 'jpeg',
+                        jpeg_quality: 90,
+                        force_flash: false
+                    });
+                    Webcam.attach('#idwebcam');
+                    //Imagen capturada
+                    $("#btnCapturar1").click(function () {
+                        Webcam.snap(function (data_uri) {
+                            // display results in page
+                            var x = "300";
+                            var y = "100";
+                            document.getElementById('idcaptured').innerHTML =
+                                '<img id="fotografia1" name="fotografia1" width="320" height="185" src="' + data_uri + '"/>';
+                            console.log(data_uri)
+                            document.getElementById('fotoArriba').value = data_uri;
+                        });
 
+                    });
+                    Webcam.attach('#idwebcam2');
+                    $("#btnCapturar2").click(function () {
+                        Webcam.snap(function (data_uri2) {
+                            // display results in page
+                            var x = "300";
+                            var y = "100";
+                            document.getElementById('idcaptured2').innerHTML =
+                                '<img id="fotografia2" name="fotografia2" width="320" height="185" src="' + data_uri2 + '"/>';
+                            console.log(data_uri2)
+                            document.getElementById('fotoIzquierdo').value = data_uri2;
+                        });
+                    });
+                    Webcam.attach('#idwebcam3');
+                    $("#btnCapturar3").click(function () {
+                        Webcam.snap(function (data_uri3) {
+                            // display results in page
+                            var x = "300";
+                            var y = "100";
+                            document.getElementById('idcaptured3').innerHTML =
+                                '<img id="fotografia3" name="fotografia3" width="320" height="185" src="' + data_uri3 + '"/>';
+                            console.log(data_uri3)
+                            document.getElementById('fotoDerecho').value = data_uri3;
+                        });
+                    });
+                    Webcam.attach('#idwebcam4');
+                    $("#btnCapturar4").click(function () {
+                        Webcam.snap(function (data_uri4) {
+                            // display results in page
+                            var x = "300";
+                            var y = "100";
+                            document.getElementById('idcaptured4').innerHTML =
+                                '<img id="fotografia4" name="fotografia4" width="320" height="185" src="' + data_uri4 + '"/>';
+                            console.log(data_uri4)
+                            document.getElementById('fotoAtras').value = data_uri4;
+                        });
+                    });
+                    Webcam.attach('#idwebcam5');
+                    $("#btnCapturar5").click(function () {
+                        Webcam.snap(function (data_uri5) {
+                            // display results in page
+                            var x = "300";
+                            var y = "100";
+                            document.getElementById('idcaptured5').innerHTML =
+                                '<img id="fotografia5" name="fotografia5" width="320" height="185" src="' + data_uri5 + '"/>';
+                            console.log(data_uri5)
+                            document.getElementById('fotoFrente').value = data_uri5;
+                        });
+                    });
+
+                });
+            }
+            cont++;
         });
-    </script>--%>
+        });
+    </script>
     <script>
         $(document).ready(function () {
             $("#btnModalGuardar1").click(function () {
@@ -204,10 +216,12 @@
             $("#btnSiguiente").click(function () {
                 $("#divPaso1").hide(500);
                 $("#divPaso2").show(500);
-
+                console.log($("#txtNombre").val());
+                console.log($("#txtEmail").val());
+                console.log($("#txtRut").val());
                 <%-- AJAX Guardar Solicitud no terminada --%>
 
-                if (($("#inputGuardarDatos").val() == "true") && ($("#txtEmail").val() != "" || $("#txtTelefono").val() != "")) {
+                if (($("#inputGuardarDatos").val() == "true") && $("#txtNombre").val() != "" && $("#txtEmail").val() != "" /*&& $("#txtRut").val() != ""*/) {
                     console.log("AJAX Guardar Solicitud no terminada")
                     var Nombre = $("#txtNombre").val();
                     var Email = $("#txtEmail").val();
@@ -240,6 +254,13 @@
                     $("#baraDeCarga").css("width", "99%");
                     $("#divPaso2").hide(500);
                     $("#divPaso3").show(500);
+                    
+
+
+
+
+
+
                     $("#inputGuardarDatos").val("false");
                 } else {
                     if (cont == 1) {
@@ -613,7 +634,7 @@
                 <div class="form-row">
                     <div class="col-lg-6 col-md-6 form-group">
                         <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre Completo" data-rule="minlen:1" data-msg="Please enter at least 4 chars" required>
-                        <div class="invalid-feedback">
+                        <div class="invalid-feedback" >
                             Por favor ingrese su nombre
                         </div>
                     </div>
@@ -625,8 +646,9 @@
                     </div>--%>
                     <div class="col-lg-6 col-md-6 form-group">
                         <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="Rut" required>
+                        <h6 id="verificarRut" style="color: orangered;font-size: 12px;margin-top: 4px;margin-left: 6px;"></h6>
                         <div class="invalid-feedback">
-                            <h6 id="verificarRut" ></h6>
+                            
                             Por favor ingrese su rut
                         </div>
                             <script>
@@ -654,10 +676,12 @@
                                         }
 
                                         if (Fn.validaRut($("#txtRut").val())) {
-                                            $("#verificarRut").val("El rut ingresado es válido :D")
+                                            $("#verificarRut").hide();
+                                            $("#verificarRut").text("El rut ingresado es válido :D")
                                             console.log("El rut ingresado es válido :D");
                                         } else {
-                                            $("#verificarRut").val("El Rut no es válido :'( ")
+                                            $("#verificarRut").show();
+                                            $("#verificarRut").text("El Rut no es válido")
                                             console.log("El Rut no es válido :'( ");
                                         }
                                         // Uso de la función
@@ -704,42 +728,33 @@
                 <%-- Primera pregunta --%>
                 <h6>1.- ¿Qué zona deseas reparar?</h6>
                 <div style="margin-left: 24px">
-                    <div class="form-check custom-radio custom-control-inline">
-                        <input class="form-check-input" type="checkbox" id="chkZonaCima" name="chkZonaCima">
-                        <label class="form-check-label" for="chkZonaCima">
-                            Cima
-                        </label>
 
-                    </div>
-                    <div class="form-check custom-radio custom-control-inline">
-                        <input class="form-check-input" type="checkbox" id="chkZonaRegion" name="chkZonaRegion">
-                        <label class="form-check-label" for="chkZonaRegion">
-                            Región Parietal
-                        </label>
-                    </div>
-                    <div class="form-check custom-radio custom-control-inline">
-                        <input class="form-check-input" type="checkbox" id="chkZonaCoronilla" name="chkZonaCoronilla">
-                        <label class="form-check-label" for="chkZonaCoronilla">
-                           Coronilla
-                        </label>
-                    </div>
-                    <div class="form-check custom-radio custom-control-inline">
-                        <input class="form-check-input" type="checkbox" id="chkZonaOccipital" name="chkZonaOccipital">
-                        <label class="form-check-label" for="chkZonaOccipital">
-                            Hueso Occipital
-                        </label>
-                    </div>
-                    <div class="form-check custom-radio custom-control-inline">
-                        <input class="form-check-input" type="checkbox" id="chkZonaNuca" name="chkZonaNuca">
-                        <label class="form-check-label" for="chkZonaNuca">
-                            Nuca
-                        </label>
-                    </div>
-                    <div class="form-check custom-radio custom-control-inline">
-                        <input class="form-check-input" type="checkbox" id="chkZonaSien" name="chkZonaSien"> 
-                        <label class="form-check-label" for="chkZonaSien">
-                            Sien
-                        </label>
+                    <div class="row" style="margin-left: -24px;">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="chkZonaCima" name="chkZonaCima">
+                            <label class="custom-control-label" for="chkZonaCima" style="padding-left: 20px;">Cima</label>
+                        </div>
+
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="chkZonaRegion" name="chkZonaRegion">
+                            <label class="custom-control-label" for="chkZonaRegion" style="padding-left: 20px;">Región Parietal</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="chkZonaCoronilla" name="chkZonaRegion">
+                            <label class="custom-control-label" for="chkZonaCoronilla" style="padding-left: 20px;">Coronilla</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="chkZonaOccipital" name="chkZonaRegion">
+                            <label class="custom-control-label" for="chkZonaOccipital" style="padding-left: 20px;">Hueso Occipital</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="chkZonaNuca" name="chkZonaRegion">
+                            <label class="custom-control-label" for="chkZonaNuca" style="padding-left: 20px;">Nuca</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input class="custom-control-input" type="checkbox" id="chkZonaSien" name="chkZonaRegion">
+                            <label class="custom-control-label" for="chkZonaSien" style="padding-left: 20px;">Sien</label>
+                        </div>
                     </div>
                 </div>
                 <br />
@@ -748,16 +763,17 @@
                 <div class="invalid-feedback">
                     You must agree before submitting.
                 </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                                        <label>Si</label>
+                <div class="custom-control custom-checkbox custom-control-inline"> 
                     <input type="radio" id="chkDermaSi" name="chkDermaSi" class="custom-control-input">
-                  <label class="custom-control-label" for="chkDermaSi"></label>
+                    <label class="custom-control-label" for="chkDermaSi">Sí</label>
+                    <label style="padding-left: 7px;">Si</label>
                 </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                                      <label>No</label>
-                  <input type="radio" id="chkDermaNo" name="chkDermaSi" class="custom-control-input" required>
-                  <label class="custom-control-label" for="chkDermaNo"></label>
-
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <div>
+                    <input type="radio" id="chkDermaNo" name="chkDermaSi" class="custom-control-input" required>
+                    <label class="custom-control-label" for="chkDermaNo"></label>
+                    <label style="padding-left: 15px;">No</label>
+                    </div>
                 </div>
                 <%-- Chk Si --%>
                 <div id="divSegundaPregunta" style="margin-left: 24px">
@@ -794,24 +810,39 @@
                     </div>
                 </div>
                 <br />
-                <br />
                 <%-- Tercera Pregunta --%>
                 <h6>3.- ¿Ha tenido pelones en la cabeza o barba?</h6>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <label>Si</label>
+                <div  class="custom-control custom-checkbox custom-control-inline">
+                  
                     <input type="radio" id="chkPeloSi" name="chkPeloSi" class="custom-control-input" required>
-                  <label class="custom-control-label" for="chkPeloSi">
-                      
-                  </label>
+                  <label class="custom-control-label" for="chkPeloSi"></label>
+                    <label style="padding-left: 19px;">Si</label>
                 </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                  <label>No</label>
-                    <input type="radio" id="chkPeloNo" name="chkPeloSi" class="custom-control-input">
-                  <label class="custom-control-label" for="chkPeloNo">
-                  </label>
+                <div class="custom-control custom-checkbox custom-control-inline">
+                    <input type="radio" id="chkPeloNo" name="chkPeloSi" class="custom-control-input" required>
+                  <label class="custom-control-label" for="chkPeloNo"></label>
+                    <label style="padding-left: 19px;">No</label>
                 </div>
                 </div>
             </div>
+          <style>
+            .custom-control-label::before {
+                position: absolute;
+                top: .25rem;
+                left: 0;
+                display: block;
+                width: 1rem;
+                height: 1rem;
+                pointer-events: none;
+                content: "";
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                background-color: #ffffff;
+            }
+
+          </style>
         <%-- Paso 3 --%>
             <div class="card" id="divPaso3"  style="border-radius: 10px">
                 <div class="card-body">
@@ -885,7 +916,7 @@
 
                 <%--<button id="btnFacebook" hidden onclick="onLogin();">Iniciar Sesión</button>--%>
                 </div>
-                <div class="col">
+              <div class="col">
                     <img width="50" height="50" src="../../Styles/img/whatsapp.png" />
                     <br />
                     <div class="custom-control custom-checkbox" style="margin-right: 40px;">
@@ -1107,7 +1138,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Fotografía 2</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1166,9 +1197,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar Cambios</button>
-                </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button id="btnModalGuardar2" type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #C6D41D; border-color: #C6D41D;">Guardar Cambios</button>
+                </div>             
             </div>
         </div>
     </div>
@@ -1176,7 +1207,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Fotografía 3</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1235,9 +1266,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar Cambios</button>
-                </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button id="btnModalGuardar3" type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #C6D41D; border-color: #C6D41D;">Guardar Cambios</button>
+                </div>  
             </div>
         </div>
     </div>
@@ -1245,7 +1276,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Fotografía 4</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1304,9 +1335,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar Cambios</button>
-                </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button id="btnModalGuardar4" type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #C6D41D; border-color: #C6D41D;">Guardar Cambios</button>
+                </div>  
             </div>
         </div>
     </div>
@@ -1314,7 +1345,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Fotografía 5</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1373,9 +1404,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar Cambios</button>
-                </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button id="btnModalGuardar5" type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #C6D41D; border-color: #C6D41D;">Guardar Cambios</button>
+                </div>  
             </div>
         </div>
     </div>

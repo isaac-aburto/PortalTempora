@@ -58,6 +58,8 @@ namespace WebSolicitudes.Models
         public Nullable<bool> Leido { get; set; }
         public string Enviado { get; set; }
         public string Guardado { get; set; }
+        public Nullable<System.DateTime> FechaSolicitudIncompleta { get; set; }
+        public Nullable<bool> CorreoSolicitudIncompleta { get; set; }
     
         public virtual Ciudad Ciudad { get; set; }
         public virtual Cliente Cliente { get; set; }
