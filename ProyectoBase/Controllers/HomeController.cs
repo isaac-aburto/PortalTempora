@@ -215,10 +215,6 @@ namespace WebSolicitudes.Controllers
                     var filename4 = "fotoAtras.jpg";
                     var filename5 = "fotoFrente.jpg";
 
-
-                    //var filename = Path.GetFileName(file.FileName);
-                    //var path = Path.GetTempPath();
-
                     Fotos fotos = new Fotos();
 
 
@@ -237,7 +233,9 @@ namespace WebSolicitudes.Controllers
                             var nombrearchivo = Path.GetFileName(file.FileName);
                             var path = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
                             Fotos archivo = new Fotos();
-                            if (cont == 1) {
+                            if (cont == 1)
+                            {
+
                                 System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoArriba));
                                 archivo.nombreFalso = filename;
                             }
@@ -271,40 +269,89 @@ namespace WebSolicitudes.Controllers
                             archivo.FK_idSolicitud = ultimoId2;
                             conexionDB.Fotos.Add(archivo);
                             conexionDB.SaveChanges();
-                            //Ver si existe otro archivo con el mismo nombre.
-                            //List<Fotos> listaarchivos = conexionDB.Fotos.ToList();
-                            //String opciones = string.Empty;
-                            //int n = 0;
-                            //string segundoNombre = "";
-                            //bool igual = false;
-                            //foreach (Fotos item in listaarchivos)
-                            //{
-                            //    if (item.nombreArchivo == filename)
-                            //    {
-                            //        n++;
-                            //        igual = true;
-                            //        if (igual == true)
-                            //        {
-                            //            string nombrefile = filename.Split('.').FirstOrDefault();
-                            //            string exten = filename.Split('.').LastOrDefault();
-                            //            if (n != 1)
-                            //            {
-                            //                string nombrefileparnt = nombrefile.Split('(').FirstOrDefault();
-                            //                segundoNombre = nombrefileparnt + "(" + n.ToString() + ")." + exten;
-                            //            }
-                            //            else
-                            //            {
-                            //                segundoNombre = nombrefile + "(" + n.ToString() + ")." + exten;
-                            //            }
-                            //        }
-                            //    }
-                            //}
-                            //if (igual == false)
-                            //{
-                            //    segundoNombre = filename;
-                            //}
-
-                            //respuesta.AdjuntoEvidencias = archivo.id_archivo;
+                        }
+                        else {
+                            if (cont == 1)
+                            {
+                                var nombrearchivo = filename;
+                                var path = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
+                                Fotos archivo = new Fotos();
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoArriba));
+                                archivo.nombreFalso = nombrearchivo;
+                                //path = Path.GetTempPath();                        
+                                //file.SaveAs(path);
+                                archivo.nombreArchivo = nombrearchivo;
+                                archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
+                                var ultimoId2 = solicitud.idSolicitud;
+                                archivo.FK_idSolicitud = ultimoId2;
+                                conexionDB.Fotos.Add(archivo);
+                                conexionDB.SaveChanges();
+                            }
+                            if (cont == 2)
+                            {
+                                var nombrearchivo = filename2;
+                                var path = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
+                                Fotos archivo = new Fotos();
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoIzquierdo));
+                                archivo.nombreFalso = filename2;
+                                //path = Path.GetTempPath();
+                                //file.SaveAs(path);
+                                archivo.nombreArchivo = nombrearchivo;
+                                archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
+                                var ultimoId2 = solicitud.idSolicitud;
+                                archivo.FK_idSolicitud = ultimoId2;
+                                conexionDB.Fotos.Add(archivo);
+                                conexionDB.SaveChanges();
+                            }
+                            if (cont == 3)
+                            {
+                                var nombrearchivo = filename3;
+                                var path = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
+                                Fotos archivo = new Fotos();
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoDerecho));
+                                archivo.nombreFalso = filename3;
+                                //path = Path.GetTempPath();
+                                //file.SaveAs(path);
+                                archivo.nombreArchivo = nombrearchivo;
+                                archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
+                                var ultimoId2 = solicitud.idSolicitud;
+                                archivo.FK_idSolicitud = ultimoId2;
+                                conexionDB.Fotos.Add(archivo);
+                                conexionDB.SaveChanges();
+                            }
+                            if (cont == 4)
+                            {
+                                var nombrearchivo = filename4;
+                                var path = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
+                                Fotos archivo = new Fotos();
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoAtras));
+                                archivo.nombreFalso = filename4;
+                                //path = Path.GetTempPath();
+                                //file.SaveAs(path);
+                                archivo.nombreArchivo = nombrearchivo;
+                                archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
+                                var ultimoId2 = solicitud.idSolicitud;
+                                archivo.FK_idSolicitud = ultimoId2;
+                                conexionDB.Fotos.Add(archivo);
+                                conexionDB.SaveChanges();
+                            }
+                            if (cont == 5)
+                            {
+                                Fotos archivo = new Fotos();
+                                var nombrearchivo = filename5;
+                                var path = Path.Combine(Server.MapPath("~/App_Data/"), nombrearchivo);
+                                System.IO.File.WriteAllBytes(path, Util.ConvertirBase64ABytes(base64FotoFrente));
+                                archivo.nombreFalso = filename5;
+                                //path = Path.GetTempPath();
+                                //file.SaveAs(path);
+                                archivo.nombreArchivo = nombrearchivo;
+                                archivo.baseArchivo = Util.ConvertirArchivoABase64(path);
+                                var ultimoId2 = solicitud.idSolicitud;
+                                archivo.FK_idSolicitud = ultimoId2;
+                                conexionDB.Fotos.Add(archivo);
+                                conexionDB.SaveChanges();
+                            }
+                            cont++;
                         }
                     }
                     
@@ -645,6 +692,7 @@ namespace WebSolicitudes.Controllers
                     solicitud.Fk_idEstado = 2;
                     solicitud.FechaSolicitudIncompleta = DateTime.Now;
                     solicitud.UltimoCambio = DateTime.Now;
+                    solicitud.FechaSolicitud = DateTime.Now;
                     solicitud.CorreoSolicitudIncompleta = false;
                     conexionDB.Solicitud.Add(solicitud);
                     conexionDB.SaveChanges();
@@ -701,14 +749,59 @@ namespace WebSolicitudes.Controllers
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception )
             {
-
+                
             }
             return (permiso);
 
         }
 
+        public string ConsultarCorreo(string correo)
+        {
+            try
+            {
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Cliente cliente = conexionDB.Cliente.Where(w => w.correo == correo).FirstOrDefault();
+                    if (cliente == null)
+                    {
+                        return "";
+                    }
+                    else {
+                        return "Existe";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("Home", "ConsultarCorreo", ex.Message);
+            }
+            return "";
+        }
 
+        public string ConsultarRut(string rut)
+        {
+            try
+            {
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Cliente cliente = conexionDB.Cliente.Where(w => w.rut == rut).FirstOrDefault();
+                    if (cliente == null)
+                    {
+                        return "";
+                    }
+                    else
+                    {
+                        return "Existe";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("Home", "ConsultarRut", ex.Message);
+            }
+            return "";
+        }
     }
 }

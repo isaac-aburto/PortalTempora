@@ -93,7 +93,7 @@
                                      Totales
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <h5 style="color: #C6D41D"; >18</h5>
+                                    <h5 style="color: #C6D41D"; ><%= ViewData["totalSolicitudes"] %></h5>
                                 </div>
                             </div>
                          </div>
@@ -108,7 +108,7 @@
                                 <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #8e8e8e">Estado </div>
                                 <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #8e8e8e"> Abierto</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <h5 style="color: #C6D41D">15</h5>
+                                    <h5 style="color: #C6D41D"><%= ViewData["totalAbiertas"] %></h5>
                                 </div>
                             </div>
                          </div>
@@ -121,9 +121,9 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #8e8e8e">Estado </div>
-                                    <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #8e8e8e">En proceso</div>
+                                    <div class="text-xs font-weight-bold text-uppercase mb-1" style="color: #8e8e8e">Cerrado</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        <h5 style="color: #C6D41D">0</h5>
+                                        <h5 style="color: #C6D41D"><%= ViewData["totalCerradas"] %></h5>
                                     </div>
                                 </div>
                              </div>
@@ -136,9 +136,9 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color: #8e8e8e">Estado </div>
-                                    <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color: #8e8e8e"> En Espera</div>
+                                    <div class="text-xs font-weight-bold  text-uppercase mb-1" style="color: #8e8e8e"> Pendientes</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                        <h5 style="color: #C6D41D">0</h5>
+                                        <h5 style="color: #C6D41D"><%= ViewData["totalPendientes"] %></h5>
                                     
                                     </div>
                                 </div>
@@ -160,6 +160,10 @@
                                     <label for="txtSolicitud">N° de Solicitud</label>
                                     <input type="text" class="form-control" id="txtSolicitud" name="txtSolicitud" />
                                 </fieldset>                         
+                                <fieldset class="form-group col-md-2">
+                                    <label for="txtNombre">Nombre</label>
+                                    <input type="text" class="form-control" id="txtNombre" name="txtNombre" />
+                                </fieldset>
                                 <fieldset class="form-group col-md-3">
                                     <label for="txtFechaDesde">Creación Desde</label>
                                     <input type="date" class="form-control" id="txtFechaDesde" name="txtFechaDesde" />
@@ -174,14 +178,7 @@
                                          <%=  ViewData["opcionesEstados"] %>
                                     </select>
                                 </fieldset>
-                                <fieldset class="form-group col-md-2">
-                                    <label for="txtTecnica">Técnica</label>
-                                    <select name="txtTecnica" id="txtTecnica" class="form-control">
-                                        <option  value='0'>Todos</option>
-                                         <option  value='1'>FUE</option>
-                                        <option  value='2'>FUSS</option>
-                                    </select>
-                                </fieldset>
+
                             </div>
                         </div>
                     </div>
@@ -195,7 +192,7 @@
                             <thead>
                                 <tr>
                                     <th class="col-xs-2">N° Solicitud</th>
-                                    <th class="col-xs-1">Cliente</th>
+                                    <th class="col-xs-1">Pacientes</th>
                                     <th class="col-xs-1">Rut</th>
                                     <th class="col-xs-1">Fecha Solicitud</th>
                                     <th class="col-xs-2">Estado</th>
@@ -282,7 +279,11 @@
                         table.draw();
                     });
 
-                    $('#txtRut, #txtFechaDesde, #txtFechaHasta,  #txtEstado, #txtTecnica').change(function () {
+                    $("#txtNombre").on("input", function () {
+                        table.draw();
+                    });
+
+                    $('#txtFechaDesde, #txtFechaHasta,  #txtEstado').change(function () {
                         table.draw();
                     });
 
@@ -294,6 +295,9 @@
                             var IsIdSolicitud = !$("#txtSolicitud").val() ||
                                 IdSolicitud.includes($("#txtSolicitud").val()) == true;
 
+                            var IdNombre = data[1];
+                            var IsIdNombre = !$("#txtNombre").val() ||
+                                IdNombre.includes($("#txtNombre").val()) == true;
                             //Rut
                             //var Rut = data[2];
                             //var IsRut = !$("#txtRut").val() ||
@@ -314,22 +318,22 @@
                             var EstadoSeleccionada = EstadoActual == "-- Selecciona opción --" || EstadoActual == EstadoTabla;
 
                             //Técnica
-                            var TecnicoTabla = data[6];
-                            var TecnicoActual = $("#txtTecnica").children(":selected").text();
-                            var TecnicoSeleccionada = TecnicoActual == "-- Selecciona opción --" || TecnicoActual == TecnicoTabla;
-                            var TecnicoSeleccionadaTdos = TecnicoActual == "Todos" || TecnicoActual == TecnicoTabla;
-                            if (TecnicoSeleccionadaTdos) {
-                                if (TecnicoSeleccionadaTdos && IsIdSolicitud && EstadoSeleccionada && estaEnRangoFechas) {
-                                    return true;
-                                }
-                            } else {
-                                if (TecnicoSeleccionadaTdos) {
-                                    if (TecnicoSeleccionada && IsIdSolicitud && EstadoSeleccionada && estaEnRangoFechas) {
-                                        return true;
-                                    }    
-                                }
-                                   
+                            //var TecnicoTabla = data[6];
+                            //var TecnicoActual = $("#txtTecnica").children(":selected").text();
+                            //var TecnicoSeleccionada = TecnicoActual == "-- Selecciona opción --" || TecnicoActual == TecnicoTabla;
+                            //var TecnicoSeleccionadaTdos = TecnicoActual == "Todos" || TecnicoActual == TecnicoTabla;
+                            //if (TecnicoSeleccionadaTdos) {
+                            if (IsIdSolicitud && IsIdNombre && EstadoSeleccionada && estaEnRangoFechas) {
+                                return true;
                             }
+                            //} else {
+                            //    if (TecnicoSeleccionadaTdos) {
+                            //        if (TecnicoSeleccionada && IsIdSolicitud && EstadoSeleccionada && estaEnRangoFechas) {
+                            //            return true;
+                            //        }    
+                            //    }
+                                   
+                            //}
                             return false;
                     });
                         //table.draw();

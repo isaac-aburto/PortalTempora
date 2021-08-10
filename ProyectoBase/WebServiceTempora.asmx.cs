@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
 using System.Web.Services;
 
 namespace WebSolicitudes
@@ -18,7 +14,24 @@ namespace WebSolicitudes
     public class WebServiceTempora : System.Web.Services.WebService
     {
 
+
         [WebMethod]
+        public String CrearTicket(string hola)
+        {
+
+            //try
+            //{
+
+            //    return "Respuesta correcta";
+            //}
+            //catch (Exception ex)
+            //{
+
+            //    return "Respuesta correcta";
+            //}
+            return "Respuesta correcta";
+        }
+        //[WebMethod]
         //[HttpPost]
         //public string webhook(string req, string res)
         //{// Creates the endpoint for our webhook 
@@ -54,15 +67,15 @@ namespace WebSolicitudes
         //    return "Hola a todos";
         //}
 
-        [HttpGet]
-        public string webhook(Dictionary<string, string> varName)
-        { 
-            foreach(var eachvals in varName) { 
-                //string Keyval = eachvals.["Key"]; 
-                //string Value = eachvals.["Value"]; 
-            }
-            return "holaa";
-        }
+        //[HttpGet]
+        //public string webhook(Dictionary<string, string> varName)
+        //{ 
+        //    foreach(var eachvals in varName) { 
+        //        //string Keyval = eachvals.["Key"]; 
+        //        //string Value = eachvals.["Value"]; 
+        //    }
+        //    return "holaa";
+        //}
     }
-        
+
 }

@@ -31,6 +31,26 @@ namespace WebSolicitudes.Controllers
                         if (usuario == null)
                             throw new Exception("El usuario no existe");
 
+
+                        //Indicadores
+
+                        //Solicitudes Totales
+                        int numeroSolicitudes = conexionDB.Solicitud.Count();
+                        ViewData["totalSolicitudes"] = numeroSolicitudes;
+
+                        //Solicitudes Abiertas
+                        int numeroAbierto = conexionDB.Solicitud.Where(w => w.Fk_idEstado != 32).Count();
+                        ViewData["totalAbiertas"] = numeroAbierto;
+
+                        // Solicitudes Cerradas
+                        int numeroCerrado = conexionDB.Solicitud.Where(w => w.Fk_idEstado == 32).Count();
+                        ViewData["totalCerradas"] = numeroCerrado;
+
+                        // Solicitudes Pendientes
+                        int numeroPendiente = conexionDB.Solicitud.Where(w => w.Leido == true).Count();
+                        ViewData["totalPendientes"] = numeroPendiente;
+
+
                         // Filtros
 
 
@@ -80,10 +100,19 @@ namespace WebSolicitudes.Controllers
                             filaSolicitud += solicitud.Cliente.rut;
                             filaSolicitud += "  </td>";
                             filaSolicitud += "  <td >";
-                            var fechau1 = solicitud.FechaSolicitud.ToString();
-                            DateTime bDate1 = DateTime.Now;
-                            bDate1 = Convert.ToDateTime(fechau1);
-                            filaSolicitud += (bDate1).ToString("dd/MM/yyyy");
+                            string fechau1 = "01/01/0001";
+
+                            if (solicitud.FechaSolicitud != null)
+                            {
+                                fechau1 = solicitud.FechaSolicitud.ToString();
+                                DateTime bDate1 = DateTime.Now;
+                                bDate1 = Convert.ToDateTime(fechau1);
+                                filaSolicitud += (bDate1).ToString("dd/MM/yyyy");
+                            }
+                            else {
+                                filaSolicitud += fechau1;
+                            }
+
                             filaSolicitud += "  </td>";
                             filaSolicitud += "  <td>";
                             if (solicitud.Fk_idEstado == null)
@@ -105,10 +134,19 @@ namespace WebSolicitudes.Controllers
                             }
                             filaSolicitud += "  </td>";
                             filaSolicitud += "  <td>";
-                            var fechau = solicitud.UltimoCambio.ToString();
-                            DateTime bDate = DateTime.Now;
-                            bDate = Convert.ToDateTime(fechau);
-                            filaSolicitud += (bDate).ToString("dd/MM/yyyy");
+                            string fechau = "01/01/0001";
+
+                            if (solicitud.UltimoCambio != null)
+                            {
+                                fechau = solicitud.UltimoCambio.ToString();
+                                DateTime bDate = DateTime.Now;
+                                bDate = Convert.ToDateTime(fechau);
+                                filaSolicitud += (bDate).ToString("dd/MM/yyyy");
+                            }
+                            else
+                            {
+                                filaSolicitud += fechau;
+                            }
                             //filaSolicitud += solicitud.UltimoCambio;
                             //if (solicitud.SolicitudCompleta == 1 || solicitud.SolicitudCompleta == null) {
                             //    filaSolicitud += "Completa";
@@ -331,7 +369,9 @@ namespace WebSolicitudes.Controllers
 
 
                         //Fotos 1 Mes Despues
-
+                        if (solicitud.Fk_idEstado >=    20) { 
+                        
+                       
                         int conteoFotos1Mes = conexionDB.FotosUnMes.Count();
                         if (conteoFotos1Mes != 0)
                         {
@@ -476,11 +516,12 @@ namespace WebSolicitudes.Controllers
                         {
                             Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Leyó ninguna Foto");
                         }
-
+                    }
+                        Util.escribirLog("Solicitudes", "GestionSolicitud (GET)", "Va todo bien");
                         ViewData["FechaSolicitud"] = solicitud.FechaSolicitud;
-                        ViewData["idSolicitud"] = id;
-                        conexionDB.SaveChanges();
-                        return View();
+                    ViewData["idSolicitud"] = id;
+                    conexionDB.SaveChanges();
+                    return View();
 
 
                     }

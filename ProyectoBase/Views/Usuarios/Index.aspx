@@ -118,6 +118,34 @@
                         <div class="card-body" style="    margin-top: -5pc;">
                         <div class="card border-left-warning shadow ">
                         <div class="card-body">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading"><%--Filtros Ticket--%></div>
+                                    <div class="panel-body">
+                            <div class="row justify-content-md-center">
+                                <fieldset class="form-group col-md-3">
+                                    <label for="txtSolicitud">N° de Usuario</label>
+                                    <input type="text" class="form-control" id="txtSolicitud" name="txtSolicitud" />
+                                </fieldset>                         
+                                <fieldset class="form-group col-md-3">
+                                    <label for="txtNombre">Nombre</label>
+                                    <input type="text" class="form-control" id="txtNombre" name="txtNombre" />
+                                </fieldset>
+                                <fieldset class="form-group col-md-3">
+                                    <label for="txtNombre">Perfil</label>
+                                    <input type="text" class="form-control" id="txtPerfil" name="txtPerfil" />
+                                </fieldset>
+                                <fieldset class="form-group col-md-3">
+                                    <label for="txtCorreo">Correo</label>
+                                    <input type="text" class="form-control" id="txtCorreo" name="txtCorreo" />
+                                </fieldset>
+                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="card border-left-warning shadow ">
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col">
                                     <h1 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: inherit;">Usuarios Tempora</h1>
@@ -147,6 +175,98 @@
                                             <%= ViewData["valoresUsuarios"] %>
                                         </tbody>
                                     </table>
+
+                                    <script>
+
+                                        var table = $('#tablasolicitudes').DataTable({
+                                            "sDom": '<"top">rt<"bottom"ip><"clear">',
+                                            "order": [[0, "dec"]],
+                                            "language": {
+                                                "sProcessing": "Procesando...",
+                                                "sLengthMenu": "Mostrar _MENU_ registros",
+                                                "sZeroRecords": "No se encontraron resultados",
+                                                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                                                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                                                "sInfoPostFix": "",
+                                                "sSearch": "Buscar:",
+                                                "sUrl": "",
+                                                "sInfoThousands": ",",
+                                                "sLoadingRecords": "Cargando...",
+                                                "oPaginate": {
+                                                    "sFirst": "Primero",
+                                                    "sLast": "Último",
+                                                    "sNext": "Siguiente",
+                                                    "sPrevious": "Anterior"
+                                                },
+                                                "oAria": {
+                                                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                                                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                                }
+                                            }
+                                        });
+
+
+                                        $("#txtSolicitud").on("input", function () {
+                                            table.draw();
+                                        });
+
+                                        $("#txtPerfil").on("input", function () {
+                                            table.draw();
+                                        });
+
+                                        $("#txtNombre").on("input", function () {
+                                            table.draw();
+                                        });
+
+                                        $("#txtCorreo").on("input", function () {
+                                            table.draw();
+                                        });
+                                       
+
+                                        // Filtros
+                                        $.fn.dataTable.ext.search.push(
+                                            function (settings, data, dataIndex) {
+                                                // Id de la Solicitud
+                                                var IdSolicitud = data[0];
+                                                var IsIdSolicitud = !$("#txtSolicitud").val() ||
+                                                    IdSolicitud.includes($("#txtSolicitud").val()) == true;
+
+                                                var IdPerfil = data[2];
+                                                var IsIdPerfil = !$("#txtPerfil").val() ||
+                                                    IdPerfil.includes($("#txtPerfil").val()) == true;
+
+                                                var IdNombre = data[1];
+                                                var IsIdNombre = !$("#txtNombre").val() ||
+                                                    IdNombre.includes($("#txtNombre").val()) == true;
+
+                                                var IdCorreo = data[3];
+                                                var IsIdCorreo = !$("#txtCorreo").val() ||
+                                                    IdCorreo.includes($("#txtCorreo").val()) == true;
+
+                                                //Técnica
+                                                //var TecnicoTabla = data[6];
+                                                //var TecnicoActual = $("#txtTecnica").children(":selected").text();
+                                                //var TecnicoSeleccionada = TecnicoActual == "-- Selecciona opción --" || TecnicoActual == TecnicoTabla;
+                                                //var TecnicoSeleccionadaTdos = TecnicoActual == "Todos" || TecnicoActual == TecnicoTabla;
+                                                //if (TecnicoSeleccionadaTdos) {
+                                                if (IsIdSolicitud && IsIdNombre && IsIdPerfil && IsIdCorreo) {
+                                                    return true;
+                                                }
+                                                //} else {
+                                                //    if (TecnicoSeleccionadaTdos) {
+                                                //        if (TecnicoSeleccionada && IsIdSolicitud && EstadoSeleccionada && estaEnRangoFechas) {
+                                                //            return true;
+                                                //        }    
+                                                //    }
+
+                                                //}
+                                                return false;
+                                            });
+            //table.draw();
+
+                                    </script>
                                 </div>
                             </div>
                         </div>

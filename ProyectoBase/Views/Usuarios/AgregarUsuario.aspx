@@ -160,7 +160,14 @@
                                     <label for="txtPipeDrive">ID Pipedrive</label>
                                     <input type="text" class="form-control" name="txtPipeDrive" id="txtPipeDrive" placeholder="123456" data-rule="minlen:4" data-msg="Please enter at least 4 chars" >
                                     <div class="invalid-feedback">
-                                        Por favor ingrese su celular
+                                        Por favor ingrese su ID 
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 form-group">
+                                    <label for="txtPipeDrive">Constraseña</label>
+                                    <input type="password" class="form-control" name="txtPassword" id="txtPassword"  data-rule="minlen:4" data-msg="Please enter at least 4 chars" >
+                                    <div class="invalid-feedback">
+                                        Por favor ingrese su Contraseña
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 form-group">

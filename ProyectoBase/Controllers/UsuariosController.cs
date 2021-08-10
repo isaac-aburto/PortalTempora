@@ -159,6 +159,8 @@ namespace WebSolicitudes.Controllers
                 string Telefono = collection["txtTelefono"];
                 string Celular = collection["txtCelular"];
                 string PipeDrive = collection["txtPipeDrive"];
+                string Pass = collection["txtPassword"];
+                string pass = Util.GetSHA1(Pass);
 
                 string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
                 using (ModeloTempora conexionDB = new ModeloTempora())
@@ -175,6 +177,7 @@ namespace WebSolicitudes.Controllers
                         usuario.Celular = Celular;
                         string idUsers = PipeDriveAPI.PostUser(nombre + " " + apellido, Correo);
                         usuario.idPipeDrive = idUsers;
+                        usuario.Password = pass;
                         conexionDB.Usuario.Add(usuario);
                         conexionDB.SaveChanges();
                     }
@@ -254,6 +257,8 @@ namespace WebSolicitudes.Controllers
                 string Telefono = collection["txtTelefono"];
                 string Celular = collection["txtCelular"];
                 string PipeDrive = collection["txtPipeDrive"];
+                string Pass = collection["txtPassword"];
+                string pass = Util.GetSHA1(Pass);
 
                 string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
                 using (ModeloTempora conexionDB = new ModeloTempora())
@@ -270,6 +275,7 @@ namespace WebSolicitudes.Controllers
                         usuario.Telefono = Telefono;
                         usuario.Celular = Celular;
                         usuario.idPipeDrive = PipeDrive;
+                        usuario.Password = pass;
                         conexionDB.SaveChanges();
                     }
                 }

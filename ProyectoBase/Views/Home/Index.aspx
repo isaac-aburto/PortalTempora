@@ -17,76 +17,80 @@
             if (cont == 1) {
                 $(function () {
                     console.log("Entro al tema de la webcam")
-                    Webcam.set({
-                        width: 320,
-                        height: 240,
-                        image_format: 'jpeg',
-                        jpeg_quality: 90,
-                        force_flash: false
-                    });
-                    Webcam.attach('#idwebcam');
-                    //Imagen capturada
-                    $("#btnCapturar1").click(function () {
-                        Webcam.snap(function (data_uri) {
-                            // display results in page
-                            var x = "300";
-                            var y = "100";
-                            document.getElementById('idcaptured').innerHTML =
-                                '<img id="fotografia1" name="fotografia1" width="320" height="185" src="' + data_uri + '"/>';
-                            console.log(data_uri)
-                            document.getElementById('fotoArriba').value = data_uri;
+                    console.log("Webcam: " + Webcam.set);
+                   
+                        Webcam.set({
+                            width: 320,
+                            height: 240,
+                            image_format: 'jpeg',
+                            jpeg_quality: 90,
+                            force_flash: false
                         });
+                        Webcam.attach('#idwebcam');
+                        //Imagen capturada
+                        $("#btnCapturar1").click(function () {
+                            Webcam.snap(function (data_uri) {
+                                // display results in page
+                                var x = "300";
+                                var y = "100";
+                                document.getElementById('idcaptured').innerHTML =
+                                    '<img id="fotografia1" name="fotografia1" width="320" height="238" src="' + data_uri + '"/>';
+                                console.log(data_uri)
+                                document.getElementById('fotoArriba').value = data_uri;
+                            });
 
-                    });
-                    Webcam.attach('#idwebcam2');
-                    $("#btnCapturar2").click(function () {
-                        Webcam.snap(function (data_uri2) {
-                            // display results in page
-                            var x = "300";
-                            var y = "100";
-                            document.getElementById('idcaptured2').innerHTML =
-                                '<img id="fotografia2" name="fotografia2" width="320" height="185" src="' + data_uri2 + '"/>';
-                            console.log(data_uri2)
-                            document.getElementById('fotoIzquierdo').value = data_uri2;
                         });
-                    });
-                    Webcam.attach('#idwebcam3');
-                    $("#btnCapturar3").click(function () {
-                        Webcam.snap(function (data_uri3) {
-                            // display results in page
-                            var x = "300";
-                            var y = "100";
-                            document.getElementById('idcaptured3').innerHTML =
-                                '<img id="fotografia3" name="fotografia3" width="320" height="185" src="' + data_uri3 + '"/>';
-                            console.log(data_uri3)
-                            document.getElementById('fotoDerecho').value = data_uri3;
+                        Webcam.attach('#idwebcam2');
+                        $("#btnCapturar2").click(function () {
+                            Webcam.snap(function (data_uri2) {
+                                // display results in page
+                                var x = "300";
+                                var y = "100";
+                                document.getElementById('idcaptured2').innerHTML =
+                                    '<img id="fotografia2" name="fotografia2" width="320" height="238" src="' + data_uri2 + '"/>';
+                                console.log(data_uri2)
+                                document.getElementById('fotoIzquierdo').value = data_uri2;
+                            });
                         });
-                    });
-                    Webcam.attach('#idwebcam4');
-                    $("#btnCapturar4").click(function () {
-                        Webcam.snap(function (data_uri4) {
-                            // display results in page
-                            var x = "300";
-                            var y = "100";
-                            document.getElementById('idcaptured4').innerHTML =
-                                '<img id="fotografia4" name="fotografia4" width="320" height="185" src="' + data_uri4 + '"/>';
-                            console.log(data_uri4)
-                            document.getElementById('fotoAtras').value = data_uri4;
+                        Webcam.attach('#idwebcam3');
+                        $("#btnCapturar3").click(function () {
+                            Webcam.snap(function (data_uri3) {
+                                // display results in page
+                                var x = "300";
+                                var y = "100";
+                                document.getElementById('idcaptured3').innerHTML =
+                                    '<img id="fotografia3" name="fotografia3" width="320" height="238" src="' + data_uri3 + '"/>';
+                                console.log(data_uri3)
+                                document.getElementById('fotoDerecho').value = data_uri3;
+                            });
                         });
-                    });
-                    Webcam.attach('#idwebcam5');
-                    $("#btnCapturar5").click(function () {
-                        Webcam.snap(function (data_uri5) {
-                            // display results in page
-                            var x = "300";
-                            var y = "100";
-                            document.getElementById('idcaptured5').innerHTML =
-                                '<img id="fotografia5" name="fotografia5" width="320" height="185" src="' + data_uri5 + '"/>';
-                            console.log(data_uri5)
-                            document.getElementById('fotoFrente').value = data_uri5;
+                        Webcam.attach('#idwebcam4');
+                        $("#btnCapturar4").click(function () {
+                            Webcam.snap(function (data_uri4) {
+                                // display results in page
+                                var x = "300";
+                                var y = "100";
+                                document.getElementById('idcaptured4').innerHTML =
+                                    '<img id="fotografia4" name="fotografia4" width="320" height="238" src="' + data_uri4 + '"/>';
+                                console.log(data_uri4)
+                                document.getElementById('fotoAtras').value = data_uri4;
+                            });
                         });
-                    });
-
+                        Webcam.attach('#idwebcam5');
+                        $("#btnCapturar5").click(function () {
+                            Webcam.snap(function (data_uri5) {
+                                // display results in page
+                                var x = "300";
+                                var y = "100";
+                                document.getElementById('idcaptured5').innerHTML =
+                                    '<img id="fotografia5" name="fotografia5" width="320" height="238" src="' + data_uri5 + '"/>';
+                                console.log(data_uri5)
+                                document.getElementById('fotoFrente').value = data_uri5;
+                            });
+                        });
+                }); 
+                Webcam.on('error', function (err) {
+                    console.log(err)
                 });
             }
             cont++;
@@ -494,7 +498,7 @@
 
    <%-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">--%>
       <!-- ======= Hero Section ======= -->
-  <section class="d-flex align-items-center">
+  <section id="home" class="d-flex align-items-center">
 
       <div class="video-header wrap">
           <div class="fullscreen-video-wrap">
@@ -645,7 +649,7 @@
                         </div>
                     </div>--%>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="Rut" required>
+                        <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="Rut (77777777-7)" required>
                         <h6 id="verificarRut" style="color: orangered;font-size: 12px;margin-top: 4px;margin-left: 6px;"></h6>
                         <div class="invalid-feedback">
                             
@@ -654,14 +658,50 @@
                             <script>
                                 $(document).ready(function () {
                                     $("#txtRut").change(function (event) {
-                                        var rutCompleto = $("#txtRut").val();
-                                        console.log("rutCompleto" + rutCompleto);
+                                        var rut = $("#txtRut").val();
+                                        console.log("rutCompleto" + rut);
+
+                                        //Verificar existencia del rut
+
+                                        $.ajax({
+                                            url: '<%: Url.Content("~/Home/ConsultarRut/") %>',
+                                            data: { rut: rut },
+                                            cache: false,
+                                            type: "GET",
+                                            success: function (data) {
+                                                // data is your result from controller
+                                                console.log(data);
+                                                if (data == "false") {
+                                                    console.log("error en Ajax")
+
+                                                } else {
+                                                    console.log(data)
+                                                    respuesta = data;
+                                                    if (data == "Existe") {
+                                                        console.log("El rut existe!!")
+                                                    }
+                                                    else {
+                                                        console.log("El rut no existe")
+                                                    }
+
+                                                    if (respuesta == "Existe") {
+                                                        $("#verificarRut").show();
+                                                        $("#verificarRut").text("El rut ya existe en el sistema")
+                                                        console.log("El rut ingresado es válido :D");
+                                                    }
+                                                }
+                                            },
+                                            error: function (err) {
+                                                console.log(err);
+                                            }
+                                        });
+
                                         var Fn = {
                                             // Valida el rut con su cadena completa "XXXXXXXX-X"
-                                            validaRut: function (rutCompleto) {
-                                                if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rutCompleto))
+                                            validaRut: function (rut) {
+                                                if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rut))
                                                     return false;
-                                                var tmp = rutCompleto.split('-');
+                                                var tmp = rut.split('-');
                                                 var digv = tmp[1];
                                                 var rut = tmp[0];
                                                 if (digv == 'K') digv = 'k';
@@ -684,6 +724,10 @@
                                             $("#verificarRut").text("El Rut no es válido")
                                             console.log("El Rut no es válido :'( ");
                                         }
+
+
+
+
                                         // Uso de la función
                                         //console.log(Fn.validaRut('11111111-1') ? 'Valido' : 'inválido');
                                     }); 
@@ -692,10 +736,95 @@
                     </div>
                     <div class="col-lg-6 col-md-6 form-group">
                         <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email" required>
+                        <h6 id="verificarcorreo" style="color: orangered;font-size: 12px;margin-top: 4px;margin-left: 6px;"></h6>
                         <div class="invalid-feedback">
                             Por favor ingrese su correo
                         </div>
                     </div>
+                    <%-- Verificar Correo --%>
+                    <script>
+                        $(document).ready(function () {
+                            $("#txtEmail").change(function (event) {
+                                console.log("Se cambio");
+                                var correo = $("#txtEmail").val();
+                                console.log("correo" + correo);
+                                var respuesta; 
+                                $.ajax({
+                                    url: '<%: Url.Content("~/Home/ConsultarCorreo/") %>',
+                                    data: { correo: correo },
+                                    cache: false,
+                                    type: "GET",
+                                    success: function (data) {
+                                        // data is your result from controller
+                                        console.log(data);
+                                        if (data == "false") {
+                                            console.log("error en Ajax")
+
+                                        } else {
+                                            console.log(data)
+                                            respuesta = data;
+                                            if (data == "Existe") {
+                                                console.log("El Correo existe!!")
+                                            }
+                                            else {
+                                                console.log("El Correo no existe")
+                                            }
+
+                                            if (respuesta != "Existe") {
+                                                $("#verificarcorreo").hide();
+                                                $("#verificarcorreo").text("El correo ingresado es válido :D")
+                                                console.log("El rut ingresado es válido :D");
+                                            } else {
+                                                $("#verificarcorreo").show();
+                                                $("#verificarcorreo").text("El ya correo existe en el sistema")
+                                                console.log("El correo no es válido :'( ");
+                                            }
+                                        }
+                                    },
+                                    error: function (err) {
+                                        console.log(err);
+                                    }
+                                });
+
+
+<%--                                var Fn = {
+                                    // Valida el rut con su cadena completa "XXXXXXXX-X"
+                                    validaCorreo: function (correo) {
+
+                                        $.ajax({
+                                            url: '<%: Url.Content("~/Home/ConsultarCorreo/") %>',
+                                            data: { correo: correo },
+                                                cache: false,
+                                                type: "GET",
+                                                success: function (data) {
+                                                    // data is your result from controller
+                                                    console.log(data);
+                                                    if (data == "false") {
+                                                        console.log("error en Ajax")
+
+                                                    } else {
+                                                        console.log(data)
+                                                        if (data == "Existe") {
+                                                            console.log("El Rut existe!!")
+                                                        }
+                                                        else {
+                                                            console.log("El Rut no existe")
+                                                        }
+                                                    }
+                                                },
+                                                error: function (err) {
+                                                    console.log(err);
+                                                }
+                                        });
+
+                                        return correo;
+                                    }
+                                }--%>
+
+                            }); 
+                        });
+                    </script>
+
   <%--                  <div class="col-lg-6 col-md-6 form-group">
                         <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" placeholder="Teléfono" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
                         <div class="invalid-feedback">
@@ -703,17 +832,47 @@
                         </div>
                     </div>--%>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="text" class="form-control" name="txtCelular" id="txtCelular" placeholder="Celular" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
-                        <div class="invalid-feedback">
-                            Por favor ingrese su celular
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">+56</div>
+                            </div>
+                            <input type="text" min="10000000" max="99999999" class="form-control" name="txtCelular" id="txtCelular" placeholder="Celular" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                            <div class="invalid-feedback">
+                                Por favor ingrese su celular
+                            </div>
                         </div>
                     </div>
+                    <script>
+                        $(document).ready(function () {
+                            var input = document.getElementById('txtCelular');
+                            input.addEventListener('input', function () {
+                                if (this.value.length > 9)
+                                    this.value = this.value.slice(0, 9);
+                            });
+
+                            
+                            $('#txtCelular')    
+                                .keypress(function (event) {
+                                    if (event.which < 48 || event.which > 57 || this.value.length === 12) {
+                                        return false;
+                                    }
+                            });
+                            
+
+                        });
+                    </script>
                     <div class="col-lg-6 col-md-6 form-group">
                         <input id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" required/>
+
                         <script>
+                            $(function () {
                             $('#txtFechaNacimiento').datepicker({
                                 uiLibrary: 'bootstrap4',
-                                format: 'dd/mm/yyyy'
+                                format: 'dd/mm/yyyy',
+                            });
+                            $('#txtFechaNacimiento').datepicker("option", "maxDate", '+7D');
+                                $('#txtFechaNacimiento').datepicker();
+
                             });
                         </script>
 
@@ -721,6 +880,62 @@
                 </div>
                 </div>
             </div>
+          <%-- Script Primer paso --%>
+            <script>
+                $(document).ready(function () {
+
+                    $("#txtFechaNacimiento").change(function (event) {
+                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                            console.log("Hay algo vacío")
+                            $("#btnSiguiente").prop("disabled", true);
+                        }
+                        else {
+                            $("#btnSiguiente").prop("disabled", false);
+                            console.log("Esta todo ok")
+                        }
+                    });
+                    $("#txtCelular").change(function (event) {
+                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                            console.log("Hay algo vacío")
+                            $("#btnSiguiente").prop("disabled", true);  
+                        }
+                        else {
+                            $("#btnSiguiente").prop("disabled", false);
+                            console.log("Esta todo ok")
+                        }
+                    });
+                    $("#txtEmail").change(function (event) {
+                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                            console.log("Hay algo vacío")
+                            $("#btnSiguiente").prop("disabled", true);
+                        }
+                        else {
+                            $("#btnSiguiente").prop("disabled", false);
+                            console.log("Esta todo ok")
+                        }
+                    });
+                    $("#txtRut").change(function (event) {
+                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                            console.log("Hay algo vacío")
+                            $("#btnSiguiente").prop("disabled", true);
+                        }
+                        else {
+                            $("#btnSiguiente").prop("disabled", false);
+                            console.log("Esta todo ok")
+                        }
+                    });
+                    $("#txtNombre").change(function (event) {
+                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                            console.log("Hay algo vacío")
+                            $("#btnSiguiente").prop("disabled", true);
+                        }
+                        else {
+                            $("#btnSiguiente").prop("disabled", false);
+                            console.log("Esta todo ok")
+                        }
+                    });
+                });
+            </script>
           <%--  Paso 2 --%>
             <div class="card" id="divPaso2" style="border-radius: 10px">
                 <div class="card-body">
@@ -825,6 +1040,12 @@
                 </div>
                 </div>
             </div>
+          <%-- Script Segundo paso --%>
+          <script>
+              $(document).ready(function () {
+
+              });
+          </script>
           <style>
             .custom-control-label::before {
                 position: absolute;
@@ -860,24 +1081,29 @@
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalArriba" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Desde Arriba</button>
                                 <input type="text"  id="fotoArriba" name="fotoArriba" value="" hidden/>
+                                <input type="text"  id="fotoArribaIs" name="fotoArribaIs" value="" hidden/>
                             </div>
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalIzquierdo" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Izquierdo</button>
                                 <input type="text"  id="fotoIzquierdo" name="fotoIzquierdo" value="" hidden/>
+                                <input type="text"  id="fotoIzquierdoIs" name="fotoIzquierdoIs" value="" hidden/>
                             </div>
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalDerecho" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Derecho</button>
                                 <input type="text"  id="fotoDerecho" name="fotoDerecho" value="" hidden/>
+                                <input type="text"  id="fotoDerechoIs" name="fotoDerechoIs" value="" hidden/>
                             </div>
                         </div>
                         <div class="row" style="    margin-top: 2pc;">
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalAtras" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Atrás</button>
                                 <input type="text"  id="fotoAtras" name="fotoAtras" value="" hidden/>
+                                <input type="text"  id="fotoAtrasIs" name="fotoAtrasIs" value="" hidden/>
                             </div>
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalFrente" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Frente</button>
                                 <input type="text"  id="fotoFrente" name="fotoFrente" value="" hidden/>
+                                <input type="text"  id="fotoFrenteIs" name="fotoFrenteIs" value="" hidden/>
                             </div>
                         </div>
                     </div>
@@ -1006,7 +1232,7 @@
           <input id="idSolicitud" name="idSolicitud" hidden/>
         
           <script>
-              // Example starter JavaScript for disabling form submissions if there are invalid fields
+                                    // Example starter JavaScript for disabling form submissions if there are invalid fields
               (function () {
                   'use strict';
                   window.addEventListener('load', function () {
@@ -1098,6 +1324,21 @@
                                 <input type="file" id="upload1" name="files" hidden>
                                 <label id="labelupload1" class="boton-file" for="upload1">Subir Foto</label>
                                 <script>
+                                    $("#upload1").on('change', function () {
+                                        // this.files[0].size recupera el tamaño del archivo
+                                        // alert(this.files[0].size);
+
+                                        var fileName = this.files[0].name;
+                                        var fileSize = this.files[0].size;
+
+                                        if (fileSize > 20000000) {
+                                            alert('El archivo no debe superar los 20MB');
+                                            this.value = '';
+                                            this.files[0].name = '';
+                                        }
+                                    });
+                                </script>
+                                <script>
                                     $(document).ready(function () {
                                         if ($('#upload1').val() == "") {
                                             $("#cancelar1").hide();
@@ -1115,9 +1356,12 @@
                                             if ($('#upload1').val() == "") {
                                                 $('#labelupload1').css("background-color", "#BAD305")
                                                 $("#cancelar1").hide();
+                                                //$("#fotoArribaIs").val("");
+
                                             } else {
                                                 $('#labelupload1').css("background-color", "#8d9d17")
                                                 $("#cancelar1").show();
+                                                //$("#fotoArribaIs").val("true");        
                                             }
                                         });
                                     });
@@ -1166,6 +1410,21 @@
                                 <input type="button" id="cancelar2" value="Limpiar" style="margin-bottom: -7.7px"/>
                                 <input type="file" id="upload2" name="files" hidden>
                                 <label id="labelupload2" class="boton-file" for="upload2">Subir Foto</label>
+                                <script>
+                                    $("#upload2").on('change', function () {
+                                        // this.files[0].size recupera el tamaño del archivo
+                                        // alert(this.files[0].size);
+
+                                        var fileName = this.files[0].name;
+                                        var fileSize = this.files[0].size;
+
+                                        if (fileSize > 20000000) {
+                                            alert('El archivo no debe superar los 20MB');
+                                            this.value = '';
+                                            this.files[0].name = '';
+                                        }
+                                    });
+                                </script>
                                 <script>
                                     $(document).ready(function () {
                                         if ($('#upload2').val() == "") {
@@ -1236,6 +1495,21 @@
                                 <input type="file" id="upload3" name="files" hidden>
                                 <label id="labelupload3" class="boton-file" for="upload3">Subir Foto</label>
                                 <script>
+                                    $("#upload3").on('change', function () {
+                                        // this.files[0].size recupera el tamaño del archivo
+                                        // alert(this.files[0].size);
+
+                                        var fileName = this.files[0].name;
+                                        var fileSize = this.files[0].size;
+
+                                        if (fileSize > 20000000) {
+                                            alert('El archivo no debe superar los 20MB');
+                                            this.value = '';
+                                            this.files[0].name = '';
+                                        }
+                                    });
+                                </script>
+                                <script>
                                     $(document).ready(function () {
                                         if ($('#upload3').val() == "") {
                                             $("#cancelar3").hide();
@@ -1305,6 +1579,21 @@
                                 <input type="file" id="upload4" name="files" hidden>
                                 <label id="labelupload4" class="boton-file" for="upload4">Subir Foto</label>
                                 <script>
+                                    $("#upload4").on('change', function () {
+                                        // this.files[0].size recupera el tamaño del archivo
+                                        // alert(this.files[0].size);
+
+                                        var fileName = this.files[0].name;
+                                        var fileSize = this.files[0].size;
+
+                                        if (fileSize > 20000000) {
+                                            alert('El archivo no debe superar los 20MB');
+                                            this.value = '';
+                                            this.files[0].name = '';
+                                        }
+                                    });
+                                </script>
+                                <script>
                                     $(document).ready(function () {
                                         if ($('#upload4').val() == "") {
                                             $("#cancelar4").hide();
@@ -1373,6 +1662,21 @@
                                 <input type="button" id="cancelar5" value="Limpiar" style="margin-bottom: -7.7px"/>
                                 <input type="file" id="upload5" name="files" hidden>
                                 <label id="labelupload5" class="boton-file" for="upload5">Subir Foto</label>
+                                <script>
+                                    $("#upload5").on('change', function () {
+                                        // this.files[0].size recupera el tamaño del archivo
+                                        // alert(this.files[0].size);
+
+                                        var fileName = this.files[0].name;
+                                        var fileSize = this.files[0].size;
+
+                                        if (fileSize > 20000000) {
+                                            alert('El archivo no debe superar los 20MB');
+                                            this.value = '';
+                                            this.files[0].name = '';
+                                        }
+                                    });
+                                </script>
                                 <script>
                                     $(document).ready(function () {
                                         if ($('#upload5').val() == "") {

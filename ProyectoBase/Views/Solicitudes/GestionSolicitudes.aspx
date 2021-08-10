@@ -5,13 +5,18 @@
             <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap.min.css">
+<%--    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap.min.css">--%>
       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap.min.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<%--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>--%>
+<%--<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>--%>
     
-    
+
+    <script>
+        $(document).ready(function () {
+            $('#hola').selectpicker();
+        })
+    </script>
     
     <%-- Scripts de Gestion --%>
     <%-- AJAX de Descripción y estado --%>
@@ -1283,21 +1288,56 @@
                                 </div>
                                 <div id="divEstados">
                                     <div class="row">
-
                                     <div class="col">
-                                        <label for="txtTecnica"></label>
+
+<%--                                            <label for="txtTecnica"></label>
+                                                Técnica
+                                                <label style="color: white"> *</label>
+                                                <select name="txtTecnica" id="txtTecnica" class="selectpicker col-md-12" data-live-search="true" multiple data-actions-box="true" required style="background-color: white;border-color: darkgrey;">
+                                                    <%= ViewData["opcionesTecnicas"] %>
+                                                </select>--%>
+                                       <style>
+                                           .bootstrap-select .dropdown-toggle .filter-option-inner-inner {
+                                                overflow: hidden !important;
+                                                background-color: white !important;
+                                            }
+                                           .bootstrap-select[class*=col-] .dropdown-toggle {
+                                                width: 100% !important;
+                                                background-color: white !important;
+                                                border-color: #ced4da !important;
+                                            }
+                                           .bootstrap-select .dropdown-menu {
+                                                min-width: 94% !important;
+                                                -webkit-box-sizing: border-box !important;
+                                                -moz-box-sizing: border-box !important;
+                                                box-sizing: border-box !important;
+                                            }
+                                           .bs-searchbox .form-control {
+                                                margin-bottom: 0 !important;
+                                                width: 95% !important;
+                                                float: none !important;
+                                            }
+                                           .bootstrap-select:not(.input-group-btn), .bootstrap-select[class*=col-] {
+                                                float: none;
+                                                display: inline-block;
+                                                margin-left: 0;
+                                                width: 560px !important;
+                                                margin-left: -16px !important; 
+                                            }
+                                       </style>
+<%--                                        <label for="txtTecnica"></label>
                                         <label style="color: black">Técnica </label>
                                         <div id="selDiv">
                                             <select name="txtTecnica" id="txtTecnica" class="form-control" >
                                                 <%= ViewData["opcionesTecnicas"] %>
                                             </select>                                    </div>
-                                        <div class="invalid-feedback">Seleccione una opción</div>
+                                        <div class="invalid-feedback">Seleccione una opción</div>--%>
                                         <br />
                                     </div>
                                     <div class="col">
                                         <label for="txtZona"></label>
                                         <label style="color: black">Zona </label>
-                                        <div id="selDiv">
+                                        <div id="selDiv" style="margin-left: -2pc;">
                                             <select name="txtZona" id="txtZona" class="form-control" >
                                                 <%= ViewData["opcionesZonas"] %>
                                             </select>                                      </div>
@@ -1305,6 +1345,22 @@
                                         <br />
                                     </div>
                                 </div>
+<%--                                        <div class="row">
+                                    <div class="col">
+
+
+                                    <select id="multiple" class="selectpicker" multiple data-live-search="true">
+                                      <option>Mustard</option>
+                                      <option>Ketchup</option>
+                                      <option>Relish</option>
+                                    </select>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('#multiple').selectpicker();
+                                        });
+                                    </script>
+                                </div>
+                                    </div>--%>
                                 <div class="row">
                                     <div class="col-6">
                                         <label for="txtFoliculo1"></label>
