@@ -47,5 +47,7 @@ namespace WebSolicitudes.Models
         public virtual DbSet<FotosSeisMeses> FotosSeisMeses { get; set; }
         public virtual DbSet<FotosTresMeses> FotosTresMeses { get; set; }
         public virtual DbSet<FotosUnMes> FotosUnMes { get; set; }
+        public virtual DbSet<ArchivoVideo> ArchivoVideo { get; set; }
+        public virtual DbSet<SeccionArchivo> SeccionArchivo { get; set; }
     }
 }

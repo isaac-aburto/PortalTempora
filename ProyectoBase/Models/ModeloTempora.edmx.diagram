@@ -48,6 +48,9 @@
         <AssociationConnector Association="PortalModeloTemporal.FK_FotosSeisMeses_Solicitud" />
         <AssociationConnector Association="PortalModeloTemporal.FK_FotosTresMeses_Solicitud" />
         <AssociationConnector Association="PortalModeloTemporal.FK_FotosUnMes_Solicitud" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.ArchivoVideo" Width="1.5" PointX="12.625" PointY="0.875" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.SeccionArchivo" Width="1.5" PointX="10.375" PointY="1.125" />
+        <AssociationConnector Association="PortalModeloTemporal.FK_ArchivoVideo_SeccionArchivo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

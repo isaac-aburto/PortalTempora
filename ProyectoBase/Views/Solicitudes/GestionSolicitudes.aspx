@@ -1023,6 +1023,7 @@
                             <div class="row">
                                     <div class="col">
                                         <h4 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important">Información</h4>
+                                        <h6 style="color: #858585;font-family: -webkit-pictograph; font-style: initial !important">Formulario y datos del paciente.</h6>
                                     </div>
                                     <div class="col" style="    text-align: end;">
                                         <a id="btnInformacion" style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important" data-toggle="collapse" data-target="#collapseExample3" role="button"  aria-controls="collapseExample3"><i style="color: #C6D41D;     font-size: 31px;" id="icon3" class="fa fa-angle-up"></i></a>
@@ -1153,15 +1154,189 @@
                                 <div class="row">
                                     <div class="col">
                                         <h4 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important">Fotografías</h4>
+                                        <h6 style="color: #858585;font-family: -webkit-pictograph; font-style: initial !important">Imágenes del paciente.</h6>
                                     </div>
                                     <div class="col" style="    text-align: end;">
                                         <a id="btnFotografias" style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important" data-toggle="collapse" data-target="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2"><i style="color: #C6D41D;     font-size: 31px;" id="icon2" class="fa fa-angle-down"></i></a>
                                     </div>
                                 </div>                                  
                                     <hr />
+
+
                                     <div class="collapse" id="collapseExample2">
                                     
-                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+                                        
+                                    <div  class="text-center" style="margin: 5px;"><h5 id="txtImages" style="color: #a7a7a7;">Desde arriba</h5></div>
+                                    <img id="fotoMaestra" style="padding-bottom: 20px;" class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto1"]%>" alt="First slide" onclick="window.open(this.src)">
+                                    <br />
+                                    <div style=" text-align: center;">
+                                        <br />
+                                        <div class="row">
+                                            <br />
+                                            <div class="col">
+                                                <img id="foto1" style="height: 140px;" class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto1"]%>" alt="First slide">
+                                            </div>
+                                            <div class="col">
+                                                <img id="foto2" style="height: 140px;" class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto2"]%>" alt="First slide">
+                                            </div>
+                                            <div class="col">
+                                                <img id="foto3" style="height: 140px;" class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto3"]%>" alt="First slide">
+                                            </div>
+                                            <div class="col">
+                                                <img id="foto4" style="height: 140px;" class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto4"]%>" alt="First slide">
+                                            </div>
+                                            <div class="col">
+                                                <img id="foto5" style="height: 140px;" class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto5"]%>" alt="First slide">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        $(document).ready(function () {
+
+
+                                            $("#foto1").css('border', '2px');
+                                            $("#foto1").css('border-style', 'solid');
+                                            $("#foto1").css('border-color', '#ccdd0e');
+
+
+                                            $("#foto1").on("click", function () {
+                                                var src = $('#foto1').attr('src');
+                                                $("#fotoMaestra").attr("src", src);
+
+                                                $("#txtImages").text("Desde arriba");
+
+                                                $("#foto1").css('border', '2px');
+                                                $("#foto1").css('border-style', 'solid');
+                                                $("#foto1").css('border-color', '#ccdd0e');
+
+                                                $("#foto2").css('border', '0px');
+                                                $("#foto2").css('border-style', 'solid');
+                                                $("#foto2").css('border-color', '#ccdd0e');
+
+                                                $("#foto3").css('border', '0px');
+                                                $("#foto3").css('border-style', 'solid');
+                                                $("#foto3").css('border-color', '#ccdd0e');
+
+                                                $("#foto4").css('border', '0px');
+                                                $("#foto4").css('border-style', 'solid');
+                                                $("#foto4").css('border-color', '#ccdd0e');
+
+                                                $("#foto5").css('border', '0px');
+                                                $("#foto5").css('border-style', 'solid');
+                                                $("#foto5").css('border-color', '#ccdd0e');
+                                            });
+                                            $("#foto2").on("click", function () {
+                                                var src = $('#foto2').attr('src');
+                                                $("#fotoMaestra").attr("src", src);
+
+                                                $("#txtImages").text("Perfil izquierdo");
+
+                                                $("#foto1").css('border', '0px');
+                                                $("#foto1").css('border-style', 'solid');
+                                                $("#foto1").css('border-color', '#ccdd0e');
+
+                                                $("#foto2").css('border', '2px');
+                                                $("#foto2").css('border-style', 'solid');
+                                                $("#foto2").css('border-color', '#ccdd0e');
+
+                                                $("#foto3").css('border', '0px');
+                                                $("#foto3").css('border-style', 'solid');
+                                                $("#foto3").css('border-color', '#ccdd0e');
+
+                                                $("#foto4").css('border', '0px');
+                                                $("#foto4").css('border-style', 'solid');
+                                                $("#foto4").css('border-color', '#ccdd0e');
+
+                                                $("#foto5").css('border', '0px');
+                                                $("#foto5").css('border-style', 'solid');
+                                                $("#foto5").css('border-color', '#ccdd0e');
+
+                                            });
+                                            $("#foto3").on("click", function () {
+                                                var src = $('#foto3').attr('src');
+                                                $("#fotoMaestra").attr("src", src);
+
+                                                $("#txtImages").text("Perfil Derecho");
+
+                                                $("#foto1").css('border', '0px');
+                                                $("#foto1").css('border-style', 'solid');
+                                                $("#foto1").css('border-color', '#ccdd0e');
+
+                                                $("#foto2").css('border', '0px');
+                                                $("#foto2").css('border-style', 'solid');
+                                                $("#foto2").css('border-color', '#ccdd0e');
+
+                                                $("#foto3").css('border', '2px');
+                                                $("#foto3").css('border-style', 'solid');
+                                                $("#foto3").css('border-color', '#ccdd0e');
+
+                                                $("#foto4").css('border', '0px');
+                                                $("#foto4").css('border-style', 'solid');
+                                                $("#foto4").css('border-color', '#ccdd0e');
+
+                                                $("#foto5").css('border', '0px');
+                                                $("#foto5").css('border-style', 'solid');
+                                                $("#foto5").css('border-color', '#ccdd0e');
+
+                                            });
+                                            $("#foto4").on("click", function () {
+                                                var src = $('#foto4').attr('src');
+                                                $("#fotoMaestra").attr("src", src);
+
+                                                $("#txtImages").text("De Atrás");
+
+                                                $("#foto1").css('border', '0px');
+                                                $("#foto1").css('border-style', 'solid');
+                                                $("#foto1").css('border-color', '#ccdd0e');
+
+                                                $("#foto2").css('border', '0px');
+                                                $("#foto2").css('border-style', 'solid');
+                                                $("#foto2").css('border-color', '#ccdd0e');
+
+                                                $("#foto3").css('border', '0px');
+                                                $("#foto3").css('border-style', 'solid');
+                                                $("#foto3").css('border-color', '#ccdd0e');
+
+                                                $("#foto4").css('border', '2px');
+                                                $("#foto4").css('border-style', 'solid');
+                                                $("#foto4").css('border-color', '#ccdd0e');
+
+                                                $("#foto5").css('border', '0px');
+                                                $("#foto5").css('border-style', 'solid');
+                                                $("#foto5").css('border-color', '#ccdd0e');
+                                            });
+                                            $("#foto5").on("click", function () {
+                                                var src = $('#foto5').attr('src');
+                                                $("#fotoMaestra").attr("src", src);
+
+                                                $("#txtImages").text("De frente");
+
+                                                $("#foto1").css('border', '0px');
+                                                $("#foto1").css('border-style', 'solid');
+                                                $("#foto1").css('border-color', '#ccdd0e');
+
+                                                $("#foto2").css('border', '0px');
+                                                $("#foto2").css('border-style', 'solid');
+                                                $("#foto2").css('border-color', '#ccdd0e');
+
+                                                $("#foto3").css('border', '0px');
+                                                $("#foto3").css('border-style', 'solid');
+                                                $("#foto3").css('border-color', '#ccdd0e');
+
+                                                $("#foto4").css('border', '0px');
+                                                $("#foto4").css('border-style', 'solid');
+                                                $("#foto4").css('border-color', '#ccdd0e');
+
+                                                $("#foto5").css('border', '2px');
+                                                $("#foto5").css('border-style', 'solid');
+                                                $("#foto5").css('border-color', '#ccdd0e');
+                                            });
+                                        });
+                                    </script>
+
+
+<%--                                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                         <ol class="carousel-indicators">
                                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                                         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -1170,7 +1345,7 @@
                                         <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
          
                                         </ol>
-                                        <div class="carousel-inner" <%--style="border-radius: 7px;border-color: #ededed;border-style: solid;--%>">
+                                        <div class="carousel-inner">
                                         <div class="carousel-item active">
                                             <div class="text-center" style="margin: 5px;"><h5 style="color: #a7a7a7;">Desde arriba</h5></div>
                                             <img class="d-block w-100 imgen-carrusel" src="<%= ViewData["Foto1"]%>" alt="First slide" onclick="window.open(this.src)">
@@ -1222,7 +1397,7 @@
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span>
                                         </a>
-                                    </div>
+                                    </div>--%>
                                         </div>
                                     <br />
                                 </div>
@@ -1232,7 +1407,17 @@
                             <%-- Gestion --%>
                             <div class="row">
                                 <div class="col">
-                                    <h4 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important">Gestión</h4>
+                                    <h4 style="color: #858585; font-family: 'Open Sans', sans-serif; font-style: initial !important">Gestión<span id="btnGestion" class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="right" title="Por favor, seleccione estados según su criterio para el avance correcto del paciente.">
+                                        <button style="margin-top: -5px;pointer-events: none;background-color: white;border-color: white;" class="btn btn-primary" type="button" disabled><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"><path d="M13 7.5a1 1 0 11-2 0 1 1 0 012 0zm-3 3.75a.75.75 0 01.75-.75h1.5a.75.75 0 01.75.75v4.25h.75a.75.75 0 010 1.5h-3a.75.75 0 010-1.5h.75V12h-.75a.75.75 0 01-.75-.75z"></path><path fill-rule="evenodd" d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM2.5 12a9.5 9.5 0 1119 0 9.5 9.5 0 01-19 0z"></path></svg></button>
+                                    </span></h4>
+                                    <h6 style="color: #858585;font-family: -webkit-pictograph; font-style: initial !important">Control de estados para el paciente.</h6>
+                                    
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('#btnGestion').tooltip()
+                                        });
+                                    </script>
+                                                
                                 </div>
                                 <div class="col" style="    text-align: end;">
                                     <a id="btnGestionar"  data-toggle="collapse" data-target="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i style="color: #C6D41D;     font-size: 31px;" id="icon" class="fa fa-angle-down"></i></a>

@@ -13,6 +13,15 @@
           <Property Name="nombreArchivo" Type="varchar" MaxLength="100" />
           <Property Name="baseArchivo" Type="varchar(max)" />
         </EntityType>
+        <EntityType Name="ArchivoVideo">
+          <Key>
+            <PropertyRef Name="idArchivo" />
+          </Key>
+          <Property Name="idArchivo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreArchivo" Type="varchar" MaxLength="100" />
+          <Property Name="FK_Seccion" Type="int" />
+          <Property Name="pathArchivo" Type="varchar" MaxLength="1000" />
+        </EntityType>
         <EntityType Name="ArchivoxEstado">
           <Key>
             <PropertyRef Name="idArchivoxEstado" />
@@ -149,6 +158,13 @@
           <Property Name="nomRegion" Type="varchar" MaxLength="200" />
           <Property Name="FK_idPais" Type="int" />
         </EntityType>
+        <EntityType Name="SeccionArchivo">
+          <Key>
+            <PropertyRef Name="idSeccion" />
+          </Key>
+          <Property Name="idSeccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreSeccion" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="SLA">
           <Key>
             <PropertyRef Name="idSLA" />
@@ -249,6 +265,18 @@
           <Property Name="FK_idZona" Type="int" />
           <Property Name="FK_idSolicitud" Type="int" />
         </EntityType>
+        <Association Name="FK_ArchivoVideo_SeccionArchivo">
+          <End Role="SeccionArchivo" Type="Self.SeccionArchivo" Multiplicity="0..1" />
+          <End Role="ArchivoVideo" Type="Self.ArchivoVideo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeccionArchivo">
+              <PropertyRef Name="idSeccion" />
+            </Principal>
+            <Dependent Role="ArchivoVideo">
+              <PropertyRef Name="FK_Seccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ArchivoxEstado_Archivos">
           <End Role="Archivos" Type="Self.Archivos" Multiplicity="0..1" />
           <End Role="ArchivoxEstado" Type="Self.ArchivoxEstado" Multiplicity="*" />
@@ -491,6 +519,7 @@
         </Association>
         <EntityContainer Name="PortalModeloTemporalStoreContainer">
           <EntitySet Name="Archivos" EntityType="Self.Archivos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ArchivoVideo" EntityType="Self.ArchivoVideo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArchivoxEstado" EntityType="Self.ArchivoxEstado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClasificacionEstado" EntityType="Self.ClasificacionEstado" Schema="dbo" store:Type="Tables" />
@@ -505,6 +534,7 @@
           <EntitySet Name="RangoFoliculos" EntityType="Self.RangoFoliculos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RangoxSolicitud" EntityType="Self.RangoxSolicitud" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SeccionArchivo" EntityType="Self.SeccionArchivo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SLA" EntityType="Self.SLA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Solicitud" EntityType="Self.Solicitud" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -512,6 +542,10 @@
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZonaAReparar" EntityType="Self.ZonaAReparar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZonaxSolicitud" EntityType="Self.ZonaxSolicitud" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ArchivoVideo_SeccionArchivo" Association="Self.FK_ArchivoVideo_SeccionArchivo">
+            <End Role="SeccionArchivo" EntitySet="SeccionArchivo" />
+            <End Role="ArchivoVideo" EntitySet="ArchivoVideo" />
+          </AssociationSet>
           <AssociationSet Name="FK_ArchivoxEstado_Archivos" Association="Self.FK_ArchivoxEstado_Archivos">
             <End Role="Archivos" EntitySet="Archivos" />
             <End Role="ArchivoxEstado" EntitySet="ArchivoxEstado" />
@@ -1060,6 +1094,12 @@
             <End Role="Solicitud" EntitySet="Solicitud" />
             <End Role="FotosUnMes" EntitySet="FotosUnMes" />
           </AssociationSet>
+          <EntitySet Name="ArchivoVideo" EntityType="PortalModeloTemporal.ArchivoVideo" />
+          <EntitySet Name="SeccionArchivo" EntityType="PortalModeloTemporal.SeccionArchivo" />
+          <AssociationSet Name="FK_ArchivoVideo_SeccionArchivo" Association="PortalModeloTemporal.FK_ArchivoVideo_SeccionArchivo">
+            <End Role="SeccionArchivo" EntitySet="SeccionArchivo" />
+            <End Role="ArchivoVideo" EntitySet="ArchivoVideo" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ArchivoxEstado">
           <Key>
@@ -1240,6 +1280,36 @@
             </Principal>
             <Dependent Role="FotosUnMes">
               <PropertyRef Name="FK_idSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ArchivoVideo">
+          <Key>
+            <PropertyRef Name="idArchivo" />
+          </Key>
+          <Property Name="idArchivo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreArchivo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FK_Seccion" Type="Int32" />
+          <Property Name="pathArchivo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SeccionArchivo" Relationship="PortalModeloTemporal.FK_ArchivoVideo_SeccionArchivo" FromRole="ArchivoVideo" ToRole="SeccionArchivo" />
+        </EntityType>
+        <EntityType Name="SeccionArchivo">
+          <Key>
+            <PropertyRef Name="idSeccion" />
+          </Key>
+          <Property Name="idSeccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreSeccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ArchivoVideo" Relationship="PortalModeloTemporal.FK_ArchivoVideo_SeccionArchivo" FromRole="SeccionArchivo" ToRole="ArchivoVideo" />
+        </EntityType>
+        <Association Name="FK_ArchivoVideo_SeccionArchivo">
+          <End Type="PortalModeloTemporal.SeccionArchivo" Role="SeccionArchivo" Multiplicity="0..1" />
+          <End Type="PortalModeloTemporal.ArchivoVideo" Role="ArchivoVideo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeccionArchivo">
+              <PropertyRef Name="idSeccion" />
+            </Principal>
+            <Dependent Role="ArchivoVideo">
+              <PropertyRef Name="FK_Seccion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1512,6 +1582,24 @@
                 <ScalarProperty Name="baseArchivo" ColumnName="baseArchivo" />
                 <ScalarProperty Name="nombreArchivo" ColumnName="nombreArchivo" />
                 <ScalarProperty Name="idFotosUn" ColumnName="idFotosUn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArchivoVideo">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.ArchivoVideo">
+              <MappingFragment StoreEntitySet="ArchivoVideo">
+                <ScalarProperty Name="pathArchivo" ColumnName="pathArchivo" />
+                <ScalarProperty Name="FK_Seccion" ColumnName="FK_Seccion" />
+                <ScalarProperty Name="nombreArchivo" ColumnName="nombreArchivo" />
+                <ScalarProperty Name="idArchivo" ColumnName="idArchivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeccionArchivo">
+            <EntityTypeMapping TypeName="PortalModeloTemporal.SeccionArchivo">
+              <MappingFragment StoreEntitySet="SeccionArchivo">
+                <ScalarProperty Name="nombreSeccion" ColumnName="nombreSeccion" />
+                <ScalarProperty Name="idSeccion" ColumnName="idSeccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

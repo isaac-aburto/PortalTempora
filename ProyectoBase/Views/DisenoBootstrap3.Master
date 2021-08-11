@@ -156,6 +156,11 @@
              
             <li class="book-a-table text-center"><a href="<%: Url.Content("~/Home/Login") %>" <%--data-toggle="modal" data-target="#ModalLogin"--%>>Ingresar</a></li>
             <%}else{%>
+            <%if (int.Parse(Session["IdPerfil"].ToString()) == 1)
+                { %>
+                <li class="active"><a href="<%: Url.Content("~/Admin") %>">Administrar</a></li>
+            <%} %>  
+            
             <li class="active"><a href="<%: Url.Content("~/Solicitudes") %>">Solicitudes</a></li>
             <li><a class="dropdown-toggle"href="#" role="button" id="dropdownMenuLinkUsuarios" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ffffff00">Usuarios</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkUsuarios">

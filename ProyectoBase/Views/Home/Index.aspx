@@ -862,7 +862,7 @@
                         });
                     </script>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" required/>
+                        <input type="date" id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" required/>
 
                         <script>
                             $(function () {
@@ -990,6 +990,7 @@
                     <label style="padding-left: 15px;">No</label>
                     </div>
                 </div>
+
                 <%-- Chk Si --%>
                 <div id="divSegundaPregunta" style="margin-left: 24px">
                      <h6>¿Cuál?</h6>
@@ -1039,6 +1040,12 @@
                     <label style="padding-left: 19px;">No</label>
                 </div>
                 </div>
+                <script>
+                    $(document).ready(function () {
+                        $('#chkDermaNo').prop('checked', true);
+                        $('#chkPeloNo').prop('checked', true);
+                    });
+                </script>
             </div>
           <%-- Script Segundo paso --%>
           <script>

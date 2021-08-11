@@ -1,5 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.ServiceModel.Web;
+using System.Web.Http;
+using System.Web.Script.Services;
 using System.Web.Services;
+using WebSolicitudes.Controllers;
+using WebSolicitudes.Models;
 
 namespace WebSolicitudes
 {
@@ -8,74 +15,92 @@ namespace WebSolicitudes
     /// </summary>
     [WebService(Namespace = "http://tempuri.org/")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
+    [ScriptService]
     [System.ComponentModel.ToolboxItem(false)]
     // Para permitir que se llame a este servicio web desde un script, usando ASP.NET AJAX, quite la marca de comentario de la línea siguiente. 
     // [System.Web.Script.Services.ScriptService]
     public class WebServiceTempora : System.Web.Services.WebService
     {
 
-
         [WebMethod]
-        public String CrearTicket(string hola)
+        public String CrearTicket()
         {
-
-            //try
-            //{
-
-            //    return "Respuesta correcta";
-            //}
-            //catch (Exception ex)
-            //{
-
-            //    return "Respuesta correcta";
-            //}
             return "Respuesta correcta";
         }
+        [WebMethod]
+        public String CrearDeal(String json) {
+            JObject json2 = JObject.Parse(json);
+            Webhook flight = Newtonsoft.Json.JsonConvert.DeserializeObject<Webhook>(json);
+            return "Respuesta Correcta";
+        }
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        [WebMethod]
+        public String CrearDeal2(Models.Webhook id)
+        {
+            return "Respuesta Correcta";
+        }
+        [WebMethod]
+        public String CrearDeal3(int v, Matches_Filters matches_filters, Meta meta, int retry, Current current, Previous previous, string @event)
+        {
+            try
+            {
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    //Crear Cliente
+                    Cliente cliente = new Cliente();
+                    cliente.nombre = current.person_name;
+                    cliente.idPipedrive = current.person_id.ToString();
+                    //Consulta API para completar datos de Paciente
+                    string valoresPerson = PipeDriveAPI.GetPerson(current.person_name);
+                    //ACÁ IRÁ
+                    conexionDB.Cliente.Add(cliente);
+                    conexionDB.SaveChanges();
+
+                    //Crear Solicitud
+                    Solicitud solicitud = new Solicitud();
+                    solicitud.FK_idCliente = cliente.idCliente;
+                    solicitud.SolicitudCompleta = 1;
+                    solicitud.Fk_idEstado = 1;
+                    solicitud.FechaSolicitudIncompleta = DateTime.Now;
+                    solicitud.UltimoCambio = DateTime.Now;
+                    solicitud.FechaSolicitud = DateTime.Now;
+                    solicitud.CorreoSolicitudIncompleta = true;
+                    solicitud.idPipedrive = current.id.ToString();
+                    solicitud.ValorTotal = current.weighted_value;
+                    conexionDB.Solicitud.Add(solicitud);
+                    conexionDB.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("CrearDeal3", "WebServiceTempora", ex.Message);
+                return "Error: " + ex.Message;
+            }
+            return "Respuesta Correcta";
+        }
         //[WebMethod]
-        //[HttpPost]
-        //public string webhook(string req, string res)
-        //{// Creates the endpoint for our webhook 
-        // //app.post('/webhook', (req, res) => {
-
-        //    //let body = req.body;
-
-        //    //// Checks this is an event from a page subscription
-        //    //if (body.object === 'page') {
-
-        //    //    // Iterates over each entry - there may be multiple if batched
-        //    //    body.entry.forEach(function(entry) {
-
-        //    //        // Gets the message. entry.messaging is an array, but 
-        //    //        // will only ever contain one message, so we get index 0
-        //    //        let webhook_event = entry.messaging[0];
-        //    //        console.log(webhook_event);
-        //    //    });
-
-        //    //    // Returns a '200 OK' response to all requests
-        //    //    res.status(200).send('EVENT_RECEIVED');
-        //    //} else
-        //    //{
-        //    //    // Returns a '404 Not Found' if event is not from a page subscription
-        //    //    res.sendStatus(404);
-        //    //}
-        //    return "Hola a todos";
-        //}
-
-        //[HttpGet]
-        //public string webhook(string hub_verify_token, string hub_challenge, string hub_mode)
+        //public String CrearPerson(int v, Matches_Filters matches_filters, Meta meta, int retry, Current current, object previous, string @event, WebhookCrearPerson.Email email, WebhookCrearPerson.Phone phone)
         //{
-        //    return "Hola a todos";
+        //    try
+        //    {
+        //        using (ModeloTempora conexionDB = new ModeloTempora())
+        //        {
+        //            int idCliente = int.Parse(ValorGlobalIdPerson);
+        //            //Completar Cliente
+        //            Cliente cliente = conexionDB.Cliente.Find(idCliente);
+        //            cliente.correo = email.value;
+        //            cliente.celular = phone.value;
+
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Util.escribirLog("CrearDeal3", "WebServiceTempora", ex.Message);
+        //        return "Error: " + ex.Message;
+        //    }
+        //    return "Respuesta Correcta";
         //}
 
-        //[HttpGet]
-        //public string webhook(Dictionary<string, string> varName)
-        //{ 
-        //    foreach(var eachvals in varName) { 
-        //        //string Keyval = eachvals.["Key"]; 
-        //        //string Value = eachvals.["Value"]; 
-        //    }
-        //    return "holaa";
-        //}
     }
 
 }

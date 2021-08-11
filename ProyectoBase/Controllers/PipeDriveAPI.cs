@@ -101,9 +101,57 @@ namespace WebSolicitudes.Controllers
 
             return "";
         }
+        public static string GetPerson(string nombre)
+        {
+            string ejecucionCorrecta = "";
+            try
+            {
+                string parametros = "";
+                string url = "https://tempora-sandbox.pipedrive.com/v1/persons?api_token=350cf4a120446f88a6cb27d3cbce6ec4109b50ae&term=" + nombre;
+                string xml = string.Empty;
+                string metodo = "GET";
+                string respuestaAPI = LlamarAPIGet(metodo, url, parametros, xml);
+                var idPersons = "";
+                JObject json = JObject.Parse(respuestaAPI);
+                JsonTextReader reader = new JsonTextReader(new StringReader(respuestaAPI));
+                while (reader.Read())
+                {
+                    if (reader.Value != null)
+                    {
+                        if (reader.Value.ToString() == "id")
+                        {
+                            reader.Read();
+                            if (reader.Value.ToString() == "72")
+                            {
+                                reader.Read();
+                                if (reader.Value.ToString() == "phone") {
+                                    reader.Read();
+                                }
+                            }
+                            else {
+                               reader.Read();
+                            }
+                            idPersons = idPersons + ";" + reader.Value;
+                        }
+                    }
+                    else
+                    {
+                        reader.Read();
+                    }
+                }
 
+                return (idPersons);
+            }
+            catch (Exception ex)
+            {
+                // Crear log de error
+                ejecucionCorrecta = string.Empty;
+                Util.escribirLog("PipeDriveApi", "GetActivities", ex.Message);
+            }
+            return "";
+        }
 
-        public static string PostActivities(string deal_id, string person_id, string user_id, string subject, string public_description, string type) {
+            public static string PostActivities(string deal_id, string person_id, string user_id, string subject, string public_description, string type) {
             string ejecucionCorrecta = "";
             try {
                 string parametros = "&deal_id=" + deal_id + "&person_id=" + person_id + "&user_id=" + user_id + "&subjet=" + subject + "&public_description=" + public_description + "&type=" + type;
