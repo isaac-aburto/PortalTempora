@@ -1031,6 +1031,34 @@
                                 </div>
                             <hr />
                             <div class="collapse" id="collapseExample3">
+
+                            <div id="seccion1">
+                                <%--<div class="row float-sm-right" style="padding: 31px;">--%>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="float-sm-right">
+                                            <button id="btnEditar" type="button" class="btn btn-outline-secondary"><svg style="    margin-top: -6px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                            </svg></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%--</div>--%>
+                                <script>
+                                    $(document).ready(function () {
+                                        $("#seccion2").hide();
+                                        $("#btnEditar").click(function () {
+                                            $("#seccion1").hide();
+                                            $("#seccion2").show();
+                                        });
+                                        $("#btnVolver").click(function () {
+                                            $("#seccion2").hide();
+                                            $("#seccion1").show();
+                                            btnVolver
+                                        });
+                                    });
+                                </script>
                             <div class="row">
                                 <div class="col">
                                     <label for="txtNombre"></label>
@@ -1057,7 +1085,7 @@
                                     <label style="color: black">Fecha de Nacimiento </label>
                                     <div id="selDiv">
                                         <input disabled id="txtFechaNacimiento" name="txtFechaNacimiento" type='text' class='form-control' value='<%= ViewData["FechaNacimiento"] %>'>
-                                        <input hidden name="Nacimiento" value="<%= ViewData["FechaNacimiento"] %>"/>
+                                        <input hidden id="Nacimiento" name="Nacimiento" value="<%= ViewData["FechaNacimiento"] %>"/>
                                     </div>
                                     <div class="invalid-feedback">Seleccione una opción</div>
                                     <br />
@@ -1078,7 +1106,7 @@
                                     <label for="txtCelular"></label>        
                                     <label style="color: black">Celular </label>
                                     <div id="selDiv">
-                                        <input disabled  name="txtCelular" type='text' class='form-control' value='<%= ViewData["Celular"] %>'>
+                                        <input disabled id="txtCelular" name="txtCelular" type='text' class='form-control' value='<%= ViewData["Celular"] %>'>
                                     </div>
                                     <div class="invalid-feedback">Seleccione una opción</div>
                                     <br />
@@ -1098,7 +1126,7 @@
                                     <label for="txtZona"></label>
                                     <label style="color:black">Respuesta ¿Qué zonas desea reparar? </label>
                                     <div id="selDiv">
-                                        <textarea  disabled  name="txtZona"  class='form-control' style="overflow: hidden"><%= ViewData["RespuestaZona"] %></textarea>
+                                        <textarea  disabled  name="txtZona" id="txtZona" class='form-control' style="overflow: hidden"><%= ViewData["RespuestaZona"] %></textarea>
                                     </div>
                                     <div class="invalid-feedback">Seleccione una opción</div>
                                     <br />
@@ -1109,7 +1137,7 @@
                                     <label for="txtDerma"></label>
                                     <label style="color: black">Respuesta ¿Se ha estado tratando con algún dermatologo por alguna enfermedad capilar? ¿Cuál? </label>
                                     <div id="selDiv">
-                                        <textarea  disabled  name="txtDerma"  class='form-control' style="overflow: hidden "><%= ViewData["RespuestaDerma"] %></textarea>
+                                        <textarea  disabled  name="txtDerma" id="txtDerma" class='form-control' style="overflow: hidden "><%= ViewData["RespuestaDerma"] %></textarea>
                                     </div>
                                     <div class="invalid-feedback">Seleccione una opción</div>
                                     <br />
@@ -1120,7 +1148,7 @@
                                     <label for="txtPelo"></label>
                                     <label style="color: black">Respuesta ¿Ha tenido pelones en la cabeza o barba? </label>
                                     <div id="selDiv">
-                                        <textarea  disabled name="txtPelo"  class='form-control' style="overflow: hidden"><%= ViewData["RespuestaPelo"] %></textarea>
+                                        <textarea  disabled name="txtPelo" id="txtPelo" class='form-control' style="overflow: hidden"><%= ViewData["RespuestaPelo"] %></textarea>
                                     </div>
                                     <div class="invalid-feedback">Seleccione una opción</div>
                                     <br />
@@ -1146,7 +1174,212 @@
                                     <br />
                                 </div>
                             </div>
-                                </div>  
+                            </div>
+
+                            <%-- Seccion 2 --%>
+                            <div id="seccion2">
+                                <br />
+                                <div class="row">
+                                <div class="col">
+                                    <label for="txtNombre"></label>
+                                    <label style="color: /*#C6D41D*/ black">Nombre </label>
+                                    <div id="selDiv">
+                                        <input  id="txtNombre2" name="txtNombre2" type='text' class='form-control' value='<%= ViewData["NombreCompleto"]  %>'>
+                                    </div>
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                                <div class="col">
+                                    <label for="txtRut"></label>
+                                        
+                                    <label style="color: black">Rut </label>
+                                    <div id="selDiv">
+                                        <input  id="txtRut2" name="txtRut2" type='text' class='form-control' value='<%= ViewData["Rut"] %>'>
+                                    </div>
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                                <div class="col">
+                                    <label for="txtFechaNacimiento"></label>
+                                        
+                                    <label style="color: black">Fecha de Nacimiento </label>
+                                    <div id="selDiv">
+                                        <input  id="txtFechaNacimiento2" name="txtFechaNacimiento2" type='text' class='form-control' value='<%= ViewData["FechaNacimiento"] %>'>
+                                        <input hidden name="Nacimiento" value="<%= ViewData["FechaNacimiento"] %>"/>
+                                    </div>
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+
+                            </div>
+                            <div class="row">
+<%--                                <div class="col-4">
+                                    <label for="txtTelefono"></label>
+                                    <label style="color: black">Teléfono </label>
+                                    <div id="selDiv">
+                                        <input disabled id="txtTelefono" name="txtTelefono" type='text' class='form-control' value='<%= ViewData["Telefono"] %>'>
+                                    </div>
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>--%>
+                                <div class="col-4">
+                                    <label for="txtCelular"></label>        
+                                    <label style="color: black">Celular </label>
+                                    <div id="selDiv">
+                                        <input id="txtCelular2"  name="txtCelular2" type='text' class='form-control' value='<%= ViewData["Celular"] %>'>
+                                    </div>
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                                    <div class="col-4">
+                                    <label for="txtCorreo"></label>
+                                    <label style="color: black">Correo </label>
+                                    <div id="selDiv">
+                                        <input  id="txtCorreo2" name="txtCorreo2" type='text' class='form-control' value='<%= ViewData["Correo"] %>'>
+                                    </div>
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="txtZona"></label>
+                                    <label style="color:black">Respuesta ¿Qué zonas desea reparar? </label>
+                                    <div id="selDiv">
+                                        <textarea  id="txtZona2"  name="txtZona2"  class='form-control' style="overflow: hidden"><%= ViewData["RespuestaZona"] %></textarea>
+                                    </div>
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="txtDerma"></label>
+                                    <label style="color: black">Respuesta ¿Se ha estado tratando con algún dermatologo por alguna enfermedad capilar? ¿Cuál? </label>
+                                    <div id="selDiv">
+                                        <textarea  id="txtDerma2"  name="txtDerma2"  class='form-control' style="overflow: hidden "><%= ViewData["RespuestaDerma"] %></textarea>
+                                    </div>
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="txtPelo"></label>
+                                    <label style="color: black">Respuesta ¿Ha tenido pelones en la cabeza o barba? </label>
+                                    <div id="selDiv">
+                                        <textarea  id="txtPelo2" name="txtPelo2"  class='form-control' style="overflow: hidden"><%= ViewData["RespuestaPelo"] %></textarea>
+                                    </div>
+                                    <div class="invalid-feedback">Seleccione una opción</div>
+                                    <br />
+                                </div>
+                            </div>      
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for="txtFechaCirugia"></label>
+                                    <label style="color: black">Fecha Cirugía Paciente</label>
+                                    <div id="selDiv">
+                                        <input  id="txtFechaCirugia2" name="txtFechaCirugia2" type='text' class='form-control' value='<%= ViewData["FechaCirugia"] %>'>
+                                    </div>
+                          
+                                    <br />
+                                </div>
+                                <div class="col-4">
+                                    <label for="txtFechaLlamada"></label>        
+                                    <label style="color: black">Fecha Llamada Paciente</label>
+                                    <div id="selDiv">
+                                        <input  id="txtFechaLlamada2" name="txtFechaLlamada2" type='text' class='form-control' value='<%= ViewData["FechaLlamada"] %>'>
+                                    </div>
+          
+                                    <br />
+                                </div>
+                            </div>
+                            <div id="alertaEditado" class="alert alert-success alert-dismissible fade show" role="alert">
+                              <strong>Editado con éxito</strong>.
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+
+                             <div id="alertaError" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Hubo un error al editar.</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <input hidden id="IdCliente" name="IdCliente" value="<%= ViewData["idCliente"] %>"/>
+                            <div class=" text-center">
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn btn-primary" id="btnVolver" type="button" style="background-color: #55a247; border-color: #55a247;">Volver</button>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary" id="btnGuardar2" type="button" style="background-color: #C6D41D; border-color: #C6D41D;">Guardar</button>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $("#alertaEditado").hide()
+                                                $("#alertaError").hide()
+                                                $("#btnGuardar2").click(function () {
+                                                    console.log("Se hizo click!")
+                                                    var Nombre = $("#txtNombre2").val();
+                                                    var Rut = $("#txtRut2").val();
+                                                    var FechaNacimiento = $("#txtFechaNacimiento2").val();
+                                                    var Celular = $("#txtCelular2").val();
+                                                    var Correo = $("#txtCorreo2").val();
+                                                    var Zona = $("#txtZona2").val();
+                                                    var Derma = $("#txtDerma2").val();
+                                                    var Pelo = $("#txtPelo2").val();
+                                                    var FechaCirugia = $("#txtFechaCirugia2").val();
+                                                    var FechaLlamada = $("#txtFechaLlamada2").val();
+                                                    var idSolicitud = $("#idSolicitud").val();
+                                                    var IdCliente = $("#IdCliente").val();
+                                                    console.log("Pelo nuevo:" + Pelo)
+                                                    $.ajax({
+                                                        url: '<%: Url.Content("~/Solicitudes/GestionSolicitudEditar/") %>',
+                                                        data: { Nombre: Nombre, Rut: Rut, FechaNacimiento: FechaNacimiento, Celular: Celular, Correo: Correo, Zona: Zona, Derma: Derma, Pelo: Pelo, FechaCirugia: FechaCirugia, FechaLlamada: FechaLlamada, idSolicitud: idSolicitud, IdCliente: IdCliente },
+                                                            cache: false,
+                                                            type: "GET",
+                                                            success: function (data) {
+                                                            console.log("data: " + data);
+                                                                if (data != "") {
+                                                                    console.log("data: " + data);
+                                                                    if (data == "Correcto") {
+                                                                        console.log("Entró al correcto");
+                                                                        $("#alertaEditado").show("50")
+                                                                        $("#alertaEditado").alert()
+                                                                        //Cambiar datos en la seccion 1:
+                                                                        $("#txtNombre").val(Nombre);
+                                                                        $("#txtRut").val(Rut);
+                                                                        $("#txtFechaNacimiento").val(FechaNacimiento);
+                                                                        $("#txtCelular").val(Celular);
+                                                                        $("#txtCorreo").val(Correo);
+                                                                        $("#txtZona").val(Zona);
+                                                                        $("#txtDerma").val(Derma);
+                                                                        $("#txtPelo").val(Pelo);
+                                                                        $("#txtFechaCirugia").val(FechaCirugia);
+                                                                        $("#txtFechaLlamada").val(FechaLlamada);
+
+
+                                                                    } else {
+                                                                        console.log("Entró al error");
+                                                                        $("#alertaError").show("50")
+                                                                        $("#alertaError").alert()
+                                                                    }
+                                                                }
+
+                                                            }
+                                                        });
+
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            </div>
+                            </div>
+                                
                             <%-- Fotografías --%>
                             <div class="row">
                                 <div class="col-12">
@@ -1475,12 +1708,12 @@
                                     <div class="row">
                                     <div class="col">
 
-<%--                                            <label for="txtTecnica"></label>
+                                         <label for="txtTecnica"></label>
                                                 Técnica
-                                                <label style="color: white"> *</label>
-                                                <select name="txtTecnica" id="txtTecnica" class="selectpicker col-md-12" data-live-search="true" multiple data-actions-box="true" required style="background-color: white;border-color: darkgrey;">
-                                                    <%= ViewData["opcionesTecnicas"] %>
-                                                </select>--%>
+                                            <label style="color: white"> *</label>
+                                            <select name="txtTecnica" id="txtTecnica" class="selectpicker col-md-12" data-live-search="true" multiple data-actions-box="true" required style="background-color: white;border-color: darkgrey;">
+                                                <%= ViewData["opcionesTecnicas"] %>
+                                            </select>
                                        <style>
                                            .bootstrap-select .dropdown-toggle .filter-option-inner-inner {
                                                 overflow: hidden !important;
@@ -2003,6 +2236,7 @@
                     </div>
                     </div>    
                 </div> 
+                </div>
             </div> 
         </section>
     </form>

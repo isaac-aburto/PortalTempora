@@ -27,12 +27,24 @@ namespace WebSolicitudes
         {
             return "Respuesta correcta";
         }
+
         [WebMethod]
-        public String CrearDeal(String json) {
-            JObject json2 = JObject.Parse(json);
-            Webhook flight = Newtonsoft.Json.JsonConvert.DeserializeObject<Webhook>(json);
-            return "Respuesta Correcta";
+        public String DeleteDeal()
+        {
+            return "Respuesta correcta";
         }
+        [WebMethod]
+        public String CrearUser()
+        {
+            return "Respuesta correcta";
+        }
+
+        //[WebMethod]
+        //public String CrearDeal(String json) {
+        //    JObject json2 = JObject.Parse(json);
+        //    Webhook flight = Newtonsoft.Json.JsonConvert.DeserializeObject<Webhook>(json);
+        //    return "Respuesta Correcta";
+        //}
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         [WebMethod]
         public String CrearDeal2(Models.Webhook id)

@@ -490,6 +490,7 @@
     <Content Include="Styles\MensajeSolicitudProcedimientoPrevio.html" />
     <Content Include="Styles\MensajeSolicitudEvaluacionPresencial.html" />
     <Content Include="Styles\MensajeSolicitudIncompleta.html" />
+    <Content Include="Views\Admin\EditarArchivo.aspx" />
     <Content Include="Views\Admin\Index.aspx" />
     <Content Include="Views\Clientes\Index.aspx" />
     <Content Include="Views\Clientes\Perfil.aspx" />

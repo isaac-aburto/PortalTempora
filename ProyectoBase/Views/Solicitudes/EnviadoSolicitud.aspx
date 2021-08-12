@@ -21,7 +21,7 @@
                                 <h2>Fecha Agendada</h2>
                                 <p>¡Pronto nos pondremos en contacto!</p>
                                 </div>
-                                <p>Hemos resivido con éxito el formulario. En los próximos días un experto de Tempora evaluará su solicitud.</p>                          
+                                <p>Hemos recibido con éxito el formulario. En los próximos días un experto de Tempora evaluará su solicitud.</p>                          
                                 <br />
                                 </div>
                             </div>

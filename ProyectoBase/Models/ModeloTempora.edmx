@@ -21,6 +21,7 @@
           <Property Name="nombreArchivo" Type="varchar" MaxLength="100" />
           <Property Name="FK_Seccion" Type="int" />
           <Property Name="pathArchivo" Type="varchar" MaxLength="1000" />
+          <Property Name="src" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="ArchivoxEstado">
           <Key>
@@ -1292,6 +1293,7 @@
           <Property Name="FK_Seccion" Type="Int32" />
           <Property Name="pathArchivo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="SeccionArchivo" Relationship="PortalModeloTemporal.FK_ArchivoVideo_SeccionArchivo" FromRole="ArchivoVideo" ToRole="SeccionArchivo" />
+          <Property Name="src" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="SeccionArchivo">
           <Key>
@@ -1588,6 +1590,7 @@
           <EntitySetMapping Name="ArchivoVideo">
             <EntityTypeMapping TypeName="PortalModeloTemporal.ArchivoVideo">
               <MappingFragment StoreEntitySet="ArchivoVideo">
+                <ScalarProperty Name="src" ColumnName="src" />
                 <ScalarProperty Name="pathArchivo" ColumnName="pathArchivo" />
                 <ScalarProperty Name="FK_Seccion" ColumnName="FK_Seccion" />
                 <ScalarProperty Name="nombreArchivo" ColumnName="nombreArchivo" />

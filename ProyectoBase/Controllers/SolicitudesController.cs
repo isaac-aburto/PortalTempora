@@ -203,6 +203,7 @@ namespace WebSolicitudes.Controllers
                         ViewData["ObservacionCuidadoPreoperatorio"] = solicitud.ObserCuidado;
                         ViewData["Guardado"] = solicitud.Guardado;
                         ViewData["Enviado"] = solicitud.Enviado;
+                        ViewData["idCliente"] = solicitud.FK_idCliente;
                         Util.escribirLog("Solicitudes", "GestionSolicitud (GET)","Seteo todos los ViewData");
                         //Datos de la Gestión
                         List<Tecnica> listaTecnicas = conexionDB.Tecnica.ToList();
@@ -1052,10 +1053,41 @@ namespace WebSolicitudes.Controllers
 
             return View();
         }
-
-        
-        public ActionResult Solicitud2(string id)
+        public string GestionSolicitudEditar(string Nombre, string Rut, string FechaNacimiento, string Celular, string Correo, string Zona, string Derma, string Pelo, string FechaCirugia, string FechaLlamada, string idSolicitud, string IdCliente)
         {
+            int idsolicitud = int.Parse(idSolicitud);
+            int idcliente = int.Parse(IdCliente);
+            try
+            {
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Solicitud solicitud = conexionDB.Solicitud.Find(idsolicitud);
+                    solicitud.RespDerm = Derma;
+                    solicitud.RespPelo = Pelo;
+                    solicitud.FechaCirugiaPaciente = Convert.ToDateTime(FechaCirugia);
+                    solicitud.FechaLlamada = Convert.ToDateTime(FechaLlamada);
+                    conexionDB.SaveChanges();
+
+                    Cliente cliente = conexionDB.Cliente.Find(idcliente);
+                    cliente.nombre = Nombre;
+                    cliente.rut = Rut;
+                    cliente.fecha_nacimiento = Convert.ToDateTime(FechaNacimiento);
+                    cliente.correo = Correo;
+                    conexionDB.SaveChanges();
+                    return "Correcto";
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("Solicitud", "GestionSolicitudEditar (POST)", ex.Message);
+                return "Error de guardado";
+            }
+
+            
+        }
+
+            public ActionResult Solicitud2(string id)
+            {
             try 
             {
                 string[] linkDecod = Util.Base64Decode(id).Split(';');
@@ -1116,9 +1148,18 @@ namespace WebSolicitudes.Controllers
                 int Cliente = int.Parse(collection["idCliente"]);
                 int Solicitud = int.Parse(collection["idSolicitud"]);   
                 string fechaCirugia = collection["txtFechaCirugia"];
-                DateTime oDate = Convert.ToDateTime(fechaCirugia);
-                String fechaLlamada = collection["txtFechaLlamada"];
-                DateTime oDate2 = Convert.ToDateTime(fechaLlamada);
+                DateTime.ParseExact(fechaCirugia, "dd/MM/yyyy", null);
+                Util.escribirLog("La fechaCirugia la escribe:",  fechaCirugia, "");
+                //string fechaCirugia2 = Convert.ToDateTime(fechaCirugia).ToString("dd/MM/yyyy");
+                //Util.escribirLog("La fechaCirugia2 la escribe:", fechaCirugia2, "");
+                string fechaLlamada = collection["txtFechaLlamada"];
+                Util.escribirLog("La fechaLlamada la escribe:", fechaLlamada, "");
+
+                //string fechaLlamada2 = Convert.ToDateTime(fechaLlamada).ToString("dd/MM/yyyy");
+                //Util.escribirLog("La fechaLlamada2 la escribe:", fechaLlamada2, "");
+
+                DateTime oDate = DateTime.ParseExact(fechaCirugia, "dd/MM/yyyy", null);
+                DateTime oDate2 = DateTime.ParseExact(fechaLlamada, "dd/MM/yyyy", null);
 
                 using (ModeloTempora conexionDB = new ModeloTempora())
                 {
@@ -1136,7 +1177,7 @@ namespace WebSolicitudes.Controllers
             }
             catch (Exception ex)
             {
-                Util.escribirLog("Solicitud", "Solicitudes (GET)", ex.Message);
+                Util.escribirLog("Solicitud2Agendar", "Solicitudes (GET)", ex.Message);
                 return RedirectToAction("Index", "Home");
             }
             return RedirectToAction("EnviadoSolicitud", "Solicitudes");

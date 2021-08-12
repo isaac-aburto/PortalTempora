@@ -53,6 +53,9 @@ namespace WebSolicitudes.Controllers
                             filaCliente += clientes.correo;
                             filaCliente += "  </td>";
                             filaCliente += "  <td>";
+                            filaCliente += clientes.Solicitud.Select(s => s.idSolicitud).FirstOrDefault().ToString();
+                            filaCliente += "  </td>";
+                            filaCliente += "  <td>";
                             //clientes.Solicitud.Select(s => s.EstadoSolicitud.nombreEstado);
                             string idestado = clientes.Solicitud.Select(s => s.Fk_idEstado).FirstOrDefault().ToString();
                             if (idestado != "")
@@ -66,11 +69,11 @@ namespace WebSolicitudes.Controllers
                             }
                             filaCliente += "  </td>";
                             filaCliente += "  <td>"; 
-                            filaCliente += clientes.Solicitud.Select(s=> s.idSolicitud).FirstOrDefault().ToString();
+                            filaCliente += clientes.Solicitud.Select(s=> s.FechaSolicitud).FirstOrDefault().ToString();
                             filaCliente += "  </td>";
                             filaCliente += "  <td>";
-                            filaCliente += "<button title='Delete' class='btn btn-icon btn-2 btn-danger btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-trash fa-1x'></i></span></button>";
-                            filaCliente += "<button title='Delete' class='btn btn-icon btn-2 btn-primary btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-edit fa-1x'></i></span></button>";
+                            filaCliente += "<button title='Borrar' class='btn btn-icon btn-2 btn-danger btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-trash fa-1x'></i></span></button>";
+                            filaCliente += "<button title='Editar' class='btn btn-icon btn-2 btn-primary btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-edit fa-1x'></i></span></button>";
                             filaCliente += "  </td>";
                             filaCliente += "</tr>";
                         }

@@ -18,6 +18,7 @@ namespace WebSolicitudes.Models
         public string nombreArchivo { get; set; }
         public Nullable<int> FK_Seccion { get; set; }
         public string pathArchivo { get; set; }
+        public string src { get; set; }
     
         public virtual SeccionArchivo SeccionArchivo { get; set; }
     }

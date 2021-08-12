@@ -862,7 +862,7 @@
                         });
                     </script>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="date" id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" required/>
+                        <input  id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" required/>
 
                         <script>
                             $(function () {
