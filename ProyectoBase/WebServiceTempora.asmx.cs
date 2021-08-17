@@ -28,16 +28,18 @@ namespace WebSolicitudes
             return "Respuesta correcta";
         }
 
-        [WebMethod]
-        public String DeleteDeal()
-        {
-            return "Respuesta correcta";
-        }
-        [WebMethod]
-        public String CrearUser()
-        {
-            return "Respuesta correcta";
-        }
+        //[WebMethod]
+        //public String DeleteDeal()
+        //{
+        //    return "Respuesta correcta";
+        //}
+        //[WebMethod]
+        //public String CrearUser()
+        //{
+        //    return "Respuesta correcta";
+        //}
+
+
 
         //[WebMethod]
         //public String CrearDeal(String json) {
@@ -51,6 +53,36 @@ namespace WebSolicitudes
         {
             return "Respuesta Correcta";
         }
+
+
+        [WebMethod]
+        public String UpdateDeal(int v, Matches_Filters matches_filters, Meta meta, Current current, Previous previous, string @event, int retry)
+        {
+            try
+            {
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    Solicitud solicitud = conexionDB.Solicitud.Find(meta.id);
+                    if (solicitud != null) {
+                        solicitud.FechaSolicitudIncompleta = DateTime.Now;
+                        solicitud.UltimoCambio = DateTime.Now;
+                        solicitud.FechaSolicitud = DateTime.Now;
+                        solicitud.CorreoSolicitudIncompleta = true;
+                        solicitud.idPipedrive = current.id.ToString();
+                        solicitud.ValorTotal = current.weighted_value;
+                        conexionDB.Solicitud.Add(solicitud);
+                        conexionDB.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("UpdateDeal", "WebServiceTempora", ex.Message);
+                return "Error: " + ex.Message;
+            }
+            return "Respuesta correcta - Update Deal";
+        }
+
         [WebMethod]
         public String CrearDeal3(int v, Matches_Filters matches_filters, Meta meta, int retry, Current current, Previous previous, string @event)
         {

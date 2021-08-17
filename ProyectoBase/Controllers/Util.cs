@@ -90,6 +90,8 @@ namespace WebSolicitudes.Controllers
                 mail.Subject = titulo;
                 mail.Body = texto;
                 mail.IsBodyHtml = true;
+                MailAddress copy = new MailAddress("jorge.cortez@backspace.cl");
+                mail.CC.Add(copy);
                 //mail.Attachments.Add(new Attachment("C:\\file.zip"));
 
                 using (SmtpClient client = new SmtpClient())
@@ -98,6 +100,7 @@ namespace WebSolicitudes.Controllers
                     client.UseDefaultCredentials = false;
                     client.Credentials = new NetworkCredential("isaac.aburto@backspace.cl", "Isaac74644453120509");
                     client.Host = "smtp.gmail.com";
+                    
                     client.Port = 587;
                     client.DeliveryMethod = SmtpDeliveryMethod.Network;
                     client.Send(mail);

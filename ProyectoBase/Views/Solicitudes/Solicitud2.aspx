@@ -1797,25 +1797,48 @@ body {
                 <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" style="margin-top: -5pc;">
                     <h3 style="color: greenyellow;margin-top: -17pc;margin-left: 1pc;width: 25pc;">Agendemos tu llamada y cirugía</h3>
                     <p  style="color: white;width: 18pc; font-size: 19px;
-    margin-top: -25px;">
+    margin-top: -69px;">
                         Por favor seleccione el día y hora que más le acomode para que pueda asistir a nuestra clínica
                     </p>
                     <div class="col-lg-6 col-md-6 form-group fecha" style="margin-left: -1pc;margin-left: -20pc;width: 63pc;     margin-top: 21pc;">
                         
-                        <input id="txtFechaCirugia" placeholder="Ingrese fecha" name="txtFechaCirugia" required/>
-                        <script>
-                            $('#txtFechaCirugia').datepicker({
-                                uiLibrary: 'bootstrap4',
-                                format: 'dd/mm/yyyy'
-                            });
-                        </script>
-                        <input id="txtFechaLlamada" placeholder="Ingrese fecha" name="txtFechaLlamada" required/>
+                        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+                        <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+                        <script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.es-es.js" type="text/javascript"></script>
+                    <input name="txtFechaCirugia" id="txtFechaCirugia" placeholder="Ingrese fecha" required/>
+                                            <p  style="color: white;width: 18pc; font-size: 19px;
+    margin-top: 12px;">
+                        O bien agende una llamada telefónica
+                    </p>
+                    <input id="txtFechaLlamada" placeholder="Ingrese fecha" name="txtFechaLlamada" required/>
+                    <script>
+                        $('#txtFechaCirugia').datetimepicker({
+                            uiLibrary: 'bootstrap4',
+                            footer: true,
+                            modal: true,
+                            locale: 'es-es',
+                            format: 'dd/mm/yyyy HH:MM',
+                            showOtherMonths: true,
+                            calendarWeeks: true,
+                        });
+                        $('#txtFechaLlamada').datetimepicker({
+                            uiLibrary: 'bootstrap4',
+                            footer: true,
+                            modal: true,
+                            locale: 'es-es',
+                            format: 'dd/mm/yyyy HH:MM',
+                            showOtherMonths: true,
+                            calendarWeeks: true,
+                        });
+                    </script>
+<%--                        <input id="txtFechaLlamada" placeholder="Ingrese fecha" name="txtFechaLlamada" required/>
                         <script>
                             $('#txtFechaLlamada').datepicker({
                                 uiLibrary: 'bootstrap4',
                                 format: 'dd/mm/yyyy'
                             });
-                        </script>
+                        </script>--%>
                         <br />
                         <br />
                     <div class="btnAgendar">

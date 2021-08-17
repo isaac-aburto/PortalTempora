@@ -88,15 +88,42 @@
                                                 <button class="btn btn-md btn-primary btn-block btn-signin" id="btnSubmit" type="submit"><span id="spiner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Iniciar sesión</button>
 
 <%--                                                <button class="btn btn-md btn-primary btn-block btn-signin" id="btnSubmit2" type="button">Iniciar sesión2</button>--%>
-                                                					<script>
-                                                                        $(document).ready(function () {
-                                                                            $("#spiner").hide();
-                                                                            $("#btnSubmit").click(function () {
-                                                                                $("#spiner").show(100);
-                                                                            });
-                                                                        });
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        $("#spiner").hide();
+                                                        $("#btnSubmit").click(function () {
+                                                            $("#spiner").show(100);
+                                                        });
+                                                    });
                                                  
-                                                                    </script>
+                                                </script>
+<%--                                                <script>
+                                                    $(document).ready(function () {
+                                                        $("#btnSubmit").click(function () {
+                                                            console.log("aaaaa")
+                                                            var inputEmail = $("#inputEmail").val();
+                                                            var inputPassword = $("#inputPassword").val();
+                                                            $.ajax({
+                                                                url: '<%: Url.Content("~/Home/Login/") %>',
+                                                                data: { inputEmail: inputEmail, inputPassword: inputPassword },
+                                                                        cache: false,
+                                                                        type: "POST",
+                                                                        success: function (data) {
+                                                                            // data is your result from controller
+                                                                            console.log(data);
+                                                                            if (data == "ERROR") {
+                                                                                $("#spiner").hide(100);
+                                                                            }
+
+                                                                        },
+                                                                        async: true,
+                                                                        error: function (err) {
+                                                                            console.log(err);
+                                                                        }
+                                                                    });
+                                                                });
+                                                            });
+                                                </script>--%>
                                             </div>
                                             <a class="small" href="<%: Url.Content("~/Home/OlvidePassword") %>">No recuerdo mi contraseña</a>
                                         </form>

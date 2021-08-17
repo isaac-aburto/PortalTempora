@@ -3,80 +3,92 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
         <%-- Script cámara --%>
-    <script type="text/javascript">
-        $(function () {
-            Webcam.set({
-                width: 320,
-                height: 240,
-                image_format: 'jpeg',
-                jpeg_quality: 90,
-                force_flash: false
-            });
-            Webcam.attach('#idwebcam');
-            //Imagen capturada
-            $("#btnCapturar1").click(function () {
-                Webcam.snap(function (data_uri) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured').innerHTML =
-                        '<img id="fotografia1" name="fotografia1" width="320" height="185" src="' + data_uri + '"/>';
-                    console.log(data_uri)
-                    document.getElementById('fotoArriba').value = data_uri;
+<script type="text/javascript">
+    $(document).ready(function () {
+        var cont = 0;
+        console.log("cont antes de la funcion: " + cont)
+        //document.getElementById("btnSiguiente").onclick = function () { myFunction() };
+
+                $(function () {
+                    console.log("Entro al tema de la webcam")
+                    console.log("Webcam: " + Webcam.set);
+
+                    Webcam.set({
+                        width: 320,
+                        height: 240,
+                        image_format: 'jpeg',
+                        jpeg_quality: 90,
+                        force_flash: false
+                    });
+                    Webcam.attach('#idwebcam');
+                    //Imagen capturada
+                    $("#btnCapturar1").click(function () {
+                        Webcam.snap(function (data_uri) {
+                            // display results in page
+                            var x = "300";
+                            var y = "100";
+                            document.getElementById('idcaptured').innerHTML =
+                                '<img id="fotografia1" name="fotografia1" width="320" height="238" src="' + data_uri + '"/>';
+                            console.log(data_uri)
+                            document.getElementById('fotoArriba').value = data_uri;
+                        });
+
+                    });
+                    Webcam.attach('#idwebcam2');
+                    $("#btnCapturar2").click(function () {
+                        Webcam.snap(function (data_uri2) {
+                            // display results in page
+                            var x = "300";
+                            var y = "100";
+                            document.getElementById('idcaptured2').innerHTML =
+                                '<img id="fotografia2" name="fotografia2" width="320" height="238" src="' + data_uri2 + '"/>';
+                            console.log(data_uri2)
+                            document.getElementById('fotoIzquierdo').value = data_uri2;
+                        });
+                    });
+                    Webcam.attach('#idwebcam3');
+                    $("#btnCapturar3").click(function () {
+                        Webcam.snap(function (data_uri3) {
+                            // display results in page
+                            var x = "300";
+                            var y = "100";
+                            document.getElementById('idcaptured3').innerHTML =
+                                '<img id="fotografia3" name="fotografia3" width="320" height="238" src="' + data_uri3 + '"/>';
+                            console.log(data_uri3)
+                            document.getElementById('fotoDerecho').value = data_uri3;
+                        });
+                    });
+                    Webcam.attach('#idwebcam4');
+                    $("#btnCapturar4").click(function () {
+                        Webcam.snap(function (data_uri4) {
+                            // display results in page
+                            var x = "300";
+                            var y = "100";
+                            document.getElementById('idcaptured4').innerHTML =
+                                '<img id="fotografia4" name="fotografia4" width="320" height="238" src="' + data_uri4 + '"/>';
+                            console.log(data_uri4)
+                            document.getElementById('fotoAtras').value = data_uri4;
+                        });
+                    });
+                    Webcam.attach('#idwebcam5');
+                    $("#btnCapturar5").click(function () {
+                        Webcam.snap(function (data_uri5) {
+                            // display results in page
+                            var x = "300";
+                            var y = "100";
+                            document.getElementById('idcaptured5').innerHTML =
+                                '<img id="fotografia5" name="fotografia5" width="320" height="238" src="' + data_uri5 + '"/>';
+                            console.log(data_uri5)
+                            document.getElementById('fotoFrente').value = data_uri5;
+                        });
+                    });
+                });
+                Webcam.on('error', function (err) {
+                    console.log(err)
                 });
 
-            });
-            Webcam.attach('#idwebcam2');
-            $("#btnCapturar2").click(function () {
-                Webcam.snap(function (data_uri2) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured2').innerHTML =
-                        '<img id="fotografia2" name="fotografia2" width="320" height="185" src="' + data_uri2 + '"/>';
-                    console.log(data_uri2)
-                    document.getElementById('fotoIzquierdo').value = data_uri2;
-                });
-            });
-            Webcam.attach('#idwebcam3');
-            $("#btnCapturar3").click(function () {
-                Webcam.snap(function (data_uri3) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured3').innerHTML =
-                        '<img id="fotografia3" name="fotografia3" width="320" height="185" src="' + data_uri3 + '"/>';
-                    console.log(data_uri3)
-                    document.getElementById('fotoDerecho').value = data_uri3;
-                });
-            });
-            Webcam.attach('#idwebcam4');
-            $("#btnCapturar4").click(function () {
-                Webcam.snap(function (data_uri4) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured4').innerHTML =
-                        '<img id="fotografia4" name="fotografia4" width="320" height="185" src="' + data_uri4 + '"/>';
-                    console.log(data_uri4)
-                    document.getElementById('fotoAtras').value = data_uri4;
-                });
-            });
-            Webcam.attach('#idwebcam5');
-            $("#btnCapturar5").click(function () {
-                Webcam.snap(function (data_uri5) {
-                    // display results in page
-                    var x = "300";
-                    var y = "100";
-                    document.getElementById('idcaptured5').innerHTML =
-                        '<img id="fotografia5" name="fotografia5" width="320" height="185" src="' + data_uri5 + '"/>';
-                    console.log(data_uri5)
-                    document.getElementById('fotoFrente').value = data_uri5;
-                });
-            });
-
-        });
-    </script>
+    });
+</script>
     <script>
         $(document).ready(function () {
             $("#btnModalGuardar1").click(function () {
@@ -598,6 +610,97 @@
                 <button type="button" class="btn btn-primary">Guardar Cambios</button>
                 </div>
             </div>
+                            <%-- Validación de fotos --%>
+                <script>
+                    $(document).ready(function () {
+                        document.querySelector("#formSolicitud").addEventListener("submit", e => {
+                            const sizes = [];
+                            document.querySelectorAll("#formSolicitud input").forEach(el => {
+                                if (el.type !== "file") return;
+                                if (!el.files[0]) return sizes.push({ size: "0", elem: el });
+                                let _size = el.files[0].size;
+                                let fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+                                    i = 0; while (_size > 900) { _size /= 1024; i++; }
+                                let exactSize = (Math.round(_size * 100) / 100) + ' ' + fSExt[i];
+                                sizes.push({ size: exactSize, elem: el });
+                            });
+                            sizes.forEach(el => {
+                                if (el.size === "0") {
+                                    if (el.elem.getAttribute("data-required")) {
+                                        e.preventDefault();
+                                        el.elem.classList.add("needsValidation");
+                                        $("#inputValidacion").prop('hidden', false);
+                                        $("#inputValidacion").addClass("needsValidation2");
+
+                                    }
+                                } else {
+                                    $("#inputValidacion").prop('hidden', true);
+                                }
+
+
+                                //if ((el.size.replace(" MB", "")) - 0 >= 2) {
+                                //    e.preventDefault();
+                                //    el.elem.classList.add("fileSizeExceded");
+                                //}
+                            });
+                        });
+                    });
+                </script>
+                <style>
+                    input {
+                      padding:8px;
+                      border:solid 1px #c6c6c6c1;
+                      border-radius:8px;
+                      display:block;
+                      transition:0.3s;
+                      -webkit-transition:0.3s;
+                      -moz-transition:0.3s;
+                      -o-transition:0.3s;
+                    }
+
+                    .needsValidation,.fileSizeExceded {
+                      border:solid 1px red;
+                    }
+
+                    .needsValidation::after {
+                      content:"Este campo es obligatorio";
+                      color:red;
+                      display:inline-block;
+                      position:absolute;
+                      margin-left:25px;
+                    }
+                    .needsValidation2,.fileSizeExceded {
+                      border:solid 1px red;
+                    }
+
+                    .needsValidation2::after {
+                      content:"Por favor suba todas las fotogragías.";
+                        color: red;
+                        /* display: inline-block; */
+                        position: absolute;
+                        margin-left: -130px;
+                    }
+                    .fileSizeExceded::after {
+                      content:"Solo se admiten archivos menores a 20MB";
+                      color:red;
+                      display:inline-block;
+                      position:absolute;
+                      margin-left:25px;
+                    }
+
+                    @media screen and (max-width:980px) {
+                      .needsValidation::after,.fileSizeExceded::after {
+                        margin:0;
+                        position:relative;
+                        display:block;
+                      }
+                        .needsValidation2::after,.fileSizeExceded::after {
+                        margin:0;
+                        position:relative;
+                        display:block;
+                      }
+                    }
+                </style>
         </div>
     </div>
         </form>

@@ -1714,6 +1714,11 @@
                                             <select name="txtTecnica" id="txtTecnica" class="selectpicker col-md-12" data-live-search="true" multiple data-actions-box="true" required style="background-color: white;border-color: darkgrey;">
                                                 <%= ViewData["opcionesTecnicas"] %>
                                             </select>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $('#txtTecnica').val(1);
+                                            });
+                                        </script>
                                        <style>
                                            .bootstrap-select .dropdown-toggle .filter-option-inner-inner {
                                                 overflow: hidden !important;
@@ -1756,7 +1761,7 @@
                                         <label for="txtZona"></label>
                                         <label style="color: black">Zona </label>
                                         <div id="selDiv" style="margin-left: -2pc;">
-                                            <select name="txtZona" id="txtZona" class="form-control" >
+                                            <select name="txtZona3" id="txtZona3" class="form-control" >
                                                 <%= ViewData["opcionesZonas"] %>
                                             </select>                                      </div>
                                         <div class="invalid-feedback">Seleccione una opción</div>
@@ -1877,7 +1882,8 @@
                             </div>
                             <div id="divEstado14">
                                 <div class="col-lg-6 col-md-6 form-group">
-                                    <input id="txtFechaCirugiaMandar" placeholder="Fecha de cirugia" name="txtFechaCirugiaMandar" />
+                                    <label for="txtFechaCirugiaMandar">Fecha cirugía</label>
+                                    <input id="txtFechaCirugiaMandar" placeholder="dd/mm/yyyy" name="txtFechaCirugiaMandar" value="<%= ViewData["FechaCirugia"] %>"/>
                                     <script>
                                         $('#txtFechaCirugiaMandar').datepicker({
                                             uiLibrary: 'bootstrap4',

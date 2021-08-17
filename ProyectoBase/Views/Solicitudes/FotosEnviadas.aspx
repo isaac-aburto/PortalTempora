@@ -22,7 +22,7 @@
                                 <h2>Evaluación Médica - Fotografías nuevas</h2>
                                 <p>¡Pronto nos pondremos en contacto!</p>
                                 </div>
-                                <p>Hemos resivido con éxito el formulario. En los próximos días un experto de Tempora evaluará y enviará un diagnostico adecuado y personalizado sólo para usted. </p>
+                                <p>Hemos resibido con éxito el formulario. En los próximos días un experto de Tempora evaluará y enviará un diagnostico adecuado y personalizado sólo para usted. </p>
                                 <br />
                                 <br />
                                 <br />

@@ -177,7 +177,9 @@ namespace WebSolicitudes.Controllers
                     //cliente.telefono = Telefono;
                     cliente.celular = Celular;
                     cliente.correo = Correo;
-                    cliente.fecha_nacimiento = DateTime.Parse(FechaDeNacimiento);
+                    DateTime oDate = Convert.ToDateTime(FechaDeNacimiento);
+
+                    cliente.fecha_nacimiento = oDate;
                     //conexionDB.Cliente.Add(cliente);
                     string personId = string.Empty;
                     personId = PipeDriveAPI.AddPerson(Nombre, Correo, Celular);
@@ -472,7 +474,7 @@ namespace WebSolicitudes.Controllers
 
 
         [HttpPost]
-        public ActionResult Login(FormCollection collection)
+        public dynamic Login(FormCollection collection, string inputEmail, string inputPassword)
         {
             string usr = collection["inputEmail"];
             string pass = collection["inputPassword"];
@@ -507,19 +509,24 @@ namespace WebSolicitudes.Controllers
 
                         return RedirectToAction("Index", "Solicitudes");
                     }
+                    else {
+                        ViewData["Error"] = "Usuario o contraseña incorrecto";
+                        return View();
+                        //return "ERROR";
+                    }
 
                 }
             }
             catch (Exception ex)
             {
-
+                ViewData["Error"] = "Error interno, por favor contacte a un administrador";
                 Util.escribirLog("Login", "Post", ex.Message);
                 Util.escribirLog("Login", "Post", ex.InnerException.Message);
                 return RedirectToAction("Index", "Home");
 
 
             }
-            return View();
+            //return View();
         }
 
         public ActionResult OlvidePassword()

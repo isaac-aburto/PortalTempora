@@ -5,7 +5,7 @@
     <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <%-- Script cámara --%>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -211,27 +211,78 @@
     <%-- Pasos --%>
     <script>
         $(document).ready(function () {
+            $("#validacionPrimerPaso").prop('hidden', true);
             var cont = 0;
+            var pasa = false;
+            var pasaPorCorreo = true;
+            var pasaPorRut = true;
+            var pasoFotos = true;
             $("#inputGuardarDatos").val("true");
             $('#btnEnviar').hide();
             $("#divPaso2").hide();
             $("#divPaso3").hide();
             $("#divPaso4").hide();
             $("#btnSiguiente").click(function () {
-                $("#divPaso1").hide(500);
-                $("#divPaso2").show(500);
-                console.log($("#txtNombre").val());
-                console.log($("#txtEmail").val());
-                console.log($("#txtRut").val());
+                console.log("NUEVO BOTON SIGUIENTE!")
+                if (cont == 2) {
+                    //const sizes = [];
+                    //document.querySelectorAll("#formSolicitud input").forEach(el => {
+                    //    if (el.type !== "file") return;
+                    //    if (!el.files[0]) return sizes.push({ size: "0", elem: el });
+                    //    let _size = el.files[0].size;
+                    //    let fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+                    //        i = 0; while (_size > 900) { _size /= 1024; i++; }
+                    //    let exactSize = (Math.round(_size * 100) / 100) + ' ' + fSExt[i];
+                    //    sizes.push({ size: exactSize, elem: el });
+                    //});
+                    //sizes.forEach(el => {
+                    //    if (el.size === "0") {
+                    //        if (el.elem.getAttribute("data-required")) {
+
+                    //            el.elem.classList.add("needsValidation");
+                    //            $("#inputValidacion").prop('hidden', false);
+                    //            $("#inputValidacion").addClass("needsValidation2");
+                    //            pasoFotos = false;
+                    //            $("#btnSiguiente").prop("disabled", true);
+                    //        }
+                    //    } else {
+                    //        $("#inputValidacion").prop('hidden', true);
+                    //        pasoFotos = true;
+                    //        $("#btnSiguiente").prop("disabled", false);
+                    //    }
+                    //});
+                }
+            });
+
+            $("#btnSiguiente").click(function () {
+                console.log("PRIMER BOTON SIGUENTE")
+                console.log("PASA FOTOS: "  + pasoFotos)
+                if (pasa == false || pasaPorCorreo == false || pasaPorRut == false /*|| pasoFotos == false*/) {
+                    if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "" || pasaPorCorreo == false || pasaPorRut == false) {
+                        console.log("Hay algo vacío")
+                        //$("#btnSiguiente").prop("disabled", true);
+                        $("#validacionPrimerPaso").prop('hidden', false);
+                        pasa = false;
+                    }
+                    else {
+                        //$("#btnSiguiente").prop("disabled", false);
+                        console.log("Esta todo ok")
+                        $("#validacionPrimerPaso").prop('hidden', true);
+                        pasa = true;
+                    }
+                } else {
+                    $("#divPaso1").hide(500);
+                    $("#divPaso2").show(500);
+                    $("#validacionPrimerPaso").prop('hidden', true);
                 <%-- AJAX Guardar Solicitud no terminada --%>
 
-                if (($("#inputGuardarDatos").val() == "true") && $("#txtNombre").val() != "" && $("#txtEmail").val() != "" /*&& $("#txtRut").val() != ""*/) {
-                    console.log("AJAX Guardar Solicitud no terminada")
-                    var Nombre = $("#txtNombre").val();
-                    var Email = $("#txtEmail").val();
-                    var Telefono = $("#txtNombre").val();
-                    $.ajax({
-                        url: '<%: Url.Content("~/Home/GuardarSolicitudInconclusa/") %>',
+                    if (($("#inputGuardarDatos").val() == "true") && $("#txtNombre").val() != "" && $("#txtEmail").val() != "" /*&& $("#txtRut").val() != ""*/) {
+                        console.log("AJAX Guardar Solicitud no terminada")
+                        var Nombre = $("#txtNombre").val();
+                        var Email = $("#txtEmail").val();
+                        var Telefono = $("#txtNombre").val();
+                        $.ajax({
+                            url: '<%: Url.Content("~/Home/GuardarSolicitudInconclusa/") %>',
                         data: { Nombre: Nombre, Email: Email, Telefono: Telefono },
                         cache: false,
                         type: "POST",
@@ -242,7 +293,7 @@
                                 console.log("error en Ajax")
 
                             } else {
-                                console.log(data)   
+                                console.log(data)
                                 var Data = data.split(',');
                                 $("#idCliente").val(Data[0]);
                                 $("#idSolicitud").val(Data[1]);
@@ -252,41 +303,40 @@
                             console.log(err);
                         }
                     });
-                }
-                cont++;
-                if (cont == 2) {
-                    $("#baraDeCarga").css("width", "99%");
-                    $("#divPaso2").hide(500);
-                    $("#divPaso3").show(500);
-                    
-
-
-
-
-
-
-                    $("#inputGuardarDatos").val("false");
-                } else {
-                    if (cont == 1) {
-                        $("#baraDeCarga").css("width", "66%");
-                        $("#divPaso1").hide(500);
-                        $("#divPaso2").show(500);
-                        $('#btnAtras').removeAttr('disabled');
-                        $("#inputGuardarDatos").val("false");
                     }
-                    else {
-                        if (cont == 3) {
-                            $("#baraDeCarga").css("width", "99%");
-                            $("#divPaso3").hide(500);
-                            $("#divPaso4").show(500);
-                            $("#divPaso2").hide();
-                            $('#btnSiguiente').hide();
-                            $('#btnEnviar').show();
+                    if (pasa != false) {
+                        cont++;
+                    }
+                    console.log("cont2: " + cont);
+                    if (cont == 2) {
+                        $("#baraDeCarga").css("width", "99%");
+                        $("#divPaso2").hide(500);
+                        $("#divPaso3").show(500);
+                        $("#inputGuardarDatos").val("false");
+                    } else {
+                        if (cont == 1) {
+                            $("#baraDeCarga").css("width", "66%");
+                            $("#divPaso1").hide(500);
+                            $("#divPaso2").show(500);
+                            $('#btnAtras').removeAttr('disabled');
                             $("#inputGuardarDatos").val("false");
                         }
+                        else {
+                            if (cont == 3) {
+                                $("#baraDeCarga").css("width", "99%");
+                                $("#divPaso3").hide(500);
+                                $("#divPaso4").show(500);
+                                $("#divPaso2").hide();
+                                $('#btnSiguiente').hide();
+                                $('#btnEnviar').show();
+                                $("#inputGuardarDatos").val("false");
+                            }
+                        }
                     }
+                    console.log(cont)
                 }
-                console.log(cont)
+
+
             });
             $("#btnAtras").click(function () {
                 cont--;
@@ -318,8 +368,315 @@
                 }
                 console.log(cont)
             });
+            //if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+            //    console.log("Hay algo vacío1")
+            //   // $("#btnSiguiente").prop("disabled", true);
+            //    $("#validacionPrimerPaso").prop('hidden', false);
+            //}
+            //else {
+            //    $("#btnSiguiente").prop("disabled", false);
+            //    console.log("Esta todo ok1")
+            //    $("#validacionPrimerPaso").prop('hidden', true);
+            //}
+            $("#txtFechaNacimiento").change(function (event) {
+                if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                    console.log("Hay algo vacío")
+                    pasa = false;
+                    //$("#btnSiguiente").prop("disabled", true);
+                    //$("#validacionPrimerPaso").prop('hidden', true);
+                }
+                else {
+                    $("#btnSiguiente").prop("disabled", false);
+                    console.log("Esta todo ok")
+                    pasa = true;
+                    //$("#validacionPrimerPaso").prop('hidden', false);
+                }
+            });
+            $("#txtCelular").change(function (event) {
+                if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                    console.log("Hay algo vacío")
+                    pasa = false;
+                    //$("#btnSiguiente").prop("disabled", true);
+                    //$("#validacionPrimerPaso").prop('hidden', true);
+                }
+                else {
+                    $("#btnSiguiente").prop("disabled", false);
+                    console.log("Esta todo ok")
+                    pasa = true;
+                    //$("#validacionPrimerPaso").prop('hidden', false);
+                }
+            });
+            $("#txtEmail").change(function (event) {
+                var correo = $("#txtEmail").val();
+                console.log("correo" + correo);
+                var respuesta;
+                $.ajax({
+                    url: '<%: Url.Content("~/Home/ConsultarCorreo/") %>',
+                        data: { correo: correo },
+                        cache: false,
+                        type: "GET",
+                        success: function (data) {
+                            // data is your result from controller
+                            console.log(data);
+                            if (data == "false") {
+                                console.log("error en Ajax")
+
+                            } else {
+                                console.log(data)
+                                respuesta = data;
+                                if (data == "Existe") {
+                                    console.log("El Correo existe!!")
+                                }
+                                else {
+                                    console.log("El Correo no existe")
+                                }
+
+                                if (respuesta != "Existe") {
+                                    $("#verificarcorreo").hide();
+                                    $("#verificarcorreo").text("El correo ingresado es válido :D")
+                                    console.log("El rut ingresado es válido :D");
+                                    pasaPorCorreo = true;
+                                } else {
+                                    $("#verificarcorreo").show();
+                                    $("#verificarcorreo").text("El correo ya existe en el sistema")
+                                    console.log("El correo no es válido :'( ");
+                                    pasaPorCorreo = false;
+                                }
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+
+                if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                    console.log("Hay algo vacío")
+                    $("#btnSiguiente").prop("disabled", true);
+                    console.log("Se cambio");
+                    pasa = false;
+                    //$("#validacionPrimerPaso").prop('hidden', true);
+                }
+                else {
+                    $("#btnSiguiente").prop("disabled", false);
+                    console.log("Esta todo ok")
+                    //$("#validacionPrimerPaso").prop('hidden', false);
+                    pasa = true;
+
+                }
+                if (pasa != false && pasaPorCorreo != false && pasaPorRut != false) {
+                    $("#validacionPrimerPaso").prop('hidden', false);
+                }
+            });
+            $("#txtRut").change(function (event) {
+                var rut = $("#txtRut").val();
+                console.log("rutCompleto" + rut);
+                //Verificar existencia del rut
+                $.ajax({
+                    url: '<%: Url.Content("~/Home/ConsultarRut/") %>',
+                    data: { rut: rut },
+                    cache: false,
+                    type: "GET",
+                    success: function (data) {
+                        // data is your result from controller
+                        console.log(data);
+                        if (data == "false") {
+                            console.log("error en Ajax")
+
+                        } else {
+                            console.log(data)
+                            respuesta = data;
+                            if (data == "Existe") {
+                                console.log("El rut existe!!")
+                                pasaPorRut = false;
+                            }
+                            else {
+                                console.log("El rut no existe")
+                                pasaPorRut = true;
+                            }
+
+                            if (respuesta == "Existe") {
+                                $("#verificarRut").show();
+                                $("#verificarRut").text("El rut ya existe en el sistema")
+                                console.log("El rut ingresado no es válido D:");
+                            }
+                        }
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+
+                var Fn = {
+                    // Valida el rut con su cadena completa "XXXXXXXX-X"
+                    validaRut: function (rut) {
+                        if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rut))
+                            return false;
+                        var tmp = rut.split('-');
+                        var digv = tmp[1];
+                        var rut = tmp[0];
+                        if (digv == 'K') digv = 'k';
+                        return (Fn.dv(rut) == digv);
+                    },
+                    dv: function (T) {
+                        var M = 0, S = 1;
+                        for (; T; T = Math.floor(T / 10))
+                            S = (S + T % 10 * (9 - M++ % 6)) % 11;
+                        return S ? S - 1 : 'k';
+                    }
+                }
+
+                if (Fn.validaRut($("#txtRut").val())) {
+                    $("#verificarRut").hide();
+                    $("#verificarRut").text("El rut ingresado es válido :D")
+                    console.log("El rut ingresado es válido :D");
+                    pasaPorRut = true;
+                } else {
+                    $("#verificarRut").show();
+                    $("#verificarRut").text("El Rut no es válido")
+                    console.log("El Rut no es válido :'( ");
+                    pasaPorRut = false;
+                }
+
+
+                if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                    console.log("Hay algo vacío")
+                    $("#btnSiguiente").prop("disabled", true);
+                    pasa = false;
+                    //$("#btnSiguiente").prop("disabled", true);
+                    //$("#validacionPrimerPaso").prop('hidden', true);
+                }
+                else {
+                    $("#btnSiguiente").prop("disabled", false);
+                    console.log("Esta todo ok")
+                    pasa = true;
+                    //$("#validacionPrimerPaso").prop('hidden', false);
+                }
+                if (pasa != false && pasaPorCorreo != false && pasaPorRut != false) {
+                    $("#validacionPrimerPaso").prop('hidden', false);
+                }
+            });
+            $("#txtNombre").change(function (event) {
+                if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                    console.log("Hay algo vacío")
+                    pasa = false;
+                    //$("#btnSiguiente").prop("disabled", true);
+                    //$("#validacionPrimerPaso").prop('hidden', true);
+                }
+                else {
+                    $("#btnSiguiente").prop("disabled", false);
+                    console.log("Esta todo ok")
+                    pasa = true;
+                    //$("#validacionPrimerPaso").prop('hidden', false);
+                }
+            });
+
+
+            //$("#btnSiguiente").on('click', function () {
+            //    console.log("Se apretó!")
+            //    if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+            //        console.log("Hay algo vacío")
+            //        pasa = false;
+            //        //$("#btnSiguiente").prop("disabled", true);
+            //        //$("#validacionPrimerPaso").prop('hidden', true);
+            //    }
+            //    else {
+            //        $("#btnSiguiente").prop("disabled", false);
+            //        console.log("Esta todo ok")
+            //        pasa = true;
+            //        //$("#validacionPrimerPaso").prop('hidden', false);
+            //    }
+            //});
         });
     </script>
+    <%-- Script Primer paso --%>
+            <%--<script>
+                $(document).ready(function () {
+                    if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                        console.log("Hay algo vacío1")
+                        $("#btnSiguiente").prop("disabled", true);
+                        $("#validacionPrimerPaso").prop('hidden', true);
+                    }
+                    else {
+                        $("#btnSiguiente").prop("disabled", false);
+                        console.log("Esta todo ok1")
+                        $("#validacionPrimerPaso").prop('hidden', false);
+                    }
+                    $("#txtFechaNacimiento").change(function (event) {
+                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                            console.log("Hay algo vacío")
+                            $("#btnSiguiente").prop("disabled", true);
+                            $("#validacionPrimerPaso").prop('hidden', true);
+                        }
+                        else {
+                            $("#btnSiguiente").prop("disabled", false);
+                            console.log("Esta todo ok")
+                            $("#validacionPrimerPaso").prop('hidden', false);
+                        }
+                    });
+                    $("#txtCelular").change(function (event) {
+                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                            console.log("Hay algo vacío")
+                            $("#btnSiguiente").prop("disabled", true);
+                            $("#validacionPrimerPaso").prop('hidden', true);
+                        }
+                        else {
+                            $("#btnSiguiente").prop("disabled", false);
+                            console.log("Esta todo ok")
+                            $("#validacionPrimerPaso").prop('hidden', false);
+                        }
+                    });
+                    $("#txtEmail").change(function (event) {
+                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                            console.log("Hay algo vacío")
+                            $("#btnSiguiente").prop("disabled", true);
+                            $("#validacionPrimerPaso").prop('hidden', true);
+                        }
+                        else {
+                            $("#btnSiguiente").prop("disabled", false);
+                            console.log("Esta todo ok")
+                            $("#validacionPrimerPaso").prop('hidden', false);
+                        }
+                    });
+                    $("#txtRut").change(function (event) {
+                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                            console.log("Hay algo vacío")
+                            $("#btnSiguiente").prop("disabled", true);
+                            $("#validacionPrimerPaso").prop('hidden', true);
+                        }
+                        else {
+                            $("#btnSiguiente").prop("disabled", false);
+                            console.log("Esta todo ok")
+                            $("#validacionPrimerPaso").prop('hidden', false);
+                        }
+                    });
+                    $("#txtNombre").change(function (event) {
+                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                            console.log("Hay algo vacío")
+                            $("#btnSiguiente").prop("disabled", true);
+                            $("#validacionPrimerPaso").prop('hidden', true);
+                        }
+                        else {
+                            $("#btnSiguiente").prop("disabled", false);
+                            console.log("Esta todo ok")
+                            $("#validacionPrimerPaso").prop('hidden', false);
+                        }
+                    });
+                    $("#btnSiguiente").on('click', function () {
+                        console.log("Se apretó!")
+                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
+                            console.log("Hay algo vacío")
+                            $("#btnSiguiente").prop("disabled", true);
+                            $("#validacionPrimerPaso").prop('hidden', true);
+                        }
+                        else {
+                            $("#btnSiguiente").prop("disabled", false);
+                            console.log("Esta todo ok")
+                            $("#validacionPrimerPaso").prop('hidden', false);
+                        }
+                    });
+                });
+            </script>--%>
+
     <%-- Checkbox Paso 2 --%>
 
     <script>
@@ -510,9 +867,9 @@
               <div class="headera-content">
             <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
           <h1 style="font-family: 'Poppins';
-    font-style: inherit;">Bienvenido a <span style="color: #BAD305">Tempora</span></h1>
+    font-style: inherit;">Bienvenido a <span style="color: #BAD305">Clínica Tempora</span></h1>
           <h4 style="color: #BAD305;    font-family: -webkit-pictograph;
-    font-size: 22px;">Portal de solicitudes</h4>
+    font-size: 22px;">Una nueva experiencia en evaluación remota</h4>
 <%--          <div class="btns">
             <a href="#menu" class="btn-menu animated fadeInUp scrollto">Quienes somos</a>
             <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Evaluación</a>
@@ -527,11 +884,11 @@
 
 
   </section><!-- End Hero -->
-<main id="main">
-            <form action="<%: Url.Content("~/Home/Index") %>" method="post" enctype="multipart/form-data" id="formSolicitud" class="needs-validation" novalidate>
+<main id="main" style="margin-top: -48px;">
+<form action="<%: Url.Content("~/Home/Index") %>" method="post" enctype="multipart/form-data" id="formSolicitud" class="needs-validation" novalidate>
 
     <!-- ======= About Section ======= -->
-    <section id="about" class="about">
+<%--    <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
         <div class="row">
@@ -559,7 +916,7 @@
         </div>
 
       </div>
-    </section><!-- End About Section -->
+    </section>--%><!-- End About Section -->
 
     <!-- ======= Pasos a seguir ======= -->
     <section id="why-us" class="why-us">
@@ -567,32 +924,50 @@
 
         <div class="section-title">
           <h2>Pasos a seguir</h2>
-          <p>¿Desea una evaluación sin costo?</p>
+          <p>¿Desea una evaluación?</p>
         </div>
 
         <div class="row">
-
-          <div class="col-lg-4">
-            <div class="box" data-aos="zoom-in" data-aos-delay="100">
+            <style>
+                .spanCuadrados {
+                    font-size: 2pc;
+                    font-weight: bold;
+                    color: #bad302;
+                }
+            </style>
+          <div class="col-lg-4 card border-left-primary shadow" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="100">
+<%--            <div class="box" data-aos="zoom-in" data-aos-delay="100">
               <span>01</span>
-              <h4>Solicitar evaluación</h4>
-              <p>Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.</p>
+              <h4>Ingresa tus datos personales para que nos conozcamos.</h4>
+              <p></p>
+            </div>--%>
+              
+                <div class="card-body">
+                <span class="spanCuadrados">01</span>
+                <h4>Ingresa tus datos personales para que nos conozcamos.</h4>
+                
             </div>
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="zoom-in" data-aos-delay="200">
+<%--            <div class="box" data-aos="zoom-in" data-aos-delay="200">
               <span>02</span>
-              <h4>Evaluación médica</h4>
-              <p>Un profesional de nuestra clínica le entregará una propuesta para su solicitud. Si usted lo desea, podrá agendar una hora para el procedimiento adecuado.</p>
+              <h4>Envíanos las fotografías de tu cabeza para evaluar tu  calvicie.</h4>
+              <p></p>
+            </div>--%>
+              <div class="card border-left-primary shadow" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
+                <div class="card-body">
+                <span class="spanCuadrados">02</span>
+                <h4>Envíanos las fotografías de tu cabeza para evaluar tu  calvicie.</h4>
+                </div>
             </div>
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0">
             <div class="box" data-aos="zoom-in" data-aos-delay="300">
               <span>03</span>
-              <h4>Procedimiento médico</h4>
-              <p>Al asistir a la clínica según la hora agendada, usted recibirá el mejor procedimiento para su caso. Poosteriormente, usted seguirá recibiendo páginas personalizadas para su caso.</p>
+              <h4>Mira el último capítulo de tu serie favorita mientras te  enviamos tu evaluación.</h4>
+              <p></p>
             </div>
           </div>
 
@@ -602,7 +977,7 @@
     </section>
 
     <!-- ======= Events Section ======= -->
-    <section id="events" class="events">
+<%--    <section id="events" class="events">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -616,7 +991,7 @@
         </div>
 
       </div>
-    </section><!-- End Events Section -->
+    </section>--%><!-- End Events Section -->
 
     <!-- ======= Book A Table Section ======= -->
 
@@ -625,19 +1000,26 @@
 
         <div class="section-title">
           <h2>Evaluación Médica</h2>
-          <p>¡Solicita tu evaluación en sólo 3 pasos!</p>
-            <div class="progress">
+          <p>Empecemos con tu <label style="color: #ababab;">evaluación</label></p>
+  <%--          <div class="progress" style="height: 8px;">
               <div id="baraDeCarga" class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+            </div>--%>
         </div>
 <%--        <form action="<%: Url.Content("~/Home/Index") %>" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">--%>
          <%--  Paso 1 --%>
-            <div class="card" id="divPaso1" style="border-radius: 10px">
-                <div class="card-body">
-                <h3>Primer Paso: Información Personal</h3>
-                <div class="form-row">
+
+            <div class="card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">
+            <div class="card-title" style=" margin-left: 1pc;margin-right: 1pc; margin-top: 2pc;">
+                    <div class="progress" style="height: 15px;">
+              <div id="baraDeCarga" class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+                <div class="card-body" id="divPaso1">
+                <h3 style="  font-size:24px;  font-family: 'Poppins';"><label style="color: #bad302;font-family: 'Poppins';font-size:24px;">Paso 1 &nbsp;  </label>  Sobre ti</h3>
+                <div class="form-row" style="padding-left: 30px;padding-right: 30px;">
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre Completo" data-rule="minlen:1" data-msg="Please enter at least 4 chars" required>
+                        <label for="txtNombre">Nombre Completo</label>
+                        <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Dominga Relish " data-rule="minlen:1" data-msg="Please enter at least 4 chars" required>
                         <div class="invalid-feedback" >
                             Por favor ingrese su nombre
                         </div>
@@ -649,14 +1031,15 @@
                         </div>
                     </div>--%>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="Rut (77777777-7)" required>
+                        <label for="txtRut">Rut</label>
+                        <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="77777777-7" required>
                         <h6 id="verificarRut" style="color: orangered;font-size: 12px;margin-top: 4px;margin-left: 6px;"></h6>
                         <div class="invalid-feedback">
                             
                             Por favor ingrese su rut
                         </div>
                             <script>
-                                $(document).ready(function () {
+<%--                                $(document).ready(function () {
                                     $("#txtRut").change(function (event) {
                                         var rut = $("#txtRut").val();
                                         console.log("rutCompleto" + rut);
@@ -724,18 +1107,15 @@
                                             $("#verificarRut").text("El Rut no es válido")
                                             console.log("El Rut no es válido :'( ");
                                         }
-
-
-
-
                                         // Uso de la función
                                         //console.log(Fn.validaRut('11111111-1') ? 'Valido' : 'inválido');
                                     }); 
-                                });
+                                });--%>
                             </script>
                     </div>
                     <div class="col-lg-6 col-md-6 form-group">
-                        <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email" required>
+                        <label for="txtEmail">Correo</label>
+                        <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="mail@mail.com" data-rule="email" data-msg="Please enter a valid email" required>
                         <h6 id="verificarcorreo" style="color: orangered;font-size: 12px;margin-top: 4px;margin-left: 6px;"></h6>
                         <div class="invalid-feedback">
                             Por favor ingrese su correo
@@ -744,7 +1124,7 @@
                     <%-- Verificar Correo --%>
                     <script>
                         $(document).ready(function () {
-                            $("#txtEmail").change(function (event) {
+<%--                            $("#txtEmail").change(function (event) {
                                 console.log("Se cambio");
                                 var correo = $("#txtEmail").val();
                                 console.log("correo" + correo);
@@ -776,7 +1156,7 @@
                                                 console.log("El rut ingresado es válido :D");
                                             } else {
                                                 $("#verificarcorreo").show();
-                                                $("#verificarcorreo").text("El ya correo existe en el sistema")
+                                                $("#verificarcorreo").text("El correo ya existe en el sistema")
                                                 console.log("El correo no es válido :'( ");
                                             }
                                         }
@@ -787,56 +1167,18 @@
                                 });
 
 
-<%--                                var Fn = {
-                                    // Valida el rut con su cadena completa "XXXXXXXX-X"
-                                    validaCorreo: function (correo) {
-
-                                        $.ajax({
-                                            url: '<%: Url.Content("~/Home/ConsultarCorreo/") %>',
-                                            data: { correo: correo },
-                                                cache: false,
-                                                type: "GET",
-                                                success: function (data) {
-                                                    // data is your result from controller
-                                                    console.log(data);
-                                                    if (data == "false") {
-                                                        console.log("error en Ajax")
-
-                                                    } else {
-                                                        console.log(data)
-                                                        if (data == "Existe") {
-                                                            console.log("El Rut existe!!")
-                                                        }
-                                                        else {
-                                                            console.log("El Rut no existe")
-                                                        }
-                                                    }
-                                                },
-                                                error: function (err) {
-                                                    console.log(err);
-                                                }
-                                        });
-
-                                        return correo;
-                                    }
-                                }--%>
-
-                            }); 
+                            }); --%>
                         });
                     </script>
 
-  <%--                  <div class="col-lg-6 col-md-6 form-group">
-                        <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" placeholder="Teléfono" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
-                        <div class="invalid-feedback">
-                            Por favor ingrese su telefono
-                        </div>
-                    </div>--%>
                     <div class="col-lg-6 col-md-6 form-group">
+                        <label for="txtCelular">Celular</label>
                         <div class="input-group">
+
                             <div class="input-group-prepend">
                               <div class="input-group-text">+56</div>
                             </div>
-                            <input type="text" min="10000000" max="99999999" class="form-control" name="txtCelular" id="txtCelular" placeholder="Celular" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                            <input type="text" min="10000000" max="99999999" class="form-control" name="txtCelular" id="txtCelular" placeholder="9999999999" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
                             <div class="invalid-feedback">
                                 Por favor ingrese su celular
                             </div>
@@ -861,7 +1203,7 @@
 
                         });
                     </script>
-                    <div class="col-lg-6 col-md-6 form-group">
+<%--                    <div class="col-lg-6 col-md-6 form-group">
                         <input  id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" required/>
 
                         <script>
@@ -872,73 +1214,59 @@
                             });
                             $('#txtFechaNacimiento').datepicker("option", "maxDate", '+7D');
                                 $('#txtFechaNacimiento').datepicker();
-
                             });
                         </script>
 
+                    </div>--%>
+                    <script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.es-es.js" type="text/javascript"></script>
+                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+                    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+                    <div class="col-lg-6 col-md-6 form-group">
+                        <label for="txtFechaNacimiento">Fecha de nacimiento</label>
+                    <input id="txtFechaNacimiento" placeholder="dd/mm/yyyy" name="txtFechaNacimiento" required/>
+                    </div>
+                    <script>
+                        $(document).ready(function () { 
+                            $('#txtFechaNacimiento').datepicker({
+                                uiLibrary: 'bootstrap4',
+                                weekStartDay: 6,
+                                locale: 'en-us',
+                                maxDate: function () {
+                                    var date = new Date();
+                                    date.setDate(date.getDate() - 6570);
+                                    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                                },
+                                //value: function () {
+                                //    var date = new Date();
+                                //    date.setDate(date.getDate() - 6570);
+                                //    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                                //},
+                            });
+                        });
+                    </script>
+
+<%--                                            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+                        <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+                        <script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.es-es.js" type="text/javascript"></script>
+                    <input name="txtFechaNacimiento2" id="txtFechaNacimiento2" />
+                    <script>
+                        $('#txtFechaNacimiento').datetimepicker({ uiLibrary: 'bootstrap4', footer: true, modal: true, locale: 'es-es', });
+                    </script>--%>
+
+
+
+                </div>
+                    <div style="text-align: center;">
+                        <label id="validacionPrimerPaso" style="color: red">Por favor complete o verfique sus datos.</label>
                     </div>
                 </div>
-                </div>
-            </div>
-          <%-- Script Primer paso --%>
-            <script>
-                $(document).ready(function () {
-
-                    $("#txtFechaNacimiento").change(function (event) {
-                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-                            console.log("Hay algo vacío")
-                            $("#btnSiguiente").prop("disabled", true);
-                        }
-                        else {
-                            $("#btnSiguiente").prop("disabled", false);
-                            console.log("Esta todo ok")
-                        }
-                    });
-                    $("#txtCelular").change(function (event) {
-                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-                            console.log("Hay algo vacío")
-                            $("#btnSiguiente").prop("disabled", true);  
-                        }
-                        else {
-                            $("#btnSiguiente").prop("disabled", false);
-                            console.log("Esta todo ok")
-                        }
-                    });
-                    $("#txtEmail").change(function (event) {
-                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-                            console.log("Hay algo vacío")
-                            $("#btnSiguiente").prop("disabled", true);
-                        }
-                        else {
-                            $("#btnSiguiente").prop("disabled", false);
-                            console.log("Esta todo ok")
-                        }
-                    });
-                    $("#txtRut").change(function (event) {
-                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-                            console.log("Hay algo vacío")
-                            $("#btnSiguiente").prop("disabled", true);
-                        }
-                        else {
-                            $("#btnSiguiente").prop("disabled", false);
-                            console.log("Esta todo ok")
-                        }
-                    });
-                    $("#txtNombre").change(function (event) {
-                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-                            console.log("Hay algo vacío")
-                            $("#btnSiguiente").prop("disabled", true);
-                        }
-                        else {
-                            $("#btnSiguiente").prop("disabled", false);
-                            console.log("Esta todo ok")
-                        }
-                    });
-                });
-            </script>
+    
           <%--  Paso 2 --%>
-            <div class="card" id="divPaso2" style="border-radius: 10px">
-                <div class="card-body">
+          <%--<div class="card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">--%>
+            <%--<div class="card" id="divPaso2" style="border-radius: 10px">--%>
+                <div class="card-body" id="divPaso2">
                 <h3>Segundo Paso: Cuestionario</h3>
                 <%-- Primera pregunta --%>
                 <h6>1.- ¿Qué zona deseas reparar?</h6>
@@ -1046,7 +1374,7 @@
                         $('#chkPeloNo').prop('checked', true);
                     });
                 </script>
-            </div>
+            <%--</div>--%>
           <%-- Script Segundo paso --%>
           <script>
               $(document).ready(function () {
@@ -1072,14 +1400,14 @@
 
           </style>
         <%-- Paso 3 --%>
-            <div class="card" id="divPaso3"  style="border-radius: 10px">
-                <div class="card-body">
+            <%--<div class="card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">--%>
+            <%--<div class="card" id="divPaso3"  style="border-radius: 10px">--%>
+                <div class="card-body" id="divPaso3">
                 <h3>Tercer Paso: Fotografías</h3>
                 <p>Estas fotografías deben ser tomadas en un lugar con luz natural, sin flash y con la cámara trasera de su cámara o celular, no con la camara frontal, debido a que la calidad de imagen se ve afectada.</p>
                 <p>Es ideal que otra persona le ayude a tomar estas fotografías, posicionandose a un metro de distacia y no en modo selfie.</p>
                 <p>El siguiente esquema muestra los ángulos en que se debe fotografiar. En el caso de que su zona a evaluar sean las entradras, por favor tirar su cabello hacia atrás para poder apreciar de mejor manera su complicación.</p>
                 <div class="text-center">
-                    <%--<img src="../Styles/img/Fotografias.PNG" />--%>
                 </div>
                 <br />
                 <br />
@@ -1113,20 +1441,16 @@
                                 <input type="text"  id="fotoFrenteIs" name="fotoFrenteIs" value="" hidden/>
                             </div>
                         </div>
+                        <label id="inputValidacion"></label>
                     </div>
                 <br />
                 <br />
-
-    <%--        <div class="mb-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
-              </div>--%>
-                </div>
+                <%--</div>--%>
           </div>
           <%-- Por donde nos contactamos? --%>
-          <div id="divPaso4" class="card" style="border-radius: 10px">
-              <div class="card-body">
+          <%--<div class="card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">--%>
+          <%--<div id="divPaso4" class="card" style="border-radius: 10px">--%>
+              <div class="card-body" id="divPaso4">
             <h3>Cuarto Paso: Contacto</h3>
             <%-- Primera pregunta --%>
             <h6>¿Por dónde nos contactamos?</h6>
@@ -1218,18 +1542,52 @@
                           </script>--%>
             </div>
               </div>
-          </div>
+         </div> 
+         <%-- </div>--%>
+        <style>
+            #btnSiguiente {
+                border: 37px !important;
+                /* border-width: initial; */
+                border-color: #b9d101 !important;
+                transition: 1s;
+            }
+
+            #btnSiguiente:hover{
+                background-color: #9cb100 !important;
+                color: white !important;
+                box-shadow: 0px 1px 10px 0.2px rgba(0, 0, 0, 0.2);
+            }
+            #btnSiguiente img{
+                width: 7px; 
+                margin-left: 8px;
+                transition: 1s;
+            }
+            #btnSiguiente:hover img{
+                margin-left: 9px; 
+                
+            }
+            .inforContaco {
+                    margin-bottom: 20px;
+                    color: #727272;
+                    font-size: 17px;
+            }
+            .logoContacto {
+                color: #bad302 !important;
+            }
+            .divContacto {
+                margin-left: 25px;
+            }
+        </style>
           <div class="text-center">
-              <div class="row" style="    margin-top: 2pc;">
+              <div class="row" style="margin-top: 2pc;">
                   <div class="col-sm">
-                      <button disabled id="btnAtras" type="button" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Atrás</button>
-                        
+                      <button disabled id="btnAtras" type="button" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;"><i class="bi bi-chevron-left"></i> Atrás</button>
                   </div>
                   <div class="col-sm">
                     <br />    
                   </div>
                   <div class="col-sm">
-                      <button id="btnSiguiente"type="button" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Siguiente</button>
+                      <button id="btnSiguiente"type="button" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; border-radius: 50px;">Siguiente<i class="bi bi-chevron-right"></i></button>
                       <button id="btnEnviar" type="submit" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Enviar</button>
                   </div>
               </div>
@@ -1276,22 +1634,43 @@
 <!-- End Chefs Section -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+<section id="contact" class="contact" style="margin-top: -43px;">
+    <div class="container" data-aos="fade-up">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
-                <h2>Contacto</h2>
-                <p>Ubicación</p>
+                <h2>Hablemos</h2>
+                <p>Contacto</p>
             </div>
         </div>
-    
-      <div data-aos="fade-up">
-        <iframe style="border:0; width: 100%; height: 350px;" src="https://maps.google.com/maps?q=Cl%C3%ADnica%20T%C3%A9mpora%20-%20Implante%20Capilar%20-%20Suecia,%20Providencia,%20Chile&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" allowfullscreen></iframe>
-      </div>
+    <div data-aos="fade-up">
+        <div class="card border-left-primary shadow h-100 py-2 " style="border-radius: 10px;/* margin-left: 13pc;margin-right: 12pc;*/">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 form-group" style="    padding: 3pc;">
+                    <h5 style="font-size: 18px" class="inforContaco"> Más información en nuestro sitio </h5>
+                    <div class="divContacto">
+                        <h6 class="inforContaco"><a style="color: #727272  !important;" href="https://clinicatempora.cl/" target="_blank"><i class="bi bi-globe2 logoContacto"></i> clinicatempora.cl</a></h6>
+                    </div>
+                    <h5 style="font-size: 18px" class="inforContaco">Visitenos en </h5>
+                    <div class="divContacto">
+                        <h6 class="inforContaco"><i class="bi bi-signpost-2 logoContacto"></i> <a href="https://www.google.com/maps?ll=-33.419544,-70.609112&z=17&t=m&hl=en-US&gl=US&mapclient=embed&cid=6733047197633270011" target="_blank">Suecia 0142, of 603, Providencia, Santiago, Chile.</a></h6>
+                    </div>
+                    <h5 style="font-size: 18px" class="inforContaco"> Contáctenos por</h5>
+                    <div class="divContacto">
+                        <h6 class="inforContaco"><i class="bi bi-mailbox logoContacto"></i> <a href="mailto:example@email.com?subject=Email%20Subjec">contacto@clinicatempora.cl</a></h6>
+                        <h6 class="inforContaco"><i class="bi bi-telephone logoContacto"></i> <a href="tel:+56954230344">+56 2 2846 5820</a></h6>
+                        <h6 style="margin-bottom: -16px;" class="inforContaco"><i class="bi bi-whatsapp logoContacto"></i> <a href="https://wa.me/56954230344" target="_blank"> +56 9 5423 0344</a></h6>
+                    </div>
+
+                </div>
+                <div class="col" style="margin-right: 10px; margin-top: 4px;"> 
+                        <iframe data-aos="zoom-in" data-aos-delay="100" style="border:0; width: 100%; height: 392px;" src="https://maps.google.com/maps?q=Cl%C3%ADnica%20T%C3%A9mpora%20-%20Implante%20Capilar%20-%20Suecia,%20Providencia,%20Chile&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" allowfullscreen></iframe>
+                    </div>  
+                </div>
+            </div>
+  
+        </div>
 <%--<div class="mapouter"><div class="gmap_canvas"><iframe width="1033" height="310" id="gmap_canvas" src="https://maps.google.com/maps?q=Cl%C3%ADnica%20T%C3%A9mpora%20-%20Implante%20Capilar%20-%20Suecia,%20Providencia,%20Chile&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://embedgooglemap.net/maps/24"></a><br><style>.mapouter{position:relative;text-align:right;height:310px;width:1033px;}</style><a href="https://www.embedgooglemap.net">google maps generator</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:310px;width:1033px;}</style></div></div>--%>
-      <div class="container" data-aos="fade-up">
-
-
-      </div>
+       </div>
     </section><!-- End Contact Section -->
 
 
@@ -1327,9 +1706,10 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <input type="button" id="cancelar1" value="Limpiar" style="margin-bottom: -7.7px"/>
-                                <input type="file" id="upload1" name="files" hidden>
+                                <input type="button" id="cancelar1" value="Limpiar" style="margin-top: 1pc; margin-left: 196px;"/>
+                                <input type="file" id="upload1" name="files" hidden required data-required="t">
                                 <label id="labelupload1" class="boton-file" for="upload1">Subir Foto</label>
+                                
                                 <script>
                                     $("#upload1").on('change', function () {
                                         // this.files[0].size recupera el tamaño del archivo
@@ -1414,8 +1794,8 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <input type="button" id="cancelar2" value="Limpiar" style="margin-bottom: -7.7px"/>
-                                <input type="file" id="upload2" name="files" hidden>
+                                <input type="button" id="cancelar2" value="Limpiar" style="margin-top: 1pc;margin-left: 196px;"/>
+                                <input type="file" id="upload2" name="files" hidden required>
                                 <label id="labelupload2" class="boton-file" for="upload2">Subir Foto</label>
                                 <script>
                                     $("#upload2").on('change', function () {
@@ -1498,8 +1878,8 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <input type="button" id="cancelar3" value="Limpiar" style="margin-bottom: -7.7px"/>
-                                <input type="file" id="upload3" name="files" hidden>
+                                <input type="button" id="cancelar3" value="Limpiar" style="margin-top: 1pc;margin-left: 196px;"/>
+                                <input type="file" id="upload3" name="files" hidden required >
                                 <label id="labelupload3" class="boton-file" for="upload3">Subir Foto</label>
                                 <script>
                                     $("#upload3").on('change', function () {
@@ -1582,8 +1962,8 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <input type="button" id="cancelar4" value="Limpiar" style="margin-bottom: -7.7px"/>
-                                <input type="file" id="upload4" name="files" hidden>
+                                <input type="button" id="cancelar4" value="Limpiar" style="margin-top: 1pc;margin-left: 196px;"/>
+                                <input type="file" id="upload4" name="files" hidden required>
                                 <label id="labelupload4" class="boton-file" for="upload4">Subir Foto</label>
                                 <script>
                                     $("#upload4").on('change', function () {
@@ -1634,6 +2014,7 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button id="btnModalGuardar4" type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #C6D41D; border-color: #C6D41D;">Guardar Cambios</button>
                 </div>  
+
             </div>
         </div>
     </div>
@@ -1666,8 +2047,8 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <input type="button" id="cancelar5" value="Limpiar" style="margin-bottom: -7.7px"/>
-                                <input type="file" id="upload5" name="files" hidden>
+                                <input type="button" id="cancelar5" value="Limpiar" style="margin-top: 1pc;margin-left: 196px;"/>
+                                <input type="file" id="upload5" name="files" hidden required>
                                 <label id="labelupload5" class="boton-file" for="upload5">Subir Foto</label>
                                 <script>
                                     $("#upload5").on('change', function () {
@@ -1718,6 +2099,97 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button id="btnModalGuardar5" type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #C6D41D; border-color: #C6D41D;">Guardar Cambios</button>
                 </div>  
+                <%-- Validación de fotos --%>
+                <script>
+                    $(document).ready(function () {
+                        document.querySelector("#formSolicitud").addEventListener("submit", e => {
+                            const sizes = [];
+                            document.querySelectorAll("#formSolicitud input").forEach(el => {
+                                if (el.type !== "file") return;
+                                if (!el.files[0]) return sizes.push({ size: "0", elem: el });
+                                let _size = el.files[0].size;
+                                let fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+                                    i = 0; while (_size > 900) { _size /= 1024; i++; }
+                                let exactSize = (Math.round(_size * 100) / 100) + ' ' + fSExt[i];
+                                sizes.push({ size: exactSize, elem: el });
+                            });
+                            sizes.forEach(el => {
+                                if (el.size === "0") {
+                                    if (el.elem.getAttribute("data-required")) {
+                                        e.preventDefault();
+                                        el.elem.classList.add("needsValidation");
+                                        $("#inputValidacion").prop('hidden', false);
+                                        $("#inputValidacion").addClass("needsValidation2");
+
+                                    }
+                                } else {
+                                    $("#inputValidacion").prop('hidden', true);
+                                }
+
+                                
+                                //if ((el.size.replace(" MB", "")) - 0 >= 2) {
+                                //    e.preventDefault();
+                                //    el.elem.classList.add("fileSizeExceded");
+                                //}
+                            });
+                        });
+                    });
+                </script>
+                <style>
+                    input {
+                      padding:8px;
+                      border:solid 1px #c6c6c6c1;
+                      border-radius:8px;
+                      display:block;
+                      transition:0.3s;
+                      -webkit-transition:0.3s;
+                      -moz-transition:0.3s;
+                      -o-transition:0.3s;
+                    }
+
+                    .needsValidation,.fileSizeExceded {
+                      border:solid 1px red;
+                    }
+
+                    .needsValidation::after {
+                      content:"Este campo es obligatorio";
+                      color:red;
+                      display:inline-block;
+                      position:absolute;
+                      margin-left:25px;
+                    }
+                    .needsValidation2,.fileSizeExceded {
+                      border:solid 1px red;
+                    }
+
+                    .needsValidation2::after {
+                      content:"Por favor suba todas las fotogragías.";
+                        color: red;
+                        /* display: inline-block; */
+                        position: absolute;
+                        margin-left: -130px;
+                    }
+                    .fileSizeExceded::after {
+                      content:"Solo se admiten archivos menores a 20MB";
+                      color:red;
+                      display:inline-block;
+                      position:absolute;
+                      margin-left:25px;
+                    }
+
+                    @media screen and (max-width:980px) {
+                      .needsValidation::after,.fileSizeExceded::after {
+                        margin:0;
+                        position:relative;
+                        display:block;
+                      }
+                        .needsValidation2::after,.fileSizeExceded::after {
+                        margin:0;
+                        position:relative;
+                        display:block;
+                      }
+                    }
+                </style>
             </div>
         </div>
     </div>

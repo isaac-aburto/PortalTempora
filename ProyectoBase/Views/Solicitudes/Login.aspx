@@ -69,14 +69,44 @@
                                                     <label class="custom-control-label" for="rememberPasswordCheck">Recordar Contraseña</label>
                                                 </div>
                                             </div>--%>
-                                                <p style="color: red"><%= ViewData["Error"] %></p>
+                                                <p id="txterror" style="color: red"><%= ViewData["Error"] %></p>
                                                 <input id="Exp" type="hidden" name="Exp" value="<%= ViewData["Exp"] %>" / >
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <input name="idCliente" hidden value="<%= ViewData["idCliente"]%>"/>
+                                                <input id="idCliente" name="idCliente" hidden value="<%= ViewData["idCliente"]%>"/>
+                                                <input name="idCompleto" hidden value="<%= ViewData["idCompleto"]%>"/>
                                                 <input name="id" hidden value="<%= ViewData["id"]%>"/> 
                                                 <button class="btn btn-md btn-primary btn-block btn-signin" id="btnSubmit" type="submit">Iniciar sesión</button>
                                             </div>
-                                            
+                                            <%--<script>
+                                                $(document).ready(function () {
+                                                    $("#btnSubmit").click(function () {
+                                                        console.log("aaaaa")
+                                                        var inputEmail = $("#inputEmail").val();
+                                                        var inputPassword = $("#inputPassword").val();
+                                                        var idPaciente = $("#idCliente").val();
+                                                        $.ajax({
+                                                            url: '<%: Url.Content("~/Solicitudes/Login/") %>',
+                                                            data: { inputEmail: inputEmail, inputPassword: inputPassword, idPaciente: idPaciente },
+                                                                cache: false,
+                                                                type: "POST",
+                                                                success: function (data) {
+                                                                    // data is your result from controller
+                                                                    console.log(data);
+                                                                    if (data == "ERROR") {
+                                                                        console.log("AAAAAAAAAAAAAAAAAAAA")
+                                                                        $("#txterror").text("Usuario o contraseña incorrecto");
+                                                                        $("#spiner").hide(100);
+                                                                    }
+
+                                                                },
+                                                                async: true,
+                                                                error: function (err) {
+                                                                    console.log(err);
+                                                                }
+                                                            });
+                                                        });
+                                                    });
+                                            </script>--%>
                                         </form>
                                     </div>
                                 </div>

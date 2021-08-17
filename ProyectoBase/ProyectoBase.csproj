@@ -329,6 +329,7 @@
     </Compile>
     <Compile Include="Models\Webhook.cs" />
     <Compile Include="Models\WebhookCrearPerson.cs" />
+    <Compile Include="Models\WebhookUpdateDeal.cs" />
     <Compile Include="Models\ZonaAReparar.cs">
       <DependentUpon>ModeloTempora.tt</DependentUpon>
     </Compile>
@@ -471,6 +472,7 @@
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <Content Include="Scripts\Additional-Validations.js" />
     <Content Include="SpreadsheetLight.xml" />
+    <Content Include="Styles\img\chevron-right-white_Mesa de trabajo 1.svg" />
     <Content Include="Styles\img\iphone.png" />
     <Content Include="Styles\MensajeSolicitudBuenCamino.html" />
     <Content Include="Styles\MensajeSolicitudFechaCirugiaGarantia.html" />
