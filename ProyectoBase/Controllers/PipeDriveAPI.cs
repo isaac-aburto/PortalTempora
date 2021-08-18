@@ -26,8 +26,30 @@ namespace WebSolicitudes.Controllers
         //Get: Activities
         //public static async Task AddUser()
         //{
-            
+
         //}
+
+
+        public static string NotCo()
+        {
+            try
+            {
+                string parametros = "";
+                string url = "https://thenot.bambub2b.com/api/sales.php?date_init=2021-01-01&date_end=2021-01-02";
+                string xml = string.Empty;
+                string metodo = "GET";
+                string respuestaAPI = LlamarAPIGet(metodo, url, parametros, xml);
+                JObject json = JObject.Parse(respuestaAPI);
+                return json.ToString();
+            }
+            catch (Exception ex)
+            {
+                // Crear log de error
+                Util.escribirLog("PipeDriveApi", "PostDeal", ex.Message);
+                return "";
+            }
+            
+        }
         public static string AddPerson(string name, string email, string phone)
         {
             string ejecucionCorrecta = "";
@@ -559,9 +581,11 @@ namespace WebSolicitudes.Controllers
                 // Crear cliente
                 HttpClient client = new HttpClient();
 
-                // Agregar headers
+                //Agregar headers
+                client.DefaultRequestHeaders.Add("user", "notapi");
+                client.DefaultRequestHeaders.Add("password", "notc.5405");
                 //client.DefaultRequestHeaders.Accept.Add(
-                //    new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded")
+                //    new MediaTypeWithQualityHeaderValue("application/x-www-form-urlencoded"),
                 //);
 
 

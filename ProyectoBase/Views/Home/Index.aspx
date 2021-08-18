@@ -933,19 +933,40 @@
                     font-size: 2pc;
                     font-weight: bold;
                     color: #bad302;
+                    text-align:center;
+                }
+                .estiloCard {
+                    width: 18rem;
+                    max-width: 291px;
+                    max-height: 20pc;
+                    min-height: 21pc;
+                    min-width: 22pc;
+                }
+                .estiloSpan {
+                    font-size: 32px;
+                    font-family: 'Poppins';
+                    text-align:center;
+                }
+                .numeroSpan {
+                    text-align:center;
                 }
             </style>
-          <div class="col-lg-4 card border-left-primary shadow" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="100">
+          <div class="col-lg-4 mt-4 mt-lg-0">
 <%--            <div class="box" data-aos="zoom-in" data-aos-delay="100">
               <span>01</span>
               <h4>Ingresa tus datos personales para que nos conozcamos.</h4>
               <p></p>
             </div>--%>
-              
+              <div class="card border-left-primary shadow estiloCard" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
                 <div class="card-body">
-                <span class="spanCuadrados">01</span>
+                <div style="text-align:center">
+                    <span class="spanCuadrados">01</span>
+                </div>
+                    <div class="estiloSpan">
+                        <span>Sobre ti</span>
+                    </div>
                 <h4>Ingresa tus datos personales para que nos conozcamos.</h4>
-                
+                </div>
             </div>
           </div>
 
@@ -955,19 +976,31 @@
               <h4>Envíanos las fotografías de tu cabeza para evaluar tu  calvicie.</h4>
               <p></p>
             </div>--%>
-              <div class="card border-left-primary shadow" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
+              <div class="card border-left-primary shadow estiloCard" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
                 <div class="card-body">
-                <span class="spanCuadrados">02</span>
+                <div style="text-align:center">
+                    <span class="spanCuadrados">02</span>
+                </div>
+                <div class="estiloSpan">
+                    <span>Tus fotografías</span>
+                </div>
                 <h4>Envíanos las fotografías de tu cabeza para evaluar tu  calvicie.</h4>
                 </div>
             </div>
           </div>
 
           <div class="col-lg-4 mt-4 mt-lg-0">
-            <div class="box" data-aos="zoom-in" data-aos-delay="300">
-              <span>03</span>
-              <h4>Mira el último capítulo de tu serie favorita mientras te  enviamos tu evaluación.</h4>
-              <p></p>
+
+            <div class="card border-left-primary shadow estiloCard" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="300">
+                <div class="card-body">
+                <div style="text-align:center">
+                    <span class="spanCuadrados">03</span>
+                </div>
+                    <div class="estiloSpan">
+                    <span>¡Relájate!</span>
+                </div>
+                <h4>Mira el último capítulo de tu serie favorita mientras te  enviamos tu evaluación.</h4>
+                </div>
             </div>
           </div>
 
@@ -994,7 +1027,12 @@
     </section>--%><!-- End Events Section -->
 
     <!-- ======= Book A Table Section ======= -->
-
+    <style>
+        .cardBodys {
+    padding-left: 55px;
+    padding-right: 55px;        
+        }
+    </style>
     <section id="book-a-table" class="book-a-table">
       <div class="container" data-aos="fade-up">
 
@@ -1007,17 +1045,17 @@
         </div>
 <%--        <form action="<%: Url.Content("~/Home/Index") %>" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">--%>
          <%--  Paso 1 --%>
-
+          <div data-aos="fade-up">
             <div class="card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">
-            <div class="card-title" style=" margin-left: 1pc;margin-right: 1pc; margin-top: 2pc;">
+            <div class="card-title" style="    margin-left: 84px;margin-right: 81px; margin-top: 2pc;">
                     <div class="progress" style="height: 15px;">
               <div id="baraDeCarga" class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
-                <div class="card-body" id="divPaso1">
-                <h3 style="  font-size:24px;  font-family: 'Poppins';"><label style="color: #bad302;font-family: 'Poppins';font-size:24px;">Paso 1 &nbsp;  </label>  Sobre ti</h3>
+                <div class="card-body cardBodys" id="divPaso1">
+                <h3 style="  font-size:24px;  font-family: 'Poppins'; padding-left: 29px; padding-bottom: 29px;"><label style="color: #bad302;font-family: 'Poppins';font-size:24px;">Paso 1: &nbsp;  </label>  Información Personal</h3>
                 <div class="form-row" style="padding-left: 30px;padding-right: 30px;">
-                    <div class="col-lg-6 col-md-6 form-group">
+                    <div class="col-lg-4 col-md-4 form-group">
                         <label for="txtNombre">Nombre Completo</label>
                         <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Dominga Relish " data-rule="minlen:1" data-msg="Please enter at least 4 chars" required>
                         <div class="invalid-feedback" >
@@ -1030,9 +1068,9 @@
                            Por favor ingrese su apellido
                         </div>
                     </div>--%>
-                    <div class="col-lg-6 col-md-6 form-group">
+                    <div class="col-lg-4 col-md-4 form-group">
                         <label for="txtRut">Rut</label>
-                        <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="77777777-7" required>
+                        <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="10472378-K" required>
                         <h6 id="verificarRut" style="color: orangered;font-size: 12px;margin-top: 4px;margin-left: 6px;"></h6>
                         <div class="invalid-feedback">
                             
@@ -1113,14 +1151,35 @@
                                 });--%>
                             </script>
                     </div>
-                    <div class="col-lg-6 col-md-6 form-group">
-                        <label for="txtEmail">Correo</label>
-                        <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="mail@mail.com" data-rule="email" data-msg="Please enter a valid email" required>
-                        <h6 id="verificarcorreo" style="color: orangered;font-size: 12px;margin-top: 4px;margin-left: 6px;"></h6>
-                        <div class="invalid-feedback">
-                            Por favor ingrese su correo
-                        </div>
+
+                    <script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.es-es.js" type="text/javascript"></script>
+                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+                    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+                    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+                    <div class="col-lg-4 col-md-4 form-group">
+                        <label for="txtFechaNacimiento">Fecha de nacimiento</label>
+                    <input id="txtFechaNacimiento" placeholder="dd/mm/yyyy" name="txtFechaNacimiento" required/>
                     </div>
+                    <script>
+                        $(document).ready(function () {
+                            $('#txtFechaNacimiento').datepicker({
+                                uiLibrary: 'bootstrap4',
+                                weekStartDay: 6,
+                                locale: 'en-us',
+                                maxDate: function () {
+                                    var date = new Date();
+                                    date.setDate(date.getDate() - 6570);
+                                    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                                },
+                                //value: function () {
+                                //    var date = new Date();
+                                //    date.setDate(date.getDate() - 6570);
+                                //    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+                                //},
+                            });
+                        });
+                    </script>
+
                     <%-- Verificar Correo --%>
                     <script>
                         $(document).ready(function () {
@@ -1170,7 +1229,14 @@
                             }); --%>
                         });
                     </script>
-
+                    <div class="col-lg-6 col-md-6 form-group">
+                        <label for="txtEmail">Correo</label>
+                        <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="tucorreo@mail.com" data-rule="email" data-msg="Please enter a valid email" required>
+                        <h6 id="verificarcorreo" style="color: orangered;font-size: 12px;margin-top: 4px;margin-left: 6px;"></h6>
+                        <div class="invalid-feedback">
+                            Por favor ingrese su correo
+                        </div>
+                    </div>
                     <div class="col-lg-6 col-md-6 form-group">
                         <label for="txtCelular">Celular</label>
                         <div class="input-group">
@@ -1218,33 +1284,7 @@
                         </script>
 
                     </div>--%>
-                    <script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.es-es.js" type="text/javascript"></script>
-                    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-                    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-                    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-                    <div class="col-lg-6 col-md-6 form-group">
-                        <label for="txtFechaNacimiento">Fecha de nacimiento</label>
-                    <input id="txtFechaNacimiento" placeholder="dd/mm/yyyy" name="txtFechaNacimiento" required/>
-                    </div>
-                    <script>
-                        $(document).ready(function () { 
-                            $('#txtFechaNacimiento').datepicker({
-                                uiLibrary: 'bootstrap4',
-                                weekStartDay: 6,
-                                locale: 'en-us',
-                                maxDate: function () {
-                                    var date = new Date();
-                                    date.setDate(date.getDate() - 6570);
-                                    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                                },
-                                //value: function () {
-                                //    var date = new Date();
-                                //    date.setDate(date.getDate() - 6570);
-                                //    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                                //},
-                            });
-                        });
-                    </script>
+
 
 <%--                                            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
                         <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
@@ -1543,6 +1583,7 @@
             </div>
               </div>
          </div> 
+              </div>
          <%-- </div>--%>
         <style>
             #btnSiguiente {
