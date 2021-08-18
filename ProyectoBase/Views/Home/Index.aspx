@@ -217,11 +217,12 @@
             var pasaPorCorreo = true;
             var pasaPorRut = true;
             var pasoFotos = true;
+            var pasaPorCelular = true;
             $("#inputGuardarDatos").val("true");
             $('#btnEnviar').hide();
             $("#divPaso2").hide();
-            $("#divPaso3").hide();
-            $("#divPaso4").hide();
+            //$("#divPaso3").show();
+            //$("#divPaso4").show();
             $("#btnSiguiente").click(function () {
                 console.log("NUEVO BOTON SIGUIENTE!")
                 if (cont == 2) {
@@ -257,7 +258,7 @@
             $("#btnSiguiente").click(function () {
                 console.log("PRIMER BOTON SIGUENTE")
                 console.log("PASA FOTOS: "  + pasoFotos)
-                if (pasa == false || pasaPorCorreo == false || pasaPorRut == false /*|| pasoFotos == false*/) {
+                if (pasa == false || pasaPorCorreo == false || pasaPorRut == false || pasaPorCelular == false) {
                     if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "" || pasaPorCorreo == false || pasaPorRut == false) {
                         console.log("Hay algo vacío")
                         //$("#btnSiguiente").prop("disabled", true);
@@ -308,31 +309,39 @@
                         cont++;
                     }
                     console.log("cont2: " + cont);
-                    if (cont == 2) {
-                        $("#baraDeCarga").css("width", "99%");
-                        $("#divPaso2").hide(500);
-                        $("#divPaso3").show(500);
+                    if (cont == 1) {
+                        $("#baraDeCarga").css("width", "66%");
+                        $("#divPaso1").hide(500);
+                        $("#divPaso2").show(500);
+                        $('#btnAtras').removeAttr('disabled');
                         $("#inputGuardarDatos").val("false");
-                    } else {
-                        if (cont == 1) {
-                            $("#baraDeCarga").css("width", "66%");
-                            $("#divPaso1").hide(500);
-                            $("#divPaso2").show(500);
-                            $('#btnAtras').removeAttr('disabled');
-                            $("#inputGuardarDatos").val("false");
-                        }
-                        else {
-                            if (cont == 3) {
-                                $("#baraDeCarga").css("width", "99%");
-                                $("#divPaso3").hide(500);
-                                $("#divPaso4").show(500);
-                                $("#divPaso2").hide();
-                                $('#btnSiguiente').hide();
-                                $('#btnEnviar').show();
-                                $("#inputGuardarDatos").val("false");
-                            }
-                        }
+                        $('#btnSiguiente').hide();
+                        $('#btnEnviar').show();
+                        //$("#baraDeCarga").css("width", "99%");
+                        //$("#divPaso2").hide(500);
+                        //$("#divPaso3").show(500);
+                        //$("#inputGuardarDatos").val("false");
                     }
+                    //else {
+                    //    if (cont == 1) {
+                    //        $("#baraDeCarga").css("width", "66%");
+                    //        $("#divPaso1").hide(500);
+                    //        $("#divPaso2").show(500);
+                    //        $('#btnAtras').removeAttr('disabled');
+                    //        $("#inputGuardarDatos").val("false");
+                    //    }
+                    //    else {
+                    //        if (cont == 3) {
+                    //            $("#baraDeCarga").css("width", "99%");
+                    //            $("#divPaso3").hide(500);
+                    //            $("#divPaso4").show(500);
+                    //            $("#divPaso2").hide();
+                    //            $('#btnSiguiente').hide();
+                    //            $('#btnEnviar').show();
+                    //            $("#inputGuardarDatos").val("false");
+                    //        }
+                    //    }
+                    //}
                     console.log(cont)
                 }
 
@@ -431,7 +440,20 @@
                                     console.log("El Correo no existe")
                                 }
 
-                                if (respuesta != "Existe") {
+
+
+                                function validarEmail(valor) {
+                                    if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(valor)) {
+                                        alert("La dirección de email " + valor + " es correcta!.");
+                                    } else {
+                                        alert("La dirección de email es incorrecta!.");
+                                    }
+                                }
+
+
+
+
+                                if (respuesta != "Existe" ) {
                                     $("#verificarcorreo").hide();
                                     $("#verificarcorreo").text("El correo ingresado es válido :D")
                                     console.log("El rut ingresado es válido :D");
@@ -442,6 +464,30 @@
                                     console.log("El correo no es válido :'( ");
                                     pasaPorCorreo = false;
                                 }
+                                var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+                                var regOficial = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+                                //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+                                if (reg.test(correo) && regOficial.test(correo)) {
+                                    $("#verificarcorreo").hide();
+                                    $("#verificarcorreo").text("El correo ingresado es válido :D")
+                                    console.log("El rut ingresado es válido :D");
+                                    pasaPorCorreo = true;
+                                } else if (reg.test(correo)) {
+                                    $("#verificarcorreo").hide();
+                                    $("#verificarcorreo").text("El correo ingresado es válido :D")
+                                    console.log("El rut ingresado es válido :D");
+                                    pasaPorCorreo = true;
+
+                                } else {
+                                    $("#verificarcorreo").show();
+                                    $("#verificarcorreo").text("El correo no es valido.")
+                                    console.log("El correo no es válido :'( ");
+                                    pasaPorCorreo = false;
+
+                                }
+
                             }
                         },
                         error: function (err) {
@@ -468,8 +514,30 @@
                 }
             });
             $("#txtRut").change(function (event) {
+                console.log("tema del rut");
+                var hola = $("#txtRut").val().replace(/\./g, '');
+                console.log("cambio: " + hola);
+                $("#txtRut").val(hola)
+                var rut1 = $("#txtRut").val();
+
+                if (rut1.indexOf('-') > -1) {
+                    console.log("Tiene guion verificador!!");
+
+                }
+                else {
+                    console.log("No tiene guion verificador!!")
+                    var digitoVerificador = rut1[rut1.length - 1];
+                    console.log("Digito Verificador: " + digitoVerificador)
+                    var rutSinDigitoyConGuion = rut1.slice(0, -1) + '-';
+                    var rutCompleto = rutSinDigitoyConGuion + digitoVerificador;
+                    console.log("Rut Completo!: " + rutCompleto);
+                    rut1 = rutCompleto;
+                }
+
+                $("#txtRut").val(rut1);
                 var rut = $("#txtRut").val();
-                console.log("rutCompleto" + rut);
+
+                console.log("NUEVO! rutCompleto" + rut);
                 //Verificar existencia del rut
                 $.ajax({
                     url: '<%: Url.Content("~/Home/ConsultarRut/") %>',
@@ -559,6 +627,7 @@
                 if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
                     console.log("Hay algo vacío")
                     pasa = false;
+                    
                     //$("#btnSiguiente").prop("disabled", true);
                     //$("#validacionPrimerPaso").prop('hidden', true);
                 }
@@ -566,9 +635,33 @@
                     $("#btnSiguiente").prop("disabled", false);
                     console.log("Esta todo ok")
                     pasa = true;
+                    
                     //$("#validacionPrimerPaso").prop('hidden', false);
                 }
             });
+
+            $("#txtCelular").change(function (event) {
+                if ($("#txtCelular").val() == "" || $("#txtCelular").val().length <= 8 ) {
+                    console.log("Hay algo vacío o numero no existe")
+                    console.log("Tamaño de ceular: " + $("#txtCelular").val().length)
+                    if ($("#txtCelular").val().length <= 8) {
+                        console.log("Celular muy corto!!")
+                    }
+                    $("#verificarcelular").show();
+                    $("#verificarcelular").text("El celular ingresado no es es válido")
+                    pasaPorCelular = false;
+
+                }
+                else {
+                    $("#btnSiguiente").prop("disabled", false);
+                    console.log("Celular esta bien")
+                    console.log("Esta todo ok")
+                    $("#verificarcelular").hide();
+                    $("#verificarcelular").text("El celular ingresado es válido :D")
+                    pasaPorCelular = true;
+                }
+            });
+
 
 
             //$("#btnSiguiente").on('click', function () {
@@ -1076,6 +1169,31 @@
                             
                             Por favor ingrese su rut
                         </div>
+                        <script>
+                            $(document).ready(function () {
+                                $("#txtRut").change(function () {
+                                    //var rut = $("#txtRut").val();
+                                    //if (rut.indexOf('-') > -1) {
+                                    //    console.log("Tiene guion verificador!!");
+
+                                    //}
+                                    //else {
+                                    //    console.log("No tiene guion verificador!!")
+                                    //    var digitoVerificador = rut[rut.length - 1];
+                                    //    console.log("Digito Verificador: " + digitoVerificador)
+                                    //    var rutSinDigitoyConGuion = rut.slice(0, -1) + '-';
+                                    //    var rutCompleto = rutSinDigitoyConGuion + digitoVerificador;
+                                    //    console.log("Rut Completo!: " + rutCompleto);
+                                    //}
+
+
+
+                                    
+                                    
+                                });
+                            });
+                        </script>
+
                             <script>
 <%--                                $(document).ready(function () {
                                     $("#txtRut").change(function (event) {
@@ -1245,10 +1363,13 @@
                               <div class="input-group-text">+56</div>
                             </div>
                             <input type="text" min="10000000" max="99999999" class="form-control" name="txtCelular" id="txtCelular" placeholder="9999999999" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
+                            
                             <div class="invalid-feedback">
                                 Por favor ingrese su celular
                             </div>
+
                         </div>
+                        <h6 id="verificarcelular" style="color: orangered;font-size: 12px;margin-top: 4px;margin-left: 6px;"></h6>
                     </div>
                     <script>
                         $(document).ready(function () {
@@ -1302,15 +1423,16 @@
                         <label id="validacionPrimerPaso" style="color: red">Por favor complete o verfique sus datos.</label>
                     </div>
                 </div>
-    
+                  
+          
           <%--  Paso 2 --%>
           <%--<div class="card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">--%>
             <%--<div class="card" id="divPaso2" style="border-radius: 10px">--%>
-                <div class="card-body" id="divPaso2">
-                <h3>Segundo Paso: Cuestionario</h3>
+                <div class="card-body cardBodys" id="divPaso2">
+                <h3 style="  font-size:24px;  font-family: 'Poppins'; padding-left: 29px; padding-bottom: 29px;"><label style="color: #bad302;font-family: 'Poppins';font-size:24px;">Paso 2: &nbsp;  </label>  Fotografías</h3>
                 <%-- Primera pregunta --%>
-                <h6>1.- ¿Qué zona deseas reparar?</h6>
-                <div style="margin-left: 24px">
+                <h6 style="padding-left: 29px;">¿Qué zona deseas reparar?</h6>
+                <div style="margin-left: 29px">
 
                     <div class="row" style="margin-left: -24px;">
                         <div class="custom-control custom-checkbox">
@@ -1341,8 +1463,56 @@
                     </div>
                 </div>
                 <br />
+                    <style>
+                        .botonesFotos {
+                            background: #455560 !important;
+                            border: 0 !important; 
+                            padding: 10px 35px !important; 
+                            color: #fff !important; 
+                            transition: 0.4s !important; 
+                            border-radius: 7px !important;
+                        }
+                    </style>
+                    <div class="text-center">
+                        <label>
+                            Envíanos tus fotos para poder evaluarte. Recuerda que tus fotografías deben registrar todas las secciones de tu cabeza (ver imagen de referencia)
+                        </label>
+                    </div>
+                    <div class="text-center" style="    margin-top: 3pc;">
+                        <div class="row">
+                            <div class="col-sm">
+                                <button class="botonesFotos" type="button" data-toggle="modal" data-target="#ModalIzquierdo"><i class="bi bi-camera-fill"> </i> Perfil Izquierdo</button>
+                                <input type="text"  id="fotoIzquierdo" name="fotoIzquierdo" value="" hidden/>
+                                <input type="text"  id="fotoIzquierdoIs" name="fotoIzquierdoIs" value="" hidden/>
+                            </div>
+                            <div class="col-sm" style="    margin-top: -1pc">
+                                <button class="botonesFotos" type="button" data-toggle="modal" data-target="#ModalArriba"><i class="bi bi-camera-fill"> </i> Desde Arriba</button>
+                                <input type="text"  id="fotoArriba" name="fotoArriba" value="" hidden/>
+                                <input type="text"  id="fotoArribaIs" name="fotoArribaIs" value="" hidden/>
+                            </div>
+                            <div class="col-sm">
+                                <button class="botonesFotos" type="button" data-toggle="modal" data-target="#ModalDerecho"><i class="bi bi-camera-fill"> </i> Perfil Derecho</button>
+                                <input type="text"  id="fotoDerecho" name="fotoDerecho" value="" hidden/>
+                                <input type="text"  id="fotoDerechoIs" name="fotoDerechoIs" value="" hidden/>
+                            </div>
+                        </div>
+                        <div class="row" style="    margin-top: 2pc;">
+                            <div class="col-sm">
+                                <button class="botonesFotos" type="button" data-toggle="modal" data-target="#ModalAtras"><i class="bi bi-camera-fill"> </i> De Atrás</button>
+                                <input type="text"  id="fotoAtras" name="fotoAtras" value="" hidden/>
+                                <input type="text"  id="fotoAtrasIs" name="fotoAtrasIs" value="" hidden/>
+                            </div>
+                            <div class="col-sm">
+                                <button class="botonesFotos" type="button" data-toggle="modal" data-target="#ModalFrente"><i class="bi bi-camera-fill"> </i> De Frente</button>
+                                <input type="text"  id="fotoFrente" name="fotoFrente" value="" hidden/>
+                                <input type="text"  id="fotoFrenteIs" name="fotoFrenteIs" value="" hidden/>
+                            </div>
+                        </div>
+                        <label id="inputValidacion"></label>
+                    </div>
+
                 <%-- Segunda Pregunta --%>
-                <h6>2.- ¿Se ha estado tratando con algún dermatologo por alguna enfermedad capilar?</h6>
+<%--                <h6>2.- ¿Se ha estado tratando con algún dermatologo por alguna enfermedad capilar?</h6>
                 <div class="invalid-feedback">
                     You must agree before submitting.
                 </div>
@@ -1357,10 +1527,10 @@
                     <label class="custom-control-label" for="chkDermaNo"></label>
                     <label style="padding-left: 15px;">No</label>
                     </div>
-                </div>
+                </div>--%>
 
                 <%-- Chk Si --%>
-                <div id="divSegundaPregunta" style="margin-left: 24px">
+<%--                <div id="divSegundaPregunta" style="margin-left: 24px">
                      <h6>¿Cuál?</h6>
                     <div class="form-check custom-radio custom-control-inline">
                         <input class="form-check-input" type="checkbox" id="chkDermaDermatitis" name="chkDermaDermatitis">
@@ -1392,10 +1562,10 @@
                             Otra
                         </label>
                     </div>
-                </div>
+                </div>--%>
                 <br />
                 <%-- Tercera Pregunta --%>
-                <h6>3.- ¿Ha tenido pelones en la cabeza o barba?</h6>
+<%--                <h6>3.- ¿Ha tenido pelones en la cabeza o barba?</h6>
                 <div  class="custom-control custom-checkbox custom-control-inline">
                   
                     <input type="radio" id="chkPeloSi" name="chkPeloSi" class="custom-control-input" required>
@@ -1413,14 +1583,10 @@
                         $('#chkDermaNo').prop('checked', true);
                         $('#chkPeloNo').prop('checked', true);
                     });
-                </script>
+                </script>--%>
             <%--</div>--%>
           <%-- Script Segundo paso --%>
-          <script>
-              $(document).ready(function () {
 
-              });
-          </script>
           <style>
             .custom-control-label::before {
                 position: absolute;
@@ -1442,7 +1608,7 @@
         <%-- Paso 3 --%>
             <%--<div class="card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">--%>
             <%--<div class="card" id="divPaso3"  style="border-radius: 10px">--%>
-                <div class="card-body" id="divPaso3">
+<%--                <div class="card-body" id="divPaso3">
                 <h3>Tercer Paso: Fotografías</h3>
                 <p>Estas fotografías deben ser tomadas en un lugar con luz natural, sin flash y con la cámara trasera de su cámara o celular, no con la camara frontal, debido a que la calidad de imagen se ve afectada.</p>
                 <p>Es ideal que otra persona le ayude a tomar estas fotografías, posicionandose a un metro de distacia y no en modo selfie.</p>
@@ -1450,8 +1616,8 @@
                 <div class="text-center">
                 </div>
                 <br />
-                <br />
-                    <div class="text-center">
+                <br />--%>
+<%--                    <div class="text-center">
                         <div class="row">
                             <div class="col-sm">
                                 <button type="button" data-toggle="modal" data-target="#ModalArriba" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Desde Arriba</button>
@@ -1482,21 +1648,20 @@
                             </div>
                         </div>
                         <label id="inputValidacion"></label>
-                    </div>
+                    </div>--%>
                 <br />
                 <br />
                 <%--</div>--%>
-          </div>
+          <%--</div>--%>
           <%-- Por donde nos contactamos? --%>
           <%--<div class="card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">--%>
           <%--<div id="divPaso4" class="card" style="border-radius: 10px">--%>
-              <div class="card-body" id="divPaso4">
+              <%--<div class="card-body" id="divPaso4">
             <h3>Cuarto Paso: Contacto</h3>
-            <%-- Primera pregunta --%>
             <h6>¿Por dónde nos contactamos?</h6>
             <div style="text-align: center;">
                 <br />
-            <div class="row" style="    width: 30pc;margin-left: 20pc;padding-bottom: 3pc;">
+            <div class="row" style="    width: 30pc;margin-left: 20pc;padding-bottom: 3pc;">--%>
 <%--                <div class="col">
                     <img width="50" height="50" src="../../Styles/img/correo.png" />
                     <div class="custom-control custom-checkbox" style="margin-right: 40px;">
@@ -1504,15 +1669,15 @@
                       <label class="custom-control-label" for="customCheck1"></label>
                     </div>
                 </div>--%>
-                <div class="col">
+<%--                <div class="col">
                     <img width="50" height="50" src="../../Styles/img/facebook.png" />
                     <div class="custom-control custom-checkbox" style="margin-right: 40px;">
                       <input type="checkbox" class="custom-control-input" id="customCheck2" >
                       <label class="custom-control-label" for="customCheck2"></label>
-                    </div>
+                    </div>--%>
 
                 <%--<button id="btnFacebook" hidden onclick="onLogin();">Iniciar Sesión</button>--%>
-                </div>
+<%--                </div>
               <div class="col">
                     <img width="50" height="50" src="../../Styles/img/whatsapp.png" />
                     <br />
@@ -1522,7 +1687,7 @@
                         <a hidden id="btnWsp" class="button" href="https://api.whatsapp.com/send?phone=56953306060&text=Quiero que me contecten por favor." target="_blank">https://api.whatsapp.com/send?phone=56953306060&text=Quiero</a>
                     </div>
                 </div>
-                </div>
+                </div>--%>
                 <%--<fb:login-button 
                   scope="public_profile,email"
                   onlogin="checkLoginState();">
@@ -1580,8 +1745,8 @@
                                   }
                               });
                           </script>--%>
-            </div>
-              </div>
+            <%--</div>
+              </div>--%>
          </div> 
               </div>
          <%-- </div>--%>

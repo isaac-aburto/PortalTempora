@@ -171,11 +171,8 @@
                     <%} %>  
                 </div>
             </li>
-            <li><a class="dropdown-toggle"href="#" role="button" id="dropdownMenuLinkClientes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ffffff00">Pacientes</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkClientes">
-                    <a class="dropdown-item" href="<%: Url.Content("~/Clientes") %>"  style="border: 0px; color:white; border-radius: 0px">Pacientes</a>
-                  </div>
-            </li>
+            <li class="active"><a href="<%: Url.Content("~/Pacientes") %>">Pacientes</a></li>
+
             <li class="book-a-table text-center">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #ffffff00">
                     <%: Session["Nombre"]%>

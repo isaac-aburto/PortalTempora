@@ -17,10 +17,10 @@ using OfficeOpenXml.Style;
 
 namespace WebSolicitudes.Controllers
 {
-    public class ClientesController : Controller
+    public class PacientesController : Controller
     {
         //
-        // GET: /Clientes/
+        // GET: /Pacientes/
 
         public ActionResult Index()
         {
@@ -50,6 +50,9 @@ namespace WebSolicitudes.Controllers
                             filaCliente += clientes.nombre + " " + clientes.apellido;
                             filaCliente += "  </td>";
                             filaCliente += "  <td>";
+                            filaCliente += clientes.rut;
+                            filaCliente += "  </td>";
+                            filaCliente += "  <td>";
                             filaCliente += clientes.correo;
                             filaCliente += "  </td>";
                             filaCliente += "  <td>";
@@ -68,8 +71,11 @@ namespace WebSolicitudes.Controllers
                                 filaCliente += "Sin solicitud";
                             }
                             filaCliente += "  </td>";
-                            filaCliente += "  <td>"; 
-                            filaCliente += clientes.Solicitud.Select(s=> s.FechaSolicitud).FirstOrDefault().ToString();
+                            filaCliente += "  <td>";
+                            DateTime bDate1 = Convert.ToDateTime(clientes.Solicitud.Select(s => s.FechaSolicitud).FirstOrDefault());
+                            //bDate1 = Convert.ToDateTime(bDate1);
+                            filaCliente += bDate1.ToString("dd-MM-yyyy hh:mm:ss");
+                            //filaCliente += clientes.Solicitud.Select(s=> s.FechaSolicitud).FirstOrDefault().ToString();
                             filaCliente += "  </td>";
                             filaCliente += "  <td>";
                             filaCliente += "<button title='Borrar' class='btn btn-icon btn-2 btn-danger btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-trash fa-1x'></i></span></button>";
@@ -85,7 +91,7 @@ namespace WebSolicitudes.Controllers
             }
             catch (Exception ex)
             {
-                Util.escribirLog("Index", "Clientes", ex.Message);
+                Util.escribirLog("Index", "Pacientes", ex.Message);
                 return RedirectToAction("Index");
             }
             return View();
@@ -188,8 +194,8 @@ namespace WebSolicitudes.Controllers
             }
             catch (Exception ex)
             {
-                Util.escribirLog("Perfil", "Clientes", ex.Message);
-                return RedirectToAction("Clientes");
+                Util.escribirLog("Perfil", "Pacientes", ex.Message);
+                return RedirectToAction("Pacientes");
             }
             return View();
         }

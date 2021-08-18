@@ -232,7 +232,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CasosController.cs" />
-    <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\PacientesController.cs" />
     <Compile Include="Controllers\ConversorBase64.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Permisos.cs" />
@@ -494,8 +494,8 @@
     <Content Include="Styles\MensajeSolicitudIncompleta.html" />
     <Content Include="Views\Admin\EditarArchivo.aspx" />
     <Content Include="Views\Admin\Index.aspx" />
-    <Content Include="Views\Clientes\Index.aspx" />
-    <Content Include="Views\Clientes\Perfil.aspx" />
+    <Content Include="Views\Pacientes\Index.aspx" />
+    <Content Include="Views\Pacientes\Perfil.aspx" />
     <Content Include="Views\Solicitudes\CompletarSolicitud.aspx" />
     <Content Include="Views\Solicitudes\EnviadoSolicitud.aspx" />
     <Content Include="Views\Solicitudes\FotosEnviadas.aspx" />

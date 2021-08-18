@@ -171,6 +171,7 @@
                                             <tr>
                                                 <th class="col-xs-2">ID</th>
                                                 <th class="col-xs-1">Nombre</th>
+                                                <th class="col-xs-1">Rut</th>
                                                 <th class="col-xs-1">Correo</th>
                                                 <th class="col-xs-1">ID Solicitud</th>
                                                 <th class="col-xs-1">Evaluación</th>
