@@ -216,7 +216,7 @@
             var pasa = false;
             var pasaPorCorreo = true;
             var pasaPorRut = true;
-            var pasoFotos = true;
+            var pasoFotos = false;
             var pasaPorCelular = true;
             $("#inputGuardarDatos").val("true");
             $('#btnEnviar').hide();
@@ -255,6 +255,46 @@
                 }
             });
 
+            document.querySelector("#formSolicitud").addEventListener("submit", e => {
+                const sizes = [];
+                document.querySelectorAll("#formSolicitud input").forEach(el => {
+                    if (el.type !== "file") return;
+                    if (!el.files[0]) return sizes.push({ size: "0", elem: el });
+                    let _size = el.files[0].size;
+                    let fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
+                        i = 0; while (_size > 900) { _size /= 1024; i++; }
+                    let exactSize = (Math.round(_size * 100) / 100) + ' ' + fSExt[i];
+                    sizes.push({ size: exactSize, elem: el });
+                });
+                sizes.forEach(el => {
+                    if (el.size === "0") {
+                        if (el.elem.getAttribute("data-required")) {
+                            e.preventDefault();
+                            el.elem.classList.add("needsValidation");
+                            $("#inputValidacion").prop('hidden', false);
+                            $("#inputValidacion").addClass("needsValidation2");
+                            pasoFotos = false;
+                        }
+                    } else {
+                        $("#inputValidacion").prop('hidden', true);
+                        pasoFotos = true;
+                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "" || pasaPorCorreo == false || pasaPorRut == false) {
+                            console.log("Falta por llenar");
+                        } else {
+                            console.log("Entro al modal para mostrar");
+                            $('#modal').modal('show');
+                        }
+                    }
+
+
+                    //if ((el.size.replace(" MB", "")) - 0 >= 2) {
+                    //    e.preventDefault();
+                    //    el.elem.classList.add("fileSizeExceded");
+                    //}
+                });
+            });
+
+            
             $("#btnSiguiente").click(function () {
                 console.log("PRIMER BOTON SIGUENTE")
                 console.log("PASA FOTOS: "  + pasoFotos)
@@ -468,24 +508,26 @@
 
                                 var regOficial = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-                                //Se muestra un texto a modo de ejemplo, luego va a ser un icono
-                                if (reg.test(correo) && regOficial.test(correo)) {
-                                    $("#verificarcorreo").hide();
-                                    $("#verificarcorreo").text("El correo ingresado es válido :D")
-                                    console.log("El rut ingresado es válido :D");
-                                    pasaPorCorreo = true;
-                                } else if (reg.test(correo)) {
-                                    $("#verificarcorreo").hide();
-                                    $("#verificarcorreo").text("El correo ingresado es válido :D")
-                                    console.log("El rut ingresado es válido :D");
-                                    pasaPorCorreo = true;
+                                if (pasaPorCorreo != false) {
+                                    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+                                    if (reg.test(correo) && regOficial.test(correo)) {
+                                        $("#verificarcorreo").hide();
+                                        $("#verificarcorreo").text("El correo ingresado es válido :D")
+                                        console.log("El rut ingresado es válido :D");
+                                        pasaPorCorreo = true;
+                                    } else if (reg.test(correo)) {
+                                        $("#verificarcorreo").hide();
+                                        $("#verificarcorreo").text("El correo ingresado es válido :D")
+                                        console.log("El rut ingresado es válido :D");
+                                        pasaPorCorreo = true;
 
-                                } else {
-                                    $("#verificarcorreo").show();
-                                    $("#verificarcorreo").text("El correo no es valido.")
-                                    console.log("El correo no es válido :'( ");
-                                    pasaPorCorreo = false;
+                                    } else {
+                                        $("#verificarcorreo").show();
+                                        $("#verificarcorreo").text("El correo no es valido.")
+                                        console.log("El correo no es válido :'( ");
+                                        pasaPorCorreo = false;
 
+                                    }
                                 }
 
                             }
@@ -1347,7 +1389,7 @@
                             }); --%>
                         });
                     </script>
-                    <div class="col-lg-6 col-md-6 form-group">
+                    <div class="col-lg-5 col-md-5 form-group">
                         <label for="txtEmail">Correo</label>
                         <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="tucorreo@mail.com" data-rule="email" data-msg="Please enter a valid email" required>
                         <h6 id="verificarcorreo" style="color: orangered;font-size: 12px;margin-top: 4px;margin-left: 6px;"></h6>
@@ -1355,7 +1397,7 @@
                             Por favor ingrese su correo
                         </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 form-group">
+                    <div class="col-lg-4 col-md-4 form-group">
                         <label for="txtCelular">Celular</label>
                         <div class="input-group">
 
@@ -1367,9 +1409,21 @@
                             <div class="invalid-feedback">
                                 Por favor ingrese su celular
                             </div>
-
                         </div>
                         <h6 id="verificarcelular" style="color: orangered;font-size: 12px;margin-top: 4px;margin-left: 6px;"></h6>
+                    </div>
+                    <div class="col-lg-3 col-md-3 form-group">                                
+                        <label for="txtContacto"></label>
+                        <label style="color: black">Contacto </label>
+                        <div id="selDiv" >
+                            <select name="txtContacto" id="txtContacto" class="form-control" >
+                                <option value="ninguno">-</option>
+                                <option value="wsp">WhatsApp</option>
+                                <option value="msn">Messenger</option>
+                            </select>                                     
+                        </div>
+                        <div class="invalid-feedback">Seleccione una opción</div>
+                        <br />                                 
                     </div>
                     <script>
                         $(document).ready(function () {
@@ -1783,6 +1837,18 @@
             .divContacto {
                 margin-left: 25px;
             }
+            .bd-example-modal-lg .modal-dialog{
+                display: table;
+                position: relative;
+                margin: 0 auto;
+                top: calc(50% - 24px);
+            }
+  
+            .bd-example-modal-lg .modal-dialog .modal-content{
+                background-color: transparent;
+                border: none;
+            }
+
         </style>
           <div class="text-center">
               <div class="row" style="margin-top: 2pc;">
@@ -1794,7 +1860,7 @@
                   </div>
                   <div class="col-sm">
                       <button id="btnSiguiente"type="button" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; border-radius: 50px;">Siguiente<i class="bi bi-chevron-right"></i></button>
-                      <button id="btnEnviar" type="submit" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Enviar</button>
+                      <button id="btnEnviar" onclick="modal();" type="submit" style="background: #BAD305;border: 0; padding: 10px 35px;color: #fff;transition: 0.4s;border-radius: 50px;">Enviar</button>
                   </div>
               </div>
             </div>
@@ -1802,6 +1868,18 @@
           <input id="idCliente" name="idCliente" hidden/>
           <input id="idSolicitud" name="idSolicitud" hidden/>
         
+
+              <%--<button type="button" class="btn btn-primary" onclick="modal();">Open and close in 3 secs</button>--%>
+
+            <script>
+                //function modal() {
+                //    $('#modal').modal('show');
+                //    //setTimeout(function () {
+                //    //    console.log('hejsan');
+                //    //    $('#modal').modal('hide');
+                //    //}, 3000);
+                //}
+            </script>
           <script>
                                     // Example starter JavaScript for disabling form submissions if there are invalid fields
               (function () {
@@ -1886,7 +1964,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Fotografía 1</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Fotografía lado izquierdo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1975,7 +2053,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Fotografía 2</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Fotografía desde arriba</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -2059,7 +2137,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Fotografía 3</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Fotografía lado derecho</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -2143,7 +2221,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Fotografía 4</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Fotografía desde atrás</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -2228,7 +2306,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Fotografía 5</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Fotografía de frente</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -2308,37 +2386,7 @@
                 <%-- Validación de fotos --%>
                 <script>
                     $(document).ready(function () {
-                        document.querySelector("#formSolicitud").addEventListener("submit", e => {
-                            const sizes = [];
-                            document.querySelectorAll("#formSolicitud input").forEach(el => {
-                                if (el.type !== "file") return;
-                                if (!el.files[0]) return sizes.push({ size: "0", elem: el });
-                                let _size = el.files[0].size;
-                                let fSExt = new Array('Bytes', 'KB', 'MB', 'GB'),
-                                    i = 0; while (_size > 900) { _size /= 1024; i++; }
-                                let exactSize = (Math.round(_size * 100) / 100) + ' ' + fSExt[i];
-                                sizes.push({ size: exactSize, elem: el });
-                            });
-                            sizes.forEach(el => {
-                                if (el.size === "0") {
-                                    if (el.elem.getAttribute("data-required")) {
-                                        e.preventDefault();
-                                        el.elem.classList.add("needsValidation");
-                                        $("#inputValidacion").prop('hidden', false);
-                                        $("#inputValidacion").addClass("needsValidation2");
-
-                                    }
-                                } else {
-                                    $("#inputValidacion").prop('hidden', true);
-                                }
-
-                                
-                                //if ((el.size.replace(" MB", "")) - 0 >= 2) {
-                                //    e.preventDefault();
-                                //    el.elem.classList.add("fileSizeExceded");
-                                //}
-                            });
-                        });
+ 
                     });
                 </script>
                 <style>
@@ -2399,6 +2447,16 @@
             </div>
         </div>
     </div>
+
+
+                <div id="modal" class="modal fade bd-example-modal-lg" data-backdrop="static" data-keyboard="false" tabindex="-1">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content" style="width: 48px">
+                        <span id="spiner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    </div>
+                </div>
+            </div>
+            
 </form>
   </main><!-- End #main -->
 </asp:Content>

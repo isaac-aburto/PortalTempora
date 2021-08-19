@@ -21,8 +21,7 @@
                                 <h2>Evaluación Médica</h2>
                                 <p>¡Pronto nos pondremos en contacto!</p>
                                 </div>
-                                <p>Hemos resivido con éxito el formulario. En los próximos días un experto de Tempora evaluará y enviará un diagnostico adecuado y personalizado sólo para usted. </p>
-                                <p>Si lo desea puede crear una contraseña para su usuario <%= ViewData["Correo"] %> y usar este portal para ver en tiempo real estado de su solicitud. </p>
+                                <p>Hemos recibido con éxito el formulario. En los próximos días un experto de Tempora evaluará y enviará un diagnóstico adecuado y personalizado sólo para usted. </p>
                                 <br />
                                 <br />
                                 <br />

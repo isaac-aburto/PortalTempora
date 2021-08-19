@@ -18,6 +18,7 @@ using FiftyOne.Foundation.Bases;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace WebSolicitudes.Controllers
 {
@@ -25,6 +26,54 @@ namespace WebSolicitudes.Controllers
     {
         //
         // GET: /Home/
+        private String simpleMethod(string inputEmail)
+        {
+            var tsk = Task.Factory.StartNew(() => EnviarWhatsapp("a"));
+            Task.WaitAll(tsk);
+            //DataTable table = tsk.Result;
+            return "hola";
+        }
+
+        public string EnviarWhatsapp(string inputEmail)
+        {
+            var tsk = Task.Factory.StartNew(() => AppendPathSeparator("a"));
+            //Task.WaitAll(tsk);
+            tsk.ContinueWith(t => Console.WriteLine(t.Result));
+
+            string AppendPathSeparator(string filepath)
+            {
+                var psi = new ProcessStartInfo();
+                psi.FileName = @"C:\Python\python.exe";
+
+                var script = @"C:\Users\PC\Desktop\whatsapp.py";
+
+                psi.Arguments = $"\"{script}";
+
+                psi.UseShellExecute = false;
+                psi.CreateNoWindow = true;
+                psi.RedirectStandardOutput = true;
+                psi.RedirectStandardError = true;
+
+                var errors = "";
+                var results = "";
+
+                using (var process = Process.Start(psi))
+                {
+                    errors = process.StandardError.ReadToEnd();
+                    results = process.StandardOutput.ReadToEnd();
+                }
+
+
+                Console.WriteLine("Errors:");
+                Console.WriteLine(errors);
+                Console.WriteLine();
+                Console.WriteLine("Resultados");
+                Console.WriteLine(results);
+                return results;
+            }
+
+            return "";
+        }
 
         public ActionResult Index()
         {
@@ -46,13 +95,14 @@ namespace WebSolicitudes.Controllers
                 string Telefono = collection["txtTelefono"];
                 string Celular = collection["txtCelular"];
                 string FechaDeNacimiento = collection["txtFechaNacimiento"];
+                string Contacto = collection["txtContacto"];
 
                 string idcliente;
                 //Solicitud
                 int idSolicitud = int.Parse(collection["idSolicitud"]);
                 //Zonas
                 string RespuestaZona = string.Empty;
-
+                
                 string RespuestaZonaCima = collection["chkZonaCima"];
                 string RespuestaZonaRegion = collection["chkZonaRegion"];
                 string RespuestaZonaCoronilla = collection["chkZonaCoronilla"];
@@ -207,6 +257,12 @@ namespace WebSolicitudes.Controllers
                     solicitud.DiaCirugiaEnviado = false;
                     solicitud.Leido = false;
                     solicitud.UltimoCambio = DateTime.Now;
+
+                    if (Contacto == "wsp")
+                    {
+                        solicitud.UsaWsp = true;
+                    }
+
                     conexionDB.SaveChanges();
 
                     //Agrego cada Foto.
@@ -439,38 +495,7 @@ namespace WebSolicitudes.Controllers
         // GET: /Home/Login
 
 
-        public string EnviarWhatsapp(string inputEmail)
-        {
 
-            var psi = new ProcessStartInfo();
-            psi.FileName = @"C:\Python\python.exe";
-
-            var script = @"C:\Users\PC\Desktop\whatsapp.py";
-
-            psi.Arguments = $"\"{script}";
-
-            psi.UseShellExecute = false;
-            psi.CreateNoWindow = true;
-            psi.RedirectStandardOutput = true;
-            psi.RedirectStandardError = true;
-
-            var errors = "";
-            var results = "";
-
-            using (var process = Process.Start(psi))
-            {
-                errors = process.StandardError.ReadToEnd();
-                results = process.StandardOutput.ReadToEnd();
-            }
-
-
-            Console.WriteLine("Errors:");
-            Console.WriteLine(errors);
-            Console.WriteLine();
-            Console.WriteLine("Resultados");
-            Console.WriteLine(results);
-            return results;
-        }
 
 
         [HttpPost]

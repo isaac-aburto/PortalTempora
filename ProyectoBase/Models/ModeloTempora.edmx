@@ -213,6 +213,7 @@
           <Property Name="Guardado" Type="varchar" MaxLength="6" />
           <Property Name="FechaSolicitudIncompleta" Type="datetime" />
           <Property Name="CorreoSolicitudIncompleta" Type="bit" />
+          <Property Name="UsaWsp" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -785,6 +786,7 @@
           <Property Name="Guardado" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="FechaSolicitudIncompleta" Type="DateTime" Precision="3" />
           <Property Name="CorreoSolicitudIncompleta" Type="Boolean" />
+          <Property Name="UsaWsp" Type="Boolean" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1420,6 +1422,7 @@
           <EntitySetMapping Name="Solicitud">
             <EntityTypeMapping TypeName="PortalModeloTemporal.Solicitud">
               <MappingFragment StoreEntitySet="Solicitud">
+                <ScalarProperty Name="UsaWsp" ColumnName="UsaWsp" />
                 <ScalarProperty Name="CorreoSolicitudIncompleta" ColumnName="CorreoSolicitudIncompleta" />
                 <ScalarProperty Name="FechaSolicitudIncompleta" ColumnName="FechaSolicitudIncompleta" />
                 <ScalarProperty Name="Guardado" ColumnName="Guardado" />

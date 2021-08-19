@@ -667,6 +667,10 @@ namespace WebSolicitudes.Controllers
                                 string textoCorreo = System.IO.File.ReadAllText(HttpContext.Server.MapPath("~/Styles/MensajeSolicitudPaso1.html")).Replace("[Nombre]", nombre).Replace("[Link]",link).Replace("[Password]", password);
                                 Util.EnviarMail(textoCorreo, correo, titulo);
                                 solicitud.UltimoCambio = DateTime.Now;
+
+                                if (Convert.ToBoolean(solicitud.UsaWsp) == Convert.ToBoolean(1)) { 
+                                    
+                                }
                             }
                         }
                         // Enviar evaluación presencial 
@@ -1075,14 +1079,26 @@ namespace WebSolicitudes.Controllers
                     Solicitud solicitud = conexionDB.Solicitud.Find(idsolicitud);
                     solicitud.RespDerm = Derma;
                     solicitud.RespPelo = Pelo;
-                    solicitud.FechaCirugiaPaciente = Convert.ToDateTime(FechaCirugia);
-                    solicitud.FechaLlamada = Convert.ToDateTime(FechaLlamada);
+                    if (FechaCirugia != "" && FechaCirugia != null) {
+                        solicitud.FechaCirugiaPaciente = Convert.ToDateTime(FechaCirugia);
+                    }
+                    if (FechaLlamada != "" && FechaLlamada != null)
+                    {
+                        solicitud.FechaLlamada = Convert.ToDateTime(FechaLlamada);
+
+                    }
+
                     conexionDB.SaveChanges();
 
                     Cliente cliente = conexionDB.Cliente.Find(idcliente);
                     cliente.nombre = Nombre;
                     cliente.rut = Rut;
-                    cliente.fecha_nacimiento = Convert.ToDateTime(FechaNacimiento);
+                    cliente.celular = Celular;
+                    if (FechaNacimiento != "" && FechaNacimiento != null)
+                    {
+                        cliente.fecha_nacimiento = Convert.ToDateTime(FechaNacimiento);
+
+                    }
                     cliente.correo = Correo;
                     conexionDB.SaveChanges();
                     return "Correcto";

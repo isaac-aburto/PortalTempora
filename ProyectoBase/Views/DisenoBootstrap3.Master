@@ -141,10 +141,11 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-      <a class="navbar-brand" href="<%: Url.Content("~/Home") %>"><img src="<%: Url.Content("~/Styles/img/logo_tempora.png") %>"/></a>
+
+      <a class="navbar-brand" href="<%: Url.Content("~/Home") %>"><img src="<%: Url.Content("~/Styles/img/logo_tempora.png") %>" style="padding-right: 2pc;padding-left: 3pc;"/></a>
 
 
-      <nav class="nav-menu d-none d-lg-block" style="margin-left: 16pc;" <%--style="padding-left: 14pc;"--%>>
+      <nav class="nav-menu d-none d-lg-block" <%--style="padding-left: 14pc;"--%>>
         <ul>
             <%if (Convert.ToBoolean(Session["Conectado"]) == false)
                  { %>

@@ -18,7 +18,7 @@
         <EntityTypeShape EntityType="PortalModeloTemporal.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.Tecnica" Width="1.5" PointX="3" PointY="20.5" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.Usuario" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="PortalModeloTemporal.ZonaAReparar" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PortalModeloTemporal.ZonaAReparar" Width="1.5" PointX="10.375" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PortalModeloTemporal.ZonaxSolicitud" Width="1.5" PointX="7.5" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="PortalModeloTemporal.FK_Ciudad_Region" ManuallyRouted="false" />
         <AssociationConnector Association="PortalModeloTemporal.FK_Solicitud_Ciudad" ManuallyRouted="false" />
