@@ -474,6 +474,9 @@
     <Content Include="SpreadsheetLight.xml" />
     <Content Include="Styles\img\chevron-right-white_Mesa de trabajo 1.svg" />
     <Content Include="Styles\img\iphone.png" />
+    <Content Include="Styles\img\Logo-tempora-white.png" />
+    <Content Include="Styles\js\dist\plugins\overscroll.js" />
+    <Content Include="Styles\js\dist\smooth-scrollbar.js" />
     <Content Include="Styles\MensajeSolicitudBuenCamino.html" />
     <Content Include="Styles\MensajeSolicitudFechaCirugiaGarantia.html" />
     <Content Include="Styles\MensajeSolicitudQuintoMicrositio.html" />
@@ -494,6 +497,7 @@
     <Content Include="Styles\MensajeSolicitudIncompleta.html" />
     <Content Include="Views\Admin\EditarArchivo.aspx" />
     <Content Include="Views\Admin\Index.aspx" />
+    <Content Include="Views\Pacientes\EditarPaciente.aspx" />
     <Content Include="Views\Pacientes\Index.aspx" />
     <Content Include="Views\Pacientes\Perfil.aspx" />
     <Content Include="Views\Solicitudes\CompletarSolicitud.aspx" />

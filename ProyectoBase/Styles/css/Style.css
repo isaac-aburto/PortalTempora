@@ -195,20 +195,20 @@ h1, h2, h3, h4, h5, h6 {
 
     #header.header-scrolled {
         top: -16px;
-        background: rgba(0, 0, 0, 0.85);
+        background: #455560 !important;
         border-bottom: 1px solid #37332a;
     }
-#header.header-scrolled > a{
-  top: 0;
-  background: rgba(0, 0, 0, 0.85);
-  border-bottom: 1px solid #37332a;
-  display: block;
-  position: relative;
-  color: white;
-  transition: 0.3s;
-  font-size: 14px;
-  font-family: "Open Sans", sans-serif;
-}
+        #header.header-scrolled > a {
+            top: 0;
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 1px solid #37332a;
+            display: block;
+            position: relative;
+            color: #adadad !important;
+            transition: 0.3s;
+            font-size: 14px;
+            font-family: "Open Sans", sans-serif;
+        }
 
 #header .logo {
   font-size: 28px;

@@ -78,8 +78,9 @@ namespace WebSolicitudes.Controllers
                             //filaCliente += clientes.Solicitud.Select(s=> s.FechaSolicitud).FirstOrDefault().ToString();
                             filaCliente += "  </td>";
                             filaCliente += "  <td>";
+                            string URL2 = Url.Content("~/Pacientes/EditarPaciente/");
                             filaCliente += "<button title='Borrar' class='btn btn-icon btn-2 btn-danger btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-trash fa-1x'></i></span></button>";
-                            filaCliente += "<button title='Editar' class='btn btn-icon btn-2 btn-primary btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><i class='fa fa-edit fa-1x'></i></span></button>";
+                            filaCliente += "<button title='Editar' class='btn btn-icon btn-2 btn-primary btnEliminar' type='button'><span class='btn-inner--icon' style='border-radius: 11px;'><a href='" + URL2 + clientes.idCliente + "'><i class='fa fa-edit fa-1x'></i></a></span></button>";
                             filaCliente += "  </td>";
                             filaCliente += "</tr>";
                         }
@@ -278,7 +279,78 @@ namespace WebSolicitudes.Controllers
         }
 
 
+        public ActionResult EditarPaciente(int id)
+        {
+            try
+            {
 
+                string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    if (int.TryParse(valorUsuario, out int idUsuario))
+                    {
+                        Cliente cliente = conexionDB.Cliente.Find(id);
+                        if (cliente == null)
+                            throw new Exception("El cliente no existe");
+
+                        ViewData["txtIdPaciente"] = id.ToString();
+                        ViewData["txtNombre"] = cliente.nombre;
+                        ViewData["txtApellido"] = cliente.apellido;
+                        ViewData["txtCorreo"] = cliente.correo;
+                        ViewData["txtCelular"] = cliente.celular;
+                        ViewData["txtPipeDrive"] = cliente.idPipedrive;
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("EditarPaciente", "Pacientes", ex.Message);
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult EditarPaciente(FormCollection collection)
+        {
+            int idPaciente = int.Parse(collection["txtIdPaciente"]);
+            try
+            {
+                string nombre = collection["txtNombre"];
+
+                string Correo = collection["txtEmail"];
+                string Celular = collection["txtCelular"];
+                string PipeDrive = collection["txtPipeDrive"];
+
+                string valorUsuario = Session["IdUsuario"] != null ? Session["IdUsuario"].ToString() : string.Empty;
+                using (ModeloTempora conexionDB = new ModeloTempora())
+                {
+                    if (int.TryParse(valorUsuario, out int idUsuario))
+                    {
+                        Cliente cliente = conexionDB.Cliente.Find(idPaciente);
+                        if (cliente == null)
+                            throw new Exception("El cliente no existe");
+                        cliente.nombre = nombre;
+  
+                        cliente.correo = Correo;
+                        cliente.celular = Celular;
+                        cliente.idPipedrive = PipeDrive;
+                        conexionDB.SaveChanges();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Util.escribirLog("EditarPaciente", "Pacientes", ex.Message);
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("EditarPaciente/" + idPaciente.ToString(), "Pacientes");
+        }
 
 
     }

@@ -6,7 +6,21 @@
     <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <%-- Gsap --%>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/CSSRulePlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/Draggable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/EaselPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/MotionPathPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/PixiPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/ScrollTrigger.min.js"></script>
+
     <%-- Script cámara --%>
+
     <script type="text/javascript">
         $(document).ready(function () {
         var cont = 0;
@@ -851,7 +865,7 @@
         }
     </style>
     <style>
-                *{box-sizing: border-box;}
+        *{box-sizing: border-box;}
 
         .video-header {
             height: 100vh;
@@ -994,69 +1008,248 @@
 
       <div class="video-header wrap">
           <div class="fullscreen-video-wrap">
-            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" style="filter: brightness(0.5);object-fit: scale-down; max-width: 100%; height: auto; background-color: black;">
+            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" style="filter: brightness(0.68);object-fit: scale-down; max-width: 100%; height: auto; background-color: black;">
                 <source src="../../assets/video/tempora.mp4" type="video/mp4">
             </video>
           </div>
           <div class="header-overlay">
               <div class="headera-content">
-            <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
-          <h1 style="font-family: 'Poppins';
-    font-style: inherit;">Bienvenido a <span style="color: #BAD305">Clínica Tempora</span></h1>
-          <h4 style="color: #BAD305;    font-family: -webkit-pictograph;
-    font-size: 22px;">Una nueva experiencia en evaluación remota</h4>
-<%--          <div class="btns">
-            <a href="#menu" class="btn-menu animated fadeInUp scrollto">Quienes somos</a>
-            <a href="#book-a-table" class="btn-book animated fadeInUp scrollto">Evaluación</a>
-          </div>--%>
-        </div>
-<%--        <div class="col-lg-4 d-flex align-items-center justify-content-center" data-aos="zoom-in" data-aos-delay="200">
-          <a href="https://www.youtube.com/watch?v=gpcZw_XAys4" class="venobox play-btn" data-vbtype="video" data-autoplay="true"></a>
-        </div>--%>
+                <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
+
+                    <h1 style="text-align: center;margin-top: 7pc;font-family: 'Poppins';font-style: inherit;font-weight: 400;color: #BAD305;letter-spacing: 1rem;font-size: 20px;">BIENVENIDO A<%-- <span style="color: #BAD305">Clínica Tempora</span>--%></h1>
+                    <img style="height: 75px;margin-left: 14pc;margin-bottom: 13pc;" src="../../Styles/img/Logo-tempora-white.png" />
+                    <h1 style="text-align: center;font-family: 'Poppins';font-weight: 100;color: whitesmoke;font-style: inherit;/* letter-spacing: 15px; */font-size: 20px;margin-left: 17pc;margin-right: 17pc;">Portar de  evaluación y diagnóstico</h1>
+
+
+
+                </div>
               </div>
           </div>
       </div>
 
 
   </section><!-- End Hero -->
+
+
+<style>
+    rect {
+        background-image:url(../../Styles/img/hero-bg.jpg) !important;
+    }
+    .grid {
+      background-size: cover;
+      position: relative;
+      
+      /*background-blend-mode: saturation;*/
+      color: #fff;
+    }
+    .section.--mask {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #000000;
+      z-index: 1000;
+    }
+    .mask__title {
+      z-index: 100;
+    }
+    .mask__title {
+      font-size: 65px;
+      line-height: 1.2;
+      text-align: center;
+      color: #000000;
+      max-width: 20ch;
+      margin: auto;
+    }
+    #svg-mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+    }
+</style>
+
+<div class="grid">
+    <section class="section --mask ">
+        <svg id="svg-mask" width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <mask id="mask">
+                    <rect width="100%" height="100%" fill="#fff"></rect>
+                    <circle id="inner-mask" stroke="green" stroke-width="3" cx="50%" cy="50%" r="100" fill="black"></circle>
+                </mask>
+            </defs>
+            <g>
+                <rect mask="url(#mask)" width="100%" height="100%" fill="#fff"></rect>
+            </g>
+        </svg>
+    </section>
+    <section class="section --fixed"></section>
+</div>
+
+<section class="spacer"></section>
+<script>
+    const svg = document.querySelector("#svg-mask");
+    const img = document.querySelector("#fixed-image");
+    const maskTitle = document.querySelector(".mask__title");
+    const chevron = document.querySelector("#inner-mask");
+
+    gsap.set(maskTitle, {
+        y: chevron.getBoundingClientRect().height / 2
+    });
+    gsap.set(chevron, {
+        transformOrigin: "center center"
+    });
+    const imageContainers = document.querySelectorAll(".content__image--animate");
+    imageContainers.forEach(imageContainer => {
+        const imageAnim = gsap.to(imageContainer.querySelector('img'), {
+            // ease: 'none',
+            paused: true,
+            yPercent: parseFloat(imageContainer.dataset.offsetY) || 0,
+            duration: parseFloat(imageContainer.dataset.scrub) || 0.1
+        });
+
+        ScrollTrigger.create({
+            animation: imageAnim,
+            scrub: true,
+            trigger: imageContainer,
+            start: "top center",
+            end: "bottom top"
+        });
+    });
+
+    // Setup a timeline for the Mask and text
+    var tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: '.--mask',
+            pin: true,
+            start: "top top",
+            end: '+=925',
+            scrub: 0.2,
+            pinSpacing: false
+        },
+        defaults: {
+            duration: 2,
+            ease: "power3"
+        }
+    }).to(maskTitle, {
+        opacity: 0,
+        duration: 0.15
+    }, 0).to(chevron, {
+        scale: 35,
+        yPercent: -550,
+        duration: 4
+    }, 0);
+
+
+    // Fade in the text
+    gsap.set(".content__text", {
+        y: 50
+    });
+
+    ScrollTrigger.batch(".content__text", {
+        interval: 0.2,
+        batchMax: 2,
+        onEnter: batch => gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            overwrite: true
+        }),
+        onLeave: batch => gsap.set(batch, {
+            opacity: 0,
+            y: -50,
+            overwrite: true
+        }),
+        onEnterBack: batch => gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.15,
+            overwrite: true
+        }),
+        onLeaveBack: batch => gsap.set(batch, {
+            opacity: 0,
+            y: 50,
+            overwrite: true
+        }),
+        start: "top bottom",
+        end: "bottom top",
+        // markers: true
+    });
+
+    window.addEventListener("load", init);
+    window.addEventListener("resize", resize);
+
+    function init() {
+        resize();
+    }
+
+    function resize() {
+        tl.progress(0);
+        tl.invalidate();
+        ScrollTrigger.refresh();
+    }
+
+    ScrollTrigger.addEventListener("refreshInit", () => gsap.set(".content__text", {
+        y: 0
+    }));
+</script>
+
+
+
+
 <main id="main" style="margin-top: -48px;">
 <form action="<%: Url.Content("~/Home/Index") %>" method="post" enctype="multipart/form-data" id="formSolicitud" class="needs-validation" novalidate>
 
-    <!-- ======= About Section ======= -->
-<%--    <section id="about" class="about">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row">
-          <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
-            <div class="about-img">
-              <img src="Styles/img/about.jpg" alt="">
-            </div>
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
-            <h3 style="color: greenyellow">Sobre nuestra clínica...</h3>
-            <p class="font-italic" style="color: white;">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <ul>
-              <li style="color: white;"><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li style="color: white;"><i class="icofont-check-circled"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li style="color: white;"><i class="icofont-check-circled"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-            </ul>
-            <p style="color: white;">
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. 
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section>--%><!-- End About Section -->
 
     <!-- ======= Pasos a seguir ======= -->
+    <style>
+        .estiloCard2 {
+            width: 18rem;
+            /* max-width: 10pc; */
+            max-height: 20pc;
+            min-height: 14pc;
+            min-width: 69pc;
+        }
+        .cuadroNumeros {
+            background-color:aquamarine        
+        }
+    </style>
     <section id="why-us" class="why-us">
       <div class="container" data-aos="fade-up">
+        <div class="col-lg-12 mt-12 mt-lg-0">
+            <div class="card border-left-primary shadow estiloCard2" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="card" style="height: 220px;background-color: #465660;">
+                            <div style="margin-top: 3pc;margin-left: 13px;">
+                                <h4 style="color:whitesmoke;font-size: 3pc;">1°</h4>
+                                <h4 style="color:whitesmoke;font-size: 18px;">Paso</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"  style="margin-top: 30px;">
+                        <div class="card-body" style="text-align: center;">
+                            <h4 style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill"></i>Solicitar evaluación</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-top: 3pc;">
+                        <div class="card-body">
+                            <h4 style="font-family: -webkit-pictograph;text-align: left;">Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card" style="height: 220px;background-color: #ededed;">
+                          <div class="card-body">   
+                          </div>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+          </div>
         <div class="section-title">
           <h2>Pasos a seguir</h2>
           <p>¿Desea una evaluación?</p>
@@ -1160,6 +1353,15 @@
 
       </div>
     </section>--%><!-- End Events Section -->
+
+
+
+
+
+
+
+
+
 
     <!-- ======= Book A Table Section ======= -->
     <style>

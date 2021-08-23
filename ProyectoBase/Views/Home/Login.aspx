@@ -4,7 +4,7 @@
 
     <title>Login</title>
     <link href="<%: Url.Content("~/Styles/css/custom.css") %>" rel="stylesheet" />
-    <script>
+<%--    <script>
         $(document).ready(function () {
             $("#btnSubmit").click(function () {
                 console.log("aaaaa")
@@ -26,7 +26,7 @@
                 });
             });
         });
-    </script>
+    </script>--%>
     <style>
         .box-contenedor {
             background-color: #e3e3e3;

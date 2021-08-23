@@ -1,6 +1,7 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
 <!DOCTYPE html>
+
 <html lang="es-ES">
 
 <head>
@@ -16,7 +17,7 @@
   <link href="Styles/img/apple-touch-icon.png" rel="apple-touch-icon">--%>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
   <!-- Vendor CSS Files -->
@@ -69,8 +70,8 @@
           background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
         }
         a {
-  color: #7d7d7d !important;
-}
+          color: #d7d7d7  !important;
+        }
     </style>
         <style>
         .mobile-nav-toggle {
@@ -108,6 +109,10 @@
             };
         });
     </script>
+
+
+
+
     <asp:ContentPlaceHolder ID="TitleContent" runat="server">
     </asp:ContentPlaceHolder>
     <%
@@ -201,10 +206,15 @@
 CONTENEDOR PARA IMPLEMENTAR
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <%--    <section>--%>
-        <div class="box-contenedor mx-auto">
+        <div class="box-contenedor mx-auto" <%--id="my-scrollbar"--%>>
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
         </div>
+<%--    <script src="<%: Url.Content("~/Styles/js/dist/smooth-scrollbar.js") %>"></script>
+    <script>
+        var Scrollbar = window.Scrollbar;
+        Scrollbar.init(document.querySelector('#my-scrollbar'));
+    </script>--%>
 <%--    </section>--%>
     <!------------------------------------------------------------------------------------------------------------------------------------------------------------------
 FIN CONTENEDOR PARA IMPLEMENTAR
@@ -322,6 +332,7 @@ FIN CONTENEDOR PARA IMPLEMENTAR
 <script src="<%: Url.Content("~/Styles/js/main.js") %>"></script>
 <script src="<%: Url.Content("~/Styles/vendor/bootstrap/js/bootstrap.bundle.min.js") %>"></script>
 <script "<%: Url.Content("~/Styles/js/custom-file-input.js") %>></script>
+
 
 <%-- DataTable --%>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>

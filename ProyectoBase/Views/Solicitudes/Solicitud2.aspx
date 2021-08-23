@@ -1519,7 +1519,8 @@ body {
     </section>
 </div>
 
-<section class="spacer"></section><script>
+<section class="spacer"></section>
+<script>
 
 
     const svg = document.querySelector("#svg-mask");
