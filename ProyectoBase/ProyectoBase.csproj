@@ -472,6 +472,8 @@
     <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
     <Content Include="Scripts\Additional-Validations.js" />
     <Content Include="SpreadsheetLight.xml" />
+    <Content Include="Styles\dry-clean.svg" />
+    <Content Include="Styles\heart.svg" />
     <Content Include="Styles\img\chevron-right-white_Mesa de trabajo 1.svg" />
     <Content Include="Styles\img\iphone.png" />
     <Content Include="Styles\img\Logo-tempora-white.png" />
@@ -497,6 +499,8 @@
     <Content Include="Styles\MensajeSolicitudIncompleta.html" />
     <Content Include="Views\Admin\EditarArchivo.aspx" />
     <Content Include="Views\Admin\Index.aspx" />
+    <Content Include="Views\Home\Index - Copia %282%29.aspx" />
+    <Content Include="Views\Home\IndexDefinitivo.aspx" />
     <Content Include="Views\Pacientes\EditarPaciente.aspx" />
     <Content Include="Views\Pacientes\Index.aspx" />
     <Content Include="Views\Pacientes\Perfil.aspx" />

@@ -431,22 +431,12 @@
                 }
                 console.log(cont)
             });
-            //if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-            //    console.log("Hay algo vacío1")
-            //   // $("#btnSiguiente").prop("disabled", true);
-            //    $("#validacionPrimerPaso").prop('hidden', false);
-            //}
-            //else {
-            //    $("#btnSiguiente").prop("disabled", false);
-            //    console.log("Esta todo ok1")
-            //    $("#validacionPrimerPaso").prop('hidden', true);
-            //}
+
             $("#txtFechaNacimiento").change(function (event) {
                 if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
                     console.log("Hay algo vacío")
                     pasa = false;
-                    //$("#btnSiguiente").prop("disabled", true);
-                    //$("#validacionPrimerPaso").prop('hidden', true);
+
                 }
                 else {
                     $("#btnSiguiente").prop("disabled", false);
@@ -717,114 +707,8 @@
                     pasaPorCelular = true;
                 }
             });
-
-
-
-            //$("#btnSiguiente").on('click', function () {
-            //    console.log("Se apretó!")
-            //    if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-            //        console.log("Hay algo vacío")
-            //        pasa = false;
-            //        //$("#btnSiguiente").prop("disabled", true);
-            //        //$("#validacionPrimerPaso").prop('hidden', true);
-            //    }
-            //    else {
-            //        $("#btnSiguiente").prop("disabled", false);
-            //        console.log("Esta todo ok")
-            //        pasa = true;
-            //        //$("#validacionPrimerPaso").prop('hidden', false);
-            //    }
-            //});
         });
     </script>
-    <%-- Script Primer paso --%>
-            <%--<script>
-                $(document).ready(function () {
-                    if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-                        console.log("Hay algo vacío1")
-                        $("#btnSiguiente").prop("disabled", true);
-                        $("#validacionPrimerPaso").prop('hidden', true);
-                    }
-                    else {
-                        $("#btnSiguiente").prop("disabled", false);
-                        console.log("Esta todo ok1")
-                        $("#validacionPrimerPaso").prop('hidden', false);
-                    }
-                    $("#txtFechaNacimiento").change(function (event) {
-                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-                            console.log("Hay algo vacío")
-                            $("#btnSiguiente").prop("disabled", true);
-                            $("#validacionPrimerPaso").prop('hidden', true);
-                        }
-                        else {
-                            $("#btnSiguiente").prop("disabled", false);
-                            console.log("Esta todo ok")
-                            $("#validacionPrimerPaso").prop('hidden', false);
-                        }
-                    });
-                    $("#txtCelular").change(function (event) {
-                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-                            console.log("Hay algo vacío")
-                            $("#btnSiguiente").prop("disabled", true);
-                            $("#validacionPrimerPaso").prop('hidden', true);
-                        }
-                        else {
-                            $("#btnSiguiente").prop("disabled", false);
-                            console.log("Esta todo ok")
-                            $("#validacionPrimerPaso").prop('hidden', false);
-                        }
-                    });
-                    $("#txtEmail").change(function (event) {
-                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-                            console.log("Hay algo vacío")
-                            $("#btnSiguiente").prop("disabled", true);
-                            $("#validacionPrimerPaso").prop('hidden', true);
-                        }
-                        else {
-                            $("#btnSiguiente").prop("disabled", false);
-                            console.log("Esta todo ok")
-                            $("#validacionPrimerPaso").prop('hidden', false);
-                        }
-                    });
-                    $("#txtRut").change(function (event) {
-                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-                            console.log("Hay algo vacío")
-                            $("#btnSiguiente").prop("disabled", true);
-                            $("#validacionPrimerPaso").prop('hidden', true);
-                        }
-                        else {
-                            $("#btnSiguiente").prop("disabled", false);
-                            console.log("Esta todo ok")
-                            $("#validacionPrimerPaso").prop('hidden', false);
-                        }
-                    });
-                    $("#txtNombre").change(function (event) {
-                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-                            console.log("Hay algo vacío")
-                            $("#btnSiguiente").prop("disabled", true);
-                            $("#validacionPrimerPaso").prop('hidden', true);
-                        }
-                        else {
-                            $("#btnSiguiente").prop("disabled", false);
-                            console.log("Esta todo ok")
-                            $("#validacionPrimerPaso").prop('hidden', false);
-                        }
-                    });
-                    $("#btnSiguiente").on('click', function () {
-                        console.log("Se apretó!")
-                        if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
-                            console.log("Hay algo vacío")
-                            $("#btnSiguiente").prop("disabled", true);
-                            $("#validacionPrimerPaso").prop('hidden', true);
-                        }
-                        else {
-                            $("#btnSiguiente").prop("disabled", false);
-                            console.log("Esta todo ok")
-                            $("#validacionPrimerPaso").prop('hidden', false);
-                        }
-                    });
-                });
-            </script>--%>
 
     <%-- Checkbox Paso 2 --%>
 
@@ -848,16 +732,6 @@
         });
     </script>
 
-    <%-- AJAX Guardar Solicitud no terminada --%>
-<%--    <script>
-        $(document).ready(function () {
-            $("#btnSiguiente").click(function () {
-                console.log("Intento AJAX Guardar Solicitud no terminada")
-                console.log($("#inputGuardarDatos").val())
-
-            });
-        });
-    </script>--%>
 
     <style>
         .progress-bar {
@@ -1008,7 +882,7 @@
 
       <div class="video-header wrap">
           <div class="fullscreen-video-wrap">
-            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" style="filter: brightness(0.68);object-fit: scale-down; max-width: 100%; height: auto; background-color: black;">
+            <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop" style="filter: brightness(0.50);object-fit: scale-down; max-width: 100%; height: auto; background-color: black;">
                 <source src="../../assets/video/tempora.mp4" type="video/mp4">
             </video>
           </div>
@@ -1016,11 +890,66 @@
               <div class="headera-content">
                 <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
 
-                    <h1 style="text-align: center;margin-top: 7pc;font-family: 'Poppins';font-style: inherit;font-weight: 400;color: #BAD305;letter-spacing: 1rem;font-size: 20px;">BIENVENIDO A<%-- <span style="color: #BAD305">Clínica Tempora</span>--%></h1>
-                    <img style="height: 75px;margin-left: 14pc;margin-bottom: 13pc;" src="../../Styles/img/Logo-tempora-white.png" />
-                    <h1 style="text-align: center;font-family: 'Poppins';font-weight: 100;color: whitesmoke;font-style: inherit;/* letter-spacing: 15px; */font-size: 20px;margin-left: 17pc;margin-right: 17pc;">Portar de  evaluación y diagnóstico</h1>
+                    <h1 style="text-align: center;margin-top: 14pc;font-family: 'Poppins';font-style: inherit;font-weight: 400;color: #BAD305;letter-spacing: 1rem;font-size: 20px;">BIENVENIDO A<%-- <span style="color: #BAD305">Clínica Tempora</span>--%></h1>
+                        <div class="circulo"></div>
+                    <style>
+                        .circulo {
+                             width: 4px;
+                            height: 4px;
+                            -moz-border-radius: 50%;
+                            -webkit-border-radius: 50%;
+                            border-radius: 50%;
+                            background: #EBEBEB;
+                            margin-left: 24pc;
+                        }
+                    </style>
+                    <script>
+
+                        var b = gsap.timeline({});
+
+                        //add 3 tweens that will play in direct succession.
+                        b.set(".circulo", { xPercent: 900, yPercent: 0 });
+                        b.to(".circulo", {
+                            duration: 0.5, y: -200, scale: 6000, scrollTrigger: {
+                                opacity: 100,
+                                start: () => '+=${document.querySelector(".circulo").offsetHeight}',
+                                //trigger: ".circulo",
+                                scrub: true,
+                            }
+                        });
 
 
+                    </script>
+                    <img style="height: 75px;margin-left: 14pc;margin-bottom: 17pc;" src="../../Styles/img/Logo-tempora-white.png" />
+                    <h1 class="texto0" style="text-align: center;margin-top: 0pc;    margin-left: 16px;font-family: 'Poppins';font-style: inherit;font-weight: 400;color: #BAD305;letter-spacing: 1rem;font-size: 20px;">TU NUEVO</h1><h1 style="text-align: center;font-family: 'Poppins';font-weight: 100;color: whitesmoke;font-style: inherit;/* letter-spacing: 15px; */font-size: 20px;margin-left: 17pc;margin-right: 17pc;">Portar de  evaluación y diagnóstico</h1>
+                    
+                    <script>
+                        gsap.registerPlugin(ScrollTrigger);
+
+                        //let tl = gsap.titeline({
+                        //    scrub: true,
+                        //    scrollTrigger: {
+                        //        trigger: ".texto0",
+                        //        start: () => '+=${document.querySelector(".texto0").offsetHeight}',
+                        //        markers: true,
+
+                        //        scrub: true
+                        //    }
+                        //});
+                        //tl.from("texto0", {x: 200, opacity: 0, duration: 1.5})
+
+                        gsap.from(".texto0", {
+                            y: -40,
+                            scrub: true,
+                            opacity: 0,
+                            scrollTrigger: {
+                                trigger: ".texto0",
+                                start: () => '+=${document.querySelector(".texto0").offsetHeight}',
+                                //markers: true,
+                                scrub: true
+                            }
+                        });
+                    </script>
 
                 </div>
               </div>
@@ -1073,129 +1002,6 @@
     }
 </style>
 
-<%--<div class="grid">
-    <section class="section --mask ">
-        <svg id="svg-mask" width="100%" height="100%" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
-            <defs>
-                <mask id="mask">
-                    <rect width="100%" height="100%" fill="#fff"></rect>
-                    <circle id="inner-mask" stroke="green" stroke-width="3" cx="50%" cy="50%" r="100" fill="black"></circle>
-                </mask>
-            </defs>
-            <g>
-                <rect mask="url(#mask)" width="100%" height="100%" fill="#fff"></rect>
-            </g>
-        </svg>
-    </section>
-    <section class="section --fixed"></section>
-</div>
-
-<section class="spacer"></section>
-<script>
-    const svg = document.querySelector("#svg-mask");
-    const img = document.querySelector("#fixed-image");
-    const maskTitle = document.querySelector(".mask__title");
-    const chevron = document.querySelector("#inner-mask");
-
-    gsap.set(maskTitle, {
-        y: chevron.getBoundingClientRect().height / 2
-    });
-    gsap.set(chevron, {
-        transformOrigin: "center center"
-    });
-    const imageContainers = document.querySelectorAll(".content__image--animate");
-    imageContainers.forEach(imageContainer => {
-        const imageAnim = gsap.to(imageContainer.querySelector('img'), {
-            // ease: 'none',
-            paused: true,
-            yPercent: parseFloat(imageContainer.dataset.offsetY) || 0,
-            duration: parseFloat(imageContainer.dataset.scrub) || 0.1
-        });
-
-        ScrollTrigger.create({
-            animation: imageAnim,
-            scrub: true,
-            trigger: imageContainer,
-            start: "top center",
-            end: "bottom top"
-        });
-    });
-
-    // Setup a timeline for the Mask and text
-    var tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: '.--mask',
-            pin: true,
-            start: "top top",
-            end: '+=925',
-            scrub: 0.2,
-            pinSpacing: false
-        },
-        defaults: {
-            duration: 2,
-            ease: "power3"
-        }
-    }).to(maskTitle, {
-        opacity: 0,
-        duration: 0.15
-    }, 0).to(chevron, {
-        scale: 35,
-        yPercent: -550,
-        duration: 4
-    }, 0);
-
-
-    // Fade in the text
-    gsap.set(".content__text", {
-        y: 50
-    });
-
-    ScrollTrigger.batch(".content__text", {
-        interval: 0.2,
-        batchMax: 2,
-        onEnter: batch => gsap.to(batch, {
-            opacity: 1,
-            y: 0,
-            overwrite: true
-        }),
-        onLeave: batch => gsap.set(batch, {
-            opacity: 0,
-            y: -50,
-            overwrite: true
-        }),
-        onEnterBack: batch => gsap.to(batch, {
-            opacity: 1,
-            y: 0,
-            stagger: 0.15,
-            overwrite: true
-        }),
-        onLeaveBack: batch => gsap.set(batch, {
-            opacity: 0,
-            y: 50,
-            overwrite: true
-        }),
-        start: "top bottom",
-        end: "bottom top",
-        // markers: true
-    });
-
-    window.addEventListener("load", init);
-    window.addEventListener("resize", resize);
-
-    function init() {
-        resize();
-    }
-
-    function resize() {
-        tl.progress(0);
-        tl.invalidate();
-        ScrollTrigger.refresh();
-    }
-
-    ScrollTrigger.addEventListener("refreshInit", () => gsap.set(".content__text", {
-        y: 0
-    }));
-</script>--%>
 
 
 
@@ -1217,258 +1023,275 @@
             background-color:aquamarine        
         }
     </style>
+
+
     <section id="why-us" class="why-us">
       <div class="container" data-aos="fade-up">
 
-
-
-        <div class="col-lg-12 mt-12 mt-lg-0 primero">
-            <div class="card border-left-primary shadow estiloCard2" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
-                <div class="row">
-                    <div class="col-lg-1">
-                        <div class="card" style="height: 220px;background-color: #465660;">
-                            <div style="margin-top: 3pc;margin-left: 13px;">
-                                <h4 style="color:whitesmoke;font-size: 3pc;">1°</h4>
-                                <h4 style="color:whitesmoke;font-size: 18px;">Paso</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-2"  style="margin-top: 30px;">
-                        <div class="card-body" style="text-align: center;">
-                            <h4 style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill"></i>Solicitar evaluación</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-6" style="margin-top: 3pc;">
-                        <div class="card-body">
-                            <h4 style="font-family: -webkit-pictograph;text-align: left;">Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.</h4>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card" style="height: 220px;background-color: #ededed;">
-                          <div class="card-body">   
-                          </div>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="texto1">
+                Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.
             </div>
-          </div>
-          <br />
-          <br />
-
-
-        <div class="section-title">
-          <h2>Pasos a seguir</h2>
-          <p>¿Desea una evaluación?</p>
-        </div>
-
-        <div class="row">
-            <style>
-                .spanCuadrados {
-                    font-size: 2pc;
-                    font-weight: bold;
-                    color: #bad302;
-                    text-align:center;
-                }
-                .estiloCard {
-                    width: 18rem;
-                    max-width: 291px;
-                    max-height: 20pc;
-                    min-height: 21pc;
-                    min-width: 22pc;
-                }
-                .estiloSpan {
-                    font-size: 32px;
-                    font-family: 'Poppins';
-                    text-align:center;
-                }
-                .numeroSpan {
-                    text-align:center;
-                }
-            </style>
-          <div class="col-lg-4 mt-4 mt-lg-0">
-<%--            <div class="box" data-aos="zoom-in" data-aos-delay="100">
-              <span>01</span>
-              <h4>Ingresa tus datos personales para que nos conozcamos.</h4>
-              <p></p>
-            </div>--%>
-              <div class="card border-left-primary shadow estiloCard" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
-                <div class="card-body">
-                <div style="text-align:center">
-                    <span class="spanCuadrados">01</span>
-                </div>
-                    <div class="estiloSpan">
-                        <span>Sobre ti</span>
-                    </div>
-                <h4>Ingresa tus datos personales para que nos conozcamos.</h4>
-                </div>
+            <div class="texto2">
+                Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.
             </div>
-          </div>
-
-          <div class="col-lg-4 mt-4 mt-lg-0">
-<%--            <div class="box" data-aos="zoom-in" data-aos-delay="200">
-              <span>02</span>
-              <h4>Envíanos las fotografías de tu cabeza para evaluar tu  calvicie.</h4>
-              <p></p>
-            </div>--%>
-              <div class="card border-left-primary shadow estiloCard" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
-                <div class="card-body">
-                <div style="text-align:center">
-                    <span class="spanCuadrados">02</span>
-                </div>
-                <div class="estiloSpan">
-                    <span>Tus fotografías</span>
-                </div>
-                <h4>Envíanos las fotografías de tu cabeza para evaluar tu  calvicie.</h4>
-                </div>
+            <div class="texto3">
+                Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.
             </div>
-          </div>
+          <script>
 
-          <div class="col-lg-4 mt-4 mt-lg-0">
+              //gsap.registerPlugin(ScrollTrigger);
 
-            <div class="card border-left-primary shadow estiloCard" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="300">
-                <div class="card-body">
-                <div style="text-align:center">
-                    <span class="spanCuadrados">03</span>
-                </div>
-                    <div class="estiloSpan">
-                    <span>¡Relájate!</span>
-                </div>
-                <h4>Mira el último capítulo de tu serie favorita mientras te  enviamos tu evaluación.</h4>
-                </div>
-            </div>
-          </div>
+              let tl = gsap.timeline({
+                  scrollTrigger: {
+                      trigger: ".texto1",
+                      start: "center bottom",
+                      markers: true,
+                      scrub: true
+                  }
+              });
+              tl.from("texto1", { x: 200, opacity: 5, duration: 5})
+                  .from("texto2", { x: 200, opacity: 5, duration: 6 })
 
-        </div>
+              //gsap.from(".texto0", {
+              //    y: -40,
+              //    scrub: true,
+              //    opacity: 0,
+              //    scrollTrigger: {
+              //        trigger: ".texto0",
+              //        start: () => '+=${document.querySelector(".texto0").offsetHeight}',
+              //        markers: true,
+              //        scrub: true
+              //    }
+              //});
 
-      </div>
+        
+          </script>
+
+    </div>
     </section>
 
-    <!-- ======= Events Section ======= -->
-<%--    <section id="events" class="events">
-      <div class="container" data-aos="fade-up">
+    <%-- Pelotita --%>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 
-        <div class="section-title">
-          <br />
-            <br />
-                  <div id="Container">
-    <video></video>
-    <div></div>
-</div>
-            <br />
-        </div>
+    <br />
+    <br />
 
-      </div>
-    </section>--%><!-- End Events Section -->
+    <br />
 
-<div class="divabove"><h1>Approach styles</h1>
-</div>
-<div class="approach">
-  <div class="approach-text col-md-4">
-    <h3>Title 1</h3>
-    <p>tWhat is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown pr</p></div>
-  <div class="approach-img col-md-8">
-    <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9"></div>
-</div>
+    <br />
 
-<div class="approach">
-  <div class="approach-text col-md-4">
-    <h3>Title 1</h3>
-    <p>tWhat is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown pr</p></div>
-  <div class="approach-img col-md-8">
-    <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9"></div>
-</div>
-
-<div class="approach">
-  <div class="approach-text col-md-4">
-    <h3>Title 1</h3>
-    <p>tWhat is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown pr</p></div>
-  <div class="approach-img col-md-8">
-    <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9"></div>
-</div>
-
+    <br />
+    <br />
+    <div class="cuadrado"></div>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Signika+Negative:300,400&display=swap');
-
-body { 
-  font-family: "Signika Negative", sans-serif; 
-  font-weight: 300;
-  margin: 0;
-  padding: 0 20px;
-}
-
-h1{font-size:50vh;}
-.approach{
-  width: 50%;
-  display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-  min-height:100vh
-}
-.col-md-8{
-  -ms-flex: 0 0 66.666667%;
-    flex: 0 0 66.666667%;
-    max-width: 66.666667%;
-  position: relative;
-
-}
-
-.col-md-4{
- -ms-flex: 0 0 33.333333%;
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
-  position: relative;
-  
-}
-
-
-.approach-img img{
-  width:100px;
-}
-
+        .cuadrado {
+            width: 100px;
+            height: 100px;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            background: #455560;
+        }
     </style>
-
     <script>
-        gsap.utils.toArray(".approach").forEach(section => {
-            gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    scrub: 1,
-                    pin: true,
-                    pinSpacing: true,
-                    start: "top center",
-                    end: "+=200",
-                    markers: true
-                }
-            })
-                .from(section.querySelectorAll(".approach-img, .approach-text"), 0.3, { opacity: 0, ease: "power4" })
-                .to(section.querySelectorAll(".approach-img, .approach-text"), 0.1, { opacity: 0, ease: "power4" });
 
-        }); 
+
+        var a = gsap.timeline({ });
+
+        //add 3 tweens that will play in direct succession.
+        a.set(".cuadrado", { xPercent: 720, yPercent: 0 });
+        a.to(".cuadrado", {
+            duration: 0.5, y: -200, scale: 30, scrollTrigger: {
+                opacity: 100,
+                start: () => '+=${document.querySelector(".cuadrado").offsetHeight}',
+                trigger: ".cuadrado",
+                scrub: true,
+            } });
     </script>
 
 
 
+
+
+    <%-- Notebook --%>
+
+        <div class="containera" >
+          <div class="scaleDowna" data-aos="fade-up" style="margin-left: 3pc;">
+              <div class="pantalla">
+                  <video id="video"  src="../../Styles/img/casos/Caso%20FUE.mp4" controls="controls" style="height: 719.0px;margin-top: 47px;margin-left: 4.1px;"/>  
+              </div>
+            <script>
+                let playAfterThisHeight = 2200
+                let playAfterThisHeight2 = 3600
+                $(document).scroll(function () {
+                    if ($(document).scrollTop() > playAfterThisHeight && $(document).scrollTop() < playAfterThisHeight2) {
+                        $('#video').prop('volume', 0.50);
+                        $('#video').trigger('play');
+
+                    } else {
+                        if ($(document).scrollTop() > 3700) {
+                            $('#video').prop('volume', 0.40);
+                        }
+                        if ($(document).scrollTop() > 3800) {
+                            $('#video').prop('volume', 0.30);
+                        }
+                        if ($(document).scrollTop() > 3900) {
+                            $('#video').prop('volume', 0.20);
+                        }
+                        if ($(document).scrollTop() > 4000) {
+                            $('#video').prop('volume', 0.10);
+                        }
+                        if ($(document).scrollTop() > 4100) {
+                            $('#video').prop('volume', 0.05);
+                        }
+                        if ($(document).scrollTop() > 4200) {
+                            $('#video').trigger('pause');
+                        }
+                    }
+                })
+            </script>
+             <br />    
+            </div>
+        </div>
+    <style>
+        .containera {
+          height: 100vh;
+          position: relative;
+        }
+        .scaleDowna {
+            width: 50%;
+            margin-top: -4pc;
+            height: 144vh;
+            min-width: 118vw;
+            max-width: 118vw;
+            max-height: 112vw;
+            min-height: 140vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            resize: none;
+            background-image:url(../../Styles/img/notebook.png);
+            background-repeat: no-repeat;
+    /*    border-radius: 25px;
+            border-color: #C4D600;
+            border-style:solid;
+            border-width:20px;*/
+            padding: 280px; 
+            /*background-color: black;*/
+            transform-origin: 50% 50%;
+        }
+
+        .pantalla {
+            background-color: black;
+            margin-top: -14pc;
+            margin-left: -62px;
+            height: 51pc;
+            width: 1284px;
+        }
+        .pantallaabajo {
+            background-color: black;
+            margin-top: -14pc;
+            margin-left: -62px;
+            height: 43pc;
+            width: 1284px;
+        }
+    </style>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        var timeline = gsap.timeline();
+
+        timeline.set(".scaleDowna", { xPercent: -50, yPercent: -50 });
+        timeline.from(".scaleDowna", {
+            scale: 0.59, scrollTrigger: {
+                opacity: 100,
+                trigger: ".containera",
+                pin: ".containera",
+                scrub: true,
+                markers: true,
+
+            }
+        }).from(".scaleDowna",
+            {
+                opacity: 80,
+                duration: 3,
+                scrollTrigger: {
+                    trigger: ".scaleDowna",
+                    scrub: true,
+                }
+            })
+        timeline.from(".precios", {
+            duration: 0.1,
+            opacity: 0,
+            scrollTrigger: {
+                trigger: ".textoPropuesta",
+                scrub: true,
+            }
+        })
+        timeline.from(".text1", {
+            duration: 0.1,
+            opacity: 0,
+            scrollTrigger: {
+                trigger: ".textoPropuesta",
+                scrub: true,
+            }
+        })
+    </script>
+
     <!-- ======= Book A Table Section ======= -->
+
+        <script>
+
+            var timeline2 = gsap.timeline();
+            timeline2.to(".aaa", {
+                x: 400,
+                rotation: 360,
+                duration: 400,
+                scrollTrigger: {
+                    opacity: 100,
+                    start: () => '+=${document.querySelector(".aaa").offsetHeight}',
+                    //trigger: ".container",
+                    scrub: true,
+                    markers: true
+
+                }
+            })
+
+        </script>
+
     <style>
         .cardBodys {
     padding-left: 55px;
     padding-right: 55px;        
         }
     </style>
-    <section id="book-a-table" class="book-a-table">
+    <section id="book-a-table" class="book-a-table" style="margin-top: 0pc; position: relative;">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
           <h2>Evaluación Médica</h2>
           <p>Empecemos con tu <label style="color: #ababab;">evaluación</label></p>
-  <%--          <div class="progress" style="height: 8px;">
-              <div id="baraDeCarga" class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>--%>
+
         </div>
-<%--        <form action="<%: Url.Content("~/Home/Index") %>" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">--%>
-         <%--  Paso 1 --%>
+
           <div data-aos="fade-up">
             <div class="aaa card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">
             <div class="card-title" style="    margin-left: 84px;margin-right: 81px; margin-top: 2pc;">
@@ -1486,12 +1309,7 @@ h1{font-size:50vh;}
                             Por favor ingrese su nombre
                         </div>
                     </div>
-<%--                    <div class="col-lg-6 col-md-6 form-group">
-                        <input type="text" id="txtApellido" name="txtApellido" class="form-control" placeholder="Apellido" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required>
-                        <div class="invalid-feedback">
-                           Por favor ingrese su apellido
-                        </div>
-                    </div>--%>
+
                     <div class="col-lg-4 col-md-4 form-group">
                         <label for="txtRut">Rut</label>
                         <input type="text" class="form-control" name="txtRut" id="txtRut" placeholder="10472378-K" required>
@@ -1522,64 +1340,11 @@ h1{font-size:50vh;}
                                     date.setDate(date.getDate() - 6570);
                                     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
                                 },
-                                //value: function () {
-                                //    var date = new Date();
-                                //    date.setDate(date.getDate() - 6570);
-                                //    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
-                                //},
                             });
                         });
                     </script>
 
-                    <%-- Verificar Correo --%>
-                    <script>
-                        $(document).ready(function () {
-<%--                            $("#txtEmail").change(function (event) {
-                                console.log("Se cambio");
-                                var correo = $("#txtEmail").val();
-                                console.log("correo" + correo);
-                                var respuesta; 
-                                $.ajax({
-                                    url: '<%: Url.Content("~/Home/ConsultarCorreo/") %>',
-                                    data: { correo: correo },
-                                    cache: false,
-                                    type: "GET",
-                                    success: function (data) {
-                                        // data is your result from controller
-                                        console.log(data);
-                                        if (data == "false") {
-                                            console.log("error en Ajax")
 
-                                        } else {
-                                            console.log(data)
-                                            respuesta = data;
-                                            if (data == "Existe") {
-                                                console.log("El Correo existe!!")
-                                            }
-                                            else {
-                                                console.log("El Correo no existe")
-                                            }
-
-                                            if (respuesta != "Existe") {
-                                                $("#verificarcorreo").hide();
-                                                $("#verificarcorreo").text("El correo ingresado es válido :D")
-                                                console.log("El rut ingresado es válido :D");
-                                            } else {
-                                                $("#verificarcorreo").show();
-                                                $("#verificarcorreo").text("El correo ya existe en el sistema")
-                                                console.log("El correo no es válido :'( ");
-                                            }
-                                        }
-                                    },
-                                    error: function (err) {
-                                        console.log(err);
-                                    }
-                                });
-
-
-                            }); --%>
-                        });
-                    </script>
                     <div class="col-lg-5 col-md-5 form-group">
                         <label for="txtEmail">Correo</label>
                         <input type="email" class="form-control" name="txtEmail" id="txtEmail" placeholder="tucorreo@mail.com" data-rule="email" data-msg="Please enter a valid email" required>
@@ -1635,32 +1400,6 @@ h1{font-size:50vh;}
 
                         });
                     </script>
-<%--                    <div class="col-lg-6 col-md-6 form-group">
-                        <input  id="txtFechaNacimiento" placeholder="Fecha de nacimiento" name="txtFechaNacimiento" required/>
-
-                        <script>
-                            $(function () {
-                            $('#txtFechaNacimiento').datepicker({
-                                uiLibrary: 'bootstrap4',
-                                format: 'dd/mm/yyyy',
-                            });
-                            $('#txtFechaNacimiento').datepicker("option", "maxDate", '+7D');
-                                $('#txtFechaNacimiento').datepicker();
-                            });
-                        </script>
-
-                    </div>--%>
-
-
-<%--                                            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-                        <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-                        <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-                        <script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.es-es.js" type="text/javascript"></script>
-                    <input name="txtFechaNacimiento2" id="txtFechaNacimiento2" />
-                    <script>
-                        $('#txtFechaNacimiento').datetimepicker({ uiLibrary: 'bootstrap4', footer: true, modal: true, locale: 'es-es', });
-                    </script>--%>
-
 
 
                 </div>
@@ -1756,81 +1495,9 @@ h1{font-size:50vh;}
                         <label id="inputValidacion"></label>
                     </div>
 
-                <%-- Segunda Pregunta --%>
-<%--                <h6>2.- ¿Se ha estado tratando con algún dermatologo por alguna enfermedad capilar?</h6>
-                <div class="invalid-feedback">
-                    You must agree before submitting.
-                </div>
-                <div class="custom-control custom-checkbox custom-control-inline"> 
-                    <input type="radio" id="chkDermaSi" name="chkDermaSi" class="custom-control-input">
-                    <label class="custom-control-label" for="chkDermaSi">Sí</label>
-                    <label style="padding-left: 7px;">Si</label>
-                </div>
-                <div class="custom-control custom-checkbox custom-control-inline">
-                    <div>
-                    <input type="radio" id="chkDermaNo" name="chkDermaSi" class="custom-control-input" required>
-                    <label class="custom-control-label" for="chkDermaNo"></label>
-                    <label style="padding-left: 15px;">No</label>
-                    </div>
-                </div>--%>
 
-                <%-- Chk Si --%>
-<%--                <div id="divSegundaPregunta" style="margin-left: 24px">
-                     <h6>¿Cuál?</h6>
-                    <div class="form-check custom-radio custom-control-inline">
-                        <input class="form-check-input" type="checkbox" id="chkDermaDermatitis" name="chkDermaDermatitis">
-                        <label class="form-check-label" for="chkDermaDermatitis">
-                            Dermatitis seborreica
-                        </label>
-                    </div>
-                    <div class="form-check custom-radio custom-control-inline">
-                        <input class="form-check-input" type="checkbox" id="chkDermaAlopecia" name="chkDermaAlopecia">
-                        <label class="form-check-label" for="chkDermaAlopecia">
-                            Alopecia areata
-                        </label>
-                    </div>
-                    <div class="form-check custom-radio custom-control-inline">
-                        <input class="form-check-input" type="checkbox" id="chkDermaAutoinmunes" name="chkDermaAutoinmunes">
-                        <label class="form-check-label" for="chkDermaAutoinmunes">
-                            Enfermedades autoinmunes
-                        </label>
-                    </div>
-                    <div class="form-check custom-radio custom-control-inline">
-                        <input class="form-check-input" type="checkbox" id="chkDermaEsclerodermia" name="chkDermaEsclerodermia">
-                        <label class="form-check-label" for="chkDermaEsclerodermia">
-                            Esclerodermia
-                        </label>
-                    </div>
-                    <div class="form-check custom-radio custom-control-inline">
-                        <input class="form-check-input" type="checkbox" id="chkDermaOtra" name="chkDermaOtra">
-                        <label class="form-check-label" for="chkDermaOtra">
-                            Otra
-                        </label>
-                    </div>
-                </div>--%>
                 <br />
-                <%-- Tercera Pregunta --%>
-<%--                <h6>3.- ¿Ha tenido pelones en la cabeza o barba?</h6>
-                <div  class="custom-control custom-checkbox custom-control-inline">
-                  
-                    <input type="radio" id="chkPeloSi" name="chkPeloSi" class="custom-control-input" required>
-                  <label class="custom-control-label" for="chkPeloSi"></label>
-                    <label style="padding-left: 19px;">Si</label>
-                </div>
-                <div class="custom-control custom-checkbox custom-control-inline">
-                    <input type="radio" id="chkPeloNo" name="chkPeloSi" class="custom-control-input" required>
-                  <label class="custom-control-label" for="chkPeloNo"></label>
-                    <label style="padding-left: 19px;">No</label>
-                </div>
-                </div>
-                <script>
-                    $(document).ready(function () {
-                        $('#chkDermaNo').prop('checked', true);
-                        $('#chkPeloNo').prop('checked', true);
-                    });
-                </script>--%>
-            <%--</div>--%>
-          <%-- Script Segundo paso --%>
+
 
           <style>
             .custom-control-label::before {
@@ -1850,151 +1517,13 @@ h1{font-size:50vh;}
             }
 
           </style>
-        <%-- Paso 3 --%>
-            <%--<div class="card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">--%>
-            <%--<div class="card" id="divPaso3"  style="border-radius: 10px">--%>
-<%--                <div class="card-body" id="divPaso3">
-                <h3>Tercer Paso: Fotografías</h3>
-                <p>Estas fotografías deben ser tomadas en un lugar con luz natural, sin flash y con la cámara trasera de su cámara o celular, no con la camara frontal, debido a que la calidad de imagen se ve afectada.</p>
-                <p>Es ideal que otra persona le ayude a tomar estas fotografías, posicionandose a un metro de distacia y no en modo selfie.</p>
-                <p>El siguiente esquema muestra los ángulos en que se debe fotografiar. En el caso de que su zona a evaluar sean las entradras, por favor tirar su cabello hacia atrás para poder apreciar de mejor manera su complicación.</p>
-                <div class="text-center">
-                </div>
-                <br />
-                <br />--%>
-<%--                    <div class="text-center">
-                        <div class="row">
-                            <div class="col-sm">
-                                <button type="button" data-toggle="modal" data-target="#ModalArriba" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Desde Arriba</button>
-                                <input type="text"  id="fotoArriba" name="fotoArriba" value="" hidden/>
-                                <input type="text"  id="fotoArribaIs" name="fotoArribaIs" value="" hidden/>
-                            </div>
-                            <div class="col-sm">
-                                <button type="button" data-toggle="modal" data-target="#ModalIzquierdo" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Izquierdo</button>
-                                <input type="text"  id="fotoIzquierdo" name="fotoIzquierdo" value="" hidden/>
-                                <input type="text"  id="fotoIzquierdoIs" name="fotoIzquierdoIs" value="" hidden/>
-                            </div>
-                            <div class="col-sm">
-                                <button type="button" data-toggle="modal" data-target="#ModalDerecho" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">Perfil Derecho</button>
-                                <input type="text"  id="fotoDerecho" name="fotoDerecho" value="" hidden/>
-                                <input type="text"  id="fotoDerechoIs" name="fotoDerechoIs" value="" hidden/>
-                            </div>
-                        </div>
-                        <div class="row" style="    margin-top: 2pc;">
-                            <div class="col-sm">
-                                <button type="button" data-toggle="modal" data-target="#ModalAtras" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Atrás</button>
-                                <input type="text"  id="fotoAtras" name="fotoAtras" value="" hidden/>
-                                <input type="text"  id="fotoAtrasIs" name="fotoAtrasIs" value="" hidden/>
-                            </div>
-                            <div class="col-sm">
-                                <button type="button" data-toggle="modal" data-target="#ModalFrente" style="background: #BAD305; border: 0; padding: 10px 35px; color: #fff; transition: 0.4s; border-radius: 50px;">De Frente</button>
-                                <input type="text"  id="fotoFrente" name="fotoFrente" value="" hidden/>
-                                <input type="text"  id="fotoFrenteIs" name="fotoFrenteIs" value="" hidden/>
-                            </div>
-                        </div>
-                        <label id="inputValidacion"></label>
-                    </div>--%>
+
                 <br />
                 <br />
-                <%--</div>--%>
-          <%--</div>--%>
-          <%-- Por donde nos contactamos? --%>
-          <%--<div class="card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">--%>
-          <%--<div id="divPaso4" class="card" style="border-radius: 10px">--%>
-              <%--<div class="card-body" id="divPaso4">
-            <h3>Cuarto Paso: Contacto</h3>
-            <h6>¿Por dónde nos contactamos?</h6>
-            <div style="text-align: center;">
-                <br />
-            <div class="row" style="    width: 30pc;margin-left: 20pc;padding-bottom: 3pc;">--%>
-<%--                <div class="col">
-                    <img width="50" height="50" src="../../Styles/img/correo.png" />
-                    <div class="custom-control custom-checkbox" style="margin-right: 40px;">
-                      <input type="checkbox" class="custom-control-input" id="customCheck1" checked disabled>
-                      <label class="custom-control-label" for="customCheck1"></label>
-                    </div>
-                </div>--%>
-<%--                <div class="col">
-                    <img width="50" height="50" src="../../Styles/img/facebook.png" />
-                    <div class="custom-control custom-checkbox" style="margin-right: 40px;">
-                      <input type="checkbox" class="custom-control-input" id="customCheck2" >
-                      <label class="custom-control-label" for="customCheck2"></label>
-                    </div>--%>
 
-                <%--<button id="btnFacebook" hidden onclick="onLogin();">Iniciar Sesión</button>--%>
-<%--                </div>
-              <div class="col">
-                    <img width="50" height="50" src="../../Styles/img/whatsapp.png" />
-                    <br />
-                    <div class="custom-control custom-checkbox" style="margin-right: 40px;">
-                      <input type="checkbox" class="custom-control-input" id="customCheck3">
-                      <label class="custom-control-label" for="customCheck3"></label>
-                        <a hidden id="btnWsp" class="button" href="https://api.whatsapp.com/send?phone=56953306060&text=Quiero que me contecten por favor." target="_blank">https://api.whatsapp.com/send?phone=56953306060&text=Quiero</a>
-                    </div>
-                </div>
-                </div>--%>
-                <%--<fb:login-button 
-                  scope="public_profile,email"
-                  onlogin="checkLoginState();">
-                </fb:login-button>--%>
-            
-            
-<%--            <script>
-                window.fbAsyncInit = function () {
-                    FB.init({
-                        appId: '2596657497293255',
-                        cookie: true,
-                        xfbml: true,
-                        version: 'v10.0'
-                    });
-
-                    FB.AppEvents.logPageView();
-
-                };
-
-                (function (d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) { return; }
-                    js = d.createElement(s); js.id = id;
-                    js.src = "https://connect.facebook.net/en_US/sdk.js";
-                    fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
-
-                function onLogin() {
-                    FB.login((response) => {
-                        if (response.authResponse) {
-                            FB.api('/me?fields=email,name,picture,accessToken', (response) => {
-                                console.log(response)
-                                console.log(response.name)
-                                console.log(response.id)
-                            })
-                        }
-                    })
-                }
-
-                //FB.getLoginStatus(function (response) {
-                //    statusChangeCallback(response);
-                //});
-            </script>--%>
-<%--                          <script>
-                              $("#customCheck2").change(function () {
-                                  if (this.checked) {
-                                      console.log("hola")
-                                      $('#btnFacebook').trigger('click');
-                                  }
-                              });
-                              $("#customCheck3").change(function () {
-                                  if (this.checked) {
-                                      console.log("hola")
-                                      $('#btnWsp')[0].click();
-                                  }
-                              });
-                          </script>--%>
-            <%--</div>
-              </div>--%>
          </div> 
               </div>
-         <%-- </div>--%>
+
         <style>
             #btnSiguiente {
                 border: 37px !important;
@@ -2094,6 +1623,7 @@ h1{font-size:50vh;}
               })();
           </script>
       </div>
+        </div>
     </section>
 
 <%--    <section class="book-a-table">
@@ -2109,7 +1639,7 @@ h1{font-size:50vh;}
 <!-- End Chefs Section -->
 
     <!-- ======= Contact Section ======= -->
-<section id="contact" class="contact" style="margin-top: -43px;">
+<section id="contact" class="contact" style="margin-top: -20px;">
     <div class="container" data-aos="fade-up">
         <div class="container" data-aos="fade-up">
             <div class="section-title">

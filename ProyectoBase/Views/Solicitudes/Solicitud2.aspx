@@ -382,7 +382,7 @@
       height: 100vh;
       position: relative;
     }
-    .scaleDowna {
+    .scaleDowna {|
         width: 50%;
         height: 144vh;
         min-width: 118vw;

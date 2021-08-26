@@ -173,7 +173,7 @@ h1, h2, h3, h4, h5, h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
-    background: rgba(255, 255, 255, 0.952);
+    background: rgb(69 85 96);
     border-bottom: 1px solid rgba(12, 11, 9, 0.6);
     transition: all 0.5s;
     z-index: 997;

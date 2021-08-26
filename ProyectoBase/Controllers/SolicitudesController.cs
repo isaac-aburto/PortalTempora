@@ -14,8 +14,11 @@ namespace WebSolicitudes.Controllers
     {
         //
         // GET: /Solicitudes/
-
-        public ActionResult Index()
+        public ActionResult Pagina1()
+        {
+            return View();
+        }
+            public ActionResult Index()
         {
             try
             {

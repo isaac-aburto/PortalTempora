@@ -23,16 +23,16 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            var cont = 0;
-            console.log("cont antes de la funcion: " + cont)
-            //document.getElementById("btnSiguiente").onclick = function () { myFunction() };
-            $("#btnSiguiente").click(function () {
-                console.log("cont: " + cont)
-                if (cont == 1) {
-                    $(function () {
-                        console.log("Entro al tema de la webcam")
-                        console.log("Webcam: " + Webcam.set);
-
+        var cont = 0;
+        console.log("cont antes de la funcion: " + cont)
+        //document.getElementById("btnSiguiente").onclick = function () { myFunction() };
+        $("#btnSiguiente").click(function () {
+            console.log("cont: " + cont)
+            if (cont == 1) {
+                $(function () {
+                    console.log("Entro al tema de la webcam")
+                    console.log("Webcam: " + Webcam.set);
+                   
                         Webcam.set({
                             width: 320,
                             height: 240,
@@ -102,13 +102,13 @@
                                 document.getElementById('fotoFrente').value = data_uri5;
                             });
                         });
-                    });
-                    Webcam.on('error', function (err) {
-                        console.log(err)
-                    });
-                }
-                cont++;
-            });
+                }); 
+                Webcam.on('error', function (err) {
+                    console.log(err)
+                });
+            }
+            cont++;
+        });
         });
     </script>
     <script>
@@ -129,7 +129,7 @@
             //  CAMARA 1 //
             $("#divCamara1").hide();
             $("#Camara1").click(function () {
-
+ 
                 if ($("#Camara1").val() == "Activar Cámara") {
                     $("#divCamara1").show();
                     $("#Camara1").html('Desactivar Cámara');
@@ -308,10 +308,10 @@
                 });
             });
 
-
+            
             $("#btnSiguiente").click(function () {
                 console.log("PRIMER BOTON SIGUENTE")
-                console.log("PASA FOTOS: " + pasoFotos)
+                console.log("PASA FOTOS: "  + pasoFotos)
                 if (pasa == false || pasaPorCorreo == false || pasaPorRut == false || pasaPorCelular == false) {
                     if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "" || pasaPorCorreo == false || pasaPorRut == false) {
                         console.log("Hay algo vacío")
@@ -338,26 +338,26 @@
                         var Telefono = $("#txtNombre").val();
                         $.ajax({
                             url: '<%: Url.Content("~/Home/GuardarSolicitudInconclusa/") %>',
-                            data: { Nombre: Nombre, Email: Email, Telefono: Telefono },
-                            cache: false,
-                            type: "POST",
-                            success: function (data) {
-                                // data is your result from controller
-                                console.log(data);
-                                if (data == "false") {
-                                    console.log("error en Ajax")
+                        data: { Nombre: Nombre, Email: Email, Telefono: Telefono },
+                        cache: false,
+                        type: "POST",
+                        success: function (data) {
+                            // data is your result from controller
+                            console.log(data);
+                            if (data == "false") {
+                                console.log("error en Ajax")
 
-                                } else {
-                                    console.log(data)
-                                    var Data = data.split(',');
-                                    $("#idCliente").val(Data[0]);
-                                    $("#idSolicitud").val(Data[1]);
-                                }
-                            },
-                            error: function (err) {
-                                console.log(err);
+                            } else {
+                                console.log(data)
+                                var Data = data.split(',');
+                                $("#idCliente").val(Data[0]);
+                                $("#idSolicitud").val(Data[1]);
                             }
-                        });
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
                     }
                     if (pasa != false) {
                         cont++;
@@ -475,81 +475,81 @@
                 var respuesta;
                 $.ajax({
                     url: '<%: Url.Content("~/Home/ConsultarCorreo/") %>',
-                    data: { correo: correo },
-                    cache: false,
-                    type: "GET",
-                    success: function (data) {
-                        // data is your result from controller
-                        console.log(data);
-                        if (data == "false") {
-                            console.log("error en Ajax")
+                        data: { correo: correo },
+                        cache: false,
+                        type: "GET",
+                        success: function (data) {
+                            // data is your result from controller
+                            console.log(data);
+                            if (data == "false") {
+                                console.log("error en Ajax")
 
-                        } else {
-                            console.log(data)
-                            respuesta = data;
-                            if (data == "Existe") {
-                                console.log("El Correo existe!!")
-                            }
-                            else {
-                                console.log("El Correo no existe")
-                            }
-
-
-
-                            function validarEmail(valor) {
-                                if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(valor)) {
-                                    alert("La dirección de email " + valor + " es correcta!.");
-                                } else {
-                                    alert("La dirección de email es incorrecta!.");
-                                }
-                            }
-
-
-
-
-                            if (respuesta != "Existe") {
-                                $("#verificarcorreo").hide();
-                                $("#verificarcorreo").text("El correo ingresado es válido :D")
-                                console.log("El rut ingresado es válido :D");
-                                pasaPorCorreo = true;
                             } else {
-                                $("#verificarcorreo").show();
-                                $("#verificarcorreo").text("El correo ya existe en el sistema")
-                                console.log("El correo no es válido :'( ");
-                                pasaPorCorreo = false;
-                            }
-                            var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                                console.log(data)
+                                respuesta = data;
+                                if (data == "Existe") {
+                                    console.log("El Correo existe!!")
+                                }
+                                else {
+                                    console.log("El Correo no existe")
+                                }
 
-                            var regOficial = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-                            if (pasaPorCorreo != false) {
-                                //Se muestra un texto a modo de ejemplo, luego va a ser un icono
-                                if (reg.test(correo) && regOficial.test(correo)) {
+
+                                function validarEmail(valor) {
+                                    if (/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(valor)) {
+                                        alert("La dirección de email " + valor + " es correcta!.");
+                                    } else {
+                                        alert("La dirección de email es incorrecta!.");
+                                    }
+                                }
+
+
+
+
+                                if (respuesta != "Existe" ) {
                                     $("#verificarcorreo").hide();
                                     $("#verificarcorreo").text("El correo ingresado es válido :D")
                                     console.log("El rut ingresado es válido :D");
                                     pasaPorCorreo = true;
-                                } else if (reg.test(correo)) {
-                                    $("#verificarcorreo").hide();
-                                    $("#verificarcorreo").text("El correo ingresado es válido :D")
-                                    console.log("El rut ingresado es válido :D");
-                                    pasaPorCorreo = true;
-
                                 } else {
                                     $("#verificarcorreo").show();
-                                    $("#verificarcorreo").text("El correo no es valido.")
+                                    $("#verificarcorreo").text("El correo ya existe en el sistema")
                                     console.log("El correo no es válido :'( ");
                                     pasaPorCorreo = false;
-
                                 }
-                            }
+                                var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+                                var regOficial = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+                                if (pasaPorCorreo != false) {
+                                    //Se muestra un texto a modo de ejemplo, luego va a ser un icono
+                                    if (reg.test(correo) && regOficial.test(correo)) {
+                                        $("#verificarcorreo").hide();
+                                        $("#verificarcorreo").text("El correo ingresado es válido :D")
+                                        console.log("El rut ingresado es válido :D");
+                                        pasaPorCorreo = true;
+                                    } else if (reg.test(correo)) {
+                                        $("#verificarcorreo").hide();
+                                        $("#verificarcorreo").text("El correo ingresado es válido :D")
+                                        console.log("El rut ingresado es válido :D");
+                                        pasaPorCorreo = true;
+
+                                    } else {
+                                        $("#verificarcorreo").show();
+                                        $("#verificarcorreo").text("El correo no es valido.")
+                                        console.log("El correo no es válido :'( ");
+                                        pasaPorCorreo = false;
+
+                                    }
+                                }
+
+                            }
+                        },
+                        error: function (err) {
+                            console.log(err);
                         }
-                    },
-                    error: function (err) {
-                        console.log(err);
-                    }
-                });
+                    });
 
                 if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
                     console.log("Hay algo vacío")
@@ -683,7 +683,7 @@
                 if ($("#txtFechaNacimiento").val() == "" || $("#txtCelular").val() == "" || $("#txtEmail").val() == "" || $("#txtRut").val() == "" || $("#txtNombre").val() == "") {
                     console.log("Hay algo vacío")
                     pasa = false;
-
+                    
                     //$("#btnSiguiente").prop("disabled", true);
                     //$("#validacionPrimerPaso").prop('hidden', true);
                 }
@@ -691,13 +691,13 @@
                     $("#btnSiguiente").prop("disabled", false);
                     console.log("Esta todo ok")
                     pasa = true;
-
+                    
                     //$("#validacionPrimerPaso").prop('hidden', false);
                 }
             });
 
             $("#txtCelular").change(function (event) {
-                if ($("#txtCelular").val() == "" || $("#txtCelular").val().length <= 8) {
+                if ($("#txtCelular").val() == "" || $("#txtCelular").val().length <= 8 ) {
                     console.log("Hay algo vacío o numero no existe")
                     console.log("Tamaño de ceular: " + $("#txtCelular").val().length)
                     if ($("#txtCelular").val().length <= 8) {
@@ -836,7 +836,7 @@
                 if ($("#chkDermaSi").val()) {
                     $("#divSegundaPregunta").show();
                 }
-
+                
             });
             document.getElementById('chkDermaNo').addEventListener('click', function () {
                 console.log('updateText executed')
@@ -1219,10 +1219,7 @@
     </style>
     <section id="why-us" class="why-us">
       <div class="container" data-aos="fade-up">
-
-
-
-        <div class="col-lg-12 mt-12 mt-lg-0 primero">
+<%--        <div class="col-lg-12 mt-12 mt-lg-0">
             <div class="card border-left-primary shadow estiloCard2" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
                 <div class="row">
                     <div class="col-lg-1">
@@ -1253,10 +1250,68 @@
 
             </div>
           </div>
-          <br />
-          <br />
+            <div class="col-lg-12 mt-12 mt-lg-0">
+            <div class="card border-left-primary shadow estiloCard2" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="card" style="height: 220px;background-color: #465660;">
+                            <div style="margin-top: 3pc;margin-left: 13px;">
+                                <h4 style="color:whitesmoke;font-size: 3pc;">2°</h4>
+                                <h4 style="color:whitesmoke;font-size: 18px;">Paso</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"  style="margin-top: 30px;">
+                        <div class="card-body" style="text-align: center;">
+                            <h4 style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill"></i>Evaluación médica</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-top: 3pc;">
+                        <div class="card-body">
+                            <h4 style="font-family: -webkit-pictograph;text-align: left;">Un profesional de nuestra clínica le entregará una propuesta para su solicitud. Si usted lo desea, podrá agendar una hora para el procedimiento adecuado.</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card" style="height: 220px;background-color: #ededed;">
+                          <div class="card-body">   
+                          </div>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+          </div>
+            <div class="col-lg-12 mt-12 mt-lg-0">
+            <div class="card border-left-primary shadow estiloCard2" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="card" style="height: 220px;background-color: #465660;">
+                            <div style="margin-top: 3pc;margin-left: 13px;">
+                                <h4 style="color:whitesmoke;font-size: 3pc;">3°</h4>
+                                <h4 style="color:whitesmoke;font-size: 18px;">Paso</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"  style="margin-top: 30px;">
+                        <div class="card-body" style="text-align: center;">
+                            <h4 style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill"></i>Procedimiento médico</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-top: 3pc;">
+                        <div class="card-body">
+                            <h4 style="font-family: -webkit-pictograph;text-align: left;">Al asistir a la clínica según la hora agendada, usted recibirá el mejor procedimiento para su caso. Poosteriormente, usted seguirá recibiendo páginas personalizadas para su caso.</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card" style="height: 220px;background-color: #ededed;">
+                          <div class="card-body">   
+                          </div>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+          </div>--%>
         <div class="section-title">
           <h2>Pasos a seguir</h2>
           <p>¿Desea una evaluación?</p>
@@ -1344,109 +1399,754 @@
       </div>
     </section>
 
-    <!-- ======= Events Section ======= -->
-<%--    <section id="events" class="events">
-      <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <br />
-            <br />
-                  <div id="Container">
-    <video></video>
-    <div></div>
-</div>
-            <br />
+<%--        <div class="banner">
+            <video autoplay="" loop="" >
+                <source src="../../assets/video/tempora.mp4" type="video/mp4">
+            </video>
+            <h1 style="color: black">hooola</h1>
+            <div id="bg"></div>
+            <script type="text/javascript">
+                let bg = document.querySelector('#bg')
+                window.addEventListener('scroll', function () {
+
+                    let value = this.window.scrollY;
+                    this.console.log("value scroll: " + value);
+                    bg.style.backgroundSize = 100 + value - 1500  + "px";
+                });
+            </script>
         </div>
+        <style>
 
-      </div>
-    </section>--%><!-- End Events Section -->
+            .banner {
+                position: relative;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+            }
+            .banner video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .banner #bg {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: #fff url(../../Styles/dry-clean.svg);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 100px;
+            }
+        </style>--%>
 
-<div class="divabove"><h1>Approach styles</h1>
+
+<%--<div class="wrapper">
+<div class="pin-up">
+  
+  <div class="content-wrap">
+
+
+
+    <div class="col-lg-12 mt-12 mt-lg-0">
+        <div class="card border-left-primary shadow estiloCard2" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
+            <div class="row">
+                <div class="col-lg-1">
+                    <div class="card" style="height: 220px;background-color: #465660;">
+                        <div style="margin-top: 3pc;margin-left: 13px;">
+                            <h4 style="color:whitesmoke;font-size: 3pc;">1°</h4>
+                            <h4 style="color:whitesmoke;font-size: 18px;">Paso</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2"  style="margin-top: 30px;">
+                    <div class="card-body" style="text-align: center;">
+                        <h4 class="content content-0 initial" style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill"></i>Solicitar evaluación</h4>
+                        <h4 class="content content-1" style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill "></i>Evaluación Médica</h4>
+                        <h4 class="content content-2" style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill "></i>Procedimiento Médico</h4>
+
+                    </div>
+                </div>
+                <div class="col-lg-6" style="margin-top: 3pc;">
+                    <div class="card-body">
+                        <h4 class="content content-0 initial" style="font-family: -webkit-pictograph;text-align: left;">1Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.</h4>
+                        <h4 class="content content-1" style="font-family: -webkit-pictograph;text-align: left;">2Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.</h4>
+                        <h4 class="content content-2" style="font-family: -webkit-pictograph;text-align: left;">3Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card" style="height: 220px;background-color: #ededed;">
+                        <div class="card-body">   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  </div>  
+  
+  <div class="text-wrap">
+    <div class="text"></div>
+    <div class="text"></div>
+    <div class="text"></div>
+    <div class="text"></div>
+    <div class="text"></div>  
+  </div>
+  
 </div>
-<div class="approach">
-  <div class="approach-text col-md-4">
-    <h3>Title 1</h3>
-    <p>tWhat is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown pr</p></div>
-  <div class="approach-img col-md-8">
-    <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9"></div>
-</div>
-
-<div class="approach">
-  <div class="approach-text col-md-4">
-    <h3>Title 1</h3>
-    <p>tWhat is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown pr</p></div>
-  <div class="approach-img col-md-8">
-    <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9"></div>
-</div>
-
-<div class="approach">
-  <div class="approach-text col-md-4">
-    <h3>Title 1</h3>
-    <p>tWhat is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown pr</p></div>
-  <div class="approach-img col-md-8">
-    <img src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9"></div>
 </div>
 
     <style>
+        .pin-up {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  
+  background-color: white;
+}
+
+
+
+.content-wrap{
+  position:relative;
+  width: 333px;
+  height: 222px;
+  border-radius: 4px;
+  background-color: white;
+  margin-right: 111px;
+  margin-top: -10px;
+}
+
+/*.content {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  position:absolute;
+  background-color: white;
+
+}*/
+
+
+.text-wrap {
+  height: 100vh;
+  width: 333px;
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  
+  background-color: white;
+}
+
+.text {
+  font-size: 30px;
+  width: 100px;
+  height: 50px;
+  text-transform: uppercase;
+  color: white;
+  transform-origin: left center;
+  transform: rotate(0.1deg)
+}
+
+.footer {
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background-color: lightgrey;
+}
+
+
+.spacer {
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background: white;
+}
+
+.spacer span {
+  color: green;
+  font-size: 30px;
+}
+    </style>
+    <script>
+        gsap.set('.content:not(.initial)', { autoAlpha: 0 })
+
+
+        var headlines = gsap.utils.toArray(".text");
+
+        var totalDuration = 1000;
+        var singleDuration = totalDuration / headlines.length;
+
+
+        const lineTimeline = gsap.timeline();
+
+        ScrollTrigger.create({
+            trigger: ".pin-up",
+            start: "top top",
+            end: "+=" + totalDuration,
+            //markers: true,
+            pin: true,
+            scrub: true,
+            animation: lineTimeline,
+        });
+
+        //lineTimeline
+        //    .to('.sideline', { duration: 1 }, 0)
+        //    .to('.sideline', { duration: 0.9, scaleY: 1, ease: "none" }, 0)
+
+        headlines.forEach((elem, i) => {
+
+            const smallTimeline = gsap.timeline();
+
+            const content = document.querySelector('.content-wrap');
+            const relevantContent = content.querySelector('h4.content-' + i);
+
+            ScrollTrigger.create({
+
+                trigger: ".wrapper",
+
+                start: "top -=" + (singleDuration * i),
+                end: "+=" + singleDuration,
+
+                //markers: true,
+
+                animation: smallTimeline,
+                toggleActions: relevantContent.classList.contains('remaining') ? "play none play reverse" : "play reverse play reverse",
+
+            });
+
+            smallTimeline
+                .to(elem, { duration: 0.25, color: "orange", scale: 1.25, ease: 'none' }, 0)
+                .set(relevantContent, { autoAlpha: 1 }, 0.125)
+                ;
+
+        });
+
+
+        // -------------------------------------------------------------------------------------------------------------
+
+
+        var showYowza = gsap.timeline()
+        showYowza.to('.book-a-table', { autoAlpha: 1, y: 0 })
+
+        ScrollTrigger.create({
+            trigger: ".book-a-table",
+            start: "top center",
+
+            //endTrigger: ".footer",
+            end: "bottom bottom",
+
+            //scrub: 1,
+
+            //markers: true,
+            animation: showYowza,
+
+            toggleActions: "none play none reverse"
+            //toggleActions: "play reverse play reverse"
+        });
+    </script>
+
+
+--%>
+
+    
+
+<%--<section class="text-change">
+  
+  <div class="top-portion">
+
+    <div class="col-lg-12 mt-12 mt-lg-0 one">
+            <div class="card border-left-primary shadow estiloCard2" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="card" style="height: 220px;background-color: #465660;">
+                            <div style="margin-top: 3pc;margin-left: 13px;">
+                                <h4 style="color:whitesmoke;font-size: 3pc;">1°</h4>
+                                <h4 style="color:whitesmoke;font-size: 18px;">Paso</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"  style="margin-top: 30px;">
+                        <div class="card-body" style="text-align: center;">
+                            <h4 style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill"></i>Solicitar evaluación</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-top: 3pc;">
+                        <div class="card-body">
+                            <h4 style="font-family: -webkit-pictograph;text-align: left;">Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card" style="height: 220px;background-color: #ededed;">
+                          <div class="card-body">   
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+          </div>
+        <div class="col-lg-12 mt-12 mt-lg-0 two hidden">
+            <div class="card border-left-primary shadow estiloCard2" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="card" style="height: 220px;background-color: #465660;">
+                            <div style="margin-top: 3pc;margin-left: 13px;">
+                                <h4 style="color:whitesmoke;font-size: 3pc;">2°</h4>
+                                <h4 style="color:whitesmoke;font-size: 18px;">Paso</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"  style="margin-top: 30px;">
+                        <div class="card-body" style="text-align: center;">
+                            <h4 style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill"></i>Evaluación médica</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-top: 3pc;">
+                        <div class="card-body">
+                            <h4 style="font-family: -webkit-pictograph;text-align: left;">Un profesional de nuestra clínica le entregará una propuesta para su solicitud. Si usted lo desea, podrá agendar una hora para el procedimiento adecuado.</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card" style="height: 220px;background-color: #ededed;">
+                          <div class="card-body">   
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+          </div>
+   
+    <div class="col-lg-12 mt-12 mt-lg-0 three hidden">
+            <div class="card border-left-primary shadow estiloCard2" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="card" style="height: 220px;background-color: #465660;">
+                            <div style="margin-top: 3pc;margin-left: 13px;">
+                                <h4 style="color:whitesmoke;font-size: 3pc;">3°</h4>
+                                <h4 style="color:whitesmoke;font-size: 18px;">Paso</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"  style="margin-top: 30px;">
+                        <div class="card-body" style="text-align: center;">
+                            <h4 style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill"></i>Procedimiento médico</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-top: 3pc;">
+                        <div class="card-body">
+                            <h4 style="font-family: -webkit-pictograph;text-align: left;">Al asistir a la clínica según la hora agendada, usted recibirá el mejor procedimiento para su caso. Poosteriormente, usted seguirá recibiendo páginas personalizadas para su caso.</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card" style="height: 220px;background-color: #ededed;">
+                          <div class="card-body">   
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+          </div>
+
+  </div>  
+    
+</section>
+    <style>
         @import url('https://fonts.googleapis.com/css?family=Signika+Negative:300,400&display=swap');
 
-body { 
-  font-family: "Signika Negative", sans-serif; 
-  font-weight: 300;
-  margin: 0;
-  padding: 0 20px;
-}
-
-h1{font-size:50vh;}
-.approach{
-  width: 50%;
-  display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-  min-height:100vh
-}
-.col-md-8{
-  -ms-flex: 0 0 66.666667%;
-    flex: 0 0 66.666667%;
-    max-width: 66.666667%;
-  position: relative;
-
-}
-
-.col-md-4{
- -ms-flex: 0 0 33.333333%;
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
-  position: relative;
+        body { 
+          font-family: "Signika Negative", sans-serif; 
   
-}
+  
+          background-color: #f0f0f0;  
+
+        }
+
+/*        section {
+          width: 100%;
+
+        }
+
+        .top-portion {    
+          width: 100%;
+          height: 100vh;  
+          display: flex;
+          flex-direction: column;
+          justify-content: center !important;
+          align-items: center !important;
+        }
 
 
-.approach-img img{
-  width:100px;
-}
+        h1, h2 {
+          margin: 0;
+          font-size: 64px;
+        }*/
+        .top-portion {
+            margin-left: 19pc;
+        }
 
+
+        .hidden {
+          display: none;  
+        }
     </style>
-
     <script>
-        gsap.utils.toArray(".approach").forEach(section => {
-            gsap.timeline({
-                scrollTrigger: {
-                    trigger: section,
-                    scrub: 1,
-                    pin: true,
-                    pinSpacing: true,
-                    start: "top center",
-                    end: "+=200",
-                    markers: true
-                }
-            })
-                .from(section.querySelectorAll(".approach-img, .approach-text"), 0.3, { opacity: 0, ease: "power4" })
-                .to(section.querySelectorAll(".approach-img, .approach-text"), 0.1, { opacity: 0, ease: "power4" });
+        ScrollTrigger.create({
 
-        }); 
+            trigger: 'section.text-change',
+            start: 'top +=100px',
+            pin: true,
+
+
+            onEnter: function () {
+                gsap.set('div.one', { display: "none" })
+                gsap.set('div.two', { display: "unset" })
+            },
+
+            onLeaveBack: function () {
+                gsap.set('div.one', { display: "unset" })
+                gsap.set('div.two', { display: "none" })
+            }
+
+        })
+
+        ScrollTrigger.create({
+
+            trigger: 'section.text-change',
+            start: 'top +=77px',
+            pin: true,
+            onEnter: function () {
+                gsap.set('div.two', { display: "none" })
+                gsap.set('div.three', { display: "unset" })
+            },
+
+            onLeaveBack: function () {
+                gsap.set('div.two', { display: "unset" })
+                gsap.set('div.three', { display: "none" })
+            }
+
+        })
+    </script>--%>
+
+
+    
+
+
+<section class="first panel ">
+          <div class="col-lg-12 mt-12 mt-lg-0 hijo">
+            <div class="card border-left-primary shadow estiloCard2" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="card" style="height: 220px;background-color: #465660;">
+                            <div style="margin-top: 3pc;margin-left: 13px;">
+                                <h4 style="color:whitesmoke;font-size: 3pc;">1°</h4>
+                                <h4 style="color:whitesmoke;font-size: 18px;">Paso</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"  style="margin-top: 30px;">
+                        <div class="card-body" style="text-align: center;">
+                            <h4 style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill"></i>Solicitar evaluación</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-top: 3pc;">
+                        <div class="card-body">
+                            <h4 style="font-family: -webkit-pictograph;text-align: left;">Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card" style="height: 220px;background-color: #ededed;">
+                          <div class="card-body">   
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+          </div>
+</section>
+<section class="panel ">
+          <div class="col-lg-12 mt-12 mt-lg-0 hijo">
+            <div class="card border-left-primary shadow estiloCard2" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="card" style="height: 220px;background-color: #465660;">
+                            <div style="margin-top: 3pc;margin-left: 13px;">
+                                <h4 style="color:whitesmoke;font-size: 3pc;">2°</h4>
+                                <h4 style="color:whitesmoke;font-size: 18px;">Paso</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"  style="margin-top: 30px;">
+                        <div class="card-body" style="text-align: center;">
+                            <h4 style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill"></i>Evaluación médica</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-top: 3pc;">
+                        <div class="card-body">
+                            <h4 style="font-family: -webkit-pictograph;text-align: left;">Un profesional de nuestra clínica le entregará una propuesta para su solicitud. Si usted lo desea, podrá agendar una hora para el procedimiento adecuado.</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card" style="height: 220px;background-color: #ededed;">
+                          <div class="card-body">   
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+          </div>
+</section>
+<section class="panel ">
+      <div class="col-lg-12 mt-12 mt-lg-0 hijo">
+            <div class="card border-left-primary shadow estiloCard2" style="width: 18rem;" data-aos="zoom-in" data-aos-delay="200">
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="card" style="height: 220px;background-color: #465660;">
+                            <div style="margin-top: 3pc;margin-left: 13px;">
+                                <h4 style="color:whitesmoke;font-size: 3pc;">3°</h4>
+                                <h4 style="color:whitesmoke;font-size: 18px;">Paso</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"  style="margin-top: 30px;">
+                        <div class="card-body" style="text-align: center;">
+                            <h4 style="color:#bad302;"><i style="font-size: 2pc;" class="bi bi-suit-heart-fill"></i>Procedimiento médico</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" style="margin-top: 3pc;">
+                        <div class="card-body">
+                            <h4 style="font-family: -webkit-pictograph;text-align: left;">Al asistir a la clínica según la hora agendada, usted recibirá el mejor procedimiento para su caso. Poosteriormente, usted seguirá recibiendo páginas personalizadas para su caso.</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card" style="height: 220px;background-color: #ededed;">
+                          <div class="card-body">   
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+          </div>
+
+
+</section>
+
+    <style>
+        .panel{   
+        width: 100%;
+          height: 50%;
+          top: 0;
+          left: 0;
+          align-content: center;
+          display: flex;
+        }
+        .hijo {
+          /* centrar vertical y horizontalmente */
+          position: absolute;
+          top: 49%;
+          left: 19%;
+          margin: -25px 0 0 -25px; /* aplicar a top y al margen izquierdo un valor negativo para completar el centrado del elemento hijo */
+        }
+        section:not(.first) {
+          opacity: 0;
+          visibility: hidden;
+        } 
+    </style>
+    <script>
+
+
+        let sections = gsap.utils.toArray("section"),
+            currentSection = sections[0];
+
+        gsap.defaults({ overwrite: 'auto', duration: 1 });
+
+        // stretch out the body height according to however many sections there are. 
+        gsap.set("body", { height: (sections.length * 100) + "%" });
+
+        // create a ScrollTrigger for each section
+        sections.forEach((section, i) => {
+            ScrollTrigger.create({
+                // use dynamic scroll positions based on the window height (offset by half to make it feel natural)
+                start: () => (i - 0.5) * innerHeight,
+                end: () => (i + 0.5) * innerHeight,
+                scrub: true,
+                markers: true,
+                toggleActions: "play reset play reset",
+                // when a new section activates (from either direction), set the section accordingly.
+                onToggle: self => self.isActive && setSection(section)
+            });
+        });
+
+        function setSection(newSection) {
+            if (newSection !== currentSection) {
+                gsap.timeline()
+                    .to(currentSection.querySelector("h1"), { y: -30, autoAlpha: 0, duration: 0.3 })
+                    .to(currentSection, { autoAlpha: 0, duration: 0.5 })
+
+                gsap.timeline()
+                    .to(newSection, { autoAlpha: 1, duration: 0.5 })
+                    .fromTo(newSection.querySelector("h1"), { y: 30, autoAlpha: 0 }, { autoAlpha: 1, y: 0, duration: .3 })
+
+                currentSection = newSection;
+            }
+        }
+
+
+
     </script>
+<br />
+    <br />
+    <br />
+    <br />
+        <br />
+
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <br />
+    <br />
+    <br />
+    <br />
 
 
 
@@ -1457,7 +2157,10 @@ h1{font-size:50vh;}
     padding-right: 55px;        
         }
     </style>
-    <section id="book-a-table" class="book-a-table">
+
+
+<%--            <div class="section-title">
+                <h2>Facebook<    <section id="book-a-table" class="book-a-table">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -1466,11 +2169,12 @@ h1{font-size:50vh;}
   <%--          <div class="progress" style="height: 8px;">
               <div id="baraDeCarga" class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>--%>
+
         </div>
 <%--        <form action="<%: Url.Content("~/Home/Index") %>" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">--%>
          <%--  Paso 1 --%>
           <div data-aos="fade-up">
-            <div class="aaa card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">
+            <div class="card border-left-primary shadow h-100 py-2"  style="border-radius: 10px">
             <div class="card-title" style="    margin-left: 84px;margin-right: 81px; margin-top: 2pc;">
                     <div class="progress" style="height: 15px;">
               <div id="baraDeCarga" class="progress-bar" role="progressbar" style="width: 33%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -1500,7 +2204,6 @@ h1{font-size:50vh;}
                             
                             Por favor ingrese su rut
                         </div>
-
                     </div>
 
                     <script src="https://unpkg.com/gijgo@1.9.13/js/messages/messages.es-es.js" type="text/javascript"></script>
@@ -1528,56 +2231,6 @@ h1{font-size:50vh;}
                                 //    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
                                 //},
                             });
-                        });
-                    </script>
-
-                    <%-- Verificar Correo --%>
-                    <script>
-                        $(document).ready(function () {
-<%--                            $("#txtEmail").change(function (event) {
-                                console.log("Se cambio");
-                                var correo = $("#txtEmail").val();
-                                console.log("correo" + correo);
-                                var respuesta; 
-                                $.ajax({
-                                    url: '<%: Url.Content("~/Home/ConsultarCorreo/") %>',
-                                    data: { correo: correo },
-                                    cache: false,
-                                    type: "GET",
-                                    success: function (data) {
-                                        // data is your result from controller
-                                        console.log(data);
-                                        if (data == "false") {
-                                            console.log("error en Ajax")
-
-                                        } else {
-                                            console.log(data)
-                                            respuesta = data;
-                                            if (data == "Existe") {
-                                                console.log("El Correo existe!!")
-                                            }
-                                            else {
-                                                console.log("El Correo no existe")
-                                            }
-
-                                            if (respuesta != "Existe") {
-                                                $("#verificarcorreo").hide();
-                                                $("#verificarcorreo").text("El correo ingresado es válido :D")
-                                                console.log("El rut ingresado es válido :D");
-                                            } else {
-                                                $("#verificarcorreo").show();
-                                                $("#verificarcorreo").text("El correo ya existe en el sistema")
-                                                console.log("El correo no es válido :'( ");
-                                            }
-                                        }
-                                    },
-                                    error: function (err) {
-                                        console.log(err);
-                                    }
-                                });
-
-
-                            }); --%>
                         });
                     </script>
                     <div class="col-lg-5 col-md-5 form-group">
@@ -1624,14 +2277,14 @@ h1{font-size:50vh;}
                                     this.value = this.value.slice(0, 9);
                             });
 
-
-                            $('#txtCelular')
+                            
+                            $('#txtCelular')    
                                 .keypress(function (event) {
                                     if (event.which < 48 || event.which > 57 || this.value.length === 12) {
                                         return false;
                                     }
-                                });
-
+                            });
+                            
 
                         });
                     </script>
@@ -2072,7 +2725,7 @@ h1{font-size:50vh;}
                 //}
             </script>
           <script>
-              // Example starter JavaScript for disabling form submissions if there are invalid fields
+                                    // Example starter JavaScript for disabling form submissions if there are invalid fields
               (function () {
                   'use strict';
                   window.addEventListener('load', function () {
@@ -2094,22 +2747,12 @@ h1{font-size:50vh;}
               })();
           </script>
       </div>
+          </div>
     </section>
-
-<%--    <section class="book-a-table">
-        <div class="container" data-aos="fade-up">
-            <div class="section-title">
-                <h2>Facebook</h2>
-                <p>Prueba Integración</p>   
-            </div>
-           
-            
-        </div>
-    </section>--%>
+    
 <!-- End Chefs Section -->
 
-    <!-- ======= Contact Section ======= -->
-<section id="contact" class="contact" style="margin-top: -43px;">
+    <!-- ======= Contact Section ======= -<section id="contact" class="contact" style="margin-top: -43px;">
     <div class="container" data-aos="fade-up">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
@@ -2577,7 +3220,7 @@ h1{font-size:50vh;}
                 <%-- Validación de fotos --%>
                 <script>
                     $(document).ready(function () {
-
+ 
                     });
                 </script>
                 <style>
@@ -2650,4 +3293,6 @@ h1{font-size:50vh;}
             
 </form>
   </main><!-- End #main -->
+</asp:Content>
+ #main -->
 </asp:Content>
