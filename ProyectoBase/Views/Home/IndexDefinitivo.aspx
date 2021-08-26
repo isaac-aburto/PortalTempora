@@ -900,7 +900,10 @@
                             -webkit-border-radius: 50%;
                             border-radius: 50%;
                             background: #ffffff;
-                            margin-left: 24pc;
+                            margin-left: 389px;
+                            margin-bottom: -38px;
+                            margin-top: 41px;
+                            position: relative;
                         }
                     </style>
                     <script>
@@ -911,7 +914,7 @@
                         b.set(".circulo", { xPercent: 900, yPercent: 0 });
                         b.to(".circulo", {
                             duration: 0.5, y: -200, scale: 6000, scrollTrigger: {
-                                opacity: 100,
+                                opacity: 0,
                                 start: () => '+=${document.querySelector(".circulo").offsetHeight}',
                                 //trigger: ".circulo",
                                 scrub: true,
@@ -1073,6 +1076,9 @@
             height: 100px;
         }
     </style>
+
+
+
     <%-- Primer sección - 3 pasos --%>
     <section id="why-us" class="why-us" style="margin-bottom: 45pc;background-color: #ebebeb00;">
           <div class="container">
@@ -1101,247 +1107,8 @@
         </div>
         </section>
 
-        <div class="wrapper">
-<div class="pin-up">
-  
-  <div class="content-wrap">
-    <span class="content content-0 initial">Greensock</span>
-    <span class="content content-1">ScrollTrigger</span>
-    <span class="content content-2">Creativity</span>
-    <span class="content content-3">Versatility</span>
-    <span class="content content-4 remaining">Awesomeness</span>
-  </div>  
-  
-  
-    <div class="sideline"></div>
-  
-  
-  <div class="text-wrap">
-    <div class="text">Greensock</div>
-    <div class="text">ScrollTrigger</div>
-    <div class="text">Creativity</div>
-    <div class="text">Versatility</div>
-    <div class="text">Awesomeness</div>  
-  </div>
-  
-</div>
-</div>
-        <script>
-            gsap.set('.content:not(.initial)', { autoAlpha: 0 })
 
 
-            var headlines = gsap.utils.toArray(".text");
-
-            var totalDuration = 1000;
-            var singleDuration = totalDuration / headlines.length;
-
-
-
-
-
-            const lineTimeline = gsap.timeline();
-
-            ScrollTrigger.create({
-                trigger: ".pin-up",
-                start: "top top",
-                end: "+=" + totalDuration,
-                //markers: true,
-                pin: true,
-                scrub: true,
-                animation: lineTimeline,
-            });
-
-            lineTimeline
-                .to('.sideline', { duration: 1 }, 0)
-                .to('.sideline', { duration: 0.9, scaleY: 1, ease: "none" }, 0)
-
-
-
-
-
-            headlines.forEach((elem, i) => {
-
-                const smallTimeline = gsap.timeline();
-
-                const content = document.querySelector('.content-wrap');
-                const relevantContent = content.querySelector('span.content-' + i);
-
-                ScrollTrigger.create({
-
-                    trigger: ".wrapper",
-
-                    start: "top -=" + (singleDuration * i),
-                    end: "+=" + singleDuration,
-
-                    //markers: true,
-
-                    animation: smallTimeline,
-                    toggleActions: relevantContent.classList.contains('remaining') ? "play none play reverse" : "play reverse play reverse",
-
-                });
-
-                smallTimeline
-                    .to(elem, { duration: 0.25, color: "orange", scale: 1.25, ease: 'none' }, 0)
-                    .set(relevantContent, { autoAlpha: 1 }, 0.125)
-                    ;
-
-            });
-
-
-            // -------------------------------------------------------------------------------------------------------------
-
-
-            var showYowza = gsap.timeline()
-            showYowza.to('.below span', { autoAlpha: 1, y: 0 })
-
-            ScrollTrigger.create({
-                trigger: ".below",
-                start: "top center",
-
-                //endTrigger: ".footer",
-                end: "bottom bottom",
-
-                //scrub: 1,
-
-                //markers: true,
-                animation: showYowza,
-
-                toggleActions: "none play none reverse"
-                //toggleActions: "play reverse play reverse"
-            });
-        </script>
-        <style>
-            @import url('https://fonts.googleapis.com/css?family=Signika+Negative:300,400&display=swap');
-
-body { 
-  font-family: "Signika Negative", sans-serif; 
-  
-  padding: 0;
-  margin: 0;
-  
-  background-color: grey;  
-  height: 100%;
-}
-
-
-
-.pin-up {
-  height: 100vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  
-  background-color: white;
-}
-
-
-
-.content-wrap{
-  position:relative;
-  width: 333px;
-  height: 222px;
-  border-radius: 4px;
-  background-color: limegreen;
-  margin-right: 111px;
-  margin-top: -10px;
-}
-
-.content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position:absolute;
-  background-color: limegreen;
-  border-radius: 4px;
-  font-size: 30px;
-  color: white;
-}
-
-
-
-.sideline {
-  position: absolute;
-  top: calc(50vh - 111px - 7px);
-  left: calc(50vw + 0px);
-  height: 222px;
-  width: 3px;
-  background-color: orange;
-
-  transform: scaleY(0);
-  transform-origin: top center;
-  z-index: 1;
-}
-
-
-
-.text-wrap {
-  height: 100vh;
-  width: 333px;
-  display: flex;
-  
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  
-  background-color: green;
-}
-
-.text {
-  font-size: 30px;
-  width: 100px;
-  height: 50px;
-  text-transform: uppercase;
-  color: white;
-  transform-origin: left center;
-  transform: rotate(0.1deg)
-}
-
-
-
-.below {
-  height: 100vh;
-
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  background-color: white;
-}
-
-.below span {
-  color: green;
-  font-size: 30px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-50vh);
-}
-
-
-
-.footer {
-  height: 5vh;
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  background-color: lightgrey;
-}
-
-
-.spacer {
-  height: 20vh;
-  display: flex;
-  align-items: center;
-  justify-content:center;
-  background: white;
-}
-
-.spacer span {
-  color: green;
-  font-size: 30px;
-}
-        </style>
 
 
         <script>
@@ -1360,9 +1127,21 @@ body {
                     //start: () => '+=${document.querySelector(".circulo").offsetHeight}',
                     trigger: ".seccionPasos",
                     scrub: true,
+    
 
                 }
             })
+            seccionPasos.to(".seccionPasos", {
+                duration: 10,
+                x: 100,
+                scrollTrigger: {
+                    //end: "+=500",
+                    //start: () => '+=${document.querySelector(".asdasd").offsetHeight}',
+                    trigger: ".asdasd",
+                    scrub: true,
+                    markers: true
+                }
+            });
 
             //Titulos
             //var titulo1 = gsap.timeline({});
@@ -1527,7 +1306,7 @@ body {
     <br />
     <br />
     <br />
-
+    <div class="asdasd"></div>
     <div class="cuadrado"></div>
     <style>
         body {
