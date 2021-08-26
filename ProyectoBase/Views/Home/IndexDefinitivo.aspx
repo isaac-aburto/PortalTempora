@@ -899,7 +899,7 @@
                             -moz-border-radius: 50%;
                             -webkit-border-radius: 50%;
                             border-radius: 50%;
-                            background: #EBEBEB;
+                            background: #ffffff;
                             margin-left: 24pc;
                         }
                     </style>
@@ -1024,53 +1024,76 @@
         }
     </style>
 
+    <style>
+        .circuloTempora1 {
+            width: 85px;
+            height: 85px;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            background: #ebebeb00;
+            border-color: #bad302;
+            border-width: thick;
+            border-style: solid;
+            margin-bottom: -77px;
+            position: relative;
+            margin-left: -2pc;
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        }
+        .circuloTempora2 {
+            width: 54px;
+            height: 54px;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            background: #ebebeb00;
+            border-color: #e4e4e4;
+            border-width: thick;
+            border-style: solid;
+            margin-bottom: 13px;
+            position: relative;
+            margin-top: -7pc;
+            margin-left: 20pc;
+            box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+        }
+        .trianguloTempora1 {
+            width: 0;
+            height: 0;
+            border-left: 77px solid #ececec;
+            border-top: 45px solid transparent;
+            border-bottom: 45px solid transparent;
+            margin-left: -2pc;
+        }
+    </style>
 
-    <section id="why-us" class="why-us">
+    <section id="why-us" class="why-us" style="margin-bottom: 45pc;background-color: white;">
       <div class="container" data-aos="fade-up">
+          
+          <div class="row">
+              <div class="col">
+                
+              </div>
+              <div class="col">
+                  <h1>Solicitar evaluación</h1>
+                  <div class="texto1">
+                    Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.
+                </div>
+              </div>
+              <div class="col">
+                  <div class="circuloTempora1"></div>
+                  <img src="../../Styles/img/img_mountains02.jpg" style="width: 21pc; height: 30pc; border-radius: 17px;"/>
+                <div class="circuloTempora2"></div>
+                <div class="trianguloTempora1"></div>
+              </div>
+          </div>
 
-            <div class="texto1">
-                Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.
-            </div>
-            <div class="texto2">
-                Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.
-            </div>
-            <div class="texto3">
-                Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.
-            </div>
-          <script>
 
-              //gsap.registerPlugin(ScrollTrigger);
-
-              let tl = gsap.timeline({
-                  scrollTrigger: {
-                      trigger: ".texto1",
-                      start: "center bottom",
-                      markers: true,
-                      scrub: true
-                  }
-              });
-              tl.from("texto1", { x: 200, opacity: 5, duration: 5})
-                  .from("texto2", { x: 200, opacity: 5, duration: 6 })
-
-              //gsap.from(".texto0", {
-              //    y: -40,
-              //    scrub: true,
-              //    opacity: 0,
-              //    scrollTrigger: {
-              //        trigger: ".texto0",
-              //        start: () => '+=${document.querySelector(".texto0").offsetHeight}',
-              //        markers: true,
-              //        scrub: true
-              //    }
-              //});
-
-        
-          </script>
 
     </div>
     </section>
 
     <%-- Pelotita --%>
+
     <br />
     <br />
     <br />
@@ -1086,33 +1109,41 @@
     <br />
     <br />
 
-    <br />
-    <br />
-
-    <br />
-
-    <br />
-
-    <br />
-    <br />
     <div class="cuadrado"></div>
     <style>
         .cuadrado {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             -moz-border-radius: 50%;
             -webkit-border-radius: 50%;
             border-radius: 50%;
             background: #455560;
         }
     </style>
+    <div class="container" data-aos="fade-up" style="margin-top: -48pc;">      
+        <div class="row">
+            <div class="col">
+                <img src="../../Styles/img/img_mountains02.jpg" style="width: 21pc; height: 30pc; border-radius: 17px;"/>
+            </div>
+            <div class="col">
+                <h1 style="color:whitesmoke">Instrucciones</h1>
+                <div style="color:whitesmoke" class="texto1">
+                    Aquí indicamos los ángulos para la correcta toma de las fotografías que servirán para su evaluación.
+                </div>
+                <br />
+                <br />
+                <div style="color:#bad302" class="texto1">
+                    Recuerde que este es el paso más importante para generar un diánostico certero y sin contratiempos.                </div>
+                </div>
+        </div>
+    </div>
     <script>
 
 
         var a = gsap.timeline({ });
 
         //add 3 tweens that will play in direct succession.
-        a.set(".cuadrado", { xPercent: 720, yPercent: 0 });
+        a.set(".cuadrado", { xPercent: 880, yPercent: 0 });
         a.to(".cuadrado", {
             duration: 0.5, y: -200, scale: 30, scrollTrigger: {
                 opacity: 100,
