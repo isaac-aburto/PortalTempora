@@ -1064,44 +1064,463 @@
             border-bottom: 45px solid transparent;
             margin-left: -2pc;
         }
+        .descripciones {
+            overflow: hidden;
+            height: 200px;
+        }
+        .titulos {
+            overflow: hidden;
+            height: 100px;
+        }
     </style>
+    <%-- Primer sección - 3 pasos --%>
+    <section id="why-us" class="why-us" style="margin-bottom: 45pc;background-color: #ebebeb00;">
+          <div class="container">
+              <div class="row seccionPasos">
+                  <div class="col">
+                  </div>
+                  <div class="col" style="margin-top: 7pc;">
+                      <div class="titulos">
+                            <h1 class="titulo">Solicitar evaluación</h1>
+                            <h1 class="titulo">Evaluación médica</h1>
+                            <h1 class="titulo">Procedimiento médico</h1>
+                      </div>
+                        <div class="descripciones">
+                            <h3 class="descripcion1">1 Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.</h3>
+                            <h3 class="descripcion2">Un profesional de nuestra clínica le entregará una propuesta para su solicitud. Si usted lo desea, podrá agendar una hora para el procedimiento adecuado.</h3>
+                            <h3 class="descripcion3">Al asistir a la clínica según la hora agendada, usted recibirá el mejor procedimiento para su caso. Posteriormente, usted seguirá recibiendo páginas personalizadas para su caso.</h3>
+                        </div>
+                  </div>
+                  <div class="col">
+                      <div class="circuloTempora1"></div>
+                      <img src="../../Styles/img/img_mountains02.jpg" style="width: 21pc; height: 30pc; border-radius: 17px;"/>
+                    <div class="circuloTempora2"></div>
+                    <div class="trianguloTempora1"></div>
+                  </div>
+              </div>
+        </div>
+        </section>
 
-    <section id="why-us" class="why-us" style="margin-bottom: 45pc;background-color: white;">
-      <div class="container" data-aos="fade-up">
-          
-          <div class="row">
-              <div class="col">
+        <div class="wrapper">
+<div class="pin-up">
+  
+  <div class="content-wrap">
+    <span class="content content-0 initial">Greensock</span>
+    <span class="content content-1">ScrollTrigger</span>
+    <span class="content content-2">Creativity</span>
+    <span class="content content-3">Versatility</span>
+    <span class="content content-4 remaining">Awesomeness</span>
+  </div>  
+  
+  
+    <div class="sideline"></div>
+  
+  
+  <div class="text-wrap">
+    <div class="text">Greensock</div>
+    <div class="text">ScrollTrigger</div>
+    <div class="text">Creativity</div>
+    <div class="text">Versatility</div>
+    <div class="text">Awesomeness</div>  
+  </div>
+  
+</div>
+</div>
+        <script>
+            gsap.set('.content:not(.initial)', { autoAlpha: 0 })
+
+
+            var headlines = gsap.utils.toArray(".text");
+
+            var totalDuration = 1000;
+            var singleDuration = totalDuration / headlines.length;
+
+
+
+
+
+            const lineTimeline = gsap.timeline();
+
+            ScrollTrigger.create({
+                trigger: ".pin-up",
+                start: "top top",
+                end: "+=" + totalDuration,
+                //markers: true,
+                pin: true,
+                scrub: true,
+                animation: lineTimeline,
+            });
+
+            lineTimeline
+                .to('.sideline', { duration: 1 }, 0)
+                .to('.sideline', { duration: 0.9, scaleY: 1, ease: "none" }, 0)
+
+
+
+
+
+            headlines.forEach((elem, i) => {
+
+                const smallTimeline = gsap.timeline();
+
+                const content = document.querySelector('.content-wrap');
+                const relevantContent = content.querySelector('span.content-' + i);
+
+                ScrollTrigger.create({
+
+                    trigger: ".wrapper",
+
+                    start: "top -=" + (singleDuration * i),
+                    end: "+=" + singleDuration,
+
+                    //markers: true,
+
+                    animation: smallTimeline,
+                    toggleActions: relevantContent.classList.contains('remaining') ? "play none play reverse" : "play reverse play reverse",
+
+                });
+
+                smallTimeline
+                    .to(elem, { duration: 0.25, color: "orange", scale: 1.25, ease: 'none' }, 0)
+                    .set(relevantContent, { autoAlpha: 1 }, 0.125)
+                    ;
+
+            });
+
+
+            // -------------------------------------------------------------------------------------------------------------
+
+
+            var showYowza = gsap.timeline()
+            showYowza.to('.below span', { autoAlpha: 1, y: 0 })
+
+            ScrollTrigger.create({
+                trigger: ".below",
+                start: "top center",
+
+                //endTrigger: ".footer",
+                end: "bottom bottom",
+
+                //scrub: 1,
+
+                //markers: true,
+                animation: showYowza,
+
+                toggleActions: "none play none reverse"
+                //toggleActions: "play reverse play reverse"
+            });
+        </script>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Signika+Negative:300,400&display=swap');
+
+body { 
+  font-family: "Signika Negative", sans-serif; 
+  
+  padding: 0;
+  margin: 0;
+  
+  background-color: grey;  
+  height: 100%;
+}
+
+
+
+.pin-up {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  
+  background-color: white;
+}
+
+
+
+.content-wrap{
+  position:relative;
+  width: 333px;
+  height: 222px;
+  border-radius: 4px;
+  background-color: limegreen;
+  margin-right: 111px;
+  margin-top: -10px;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position:absolute;
+  background-color: limegreen;
+  border-radius: 4px;
+  font-size: 30px;
+  color: white;
+}
+
+
+
+.sideline {
+  position: absolute;
+  top: calc(50vh - 111px - 7px);
+  left: calc(50vw + 0px);
+  height: 222px;
+  width: 3px;
+  background-color: orange;
+
+  transform: scaleY(0);
+  transform-origin: top center;
+  z-index: 1;
+}
+
+
+
+.text-wrap {
+  height: 100vh;
+  width: 333px;
+  display: flex;
+  
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  
+  background-color: green;
+}
+
+.text {
+  font-size: 30px;
+  width: 100px;
+  height: 50px;
+  text-transform: uppercase;
+  color: white;
+  transform-origin: left center;
+  transform: rotate(0.1deg)
+}
+
+
+
+.below {
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background-color: white;
+}
+
+.below span {
+  color: green;
+  font-size: 30px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-50vh);
+}
+
+
+
+.footer {
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background-color: lightgrey;
+}
+
+
+.spacer {
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  background: white;
+}
+
+.spacer span {
+  color: green;
+  font-size: 30px;
+}
+        </style>
+
+
+        <script>
+
+            var seccionPasos = gsap.timeline({});
+            //add 3 tweens that will play in direct succession.
+            seccionPasos.to(".seccionPasos", {
+                duration: 10,
+                y: 10,
+                display: "none",
+                scrollTrigger: {
+                    opacity: 100,
+                    start: "center center",
+                    pin: ".seccionPasos",
+                    end: "+=500",
+                    //start: () => '+=${document.querySelector(".circulo").offsetHeight}',
+                    trigger: ".seccionPasos",
+                    scrub: true,
+
+                }
+            })
+
+            //Titulos
+            //var titulo1 = gsap.timeline({});
+            ////add 3 tweens that will play in direct succession.
+            //titulo1.to(".titulo1", {
+            //    duration: 1,
+            //    y: -300,
+            //    scrollTrigger: {
+            //        start: "center center",
+            //        pin: ".seccionPasos",
+            //        end: "+=500",
+            //        //start: () => '+=${document.querySelector(".circulo").offsetHeight}',
+            //        trigger: ".seccionPasos",
+            //        scrub: true,
+            //        markers: true,
+            //    }
+            //})
+
+            //var titulo2 = gsap.timeline({});
+            ////add 3 tweens that will play in direct succession.
+            //titulo2.to(".titulo2", {
+            //    duration: 1,
+            //    y: -300,
+            //    scrollTrigger: {
+            //        start: "center center",
+            //        pin: ".seccionPasos",
+            //        end: "+=500",
+            //        //start: () => '+=${document.querySelector(".circulo").offsetHeight}',
+            //        trigger: ".seccionPasos",
+            //        scrub: true,
+            //        markers: true,
+            //    }
+            //})
+            //var titulo3 = gsap.timeline({});
+            ////add 3 tweens that will play in direct succession.
+            //titulo3.to(".titulo3", {
+            //    duration: 10,
+            //    y: -300,
+            //    scrollTrigger: {
+            //        start: "center center",
+            //        pin: ".seccionPasos",
+            //        end: "+=500",
+            //        //start: () => '+=${document.querySelector(".circulo").offsetHeight}',
+            //        trigger: ".seccionPasos",
+            //        scrub: true,
+            //        markers: true,
+            //    }
+            //})
+
+            ////Descripciones
+            //var descripcion1 = gsap.timeline({});
+            ////add 3 tweens that will play in direct succession.
+            //descripcion1.to(".descripcion1", {
+            //    duration: 10,
+            //    y: -300,
+            //    opacity: 0,
+            //    scrollTrigger: {
+            //        start: "center center",
+            //        pin: ".seccionPasos",
+            //        end: "+=500",
+            //        //start: () => '+=${document.querySelector(".circulo").offsetHeight}',
+            //        trigger: ".seccionPasos",
+            //        scrub: true,
+            //        markers: true,
+            //    }
+            //})
+
+            //var descripcion2 = gsap.timeline({});
+            ////add 3 tweens that will play in direct succession.
+            //descripcion2.to(".descripcion2", {
+            //    duration: 10,
+            //    y: -300,
+            //    scrollTrigger: {
+            //        start: "center center",
+            //        pin: ".seccionPasos",
+            //        end: "+=500",
+            //        //start: () => '+=${document.querySelector(".circulo").offsetHeight}',
+            //        trigger: ".seccionPasos",
+            //        scrub: true,
+            //        markers: true,
+            //    }
+            //})
+
+            //var descripcion3 = gsap.timeline({});
+            ////add 3 tweens that will play in direct succession.
+            //descripcion3.to(".descripcion3", {
+            //    duration: 10,
+            //    y: -300,
+            //    scrollTrigger: {
+            //        start: "center center",
+            //        pin: ".seccionPasos",
+            //        end: "+=500",
+            //        //start: () => '+=${document.querySelector(".circulo").offsetHeight}',
+            //        trigger: ".seccionPasos",
+            //        scrub: true,
+            //        markers: true,
+            //    }
+            //})
+
+            //FORMAS
+
+            var circulo1 = gsap.timeline({});
+
+            //add 3 tweens that will play in direct succession.
+            circulo1.to(".circuloTempora1", {
+                duration: 10,
+                y: -30,
+                scrollTrigger: {
+                    opacity: 100,
+                    start: "center center",
+                    end: "+=500",
+                    //start: () => '+=${document.querySelector(".circulo").offsetHeight}',
+                    trigger: ".seccionPasos",
+                    scrub: true,
                 
-              </div>
-              <div class="col">
-                  <h1>Solicitar evaluación</h1>
-                  <div class="texto1">
-                    Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.
-                </div>
-              </div>
-              <div class="col">
-                  <div class="circuloTempora1"></div>
-                  <img src="../../Styles/img/img_mountains02.jpg" style="width: 21pc; height: 30pc; border-radius: 17px;"/>
-                <div class="circuloTempora2"></div>
-                <div class="trianguloTempora1"></div>
-              </div>
-          </div>
+                }
+            });
 
+            var circulo2 = gsap.timeline({});
 
+            //add 3 tweens that will play in direct succession.
+            circulo2.to(".circuloTempora2", {
+                duration: 10,
+                y: -20,
+                scrollTrigger: {
+                    opacity: 100,
+                    start: "center center",
+                    end: "+=500",
+                    //start: () => '+=${document.querySelector(".circulo").offsetHeight}',
+                    trigger: ".seccionPasos",
+                    scrub: true,
+                  
+                }
+            });
 
-    </div>
-    </section>
+            var triangulo1 = gsap.timeline({});
+
+            //add 3 tweens that will play in direct succession.
+            triangulo1.to(".trianguloTempora1", {
+                duration: 10,
+                y: -25,
+                scrollTrigger: {
+                    opacity: 100,
+                    start: "center center",
+                    end: "+=500",
+                    //start: () => '+=${document.querySelector(".circulo").offsetHeight}',
+                    trigger: ".seccionPasos",
+                    scrub: true,
+                  
+                }
+            });
+
+        </script>
+    
 
     <%-- Pelotita --%>
 
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+
     <br />
     <br />
     <br />
@@ -1111,6 +1530,9 @@
 
     <div class="cuadrado"></div>
     <style>
+        body {
+            background-color: white !important;
+        }
         .cuadrado {
             width: 80px;
             height: 80px;
@@ -1118,29 +1540,45 @@
             -webkit-border-radius: 50%;
             border-radius: 50%;
             background: #455560;
+            position: relative;
+            z-index: -1;
         }
     </style>
-    <div class="container" data-aos="fade-up" style="margin-top: -48pc;">      
+    <div class="container seccionInstrucciones" style="margin-top: -48pc;">      
         <div class="row">
             <div class="col">
                 <img src="../../Styles/img/img_mountains02.jpg" style="width: 21pc; height: 30pc; border-radius: 17px;"/>
             </div>
             <div class="col">
                 <h1 style="color:whitesmoke">Instrucciones</h1>
-                <div style="color:whitesmoke" class="texto1">
+                <div style="color:whitesmoke" class="texto2">
                     Aquí indicamos los ángulos para la correcta toma de las fotografías que servirán para su evaluación.
                 </div>
                 <br />
                 <br />
-                <div style="color:#bad302" class="texto1">
+                <div style="color:#bad302" class="texto3">
                     Recuerde que este es el paso más importante para generar un diánostico certero y sin contratiempos.                </div>
                 </div>
         </div>
     </div>
     <script>
+        var seccionInstrucciones = gsap.timeline({});
+        //add 3 tweens that will play in direct succession.
+        seccionInstrucciones.from(".seccionInstrucciones", {
+            y: 15,
+            scrollTrigger: {
+                opacity: 0,
+                start: "center center",
+                pin: ".seccionInstrucciones",
+                end: "+=500",
+                //start: () => '+=${document.querySelector(".circulo").offsetHeight}',
+                trigger: ".seccionInstrucciones",
+                scrub: true,
+                markers: true,
+            }
+        })
 
-
-        var a = gsap.timeline({ });
+        var a = gsap.timeline({});
 
         //add 3 tweens that will play in direct succession.
         a.set(".cuadrado", { xPercent: 880, yPercent: 0 });
@@ -1314,7 +1752,51 @@
     padding-right: 55px;        
         }
     </style>
+        <style>
+        .circuloTempora3 {
+            width: 92px;
+            height: 92px;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            background: #ebebeb00;
+            border-color: #bad302;
+            border-width: thick;
+            border-style: solid;
+            margin-bottom: -77px;
+            position: absolute;
+                margin-left: 80pc;
+    margin-top: -40pc;
+            box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        }
+        .circuloTempora4 {
+            width: 54px;
+            height: 54px;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+            background: #ebebeb00;
+            border-color: #e4e4e4;
+            border-width: thick;
+            border-style: solid;
+            margin-bottom: 13px;
+            position: absolute;
+            margin-top: 9pc;
+            margin-left: 11pc;
+            box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 20%);
+        }
+        .trianguloTempora2 {
+            width: 0;
+            height: 0;
+            border-left: 77px solid #ececec;
+            border-top: 45px solid transparent;
+            border-bottom: 45px solid transparent;
+            margin-left: 5pc;
+        }
+    </style>
+
     <section id="book-a-table" class="book-a-table" style="margin-top: 0pc; position: relative;">
+        <div class="circuloTempora4"></div>
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -1655,6 +2137,8 @@
           </script>
       </div>
         </div>
+        <div class="trianguloTempora2"></div>
+        <div class="circuloTempora3"></div>
     </section>
 
 <%--    <section class="book-a-table">
