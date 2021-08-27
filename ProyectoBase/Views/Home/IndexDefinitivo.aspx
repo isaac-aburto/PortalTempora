@@ -890,7 +890,7 @@
               <div class="headera-content">
                 <div class="container position-relative text-center text-lg-left" data-aos="zoom-in" data-aos-delay="100">
 
-                    <h1 style="text-align: center;margin-top: 14pc;font-family: 'Poppins';font-style: inherit;font-weight: 400;color: #BAD305;letter-spacing: 1rem;font-size: 20px;">BIENVENIDO A<%-- <span style="color: #BAD305">Clínica Tempora</span>--%></h1>
+                    <h1 style="text-align: center;margin-top: 14pc;font-family: 'Poppins';font-style: inherit;font-weight: 400;color: #BAD305;letter-spacing: 11px;font-size: 20px;">BIENVENIDO A<%-- <span style="color: #BAD305">Clínica Tempora</span>--%></h1>
                         <div class="circulo"></div>
                     <style>
                         .circulo {
@@ -913,7 +913,7 @@
                         //add 3 tweens that will play in direct succession.
                         b.set(".circulo", { xPercent: 900, yPercent: 0 });
                         b.to(".circulo", {
-                            duration: 0.5, y: -200, scale: 6000, scrollTrigger: {
+                            duration: 2, y: -200, scale: 3500, scrollTrigger: {
                                 opacity: 0,
                                 start: () => '+=${document.querySelector(".circulo").offsetHeight}',
                                 //trigger: ".circulo",
@@ -924,7 +924,9 @@
 
                     </script>
                     <img style="height: 75px;margin-left: 14pc;margin-bottom: 17pc;" src="../../Styles/img/Logo-tempora-white.png" />
-                    <h1 class="texto0" style="text-align: center;margin-top: 0pc;    margin-left: 16px;font-family: 'Poppins';font-style: inherit;font-weight: 400;color: #BAD305;letter-spacing: 1rem;font-size: 20px;">TU NUEVO</h1><h1 style="text-align: center;font-family: 'Poppins';font-weight: 100;color: whitesmoke;font-style: inherit;/* letter-spacing: 15px; */font-size: 20px;margin-left: 17pc;margin-right: 17pc;">Portar de  evaluación y diagnóstico</h1>
+                    <i style="font-size: 33px;margin-left: -14pc;" class="bi bi-mouse"></i>
+                    <i style="margin-left: -26px;position: absolute; margin-top: 182px;font-size: 19px;" class="bi bi-chevron-compact-down"></i>
+                    <h1 class="texto0" style="text-align: center;    margin-top: -5pc;    letter-spacing: 2px;    margin-left: 16px;font-family: 'Poppins';font-style: inherit;font-weight: 400;color: #BAD305;letter-spacing: 1rem;font-size: 23px;"><%--TU NUEVO--%></h1><h1 style="text-align: center;font-family: 'Poppins';font-weight: 100;color: whitesmoke;font-style: inherit;/* letter-spacing: 15px; */font-size: 20px;margin-left: 17pc;margin-right: 17pc;">Portar de  evaluación y diagnóstico</h1>
                     
                     <script>
                         gsap.registerPlugin(ScrollTrigger);
@@ -941,17 +943,17 @@
                         //});
                         //tl.from("texto0", {x: 200, opacity: 0, duration: 1.5})
 
-                        gsap.from(".texto0", {
-                            y: -40,
-                            scrub: true,
-                            opacity: 0,
-                            scrollTrigger: {
-                                trigger: ".texto0",
-                                start: () => '+=${document.querySelector(".texto0").offsetHeight}',
-                                //markers: true,
-                                scrub: true
-                            }
-                        });
+                        //gsap.from(".texto0", {
+                        //    y: -40,
+                        //    scrub: true,
+                        //    opacity: 0,
+                        //    scrollTrigger: {
+                        //        trigger: ".texto0",
+                        //        start: () => '+=${document.querySelector(".texto0").offsetHeight}',
+                        //        //markers: true,
+                        //        scrub: true
+                        //    }
+                        //});
                     </script>
 
                 </div>
@@ -1074,6 +1076,23 @@
         .titulos {
             overflow: hidden;
             height: 100px;
+            font-family: 'Poppins' !important;
+            font-style: initial !important;
+            font-weight: 700 !important;
+            font-size: 42px !important;
+        }
+        .titulo {
+
+            font-family: 'Poppins';
+            font-style: initial;
+            font-weight: 600;
+            font-size: 42px;
+            color: #455560;
+        }
+        .descripcion1 {
+                font-size: 21px;
+    font-weight: 400;
+    color: #9d9d9d;
         }
     </style>
 
@@ -1087,14 +1106,15 @@
                   </div>
                   <div class="col" style="margin-top: 7pc;">
                       <div class="titulos">
-                            <h1 class="titulo">Solicitar evaluación</h1>
+                            <h1 class="titulo"><i style="color: #7c9dba;" class="bi bi-journal-bookmark-fill"></i> Solicitar evaluación</h1>
                             <h1 class="titulo">Evaluación médica</h1>
                             <h1 class="titulo">Procedimiento médico</h1>
                       </div>
+                      <br />
                         <div class="descripciones">
-                            <h3 class="descripcion1">1 Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.</h3>
-                            <h3 class="descripcion2">Un profesional de nuestra clínica le entregará una propuesta para su solicitud. Si usted lo desea, podrá agendar una hora para el procedimiento adecuado.</h3>
-                            <h3 class="descripcion3">Al asistir a la clínica según la hora agendada, usted recibirá el mejor procedimiento para su caso. Posteriormente, usted seguirá recibiendo páginas personalizadas para su caso.</h3>
+                            <h3 class="descripcion1">Para poder solicitar una evaluación gratis, sólo debe completar el formulario de solicitud siguiente.</h3>
+                            <%--<h3 class="descripcion2">Un profesional de nuestra clínica le entregará una propuesta para su solicitud. Si usted lo desea, podrá agendar una hora para el procedimiento adecuado.</h3>
+                            <h3 class="descripcion3">Al asistir a la clínica según la hora agendada, usted recibirá el mejor procedimiento para su caso. Posteriormente, usted seguirá recibiendo páginas personalizadas para su caso.</h3>--%>
                         </div>
                   </div>
                   <div class="col">
@@ -1131,17 +1151,17 @@
 
                 }
             })
-            seccionPasos.to(".seccionPasos", {
-                duration: 10,
-                x: 100,
-                scrollTrigger: {
-                    //end: "+=500",
-                    //start: () => '+=${document.querySelector(".asdasd").offsetHeight}',
-                    trigger: ".asdasd",
-                    scrub: true,
-                    markers: true
-                }
-            });
+            //seccionPasos.to(".seccionPasos", {
+            //    duration: 10,
+            //    x: 100,
+            //    scrollTrigger: {
+            //        //end: "+=500",
+            //        //start: () => '+=${document.querySelector(".asdasd").offsetHeight}',
+            //        trigger: ".asdasd",
+            //        scrub: true,
+            //        markers: true
+            //    }
+            //});
 
             //Titulos
             //var titulo1 = gsap.timeline({});
@@ -1321,21 +1341,38 @@
             background: #455560;
             position: relative;
             z-index: -1;
+            left: 46.7%;
+        }
+        .rectangulo {
+            width: 400px;
+            height: 579px;
+            background: #455560;
+            background-color: #ffffff00;
+            border-color: white;
+            position: absolute;
+            z-index: -1;
+            margin-top: -34pc;
+            margin-left: 5pc;
+            /* left: 46.7%; */
+            /* top: -63%; */
+            border-style: inset;
         }
     </style>
+    <div class="rectangulo"></div>
     <div class="container seccionInstrucciones" style="margin-top: -48pc;">      
         <div class="row">
             <div class="col">
                 <img src="../../Styles/img/img_mountains02.jpg" style="width: 21pc; height: 30pc; border-radius: 17px;"/>
             </div>
             <div class="col">
-                <h1 style="color:whitesmoke">Instrucciones</h1>
-                <div style="color:whitesmoke" class="texto2">
+                <h1 style="color:whitesmoke;font-family: 'Poppins';font-style: inherit;"><i style="color: #bad302;margin-left: -3pc;" class="bi bi-info-circle"></i> Instrucciones</h1>
+                <br />
+                <div style="color:whitesmoke;color: whitesmoke;font-family: 'Poppins';font-weight: 300;font-size: 21px;padding-right: 5pc;" class="texto2">
                     Aquí indicamos los ángulos para la correcta toma de las fotografías que servirán para su evaluación.
                 </div>
                 <br />
                 <br />
-                <div style="color:#bad302" class="texto3">
+                <div style="color:#bad302;font-family: 'Poppins';padding-right: 11pc;" class="texto3">
                     Recuerde que este es el paso más importante para generar un diánostico certero y sin contratiempos.                </div>
                 </div>
         </div>
@@ -1357,10 +1394,28 @@
             }
         })
 
+
+        var rectangulo = gsap.timeline({});
+
+        //add 3 tweens that will play in direct succession.
+        rectangulo.to(".rectangulo", {
+            duration: 10,
+            y: -30,
+            scrollTrigger: {
+                opacity: 100,
+                start: "center center",
+                end: "+=500",
+                start: () => '+=${document.querySelector(".rectangulo").offsetHeight}',
+                trigger: ".seccionInstrucciones",
+                scrub: true,
+
+            }
+        });
+
         var a = gsap.timeline({});
 
         //add 3 tweens that will play in direct succession.
-        a.set(".cuadrado", { xPercent: 880, yPercent: 0 });
+        a.set(".cuadrado", { xPercent: 0, yPercent: 0 });
         a.to(".cuadrado", {
             duration: 0.5, y: -200, scale: 30, scrollTrigger: {
                 opacity: 100,
